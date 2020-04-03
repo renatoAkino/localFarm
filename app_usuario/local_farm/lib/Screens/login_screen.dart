@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:localfarm/Screens/home_screen.dart';
+import 'package:localfarm/Screens/signUp_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
-
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,6 +18,7 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
+                  SizedBox(height: 20,),
                   Container(
                       width: 150,
                       height: 150,
@@ -23,39 +26,54 @@ class LoginScreen extends StatelessWidget {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               image: AssetImage('assets/logo.png')))),
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(hintText: "Email"),
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (text) {
-                      if (text.isEmpty || !text.contains('@')) {
-                        return "Email inválido";
-                      }
-                      return null;
-                    },
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        TextFormField(
+                          controller: _emailController,
+                          decoration: InputDecoration(hintText: "Email"),
+                          keyboardType: TextInputType.emailAddress,
+                          onChanged: (text){
+
+                          },
+                          validator: (text) {
+                            if (text.isEmpty || !text.contains('@')) {
+                              return "Email inválido";
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        TextFormField(
+                          controller: _passController,
+                          decoration: InputDecoration(hintText: "Senha"),
+                          obscureText: true,
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (text) {
+                            if (text.isEmpty) {
+                              return "Senha inválida";
+                            }
+                            return null;
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    controller: _passController,
-                    decoration: InputDecoration(hintText: "Senha"),
-                    obscureText: true,
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (text) {
-                      if (text.isEmpty) {
-                        return "Senha inválido";
-                      }
-                      return null;
-                    },
-                  ),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text("Não tem conta? "),
                       FlatButton(
                           padding: EdgeInsets.zero,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => SignUpScreen()
+                            ));
+                          },
                           child: Text(
                             "Cadastre-se",
                             style: TextStyle(
@@ -77,7 +95,14 @@ class LoginScreen extends StatelessWidget {
                           style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          if(_formKey.currentState.validate()){
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                builder: (context) => HomeScreen()
+                              ));
+                          }
+                        }
+                        ,
                       )),
                   SizedBox(height: 10,),
                   OutlineButton(
