@@ -16,19 +16,22 @@ class UserModel extends Model{
 
   void signUp({@required Map<String, dynamic> userData, @required String pass}){
     _loadChangeStatus();
-
+    print(userData['email']);
+    print(pass);
     _auth.createUserWithEmailAndPassword(email: userData['email'], password: pass).then(
             (result) async {
               firebaseUser = result.user;
               await _saveUserData(userData);
+              print("sucesso");
               _loadChangeStatus();
             }).catchError(
             (e){
+              print("falha");
               _loadChangeStatus();
             });
   }
 
-  void signIn({@required String email, @required String pass}){
+  void signIn({@required String email, @required String pass, @required VoidCallback onSucess, @required VoidCallback onFailed}){
     _loadChangeStatus();
 
     _auth.signInWithEmailAndPassword(email: email, password: pass).then(
@@ -36,8 +39,10 @@ class UserModel extends Model{
       firebaseUser = result.user;
       _loadCurrentUser();
       _loadChangeStatus();
+      onSucess();
     }).catchError((e){
       _loadChangeStatus();
+      onFailed();
     });
   }
 
