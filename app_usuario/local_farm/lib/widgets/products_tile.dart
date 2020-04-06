@@ -1,7 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:localfarm/Datas/product_data.dart';
 
 class ProductsTile extends StatelessWidget {
+
+  final ProductData product;
+
+  ProductsTile(this.product);
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,19 +21,29 @@ class ProductsTile extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Container(
-                      height: 40,
-                      width: 40,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/localfarm-61f22.appspot.com/o/download%20(1).jfif?alt=media&token=5d8908f8-9072-4dd9-b68f-3c6ff7e9bcb6"))
-                      ),
-                    ),
-                    SizedBox(width: 10,),
-                    Text("Fazendiha do Zéca", style: TextStyle( fontWeight: FontWeight.w500, fontSize: 15),)
-                  ],
+                FutureBuilder(
+                  future: product.getFarmData(),
+                  builder: (context, snapshot){
+                    if(product.farmData != null){
+                      return Row(
+                        children: <Widget>[
+                          Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(image: NetworkImage(product.farmData.image))
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          Text("teste", style: TextStyle( fontWeight: FontWeight.w500, fontSize: 15),)
+                        ],
+                      );
+                    }
+                    else{
+                      return Container();
+                    }
+                  },
                 ),
                 IconButton(
                   onPressed: (){},
@@ -42,19 +60,19 @@ class ProductsTile extends StatelessWidget {
             items: <Widget>[
               Container(
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/localfarm-61f22.appspot.com/o/alface%201.jpg?alt=media&token=c84aea30-c900-4030-b70f-8d71e08d85c4"),
+                  image: DecorationImage(image: NetworkImage(product.images['0']),
                   fit: BoxFit.cover),
                 ),
               ),
               Container(
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/localfarm-61f22.appspot.com/o/alface%202.jfif?alt=media&token=bdd0447b-6aed-437c-9368-dea7d3ad1995"),
+                  image: DecorationImage(image: NetworkImage(product.images['1']),
                   fit: BoxFit.cover)
                 ),
               ),
               Container(
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/localfarm-61f22.appspot.com/o/alface%203.jfif?alt=media&token=afb89c98-452c-46bd-ab40-4b6319f41b74"),
+                  image: DecorationImage(image: NetworkImage(product.images['2']),
                       fit: BoxFit.cover),
                 ),
               ),
@@ -70,9 +88,9 @@ class ProductsTile extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text("Alface" , style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                      Text(product.title , style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                       Container(
-                        child: Text("Alface plantado seila quando, muito \ngostoso, etc.", style: TextStyle(fontSize: 11),),
+                        child: Text(product.description, style: TextStyle(fontSize: 11),),
                       )
                     ],
                   ),
@@ -80,12 +98,12 @@ class ProductsTile extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     IconButton(
-                      icon: Icon(Icons.remove),
+                      icon: Icon(Icons.favorite_border),
                       onPressed: (){},
                     ),
-                    Text("0"),
+                    SizedBox(width: 10,),
                     IconButton(
-                      icon: Icon(Icons.add),
+                      icon: Icon(Icons.chat_bubble_outline),
                       onPressed: (){},
                     )
                   ],
@@ -94,7 +112,7 @@ class ProductsTile extends StatelessWidget {
               ],
             ),
           ),
-
+          SizedBox(height: 20,)
 
 
 
