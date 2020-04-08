@@ -1,15 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/Screens/feed_screen.dart';
 import 'package:localfarm/widgets/home_appBar.dart';
 import 'package:localfarm/widgets/home_bottomBar.dart';
-import 'package:localfarm/widgets/products_tile.dart';
 
 class HomeScreen extends StatelessWidget {
-  final _pageController = PageController(initialPage: 1);
-
+  final _pageController = PageController(initialPage: 2);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +22,7 @@ class HomeScreen extends StatelessWidget {
               _pageController.jumpToPage(2);
             },
             child: Icon(Icons.blur_on),
-            backgroundColor: Colors.grey,
+            backgroundColor: Theme.of(context).primaryColor,
           ),
           floatingActionButtonLocation:
           FloatingActionButtonLocation.centerDocked,
@@ -40,7 +36,7 @@ class HomeScreen extends StatelessWidget {
               _pageController.jumpToPage(2);
             },
             child: Icon(Icons.blur_on),
-            backgroundColor: Colors.grey,
+            backgroundColor: Theme.of(context).primaryColor,
           ),
           floatingActionButtonLocation:
           FloatingActionButtonLocation.centerDocked,
@@ -48,7 +44,7 @@ class HomeScreen extends StatelessWidget {
         Scaffold(
           appBar: HomeAppBar(),
           body: FeedScreen(),
-          bottomNavigationBar: HomeBottomBar(_pageController , 3),
+          bottomNavigationBar: HomeBottomBar(_pageController , 2),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               _pageController.jumpToPage(2);
@@ -68,7 +64,7 @@ class HomeScreen extends StatelessWidget {
               _pageController.jumpToPage(2);
             },
             child: Icon(Icons.blur_on),
-            backgroundColor: Colors.grey,
+            backgroundColor: Theme.of(context).primaryColor,
           ),
           floatingActionButtonLocation:
           FloatingActionButtonLocation.centerDocked,
@@ -82,12 +78,14 @@ class HomeScreen extends StatelessWidget {
               _pageController.jumpToPage(2);
             },
             child: Icon(Icons.blur_on),
-            backgroundColor: Colors.grey,
+            backgroundColor: Theme.of(context).primaryColor,
           ),
           floatingActionButtonLocation:
           FloatingActionButtonLocation.centerDocked,
-        )
+        ),
       ],
     );
   }
+
+
 }

@@ -1,16 +1,26 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Models/user_model.dart';
+import 'package:localfarm/Screens/edit_user_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
+  @override
+  _SignUpScreenState createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
   final _confirmPassController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          key: _scaffoldKey,
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
@@ -103,9 +113,14 @@ class SignUpScreen extends StatelessWidget {
                                   Map<String, dynamic> userData = Map();
 
                                   userData['email'] = _emailController.text;
-                                  userData['nome'] = null;
+                                  userData['name'] = "";
+                                  userData['cep'] = "";
+                                  userData['adress'] = "";
+                                  userData['adress_complement'] = "";
+                                  userData['birth'] = Timestamp.fromDate(DateTime.now());
+                                  userData['gender'] = "";
 
-                                  model.signUp(userData: userData, pass: _passController.text);
+                                  model.signUp(userData: userData, pass: _passController.text, onSucess: onSucess, onFailed: onFailed);
 
                                 }
                               }
@@ -152,5 +167,21 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
+  void onSucess(){
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+            builder: (context) => EditUserScreen()
+        ));
+  }
 
+  void onFailed(){
+    _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content: Text("Falha ao criar usuário", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),),
+          backgroundColor: Theme.of(context).primaryColor,
+          duration: Duration(seconds: 3),
+
+        ));
+
+  }
 }

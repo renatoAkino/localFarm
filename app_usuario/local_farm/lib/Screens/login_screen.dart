@@ -14,10 +14,13 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
         body: ScopedModelDescendant<UserModel>(
           builder: (context, child, model){
             if(model.isLoading){
@@ -165,6 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onSucess(){
+    print(UserModel.of(context).userData['birth']);
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(
             builder: (context) => HomeScreen()
@@ -172,7 +176,14 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onFailed(){
-    print("falha");
+    _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content: Text("Falha ao entrar", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),),
+          backgroundColor: Theme.of(context).primaryColor,
+          duration: Duration(seconds: 3),
+
+        ));
+
   }
 }
 

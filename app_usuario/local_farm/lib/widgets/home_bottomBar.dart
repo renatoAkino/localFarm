@@ -27,7 +27,7 @@ class HomeBottomBar extends StatelessWidget{
                 },
                 icon: Icon(
                   Icons.receipt,
-                  color: controller.page.round() == 0 ?
+                  color: page == 0 ?
                   Theme.of(context).accentColor :
                   Colors.black
                   ,
@@ -39,7 +39,7 @@ class HomeBottomBar extends StatelessWidget{
                   controller.jumpToPage(1);
                   },
                 icon: Icon(Icons.search,
-                    color: controller.page.round() == 1 ?
+                    color: page == 1 ?
                     Theme.of(context).accentColor :
                     Colors.black),
               ),
@@ -51,7 +51,7 @@ class HomeBottomBar extends StatelessWidget{
                   controller.jumpToPage(3);
                 },
                 icon: Icon(Icons.star_border,
-                    color: controller.page.round() == 3 ?
+                    color: page == 3 ?
                     Theme.of(context).accentColor :
                     Colors.black),
               ),
@@ -60,7 +60,7 @@ class HomeBottomBar extends StatelessWidget{
                   controller.jumpToPage(4);
                   },
                 icon: Icon(Icons.shopping_cart,
-                    color: controller.page.round() == 4 ?
+                    color: page == 4 ?
                     Theme.of(context).accentColor :
                     Colors.black),
               )
@@ -69,4 +69,5 @@ class HomeBottomBar extends StatelessWidget{
         )
     );
   }
+
 }

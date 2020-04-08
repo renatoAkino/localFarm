@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/home_screen.dart';
 import 'package:localfarm/Screens/login_screen.dart';
@@ -16,6 +17,11 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: "Local Farm",
           home: HomeScreen(),
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate
+          ],
+          supportedLocales: [const Locale('pt', 'BR')],
           theme: ThemeData(
               primaryColor: Color.fromARGB(255, 51,196,155),
               accentColor: Color.fromARGB(255, 41,158,125)
