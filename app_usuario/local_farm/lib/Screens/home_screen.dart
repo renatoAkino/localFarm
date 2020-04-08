@@ -2,62 +2,92 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/product_data.dart';
+import 'package:localfarm/Screens/feed_screen.dart';
+import 'package:localfarm/widgets/home_appBar.dart';
+import 'package:localfarm/widgets/home_bottomBar.dart';
 import 'package:localfarm/widgets/products_tile.dart';
 
 class HomeScreen extends StatelessWidget {
+  final _pageController = PageController(initialPage: 1);
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        actions: <Widget>[
-          IconButton(onPressed: (){}, icon: Icon(Icons.more_vert),),
-        ],
-      ),
-      body: FutureBuilder<QuerySnapshot>(
-        future: Firestore.instance.collection('products').orderBy('data_public').getDocuments(),
-        builder: (context, snapshot){
-          if(!snapshot.hasData){
-            return Center(child: CircularProgressIndicator(),);
-          }else{
-            return ListView(
-              children: snapshot.data.documents.map(
-                  (doc){
-                    ProductData data = ProductData.fromDocument(doc);
-                    return ProductsTile(data);
-                  }
-              ).toList(),
-            );
-          }
-        },
-      ),
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        child: Padding(
-          padding: EdgeInsets.only(left: 10, right: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              IconButton(
-                onPressed: (){},
-                icon: Icon(Icons.receipt),
-              ),
-              IconButton(
-                onPressed: (){},
-                icon: Icon(Icons.shopping_cart),
-              )
-            ],
+    return PageView(
+      controller: _pageController,
+      physics: NeverScrollableScrollPhysics(),
+      children: <Widget>[
+        Scaffold(
+          appBar: HomeAppBar(),
+          body: Text("pedidos"),
+          bottomNavigationBar: HomeBottomBar(_pageController , 0),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              _pageController.jumpToPage(2);
+            },
+            child: Icon(Icons.blur_on),
+            backgroundColor: Colors.grey,
           ),
+          floatingActionButtonLocation:
+          FloatingActionButtonLocation.centerDocked,
+        ),
+        Scaffold(
+          appBar: HomeAppBar(),
+          body: Text("busca"),
+          bottomNavigationBar: HomeBottomBar(_pageController , 1),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              _pageController.jumpToPage(2);
+            },
+            child: Icon(Icons.blur_on),
+            backgroundColor: Colors.grey,
+          ),
+          floatingActionButtonLocation:
+          FloatingActionButtonLocation.centerDocked,
+        ),
+        Scaffold(
+          appBar: HomeAppBar(),
+          body: FeedScreen(),
+          bottomNavigationBar: HomeBottomBar(_pageController , 3),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              _pageController.jumpToPage(2);
+            },
+            child: Icon(Icons.blur_on),
+            backgroundColor: Theme.of(context).primaryColor,
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+        ),
+        Scaffold(
+          appBar: HomeAppBar(),
+          body: Text("Favoritos"),
+          bottomNavigationBar: HomeBottomBar(_pageController , 3),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              _pageController.jumpToPage(2);
+            },
+            child: Icon(Icons.blur_on),
+            backgroundColor: Colors.grey,
+          ),
+          floatingActionButtonLocation:
+          FloatingActionButtonLocation.centerDocked,
+        ),
+        Scaffold(
+          appBar: HomeAppBar(),
+          body: Text("Carrinho"),
+          bottomNavigationBar: HomeBottomBar(_pageController , 4),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              _pageController.jumpToPage(2);
+            },
+            child: Icon(Icons.blur_on),
+            backgroundColor: Colors.grey,
+          ),
+          floatingActionButtonLocation:
+          FloatingActionButtonLocation.centerDocked,
         )
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){},
-        child: Icon(Icons.blur_on),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-      floatingActionButtonLocation:
-      FloatingActionButtonLocation.centerDocked,
+      ],
     );
   }
 }
