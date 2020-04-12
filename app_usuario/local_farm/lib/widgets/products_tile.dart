@@ -103,7 +103,7 @@ class ProductsTile extends StatelessWidget {
                     ),
                     SizedBox(width: 10,),
                     IconButton(
-                      icon: Icon(Icons.chat_bubble_outline),
+                      icon: Icon(Icons.star_border),
                       onPressed: (){},
                     )
                   ],

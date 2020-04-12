@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Screens/feed_screen.dart';
+import 'package:localfarm/Screens/search_screen.dart';
 import 'package:localfarm/widgets/home_appBar.dart';
 import 'package:localfarm/widgets/home_bottomBar.dart';
 
@@ -29,7 +30,7 @@ class HomeScreen extends StatelessWidget {
         ),
         Scaffold(
           appBar: HomeAppBar(),
-          body: Text("busca"),
+          body: SearchScreen(),
           bottomNavigationBar: HomeBottomBar(_pageController , 1),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
