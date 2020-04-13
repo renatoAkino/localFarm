@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/product_data.dart';
-import 'package:localfarm/widgets/products_tile.dart';
+import 'package:localfarm/widgets/feed_tile.dart';
 
 class FeedScreen extends StatefulWidget {
   @override
@@ -21,7 +21,7 @@ class _FeedScreenState extends State<FeedScreen> {
             children: snapshot.data.documents.map(
                     (doc){
                   ProductData data = ProductData.fromDocument(doc);
-                  return ProductsTile(data);
+                  return FeedTile(data);
                 }
             ).toList(),
           );

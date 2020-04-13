@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/product_data.dart';
+import 'package:localfarm/widgets/feed_tile.dart';
 import 'package:localfarm/widgets/products_tile.dart';
 
 
@@ -50,7 +51,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           (doc){
                         ProductData data = ProductData.fromDocument(doc);
                         if(data.title.toLowerCase().contains(_search.toLowerCase())){
-                          return ProductsTile(data);
+                          return FeedTile(data);
                         }
                         else return Container();
                       }
