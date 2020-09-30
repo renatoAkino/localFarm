@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/Screens/store_screen.dart';
@@ -95,24 +96,27 @@ class FeedTile extends StatelessWidget {
                     children: <Widget>[
                       Text(product.title , style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
                       Container(
-                        child: Text(product.description, style: TextStyle(fontSize: 11),),
+                        width: MediaQuery.of(context).size.width*0.6,
+                        child:  Text(product.description, style: TextStyle(fontSize: 11), overflow: TextOverflow.ellipsis,),
                       )
                     ],
                   ),
                 ),
-                Row(
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.favorite_border),
-                      onPressed: (){},
-                    ),
-                    SizedBox(width: 10,),
-                    IconButton(
-                      icon: Icon(Icons.star_border),
-                      onPressed: (){},
-                    )
-                  ],
-                )
+                Container(
+                    child:
+                          Row(
+                            children: <Widget>[
+                              IconButton(
+                                icon: Icon(Icons.favorite_border),
+                                onPressed: (){},
+                              ),
+                              SizedBox(width: 10,),
+                              IconButton(
+                                icon: Icon(Icons.star_border),
+                                onPressed: (){},
+                              )
+                            ],
+                          ))
 
               ],
             ),

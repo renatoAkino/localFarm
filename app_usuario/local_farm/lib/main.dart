@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           supportedLocales: [const Locale('pt', 'BR')],
           theme: ThemeData(
               primaryColor: Color.fromARGB(255, 51,196,155),
-              accentColor: Color.fromARGB(255, 41,158,125)
+              accentColor: Color.fromARGB(255, 19,74,60)
           ),
           debugShowCheckedModeBanner: false,
         )

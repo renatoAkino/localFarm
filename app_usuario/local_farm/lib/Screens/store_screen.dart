@@ -56,12 +56,9 @@ class _StoreScreenState extends State<StoreScreen> {
 //        ),
         body: Stack(
           children: <Widget>[
-          Container(
-            height: 400,
-            color: Colors.white,
-          ),
+
             Container(
-              height: 150,
+              height: 160,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
@@ -70,14 +67,24 @@ class _StoreScreenState extends State<StoreScreen> {
                   )
               ),
             ),
-
+            Container(
+              margin: EdgeInsets.only(top: 150),
+              height: 400,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15)
+              ),
+            ),
             ListView(
               children: <Widget>[
                 FarmHeader(farmData),
                 Container(
-                  color: Colors.white,
                   padding: EdgeInsets.only(left: 15,top: 20),
                   child: Text('Categorias', style: TextStyle(fontSize: 30),),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))
+                  ),
                 ),
                 CategoryList(),
                 Container(

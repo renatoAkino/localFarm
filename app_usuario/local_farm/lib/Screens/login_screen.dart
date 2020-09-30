@@ -168,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onSucess(){
-    print(UserModel.of(context).userData['birth']);
+    print(UserModel.of(context).userData['name']);
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(
             builder: (context) => HomeScreen()
