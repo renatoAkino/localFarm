@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/product_data.dart';
+import 'package:localfarm/Screens/product_screen.dart';
 
 class ProductsTile extends StatelessWidget {
   final ProductData productData;
@@ -11,7 +12,11 @@ class ProductsTile extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 7.5, vertical: 15),
       child: GestureDetector(
-        onTap: (){},
+        onTap: (){
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ProductScreen(productData)
+          ));
+        },
         child: Card(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20)
@@ -31,7 +36,6 @@ class ProductsTile extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 100,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

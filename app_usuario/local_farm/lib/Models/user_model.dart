@@ -62,7 +62,7 @@ class UserModel extends Model{
       firebaseUser = await _auth.currentUser();
     }
     if(firebaseUser != null){
-      if(userData['nome'] == null){
+      if(userData['name'] == null){
         DocumentSnapshot docUser = await Firestore.instance.collection('users').document(firebaseUser.uid).get();
         userData = docUser.data;
       }
@@ -100,7 +100,6 @@ class UserModel extends Model{
   }
 
   bool isLoggedin(){
-    print(firebaseUser != null);
     return firebaseUser != null;
   }
 
@@ -117,4 +116,11 @@ class UserModel extends Model{
     userData['birth'] = Timestamp.fromDate(date);
   }
 
+  String getName(){
+    if(isLoggedin()){
+      return userData['name'].toString();
+    }else{
+      return 'Teste';
+    }
+  }
 }

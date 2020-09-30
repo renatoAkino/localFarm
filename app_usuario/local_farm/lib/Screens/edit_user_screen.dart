@@ -214,10 +214,7 @@ class _EditUserScreenState extends State<EditUserScreen> {
   }
 
   void onSucess(){
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-            builder: (context) => HomeScreen()
-        ));
+    Navigator.of(context).pop(context);
   }
 
   void onFailed(){

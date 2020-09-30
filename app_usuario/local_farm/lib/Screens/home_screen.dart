@@ -1,97 +1,65 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/feed_screen.dart';
 import 'package:localfarm/Screens/search_screen.dart';
 import 'package:localfarm/widgets/home_appBar.dart';
-import 'package:localfarm/widgets/home_bottomBar.dart';
 
-class HomeScreen extends StatelessWidget {
-  final _pageController = PageController(initialPage: 2);
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _pageIndex = 2;
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      controller: _pageController,
-      physics: NeverScrollableScrollPhysics(),
-      children: <Widget>[
-        Scaffold(
-          resizeToAvoidBottomPadding: false,
-          appBar: HomeAppBar(),
-          body: Text("pedidos"),
-          bottomNavigationBar: HomeBottomBar(_pageController , 0),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              _pageController.jumpToPage(2);
-            },
-            child: Icon(Icons.blur_on),
-            backgroundColor: Theme.of(context).primaryColor,
-          ),
-          floatingActionButtonLocation:
-          FloatingActionButtonLocation.centerDocked,
-        ),
-        Scaffold(
-          resizeToAvoidBottomPadding: false,
-          appBar: HomeAppBar(),
-          body: SearchScreen(),
-          bottomNavigationBar: HomeBottomBar(_pageController , 1),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              _pageController.jumpToPage(2);
-            },
-            child: Icon(Icons.blur_on),
-            backgroundColor: Theme.of(context).primaryColor,
-          ),
-          floatingActionButtonLocation:
-          FloatingActionButtonLocation.centerDocked,
-        ),
-        Scaffold(
-          resizeToAvoidBottomPadding: false,
-          appBar: HomeAppBar(),
-          body: FeedScreen(),
-          bottomNavigationBar: HomeBottomBar(_pageController , 2),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              _pageController.jumpToPage(2);
-            },
-            child: Icon(Icons.blur_on),
-            backgroundColor: Theme.of(context).primaryColor,
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-        ),
-        Scaffold(
-          resizeToAvoidBottomPadding: false,
-          appBar: HomeAppBar(),
-          body: Text("Favoritos"),
-          bottomNavigationBar: HomeBottomBar(_pageController , 3),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              _pageController.jumpToPage(2);
-            },
-            child: Icon(Icons.blur_on),
-            backgroundColor: Theme.of(context).primaryColor,
-          ),
-          floatingActionButtonLocation:
-          FloatingActionButtonLocation.centerDocked,
-        ),
-        Scaffold(
-          resizeToAvoidBottomPadding: false,
-          appBar: HomeAppBar(),
-          body: Text("Carrinho"),
-          bottomNavigationBar: HomeBottomBar(_pageController , 4),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              _pageController.jumpToPage(2);
-            },
-            child: Icon(Icons.blur_on),
-            backgroundColor: Theme.of(context).primaryColor,
-          ),
-          floatingActionButtonLocation:
-          FloatingActionButtonLocation.centerDocked,
-        ),
-      ],
+    return Scaffold(
+        resizeToAvoidBottomPadding: false,
+        appBar: HomeAppBar(),
+        body:
+        Stack(
+          children: <Widget>[
+            _getPage(_pageIndex),
+
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: CurvedNavigationBar(
+                backgroundColor: Colors.transparent,
+                index: _pageIndex,
+                buttonBackgroundColor: Theme.of(context).primaryColor,
+                items: <Widget>[
+                  Icon(Icons.receipt),
+                  Icon(Icons.search),
+                  Icon(Icons.blur_on),
+                  Icon(Icons.star_border),
+                  Icon(Icons.shopping_cart),
+                ],
+                onTap: (index){
+                  setState(() {
+                    _pageIndex = index;
+                  });
+                },
+              ),
+            )
+
+          ],
+        )
+
     );
   }
 
+  Widget _getPage(index){
+    switch(index){
+      case 0: return Center(child: Text("Pedidos"),);break;
+      case 1: return SearchScreen(); break;
+      case 2: return FeedScreen(); break;
+      case 3: return Center(child: Text("Favoritos"),);break;
+      case 4: return Center(child: Text("Carrinho"),);break;
+    }
+  }
 
 }
+
