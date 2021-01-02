@@ -1,9 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 class ScreenProgress extends StatelessWidget {
+  // double deviceHeight(BuildContext context) =>
+  //     MediaQuery.of(context).size.height;
+
+  // double deviceWidth(BuildContext context) => MediaQuery.of(context).size.width;
   final int ticks;
 
   ScreenProgress({@required this.ticks});
@@ -11,6 +13,7 @@ class ScreenProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         tick1(),
         spacer(),
@@ -67,7 +70,7 @@ class ScreenProgress extends StatelessWidget {
     return Container(
       color: Colors.blue,
       height: 5.0,
-      width: 50.0,
+      width: 50,
     );
   }
 }
@@ -75,8 +78,10 @@ class ScreenProgress extends StatelessWidget {
 class OrderStatuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScreenProgress(
-      ticks: 3,
+    return Scaffold(
+      body: ScreenProgress(
+        ticks: 1,
+      ),
     );
   }
 }
