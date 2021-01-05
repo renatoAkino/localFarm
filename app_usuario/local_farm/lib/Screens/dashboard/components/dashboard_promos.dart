@@ -12,15 +12,15 @@ class _ImageCarouselState extends State<ImageCarousel>
 
   initState() {
     super.initState();
-    // controller = new AnimationController(
-    //     duration: const Duration(milliseconds: 2000), vsync: this);
-    // animation = new Tween(begin: 0.0, end: 18.0).animate(controller)
-    //   ..addListener(() {
-    //     setState(() {
-    //       // the state that has changed here is the animation object’s value
-    //     });
-    //   });
-    // controller.forward();
+    controller = new AnimationController(
+        duration: const Duration(milliseconds: 2000), vsync: this);
+    animation = new Tween(begin: 0.0, end: 18.0).animate(controller)
+      ..addListener(() {
+        setState(() {
+          // the state that has changed here is the animation object’s value
+        });
+      });
+    controller.forward();
   }
 
   @override
@@ -32,9 +32,9 @@ class _ImageCarouselState extends State<ImageCarousel>
       boxFit: BoxFit.cover,
       dotBgColor: Colors.transparent,
       images: [
-        new AssetImage('assets/food1.jpeg'),
-        new AssetImage('assets/food2.jpeg'),
-        new AssetImage('assets/food3.jpeg'),
+        new AssetImage('assets/promo3.jpeg'),
+        new AssetImage('assets/promo2.jpeg'),
+        // new AssetImage('assets/promo5.jpeg'),
         // new AssetImage('assets/food4.jpeg'),
         // new AssetImage('assets/food5.jpeg'),
       ],
@@ -43,22 +43,22 @@ class _ImageCarouselState extends State<ImageCarousel>
     );
 
     Widget banner = new Padding(
-      padding: const EdgeInsets.only(top: 20.0, left: 20.0),
+      padding: const EdgeInsets.only(top: 5.0, left: 25.0),
       child: new Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15.0),
               bottomRight: Radius.circular(15.0)),
-          color: Colors.amber.withOpacity(0.5),
+          color: Colors.green.withOpacity(0.5),
         ),
         padding: const EdgeInsets.all(10.0),
         child: new Text(
-          'Banner on top of carousel',
-          // style: TextStyle(
-          //   // fontFamily: 'fira',
-          //   fontSize: animation.value, //18.0,
-          //   //color: Colors.white,
-          // ),
+          'Promoções',
+          style: TextStyle(
+            // fontFamily: 'fira',
+            fontSize: 12, //18.0,
+            color: Colors.white,
+          ),
         ),
       ),
       // ),

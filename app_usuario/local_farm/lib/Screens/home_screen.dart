@@ -6,7 +6,7 @@ import 'package:localfarm/Screens/feed_screen.dart';
 import 'package:localfarm/Screens/search_screen.dart';
 import 'package:localfarm/widgets/home_appBar.dart';
 
-import 'dashboard_screen.dart';
+import 'dashboard/dashboard_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

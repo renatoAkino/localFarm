@@ -2,10 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/tmp/categories.dart';
 import 'package:localfarm/tmp/foods.dart';
-import 'package:localfarm/widgets/dashboard_category.dart';
-import 'package:localfarm/widgets/dashboard_grid_product.dart';
-import 'package:localfarm/widgets/dashboard_promos.dart';
-import 'package:localfarm/widgets/dashboard_slider_item.dart';
+import 'package:localfarm/Screens/dashboard/components/dashboard_category.dart';
+import 'package:localfarm/Screens/dashboard/components/dashboard_grid_product.dart';
+import 'package:localfarm/Screens/dashboard/components/dashboard_promos.dart';
+import 'package:localfarm/Screens/dashboard/components/dashboard_slider_item.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -121,7 +121,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ),
               ],
             ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
