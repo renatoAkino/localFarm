@@ -14,7 +14,7 @@ class StatusProgressWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(top: 28.0),
+        padding: const EdgeInsets.only(top: 0.0),
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.3,

@@ -9,9 +9,14 @@ class OrderStatuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Status'),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
       body: StatusProgressWidget(
         //index de 0 à 4
-        index: 2,
+        index: 4,
       ),
     );
   }
