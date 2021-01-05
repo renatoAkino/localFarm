@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:localfarm/Datas/cart_data.dart';
 import 'package:localfarm/Datas/farm_data.dart';
 import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/Models/user_model.dart';
@@ -28,7 +29,7 @@ class _ProductScreenState extends State<ProductScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   _ProductScreenState(this.productData);
 
-
+  int quantity = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,7 +117,36 @@ class _ProductScreenState extends State<ProductScreen> {
                   color: Colors.white,
                   height: 40,
                 ),
+                Container(
+                  child: Row(
+                    children: <Widget>[
+                      RaisedButton(
+                        child: Icon(Icons.remove),
+                        onPressed: (){
+                          if(quantity >= 1){
+                            setState(() {
+                              quantity--;
+                            });
+                          }
+                        },
+                      ),
+                      Text(
+                        "$quantity"
+                      ),
+                      RaisedButton(
+                        child: Icon(Icons.add),
+                        onPressed: (){
+                          if(quantity >= 1){
+                            setState(() {
+                              quantity++;
+                            });
+                          }
+                        },
+                      ),
 
+                    ],
+                  ),
+                ),
                 Container(
                   color: Colors.white,
                   padding: EdgeInsets.only(left: 15,top: 20),
@@ -124,7 +154,10 @@ class _ProductScreenState extends State<ProductScreen> {
                     child: Text("Adicionar ao carrinho", style: TextStyle(fontSize: 27),),
                     onTap: (){
                       if(UserModel.of(context).isLoggedin()){
-                        //Adiciona ao Carrinho
+                        CartData cartData = CartData();
+                        cartData.product_id = productData.id;
+                        cartData.quantity = quantity;
+                        cartData.productData = productData;
                       }else{
                         onFailed();
                       }
