@@ -32,4 +32,11 @@ class ProductData{
          farmData = FarmData.fromDocument(snapshot);
 }
 
+  Map<String, dynamic> toResumeMap(){
+    return{
+      'title' : title,
+      'price' : price
+    };
+  }
+
 }
