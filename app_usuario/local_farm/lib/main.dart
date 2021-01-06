@@ -5,6 +5,8 @@ import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/home_screen.dart';
 import 'package:localfarm/Screens/login_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
+//
+import 'Screens/order_status_screen.dart';
 
 void main() {
   return runApp(MyApp());
@@ -15,6 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModel<UserModel>(
         model: UserModel(),
+
         child: ScopedModelDescendant<UserModel>(
           builder: (context, child, model){
             return ScopedModel<CartModel>(
@@ -37,6 +40,7 @@ class MyApp extends StatelessWidget {
           },
         )
     );
+
   }
 }
 
