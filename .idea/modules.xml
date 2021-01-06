@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/localfarm.iml" filepath="$PROJECT_DIR$/.idea/localfarm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/localFarm.iml" filepath="$PROJECT_DIR$/.idea/localFarm.iml" />
+
     </modules>
   </component>
 </project>
