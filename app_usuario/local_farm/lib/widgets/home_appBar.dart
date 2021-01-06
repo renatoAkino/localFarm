@@ -16,7 +16,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       leading: ScopedModelDescendant<UserModel>(
-        builder: (context, child, model){
+        builder: (context, child, model) {
           return Row(
             children: <Widget>[
               GestureDetector(
@@ -26,7 +26,9 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                       height: 40,
                       width: 40,
                       decoration: BoxDecoration(shape: BoxShape.circle),
-                      child: Icon(model.isLoggedin() ? Icons.exit_to_app : Icons.perm_identity),
+                      child: Icon(model.isLoggedin()
+                          ? Icons.exit_to_app
+                          : Icons.perm_identity),
                     ),
                   ],
                 ),
@@ -34,12 +36,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                   if (!model.isLoggedin()) {
                     print(model.userData['name']);
                     Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => LoginScreen()));
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
                   } else {
                     print(model.userData['name']);
                     model.logout();
-
-
                   }
                 },
               ),
@@ -47,27 +47,23 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           );
         },
       ),
-      title: ScopedModelDescendant<UserModel>(
-      builder: (context, child, model){
-        return
-          GestureDetector(
-            child: Text(model.isLoggedin()
-                ? model.userData['name']
-                : 'Fazer Login'),
-            onTap: (){
-              if(model.isLoggedin()){
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => EditUserScreen()));
-              }
-            },
-          );
-
+      title: ScopedModelDescendant<UserModel>(builder: (context, child, model) {
+        return GestureDetector(
+          child:
+              Text(model.isLoggedin() ? model.userData['name'] : 'Fazer Login'),
+          onTap: () {
+            if (model.isLoggedin()) {
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => EditUserScreen()));
+            }
+          },
+        );
       }),
       titleSpacing: 0,
       actions: <Widget>[
         IconButton(
           onPressed: () {},
-          icon: Icon(Icons.more_vert),
+          icon: Icon(Icons.menu),
         ),
       ],
     );

@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/Screens/store_screen.dart';
 
-class FeedTile extends StatelessWidget {
+class FeedTile2 extends StatelessWidget {
   final ProductData product;
 
-  FeedTile(this.product);
+  FeedTile2(this.product);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Card(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

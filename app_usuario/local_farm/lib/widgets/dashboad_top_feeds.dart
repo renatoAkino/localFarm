@@ -1,14 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/product_data.dart';
-import 'package:localfarm/widgets/feed_tile.dart';
 
-class FeedScreen extends StatefulWidget {
+import 'feed_tile.dart';
+import 'feed_tile2.dart';
+
+class TopFeedsWidget extends StatefulWidget {
   @override
-  _FeedScreenState createState() => _FeedScreenState();
+  _TopFeedsWidgetState createState() => _TopFeedsWidgetState();
 }
 
-class _FeedScreenState extends State<FeedScreen> {
+class _TopFeedsWidgetState extends State<TopFeedsWidget> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<QuerySnapshot>(
@@ -23,9 +25,13 @@ class _FeedScreenState extends State<FeedScreen> {
           );
         } else {
           return ListView(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
             children: snapshot.data.documents.map((doc) {
               ProductData data = ProductData.fromDocument(doc);
-              return FeedTile(data);
+              print(data.description);
+              // return FeedTile(data);
+              return FeedTile2(data);
             }).toList(),
           );
         }

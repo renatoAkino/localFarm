@@ -1,11 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:localfarm/tmp/categories.dart';
 import 'package:localfarm/tmp/foods.dart';
 import 'package:localfarm/Screens/dashboard/components/dashboard_category.dart';
 import 'package:localfarm/Screens/dashboard/components/dashboard_grid_product.dart';
 import 'package:localfarm/Screens/dashboard/components/dashboard_promos.dart';
 import 'package:localfarm/Screens/dashboard/components/dashboard_slider_item.dart';
+import 'package:localfarm/widgets/dashboad_top_feeds.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -32,31 +34,38 @@ class _DashboardScreenState extends State<DashboardScreen>
       body: Padding(
         padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
         child: ListView(
+          shrinkWrap: true,
+          // physics: ClampingScrollPhysics(),
           children: <Widget>[
             ImageCarousel(),
-            SizedBox(height: 10.0),
+            // SizedBox(height: 20.0),
 
-            Text(
-              "Categorias",
-              style: TextStyle(
-                fontSize: 23,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
+            // Text(
+            //   "Categorias",
+            //   style: TextStyle(
+            //     fontSize: 23,
+            //     fontWeight: FontWeight.w800,
+            //   ),
+            // ),
             SizedBox(height: 10.0),
-
+            // SvgPicture.asset(
+            //   categoriesSvg[0][1],
+            //   placeholderBuilder: (context) => CircularProgressIndicator(),
+            //   height: 18.0,
+            // ),
             Container(
               height: 65.0,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
-                itemCount: categories == null ? 0 : categories.length,
+                itemCount: categoriesSvg == null ? 0 : categoriesSvg.length,
                 itemBuilder: (BuildContext context, int index) {
-                  Map cat = categories[index];
+                  Map cat = categoriesSvg[index];
+                  // print(cat['icon']);
                   return HomeCategory(
                     icon: cat['icon'],
                     title: cat['name'],
-                    items: cat['items'].toString(),
+                    // items: cat['items'].toString(),
                     isHome: true,
                   );
                 },
@@ -76,7 +85,8 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ),
                 FlatButton(
                   child: Text(
-                    "View More",
+                    // "View More",
+                    '',
                     style: TextStyle(
 //                      fontSize: 22,
 //                      fontWeight: FontWeight.w800,
@@ -91,7 +101,7 @@ class _DashboardScreenState extends State<DashboardScreen>
             SizedBox(height: 10.0),
 
             //Slider Here
-
+            // TopFeedsWidget(),
             Column(
               children: [
                 CarouselSlider(
@@ -121,12 +131,13 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ),
               ],
             ),
+
             SizedBox(height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  "Popular Items",
+                  "Populares",
                   style: TextStyle(
                     fontSize: 23,
                     fontWeight: FontWeight.w800,
@@ -134,7 +145,8 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ),
                 FlatButton(
                   child: Text(
-                    "View More",
+                    // "View More",
+                    "",
                     style: TextStyle(
 //                      fontSize: 22,
 //                      fontWeight: FontWeight.w800,
@@ -182,3 +194,5 @@ class _DashboardScreenState extends State<DashboardScreen>
   @override
   bool get wantKeepAlive => true;
 }
+
+class TopFeeds {}
