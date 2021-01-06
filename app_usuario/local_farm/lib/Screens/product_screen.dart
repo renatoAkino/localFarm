@@ -4,12 +4,17 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:localfarm/Datas/cart_data.dart';
 import 'package:localfarm/Datas/farm_data.dart';
 import 'package:localfarm/Datas/product_data.dart';
+import 'package:localfarm/Models/cart_model.dart';
+import 'package:localfarm/Models/user_model.dart';
+import 'package:localfarm/Screens/login_screen.dart';
 import 'package:localfarm/widgets/category_list.dart';
 import 'package:localfarm/widgets/farm_header.dart';
 import 'package:localfarm/widgets/products_grid.dart';
 import 'package:localfarm/widgets/products_tile.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -22,13 +27,14 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   final ProductData productData;
-
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   _ProductScreenState(this.productData);
 
-
+  int quantity = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
 //        appBar: AppBar(
 //
 //          elevation: 0,
@@ -112,11 +118,54 @@ class _ProductScreenState extends State<ProductScreen> {
                   color: Colors.white,
                   height: 40,
                 ),
+                Container(
+                  child: Row(
+                    children: <Widget>[
+                      RaisedButton(
+                        child: Icon(Icons.remove),
+                        onPressed: (){
+                          if(quantity > 1){
+                            setState(() {
+                              quantity--;
+                            });
+                          }
+                        },
+                      ),
+                      Text(
+                        "$quantity"
+                      ),
+                      RaisedButton(
+                        child: Icon(Icons.add),
+                        onPressed: (){
+                          if(quantity < productData.quantity){
+                            setState(() {
+                              quantity++;
+                            });
+                          }
+                        },
+                      ),
 
+                    ],
+                  ),
+                ),
                 Container(
                   color: Colors.white,
                   padding: EdgeInsets.only(left: 15,top: 20),
-                  child: Text("Adicionar ao carrionho", style: TextStyle(fontSize: 27),),
+                  child: GestureDetector(
+                    child: Text("Adicionar ao carrinho", style: TextStyle(fontSize: 27),),
+                    onTap: (){
+                      if(UserModel.of(context).isLoggedin()){
+                        CartData cartData = CartData();
+                        cartData.product_id = productData.id;
+                        cartData.quantity = quantity;
+                        cartData.productData = productData;
+
+                        CartModel.of(context).addCartItem(cartData);
+                      }else{
+                        onFailed();
+                      }
+                    },
+                  ) ,
                 ),
 
               ],
@@ -145,4 +194,34 @@ class _ProductScreenState extends State<ProductScreen> {
 
     );
   }
+
+
+  void onFailed(){
+    _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content: GestureDetector(
+            child: Text("Clique e faça login para adicionar ao carrinho", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),),
+            onTap:  (){
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => LoginScreen()));
+            }
+          ),
+          backgroundColor: Theme.of(context).primaryColor,
+          duration: Duration(seconds: 3),
+
+        ));
+
+  }
+  void onSuccess(){
+    _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content:  Text("Adicionado ao Carrinho", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),),
+          backgroundColor: Theme.of(context).primaryColor,
+          duration: Duration(seconds: 3),
+
+        ));
+
+  }
 }
+
+

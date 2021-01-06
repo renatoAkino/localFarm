@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Models/user_model.dart';
+import 'package:localfarm/Screens/cart_screen.dart';
 import 'package:localfarm/Screens/feed_screen.dart';
 import 'package:localfarm/Screens/search_screen.dart';
 import 'package:localfarm/widgets/home_appBar.dart';
@@ -48,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ));
   }
 
+
   Widget _getPage(index) {
     switch (index) {
       case 0:
@@ -69,6 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Text("Carrinho"),
         );
         break;
+
     }
   }
 }
