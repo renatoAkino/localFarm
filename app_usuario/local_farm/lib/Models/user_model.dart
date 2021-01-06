@@ -123,4 +123,11 @@ class UserModel extends Model{
       return 'Teste';
     }
   }
+  String getId(){
+    if(isLoggedin()){
+      return firebaseUser.uid;
+    }else{
+      return 'Teste';
+    }
+  }
 }

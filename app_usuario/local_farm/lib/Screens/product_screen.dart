@@ -7,6 +7,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:localfarm/Datas/cart_data.dart';
 import 'package:localfarm/Datas/farm_data.dart';
 import 'package:localfarm/Datas/product_data.dart';
+import 'package:localfarm/Models/cart_model.dart';
 import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/login_screen.dart';
 import 'package:localfarm/widgets/category_list.dart';
@@ -123,7 +124,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       RaisedButton(
                         child: Icon(Icons.remove),
                         onPressed: (){
-                          if(quantity >= 1){
+                          if(quantity > 1){
                             setState(() {
                               quantity--;
                             });
@@ -136,7 +137,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       RaisedButton(
                         child: Icon(Icons.add),
                         onPressed: (){
-                          if(quantity >= 1){
+                          if(quantity < productData.quantity){
                             setState(() {
                               quantity++;
                             });
@@ -158,6 +159,8 @@ class _ProductScreenState extends State<ProductScreen> {
                         cartData.product_id = productData.id;
                         cartData.quantity = quantity;
                         cartData.productData = productData;
+
+                        CartModel.of(context).addCartItem(cartData);
                       }else{
                         onFailed();
                       }
@@ -209,7 +212,16 @@ class _ProductScreenState extends State<ProductScreen> {
         ));
 
   }
+  void onSuccess(){
+    _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content:  Text("Adicionado ao Carrinho", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),),
+          backgroundColor: Theme.of(context).primaryColor,
+          duration: Duration(seconds: 3),
 
+        ));
+
+  }
 }
 
 

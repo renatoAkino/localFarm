@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Models/user_model.dart';
+import 'package:localfarm/Screens/cart_screen.dart';
 import 'package:localfarm/Screens/feed_screen.dart';
 import 'package:localfarm/Screens/search_screen.dart';
 import 'package:localfarm/widgets/home_appBar.dart';
@@ -57,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case 1: return SearchScreen(); break;
       case 2: return FeedScreen(); break;
       case 3: return Center(child: Text("Favoritos"),);break;
-      case 4: return Center(child: Text("Carrinho"),);break;
+      case 4: return CartScreen();break;
     }
   }
 
