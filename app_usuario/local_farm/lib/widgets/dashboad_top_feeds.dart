@@ -24,15 +24,27 @@ class _TopFeedsWidgetState extends State<TopFeedsWidget> {
             child: CircularProgressIndicator(),
           );
         } else {
-          return ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            children: snapshot.data.documents.map((doc) {
-              ProductData data = ProductData.fromDocument(doc);
-              print(data.description);
-              // return FeedTile(data);
-              return FeedTile2(data);
-            }).toList(),
+          return SizedBox(
+            height: 300,
+            // width: 1500,
+            // child: ListView(
+            //   // shrinkWrap: true,
+            //   // scrollDirection: Axis.horizontal,
+            //   children: snapshot.data.documents.map((doc) {
+            //     ProductData data = ProductData.fromDocument(doc);
+            //     // print(data.description);
+            //     return FeedTile2(data);
+            //   }).toList(),
+            // ),
+            child: ListView.builder(
+              itemCount: snapshot.data.documents.length,
+              itemBuilder: (context, index) {
+                ProductData data =
+                    ProductData.fromDocument(snapshot.data.documents[index]);
+                return FeedTile2(data);
+              },
+              scrollDirection: Axis.horizontal,
+            ),
           );
         }
       },
