@@ -73,7 +73,7 @@ class FeedTile2 extends StatelessWidget {
                 child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(product.images['1']),
+                    image: NetworkImage(product.images['0']),
                     fit: BoxFit.cover),
               ),
             )),

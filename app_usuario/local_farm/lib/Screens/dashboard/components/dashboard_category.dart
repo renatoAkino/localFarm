@@ -50,13 +50,13 @@ class _HomeCategoryState extends State<HomeCategory> {
                   child: SvgPicture.asset(
                     // 'assets/icons/apple.svg',
                     widget.icon,
-                    color: Colors.green,
+                    color: Colors.orange,
                     height: 24,
                     width: 24,
                   ),
                 ),
               ),
-              SizedBox(width: 5),
+              SizedBox(width: 0),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,

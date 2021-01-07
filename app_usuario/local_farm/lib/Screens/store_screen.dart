@@ -11,6 +11,8 @@ import 'package:localfarm/widgets/products_grid.dart';
 import 'package:localfarm/widgets/products_tile.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+import 'cart_screen.dart';
+
 class StoreScreen extends StatefulWidget {
   final FarmData farmData;
   StoreScreen(this.farmData);
@@ -41,7 +43,14 @@ class _StoreScreenState extends State<StoreScreen> {
           ),
           actions: <Widget>[
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    // builder: (context) => CartScreen(),
+                    builder: (context) => CartScreen(),
+                  ),
+                );
+              },
               icon: Icon(Icons.shopping_cart),
             )
           ],

@@ -8,6 +8,7 @@ import 'package:localfarm/Screens/dashboard/components/dashboard_grid_product.da
 import 'package:localfarm/Screens/dashboard/components/dashboard_promos.dart';
 import 'package:localfarm/Screens/dashboard/components/dashboard_slider_item.dart';
 import 'package:localfarm/widgets/dashboad_top_feeds.dart';
+import 'package:localfarm/widgets/feed_tile.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -46,7 +47,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                 "Categorias",
                 style: TextStyle(
                   fontSize: 23,
-                  fontWeight: FontWeight.w800,
+                  // fontWeight: FontWeight.w800,
                 ),
               ),
               SizedBox(height: 10.0),
@@ -74,34 +75,121 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ),
               ),
 
+              SizedBox(height: 20.0),
+
+              Text(
+                "Essa Semana",
+                style: TextStyle(
+                  fontSize: 23,
+                  // fontWeight: FontWeight.w800,
+                ),
+              ),
               SizedBox(height: 10.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    "Em Alta",
-                    style: TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  FlatButton(
-                    child: Text(
-                      // "View More",
-                      '',
-                      style: TextStyle(
-//                      fontSize: 22,
-//                      fontWeight: FontWeight.w800,
-                        color: Theme.of(context).accentColor,
+              Card(
+                elevation: 0,
+                // color: Colors.lightGreen,
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                margin: EdgeInsets.only(top: 10, bottom: 10),
+                child: Column(
+                  children: [
+                    Container(
+                      height: 80,
+                      child: Center(
+                        child: ListTile(
+                          leading: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage('assets/farmer2.jpeg'),
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
+                            ),
+                            height: 40,
+                            width: 40,
+                          ),
+                          title: Text(
+                            'Sr. João dos Santos',
+                            style: TextStyle(
+                                // color: Colors.white,
+                                ),
+                          ),
+                          subtitle: Text(
+                            'Fazenda Atalaia',
+                            style: TextStyle(
+                                // color: Colors.grey[100],
+                                ),
+                          ),
+                          trailing: Container(
+                            height: 40,
+                            width: 40,
+                            child: Icon(
+                              Icons.arrow_right,
+                              color: Colors.green,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.green[50],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                    onPressed: () {},
-                  ),
-                ],
+                    Divider(
+                      // height: MediaQuery.of(context).size.width * 0.6,
+                      endIndent: 40,
+                      indent: 40,
+                      height: 10,
+                      // color: Colors.white,
+                    ),
+                    Container(
+                      height: 70,
+                      child: Center(
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.access_time,
+                            // color: Colors.white,
+                            color: Colors.green,
+                          ),
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Sexta, 08 de Janeiro',
+                                style: TextStyle(
+                                    // color: Colors.white,
+                                    ),
+                              ),
+                              Text(
+                                '8:00 - 10:00',
+                                style: TextStyle(
+                                    // color: Colors.white,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
 
-              SizedBox(height: 0.0),
+              SizedBox(height: 20.0),
 
+              Text(
+                "Destaques",
+                style: TextStyle(
+                  fontSize: 23,
+                  // fontWeight: FontWeight.w800,
+                ),
+              ),
+              SizedBox(height: 10.0),
               //Slider Here
               TopFeedsWidget(),
 //             Column(
@@ -139,10 +227,10 @@ class _DashboardScreenState extends State<DashboardScreen>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "Populares",
+                    "Recomendados",
                     style: TextStyle(
                       fontSize: 23,
-                      fontWeight: FontWeight.w800,
+                      // fontWeight: FontWeight.w800,
                     ),
                   ),
                   FlatButton(
