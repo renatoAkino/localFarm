@@ -15,38 +15,38 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _pageIndex = 2;
+  int _pageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomPadding: false,
-        appBar: HomeAppBar(),
-        body: Stack(
-          children: <Widget>[
-            _getPage(_pageIndex),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: CurvedNavigationBar(
-                backgroundColor: Colors.transparent,
-                index: _pageIndex,
-                buttonBackgroundColor: Theme.of(context).primaryColor,
-                items: <Widget>[
-                  Icon(Icons.receipt),
-                  Icon(Icons.search),
-                  Icon(Icons.blur_on),
-                  Icon(Icons.star_border),
-                  Icon(Icons.shopping_cart),
-                ],
-                onTap: (index) {
-                  setState(() {
-                    _pageIndex = index;
-                  });
-                },
-              ),
-            )
+      resizeToAvoidBottomPadding: false,
+      appBar: HomeAppBar(),
+      bottomNavigationBar: Container(
+        height: 65,
+        color: Colors.green,
+        child: CurvedNavigationBar(
+          height: 55.0,
+          backgroundColor: Colors.green,
+          index: _pageIndex,
+          // buttonBackgroundColor: Theme.of(context).primaryColor,
+          buttonBackgroundColor: Colors.white,
+          items: <Widget>[
+            Icon(Icons.home_outlined),
+            Icon(Icons.search),
+            Icon(Icons.camera_alt_outlined),
+            Icon(Icons.star_border),
+            Icon(Icons.shopping_cart_outlined),
           ],
-        ));
+          onTap: (index) {
+            setState(() {
+              _pageIndex = index;
+            });
+          },
+        ),
+      ),
+      body: _getPage(_pageIndex),
+    );
   }
 
 

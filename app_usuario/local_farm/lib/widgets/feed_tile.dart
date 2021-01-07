@@ -6,11 +6,9 @@ import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/Screens/store_screen.dart';
 
 class FeedTile extends StatelessWidget {
-
   final ProductData product;
 
   FeedTile(this.product);
-
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +23,8 @@ class FeedTile extends StatelessWidget {
               children: <Widget>[
                 FutureBuilder(
                   future: product.getFarmData(),
-                  builder: (context, snapshot){
-                    if(product.farmData != null){
+                  builder: (context, snapshot) {
+                    if (product.farmData != null) {
                       return Row(
                         children: <Widget>[
                           Container(
@@ -34,24 +32,29 @@ class FeedTile extends StatelessWidget {
                             width: 40,
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                image: DecorationImage(image: NetworkImage(product.farmData.image))
-                            ),
+                                image: DecorationImage(
+                                    image:
+                                        NetworkImage(product.farmData.image))),
                           ),
-                          SizedBox(width: 10,),
-                          Text(product.farmData.name, style: TextStyle( fontWeight: FontWeight.w500, fontSize: 15),)
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            product.farmData.name,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500, fontSize: 15),
+                          )
                         ],
                       );
-                    }
-                    else{
+                    } else {
                       return Container();
                     }
                   },
                 ),
                 IconButton(
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => StoreScreen(product.farmData)
-                    ));
+                        builder: (context) => StoreScreen(product.farmData)));
                   },
                   icon: Icon(Icons.layers),
                 )
@@ -66,19 +69,21 @@ class FeedTile extends StatelessWidget {
             items: <Widget>[
               Container(
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: NetworkImage(product.images['0']),
+                  image: DecorationImage(
+                      image: NetworkImage(product.images['0']),
                       fit: BoxFit.cover),
                 ),
               ),
               Container(
                 decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage(product.images['1']),
-                        fit: BoxFit.cover)
-                ),
+                    image: DecorationImage(
+                        image: NetworkImage(product.images['1']),
+                        fit: BoxFit.cover)),
               ),
               Container(
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: NetworkImage(product.images['2']),
+                  image: DecorationImage(
+                      image: NetworkImage(product.images['2']),
                       fit: BoxFit.cover),
                 ),
               ),
@@ -94,40 +99,45 @@ class FeedTile extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(product.title , style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                      Text(
+                        product.title,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
                       Container(
-                        width: MediaQuery.of(context).size.width*0.6,
-                        child:  Text(product.description, style: TextStyle(fontSize: 11), overflow: TextOverflow.ellipsis,),
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        child: Text(
+                          product.description,
+                          style: TextStyle(fontSize: 11),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       )
                     ],
                   ),
                 ),
                 Container(
-                    child:
-                          Row(
-                            children: <Widget>[
-                              IconButton(
-                                icon: Icon(Icons.favorite_border),
-                                onPressed: (){},
-                              ),
-                              SizedBox(width: 10,),
-                              IconButton(
-                                icon: Icon(Icons.star_border),
-                                onPressed: (){},
-                              )
-                            ],
-                          ))
-
+                    child: Row(
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.favorite_border),
+                      onPressed: () {},
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.star_border),
+                      onPressed: () {},
+                    )
+                  ],
+                ))
               ],
             ),
           ),
-          SizedBox(height: 20,)
-
-
-
-
+          SizedBox(
+            height: 20,
+          )
         ],
-
       ),
     );
   }

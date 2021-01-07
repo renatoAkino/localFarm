@@ -43,7 +43,7 @@ class _ImageCarouselState extends State<ImageCarousel>
     );
 
     Widget banner = new Padding(
-      padding: const EdgeInsets.only(top: 5.0, left: 25.0),
+      padding: const EdgeInsets.only(top: 5.0, left: 5.0),
       child: new Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -69,7 +69,7 @@ class _ImageCarouselState extends State<ImageCarousel>
       scrollDirection: Axis.horizontal,
       child: Container(
         // padding: const EdgeInsets.all(20.0),
-        height: screenHeight / 4,
+        height: screenHeight / 5,
         width: screenWidth,
         child: new ClipRRect(
           // borderRadius: BorderRadius.circular(30.0),

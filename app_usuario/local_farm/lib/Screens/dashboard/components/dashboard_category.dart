@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeCategory extends StatefulWidget {
-  final IconData icon;
+  final String icon;
   final String title;
-  final String items;
+  // final String items;
   final Function tap;
   final bool isHome;
 
@@ -11,7 +12,7 @@ class HomeCategory extends StatefulWidget {
       {Key key,
       @required this.icon,
       @required this.title,
-      @required this.items,
+      // @required this.items,
       this.tap,
       this.isHome})
       : super(key: key);
@@ -44,10 +45,15 @@ class _HomeCategoryState extends State<HomeCategory> {
           child: Row(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(left: 0.0, right: 10.0),
-                child: Icon(
-                  widget.icon,
-                  color: Theme.of(context).accentColor,
+                padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                child: Container(
+                  child: SvgPicture.asset(
+                    // 'assets/icons/apple.svg',
+                    widget.icon,
+                    color: Colors.green,
+                    height: 24,
+                    width: 24,
+                  ),
                 ),
               ),
               SizedBox(width: 5),
@@ -55,22 +61,23 @@ class _HomeCategoryState extends State<HomeCategory> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  SizedBox(height: 10.0),
+                  // SizedBox(height: 10.0),
                   Text(
                     "${widget.title}",
                     style: TextStyle(
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.grey,
                       fontSize: 17,
                     ),
                   ),
-                  Text(
-                    "${widget.items} Items",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 10,
-                    ),
-                  ),
-                  SizedBox(height: 5),
+                  // Text(
+                  //   "${widget.items} Items",
+                  //   style: TextStyle(
+                  //     fontWeight: FontWeight.w400,
+                  //     fontSize: 10,
+                  //   ),
+                  // ),
+                  // SizedBox(height: 5),
                 ],
               ),
               SizedBox(width: 5),

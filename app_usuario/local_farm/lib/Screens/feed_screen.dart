@@ -12,18 +12,21 @@ class _FeedScreenState extends State<FeedScreen> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<QuerySnapshot>(
-      future: Firestore.instance.collection('products').orderBy('data_public').getDocuments(),
-      builder: (context, snapshot){
-        if(!snapshot.hasData){
-          return Center(child: CircularProgressIndicator(),);
-        }else{
+      future: Firestore.instance
+          .collection('products')
+          .orderBy('data_public')
+          .getDocuments(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
           return ListView(
-            children: snapshot.data.documents.map(
-                    (doc){
-                  ProductData data = ProductData.fromDocument(doc);
-                  return FeedTile(data);
-                }
-            ).toList(),
+            children: snapshot.data.documents.map((doc) {
+              ProductData data = ProductData.fromDocument(doc);
+              return FeedTile(data);
+            }).toList(),
           );
         }
       },

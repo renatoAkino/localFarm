@@ -7,3 +7,11 @@ List categories = [
   {"name": "Pães", "icon": FontAwesomeIcons.breadSlice, "items": 5},
   {"name": "Ovos", "icon": FontAwesomeIcons.egg, "items": 15},
 ];
+
+List categoriesSvg = [
+  {"name": "Frutas", "icon": 'assets/icons/apple.svg'},
+  {"name": "Pães", "icon": 'assets/icons/bread.svg'},
+  {"name": "Ovos", "icon": 'assets/icons/eggs.svg'},
+  {"name": "Legumes", "icon": 'assets/icons/lettuce.svg'},
+  {"name": "Mel", "icon": 'assets/icons/honey.svg'},
+];
