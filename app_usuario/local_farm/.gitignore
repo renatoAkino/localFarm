@@ -9,6 +9,9 @@
 .history
 .svn/
 
+#pubspec
+pubspec.lock
+
 # IntelliJ related
 *.iml
 *.ipr

@@ -1,10 +1,10 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/Models/user_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:localfarm/Datas/cart_data.dart';
+
 class CartModel extends Model{
   UserModel user;
 
