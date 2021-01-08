@@ -4,7 +4,6 @@ import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/widgets/feed_tile.dart';
 import 'package:localfarm/widgets/products_tile.dart';
 
-
 class SearchScreen extends StatefulWidget {
   @override
   _SearchScreenState createState() => _SearchScreenState();
@@ -22,49 +21,50 @@ class _SearchScreenState extends State<SearchScreen> {
           child: TextField(
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
             ),
-
-            onChanged: (text){
+            onChanged: (text) {
               setState(() {
-                if(text != null && text != ""){
+                if (text != null && text != "") {
                   _search = text;
                 }
               });
             },
           ),
         ),
-        SizedBox(height: 20,),
+        SizedBox(
+          height: 20,
+        ),
         Expanded(
           child: FutureBuilder<QuerySnapshot>(
             future: Firestore.instance.collection('products').getDocuments(),
-            builder: (context, snapshot){
-              if(_search == null || _search == ""){
+            builder: (context, snapshot) {
+              if (_search == null || _search == "") {
                 return Container();
               }
 
-              if(!snapshot.hasData){
-                return Center(child: CircularProgressIndicator(),);
-              }else{
+              if (!snapshot.hasData) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
                 return ListView(
-                  children: snapshot.data.documents.map(
-                          (doc){
-                        ProductData data = ProductData.fromDocument(doc);
-                        if(data.title.toLowerCase().contains(_search.toLowerCase())){
-                          return FeedTile(data);
-                        }
-                        else return Container();
-                      }
-                  ).toList(),
+                  children: snapshot.data.documents.map((doc) {
+                    ProductData data = ProductData.fromDocument(doc);
+                    if (data.title
+                        .toLowerCase()
+                        .contains(_search.toLowerCase())) {
+                      return FeedTile(data);
+                    } else
+                      return Container();
+                  }).toList(),
                 );
               }
             },
           ),
         )
       ],
-    )
-
-        ;
+    );
   }
 }
-

@@ -61,167 +61,173 @@ class _ProductScreenState extends State<ProductScreen> {
 ////          backgroundColor: Colors.transparent,
 ////
 ////        ),
-        body: Stack(
-          children: <Widget>[
+      body: Stack(
+        children: <Widget>[
+          CarouselSlider(
+            viewportFraction: 1.0,
+            aspectRatio: 1.3,
+            enlargeCenterPage: false,
+            enableInfiniteScroll: true,
+            autoPlay: true,
+            items: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(productData.images['0']),
+                      fit: BoxFit.cover),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(productData.images['1']),
+                        fit: BoxFit.cover)),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(productData.images['2']),
+                      fit: BoxFit.cover),
+                ),
+              ),
+            ],
+          ),
+          ListView(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(top: 250),
+                padding: EdgeInsets.only(left: 15, top: 20, right: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      productData.title,
+                      style: TextStyle(fontSize: 27),
+                    ),
+                    Text(
+                      "R\$ ${productData.price.toStringAsFixed(2)}",
+                      style: TextStyle(fontSize: 27),
+                    ),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(20),
+                        topLeft: Radius.circular(20))),
+              ),
+              Container(
+                color: Colors.white,
+                padding: EdgeInsets.only(left: 15, top: 20),
+                child: Text(
+                  "Descrição da parada q tem q colocar bastante coisa pra preencher espaço na tela pq se não fica muito buraco bla bla bla bla bla bla bla",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              Container(
+                color: Colors.white,
+                height: 40,
+              ),
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    RaisedButton(
+                      child: Icon(Icons.remove),
+                      onPressed: () {
+                        if (quantity > 1) {
+                          setState(() {
+                            quantity--;
+                          });
+                        }
+                      },
+                    ),
+                    Text("$quantity"),
+                    RaisedButton(
+                      child: Icon(Icons.add),
+                      onPressed: () {
+                        if (quantity < productData.quantity) {
+                          setState(() {
+                            quantity++;
+                          });
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                color: Colors.white,
+                padding: EdgeInsets.only(left: 15, top: 20),
+                child: GestureDetector(
+                  child: Text(
+                    "Adicionar ao carrinho",
+                    style: TextStyle(fontSize: 27),
+                  ),
+                  onTap: () {
+                    if (UserModel.of(context).isLoggedin()) {
+                      CartData cartData = CartData();
+                      cartData.product_id = productData.id;
+                      cartData.quantity = quantity;
+                      cartData.productData = productData;
 
-            CarouselSlider(
-              viewportFraction: 1.0,
-              aspectRatio: 1.3,
-              enlargeCenterPage: false,
-              enableInfiniteScroll: true,
-              autoPlay: true,
-              items: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage(productData.images['0']),
-                        fit: BoxFit.cover),
-                  ),
+                      CartModel.of(context).addCartItem(cartData);
+                    } else {
+                      onFailed();
+                    }
+                  },
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(image: NetworkImage(productData.images['1']),
-                          fit: BoxFit.cover)
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage(productData.images['2']),
-                        fit: BoxFit.cover),
-                  ),
-                ),
-              ],
-            ),
-
-            ListView(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(top: 250),
-                  padding: EdgeInsets.only(left: 15,top: 20, right: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(productData.title,style: TextStyle(fontSize: 27),),
-                      Text("R\$ ${productData.price.toStringAsFixed(2)}",style: TextStyle(fontSize: 27),),
-                    ],
-                  ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))
-                  ),
-                ),
-                Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.only(left: 15,top: 20),
-                  child: Text("Descrição da parada q tem q colocar bastante coisa pra preencher espaço na tela pq se não fica muito buraco bla bla bla bla bla bla bla", style: TextStyle(fontSize: 20),),
-                ),
-                Container(
-                  color: Colors.white,
-                  height: 40,
-                ),
-                Container(
-                  child: Row(
-                    children: <Widget>[
-                      RaisedButton(
-                        child: Icon(Icons.remove),
-                        onPressed: (){
-                          if(quantity > 1){
-                            setState(() {
-                              quantity--;
-                            });
-                          }
-                        },
-                      ),
-                      Text(
-                        "$quantity"
-                      ),
-                      RaisedButton(
-                        child: Icon(Icons.add),
-                        onPressed: (){
-                          if(quantity < productData.quantity){
-                            setState(() {
-                              quantity++;
-                            });
-                          }
-                        },
-                      ),
-
-                    ],
-                  ),
-                ),
-                Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.only(left: 15,top: 20),
-                  child: GestureDetector(
-                    child: Text("Adicionar ao carrinho", style: TextStyle(fontSize: 27),),
-                    onTap: (){
-                      if(UserModel.of(context).isLoggedin()){
-                        CartData cartData = CartData();
-                        cartData.product_id = productData.id;
-                        cartData.quantity = quantity;
-                        cartData.productData = productData;
-
-                        CartModel.of(context).addCartItem(cartData);
-                      }else{
-                        onFailed();
-                      }
-                    },
-                  ) ,
-                ),
-
-              ],
-            ),
-            SafeArea(
+              ),
+            ],
+          ),
+          SafeArea(
               child: Padding(
-                padding: EdgeInsets.all(8),
-                child: MaterialButton(
-                  padding: EdgeInsets.all(8),
-                  child: Icon(Icons.arrow_back_ios),
-                  onPressed: () => Navigator.of(context).pop(context),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)
-                  ),
-                  color: Colors.white.withOpacity(0.9),
-                  height: 40,
-                  minWidth: 0,
-                ),
-              )
-            )
-
-          ],
-        ),
-
-
-
+            padding: EdgeInsets.all(8),
+            child: MaterialButton(
+              padding: EdgeInsets.all(8),
+              child: Icon(Icons.arrow_back_ios),
+              onPressed: () => Navigator.of(context).pop(context),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              color: Colors.white.withOpacity(0.9),
+              height: 40,
+              minWidth: 0,
+            ),
+          ))
+        ],
+      ),
     );
   }
 
-
-  void onFailed(){
-    _scaffoldKey.currentState.showSnackBar(
-        SnackBar(
-          content: GestureDetector(
-            child: Text("Clique e faça login para adicionar ao carrinho", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),),
-            onTap:  (){
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => LoginScreen()));
-            }
+  void onFailed() {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: GestureDetector(
+          child: Text(
+            "Clique e faça login para adicionar ao carrinho",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          backgroundColor: Theme.of(context).primaryColor,
-          duration: Duration(seconds: 3),
-
-        ));
-
+          onTap: () {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => LoginScreen()));
+          }),
+      backgroundColor: Theme.of(context).primaryColor,
+      duration: Duration(seconds: 3),
+    ));
   }
-  void onSuccess(){
-    _scaffoldKey.currentState.showSnackBar(
-        SnackBar(
-          content:  Text("Adicionado ao Carrinho", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),),
-          backgroundColor: Theme.of(context).primaryColor,
-          duration: Duration(seconds: 3),
 
-        ));
-
+  void onSuccess() {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text(
+        "Adicionado ao Carrinho",
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      backgroundColor: Theme.of(context).primaryColor,
+      duration: Duration(seconds: 3),
+    ));
   }
 }
-
-

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:localfarm/Datas/farm_data.dart';
 
-class ProductData{
+class ProductData {
   String id;
   int data_public;
   String description;
@@ -11,10 +11,10 @@ class ProductData{
   double quantity;
   String title;
   String type;
-  
+
   FarmData farmData;
 
-  ProductData.fromDocument(DocumentSnapshot snapshot){
+  ProductData.fromDocument(DocumentSnapshot snapshot) {
     id = snapshot.documentID;
     data_public = snapshot['data_public'];
     description = snapshot['description'];
@@ -24,19 +24,15 @@ class ProductData{
     quantity = snapshot['quantity'] + 0.0;
     title = snapshot['title'];
     type = snapshot['type'];
-
   }
 
   Future<void> getFarmData() async {
-         DocumentSnapshot snapshot = await Firestore.instance.collection('farms').document(farm_id).get();
-         farmData = FarmData.fromDocument(snapshot);
-}
-
-  Map<String, dynamic> toResumeMap(){
-    return{
-      'title' : title,
-      'price' : price
-    };
+    DocumentSnapshot snapshot =
+        await Firestore.instance.collection('farms').document(farm_id).get();
+    farmData = FarmData.fromDocument(snapshot);
   }
 
+  Map<String, dynamic> toResumeMap() {
+    return {'title': title, 'price': price};
+  }
 }

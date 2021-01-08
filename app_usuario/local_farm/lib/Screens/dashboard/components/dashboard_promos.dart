@@ -69,7 +69,7 @@ class _ImageCarouselState extends State<ImageCarousel>
       scrollDirection: Axis.horizontal,
       child: Container(
         // padding: const EdgeInsets.all(20.0),
-        height: screenHeight / 5,
+        height: screenHeight / 4,
         width: screenWidth,
         child: new ClipRRect(
           // borderRadius: BorderRadius.circular(30.0),

@@ -18,7 +18,9 @@ class StatusProgressWidget extends StatelessWidget {
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.3,
-          color: Color.fromRGBO(93, 97, 115, 1),
+          // color: Color.fromRGBO(93, 97, 115, 1),
+          // color: Colors.green[50],
+          color: Colors.grey[100],
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -99,7 +101,8 @@ class StatusProgressWidget extends StatelessWidget {
     return isChecked
         ? Icon(
             Icons.shopping_basket_outlined,
-            color: Colors.greenAccent,
+            // color: Colors.greenAccent,
+            color: Colors.green,
           )
         : Icon(
             Icons.shopping_basket_outlined,
@@ -111,7 +114,8 @@ class StatusProgressWidget extends StatelessWidget {
     return isChecked
         ? Icon(
             Icons.today_outlined,
-            color: Colors.greenAccent,
+            // color: Colors.greenAccent,
+            color: Colors.green,
           )
         : Icon(
             Icons.today_outlined,
@@ -123,7 +127,8 @@ class StatusProgressWidget extends StatelessWidget {
     return isChecked
         ? Icon(
             Icons.payment,
-            color: Colors.greenAccent,
+            // color: Colors.greenAccent,
+            color: Colors.green,
           )
         : Icon(
             Icons.payment,
@@ -135,7 +140,8 @@ class StatusProgressWidget extends StatelessWidget {
     return isChecked
         ? Icon(
             Icons.delivery_dining,
-            color: Colors.greenAccent,
+            // color: Colors.greenAccent,
+            color: Colors.green,
           )
         : Icon(
             Icons.delivery_dining,
@@ -173,7 +179,8 @@ class StatusProgressWidget extends StatelessWidget {
     return isChecked
         ? Icon(
             Icons.check_circle,
-            color: Colors.greenAccent,
+            // color: Colors.greenAccent,
+            color: Colors.green,
             size: 30,
           )
         : Icon(
@@ -211,7 +218,8 @@ class StatusProgressWidget extends StatelessWidget {
   Widget line(bool isChecked) {
     return isChecked
         ? Container(
-            color: Colors.greenAccent,
+            // color: Colors.greenAccent,
+            color: Colors.green,
             height: 5.0,
             width: 50,
           )
@@ -247,7 +255,8 @@ class StatusProgressWidget extends StatelessWidget {
             'Cesta\nMontada',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.greenAccent,
+              // color: Colors.greenAccent,
+              color: Colors.green,
             ),
           )
         : Text(
@@ -266,7 +275,8 @@ class StatusProgressWidget extends StatelessWidget {
             'Entrega\nAgendada',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.greenAccent,
+              // color: Colors.greenAccent,
+              color: Colors.green,
             ),
           )
         : Text(
@@ -285,7 +295,8 @@ class StatusProgressWidget extends StatelessWidget {
             'Pagamento\nEfetuado',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.greenAccent,
+              // color: Colors.greenAccent,
+              color: Colors.green,
             ),
           )
         : Text(
@@ -304,7 +315,8 @@ class StatusProgressWidget extends StatelessWidget {
             'Entrega\nRecebida',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.greenAccent,
+              // color: Colors.greenAccent,
+              color: Colors.green,
             ),
           )
         : Text(
@@ -320,7 +332,7 @@ class StatusProgressWidget extends StatelessWidget {
 
   Widget spacerBottom() {
     return Container(
-      width: 25.0,
+      width: 20.0,
     );
   }
 }
