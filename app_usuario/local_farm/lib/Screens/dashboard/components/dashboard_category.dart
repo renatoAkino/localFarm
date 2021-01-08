@@ -50,7 +50,7 @@ class _HomeCategoryState extends State<HomeCategory> {
                   child: SvgPicture.asset(
                     // 'assets/icons/apple.svg',
                     widget.icon,
-                    color: Colors.orange,
+                    color: Colors.orange[800],
                     height: 24,
                     width: 24,
                   ),

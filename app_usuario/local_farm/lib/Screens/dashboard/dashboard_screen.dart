@@ -78,7 +78,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               SizedBox(height: 20.0),
 
               Text(
-                "Essa Semana",
+                "Próxima Encomenda",
                 style: TextStyle(
                   fontSize: 23,
                   // fontWeight: FontWeight.w800,

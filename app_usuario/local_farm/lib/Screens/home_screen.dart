@@ -8,6 +8,7 @@ import 'package:localfarm/Screens/search_screen.dart';
 import 'package:localfarm/widgets/home_appBar.dart';
 
 import 'dashboard/dashboard_screen.dart';
+import 'edit_user_screen.dart';
 import 'orders/orders_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -66,7 +67,25 @@ class _HomeScreenState extends State<HomeScreen> {
         break;
       case 4:
         return Center(
-          child: Text("Perfil"),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Perfil"),
+              FlatButton(
+                  color: Colors.orange,
+                  padding: EdgeInsets.all(8),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => EditUserScreen()),
+                    );
+                  },
+                  child: Text(
+                    "Editar Perfil",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ))
+            ],
+          ),
         );
         break;
     }

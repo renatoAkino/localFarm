@@ -64,7 +64,7 @@ class FeedTile2 extends StatelessWidget {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => StoreScreen(product.farmData)));
                     },
-                    icon: Icon(Icons.layers),
+                    icon: Icon(Icons.more_vert),
                   )
                 ],
               ),
@@ -112,7 +112,9 @@ class FeedTile2 extends StatelessWidget {
                         Text(
                           product.title,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
+                            // fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
                         ),
                         Container(
                           width: MediaQuery.of(context).size.width * 0.6,
@@ -135,10 +137,10 @@ class FeedTile2 extends StatelessWidget {
                       SizedBox(
                         width: 0,
                       ),
-                      IconButton(
-                        icon: Icon(Icons.star_border),
-                        onPressed: () {},
-                      )
+                      // IconButton(
+                      //   icon: Icon(Icons.star_border),
+                      //   onPressed: () {},
+                      // )
                     ],
                   ))
                 ],

@@ -63,10 +63,10 @@ class OrderTile extends StatelessWidget {
                       ),
                       Text(
                         '14/12/2020',
-                        style: TextStyle(
-                          fontSize: 15,
-                          // color: Colors.white,
-                        ),
+                        style:
+                            TextStyle(fontSize: 18, fontWeight: FontWeight.bold
+                                // color: Colors.white,
+                                ),
                       ),
                     ],
                   ),

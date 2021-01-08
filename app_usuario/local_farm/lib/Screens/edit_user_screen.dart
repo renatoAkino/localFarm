@@ -21,7 +21,6 @@ class _EditUserScreenState extends State<EditUserScreen> {
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-
   @override
   void initState() {
     super.initState();
@@ -33,13 +32,34 @@ class _EditUserScreenState extends State<EditUserScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: HomeAppBar(),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+        title: Text(
+          "Carrinho",
+          style: TextStyle(
+            fontSize: 23,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        elevation: 0.0,
+        actions: <Widget>[
+          IconButton(
+            tooltip: "Back",
+            icon: Icon(
+              Icons.clear,
+              color: Theme.of(context).accentColor,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ],
+      ),
       body: ScopedModelDescendant<UserModel>(
-        builder: (context, child, model){
-          if(model.isLoading){
+        builder: (context, child, model) {
+          if (model.isLoading) {
             return Center(child: CircularProgressIndicator());
-          }
-          else {
+          } else {
             return Center(
               child: SingleChildScrollView(
                 child: Padding(
@@ -49,16 +69,19 @@ class _EditUserScreenState extends State<EditUserScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        SizedBox(height: 20,),
-                       Form(
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Form(
                           key: _formKey,
                           child: Column(
                             children: <Widget>[
                               TextFormField(
                                 controller: _nameController,
-                                decoration: InputDecoration(labelText: "Nome Completo"),
+                                decoration:
+                                    InputDecoration(labelText: "Nome Completo"),
                                 validator: (text) {
-                                  if (text.isEmpty ) {
+                                  if (text.isEmpty) {
                                     return "Nome inválido";
                                   }
                                   return null;
@@ -70,9 +93,7 @@ class _EditUserScreenState extends State<EditUserScreen> {
                               TextFormField(
                                 controller: _cepController,
                                 decoration: InputDecoration(labelText: "CEP"),
-                                onChanged: (text) {
-
-                                },
+                                onChanged: (text) {},
                                 validator: (text) {
                                   if (text.isEmpty) {
                                     return "CEP inválido";
@@ -85,10 +106,9 @@ class _EditUserScreenState extends State<EditUserScreen> {
                               ),
                               TextFormField(
                                 controller: _adressController,
-                                decoration: InputDecoration(labelText: "Endereço"),
-                                onChanged: (text) {
-
-                                },
+                                decoration:
+                                    InputDecoration(labelText: "Endereço"),
+                                onChanged: (text) {},
                                 validator: (text) {
                                   if (text.isEmpty) {
                                     return "Endereço inválido";
@@ -101,24 +121,28 @@ class _EditUserScreenState extends State<EditUserScreen> {
                               ),
                               TextFormField(
                                 controller: _adressComplementController,
-                                decoration: InputDecoration(labelText: "Complemento"),
-                                onChanged: (text) {
-
-                                },
+                                decoration:
+                                    InputDecoration(labelText: "Complemento"),
+                                onChanged: (text) {},
                               ),
                               SizedBox(
                                 height: 16,
                               ),
                               TextFormField(
                                 controller: _birthController,
-                                decoration: InputDecoration(labelText: "Data de Nascimento"),
-                                onTap: (){
-                                  showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1920), lastDate: DateTime.now()).then(
-                                          (date){
-                                            model.setBirth(date);
-                                            _birthController.text = formatDate(date, [ dd , '/' , mm , '/', yyyy]);
-                                          }
-                                          );
+                                decoration: InputDecoration(
+                                    labelText: "Data de Nascimento"),
+                                onTap: () {
+                                  showDatePicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                          firstDate: DateTime(1920),
+                                          lastDate: DateTime.now())
+                                      .then((date) {
+                                    model.setBirth(date);
+                                    _birthController.text = formatDate(
+                                        date, [dd, '/', mm, '/', yyyy]);
+                                  });
                                 },
                                 validator: (text) {
                                   if (text.isEmpty) {
@@ -133,15 +157,22 @@ class _EditUserScreenState extends State<EditUserScreen> {
                               DropdownButton<String>(
                                 hint: Text("Sexo"),
                                 isExpanded: true,
-                                underline: Container( height: 2, color: Colors.grey[350],),
+                                underline: Container(
+                                  height: 2,
+                                  color: Colors.grey[350],
+                                ),
                                 value: _genderText,
                                 onChanged: (String newValue) {
                                   setState(() {
                                     _genderText = newValue;
                                   });
                                 },
-                                items: <String>['Maculino', 'Feminino', 'LGBTQI', 'Não especificar']
-                                    .map<DropdownMenuItem<String>>((String value) {
+                                items: <String>[
+                                  'Maculino',
+                                  'Feminino',
+                                  'LGBTQI',
+                                  'Não especificar'
+                                ].map<DropdownMenuItem<String>>((String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
                                     child: Text(value),
@@ -151,46 +182,42 @@ class _EditUserScreenState extends State<EditUserScreen> {
                               SizedBox(
                                 height: 16,
                               ),
-
                             ],
                           ),
                         ),
-
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
                         SizedBox(
                             height: 40,
                             child: FlatButton(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               textColor: Colors.white,
-                              color: Theme
-                                  .of(context)
-                                  .primaryColor,
+                              color: Theme.of(context).primaryColor,
                               child: Text(
                                 "Salvar",
-                                style:
-                                TextStyle(
+                                style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 18),
                               ),
                               onPressed: () {
-                                if(_formKey.currentState.validate()){
+                                if (_formKey.currentState.validate()) {
                                   Map<String, dynamic> userData = Map();
 
                                   userData['name'] = _nameController.text;
                                   userData['cep'] = _cepController.text;
                                   userData['adress'] = _adressController.text;
-                                  userData['adress_complement'] = _adressComplementController.text;
+                                  userData['adress_complement'] =
+                                      _adressComplementController.text;
                                   userData['gender'] = _genderText;
 
-                                  model.updateUserData(userData: userData, onSucess: onSucess, onFailed: onFailed);
-
+                                  model.updateUserData(
+                                      userData: userData,
+                                      onSucess: onSucess,
+                                      onFailed: onFailed);
                                 }
-
-                              }
-                              ,
-
+                              },
                             )),
-
                       ],
                     )),
               ),
@@ -204,27 +231,32 @@ class _EditUserScreenState extends State<EditUserScreen> {
   void initialValues() {
     Timestamp timestamp = UserModel.of(context).userData['birth'];
     print(UserModel.of(context).userData['birth'].toString());
-    DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
+    DateTime date =
+        DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
     _cepController.text = UserModel.of(context).userData['cep'];
     _adressController.text = UserModel.of(context).userData['adress'];
-    _adressComplementController.text = UserModel.of(context).userData['adress_complement'];
-    _birthController.text = formatDate(date, [ dd , '/' , mm , '/', yyyy]);
+    _adressComplementController.text =
+        UserModel.of(context).userData['adress_complement'];
+    _birthController.text = formatDate(date, [dd, '/', mm, '/', yyyy]);
     //_genderText = UserModel.of(context).userData['gender'];
     _nameController.text = UserModel.of(context).userData['name'];
   }
 
-  void onSucess(){
+  void onSucess() {
     Navigator.of(context).pop(context);
   }
 
-  void onFailed(){
-    _scaffoldKey.currentState.showSnackBar(
-        SnackBar(
-          content: Text("Falha ao alterar dados", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,),),
-          backgroundColor: Theme.of(context).primaryColor,
-          duration: Duration(seconds: 3),
-
-        ));
-
+  void onFailed() {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text(
+        "Falha ao alterar dados",
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      backgroundColor: Theme.of(context).primaryColor,
+      duration: Duration(seconds: 3),
+    ));
   }
 }

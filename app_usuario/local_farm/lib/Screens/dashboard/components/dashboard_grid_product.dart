@@ -36,39 +36,58 @@ class GridProduct extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                right: -10.0,
-                bottom: 3.0,
-                child: RawMaterialButton(
-                  onPressed: () {},
-                  fillColor: Colors.white,
-                  shape: CircleBorder(),
-                  elevation: 4.0,
-                  child: Padding(
-                    padding: EdgeInsets.all(5),
-                    child: Icon(
-                      isFav ? Icons.favorite : Icons.favorite_border,
-                      color: Colors.red,
-                      size: 17,
-                    ),
-                  ),
-                ),
-              ),
+              // Positioned(
+              //   right: -10.0,
+              //   bottom: 3.0,
+              //   child: RawMaterialButton(
+              //     onPressed: () {},
+              //     fillColor: Colors.white,
+              //     shape: CircleBorder(),
+              //     elevation: 4.0,
+              //     child: Padding(
+              //       padding: EdgeInsets.all(5),
+              //       child: Icon(
+              //         isFav ? Icons.favorite : Icons.favorite_border,
+              //         color: Colors.red,
+              //         size: 17,
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 2.0, top: 8.0),
-            child: Text(
-              "$name",
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.w900,
-              ),
-              maxLines: 2,
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 2.0, top: 8.0),
+                  child: Text(
+                    "$name",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      // fontWeight: FontWeight.w900,
+                    ),
+                    maxLines: 2,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 2.0, top: 8.0, left: 5.0),
+                  child: Text(
+                    r"R$ 3,50",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      // fontWeight: FontWeight.w900,
+                    ),
+                    maxLines: 2,
+                  ),
+                ),
+              ],
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 5.0, top: 2.0),
+            padding: EdgeInsets.only(bottom: 5.0, top: 2.0, left: 8.0),
             child: Row(
               children: <Widget>[
                 // SmoothStarRating(
@@ -79,7 +98,8 @@ class GridProduct extends StatelessWidget {
                 //   size: 10.0,
                 // ),
                 Text(
-                  " $rating ($raters Reviews)",
+                  // " $rating ($raters Reviews)",
+                  "Fazenda Atalaia",
                   style: TextStyle(
                     fontSize: 11.0,
                   ),
@@ -101,3 +121,11 @@ class GridProduct extends StatelessWidget {
     );
   }
 }
+
+/*
+
+Plataforma Multilateral de Comércio e Entrega de Orgânicos: 
+Otimização combinatória e Machine Learning aplicados à soluções mobile
+
+
+*/
