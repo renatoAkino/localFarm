@@ -26,19 +26,34 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: HomeAppBar(),
       bottomNavigationBar: Container(
         height: 66,
-        color: Colors.green,
+        color: Colors.transparent,
         child: CurvedNavigationBar(
           height: 55.0,
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.transparent,
           index: _pageIndex,
           // buttonBackgroundColor: Theme.of(context).primaryColor,
-          buttonBackgroundColor: Colors.white,
+          buttonBackgroundColor: Colors.green,
           items: <Widget>[
-            Icon(Icons.home_outlined),
-            Icon(Icons.search),
-            Icon(Icons.camera_alt_outlined),
-            Icon(Icons.assignment_outlined),
-            Icon(Icons.person_outline),
+            Icon(
+              Icons.home_outlined,
+              color: (_pageIndex == 0) ? Colors.white : Colors.green,
+            ),
+            Icon(
+              Icons.search,
+              color: (_pageIndex == 1) ? Colors.white : Colors.green,
+            ),
+            Icon(
+              Icons.camera_alt_outlined,
+              color: (_pageIndex == 2) ? Colors.white : Colors.green,
+            ),
+            Icon(
+              Icons.assignment_outlined,
+              color: (_pageIndex == 3) ? Colors.white : Colors.green,
+            ),
+            Icon(
+              Icons.person_outline,
+              color: (_pageIndex == 4) ? Colors.white : Colors.green,
+            ),
           ],
           onTap: (index) {
             setState(() {

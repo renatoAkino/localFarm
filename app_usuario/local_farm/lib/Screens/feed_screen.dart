@@ -22,6 +22,7 @@ class _FeedScreenState extends State<FeedScreen> {
             child: CircularProgressIndicator(),
           );
         } else {
+          // print('carregando feedtile');
           return ListView(
             children: snapshot.data.documents.map((doc) {
               ProductData data = ProductData.fromDocument(doc);

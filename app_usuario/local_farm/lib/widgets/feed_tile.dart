@@ -91,7 +91,9 @@ class FeedTile extends StatelessWidget {
                           ],
                         );
                       } else {
-                        return Container();
+                        return Container(
+                          child: Text('Erro de conexão'),
+                        );
                       }
                     },
                   ),

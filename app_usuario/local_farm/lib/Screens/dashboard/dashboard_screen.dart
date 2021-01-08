@@ -124,17 +124,20 @@ class _DashboardScreenState extends State<DashboardScreen>
                                 // color: Colors.grey[100],
                                 ),
                           ),
-                          trailing: Container(
-                            height: 40,
-                            width: 40,
-                            child: Icon(
-                              Icons.arrow_right,
-                              color: Colors.green,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.green[50],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
+                          trailing: InkWell(
+                            onTap: () {},
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              child: Icon(
+                                Icons.arrow_right,
+                                color: Colors.green,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.green[50],
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                              ),
                             ),
                           ),
                         ),
