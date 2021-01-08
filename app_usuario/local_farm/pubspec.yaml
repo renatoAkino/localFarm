@@ -32,7 +32,11 @@ dependencies:
   carousel_slider: ^1.4.1
   date_format: ^1.0.8
   flutter_staggered_grid_view: ^0.3.0
-  curved_navigation_bar: ^0.3.2
+  curved_navigation_bar: ^0.3.7
+  font_awesome_flutter: ^8.5.0
+  carousel_pro: ^1.0.0
+  flutter_svg: ^0.19.1
+  
 
 
 dev_dependencies:
@@ -57,10 +61,32 @@ flutter:
   #  - images/a_dot_ham.jpeg
 
   assets:
-    - assets/logo.png
-    - assets/google_logo.png
-    - assets/frutas.png
-    - assets/legumes.png
+    - assets/
+    - assets/icons/
+    # - assets/logo.png
+    # - assets/google_logo.png
+    # - assets/frutas.png
+    # - assets/legumes.png
+
+  
+    # - assets/logo.png
+    # - assets/cc.png
+    # - assets/food1.jpeg
+    # - assets/food2.jpeg
+    # - assets/food3.jpeg
+    # - assets/food4.jpeg
+    # - assets/food5.jpeg
+    # - assets/food6.jpeg
+    # - assets/food7.jpeg
+    # - assets/food8.jpeg
+    # - assets/food9.jpeg
+    # - assets/food10.jpeg
+    # - assets/food11.jpeg
+    # - assets/food12.jpg
+    # - assets/cm1.jpeg
+    # - assets/cm2.jpeg
+    # - assets/cm3.jpeg
+    # - assets/cm4.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
@@ -72,11 +98,12 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+  fonts:
+    - family: WorkSans
+      fonts:
+        - asset: fonts/WorkSans-Regular.ttf
+        - asset: fonts/WorkSans-Medium.ttf
+        - asset: fonts/WorkSans-Bold.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:
