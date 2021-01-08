@@ -41,7 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Icon(
               // Icons.search,
-              Icons.explore_outlined,
+              // Icons.explore_outlined,
+              Icons.storefront,
               color: (_pageIndex == 1) ? Colors.white : Colors.green,
             ),
             Icon(

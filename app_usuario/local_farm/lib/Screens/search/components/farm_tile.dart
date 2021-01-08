@@ -149,8 +149,8 @@ class FarmTile extends StatelessWidget {
                     Row(
                       children: [
                         Icon(
-                          // Icons.local_shipping_outlined,
-                          Icons.moped,
+                          Icons.local_shipping_outlined,
+                          // Icons.moped,
                           color: Colors.grey,
                         ),
                         SizedBox(
