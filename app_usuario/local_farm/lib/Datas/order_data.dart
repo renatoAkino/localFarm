@@ -20,7 +20,7 @@ class OrderData{
     shipPrice= document.data['shipPrice'];
     status = document.data['status'];
     totalPrice = document.data['totalPrice'];
-    document.data[products].forEach((product){
+    document.data['products'].forEach((product){
         products.add(ProductData.fromResumedDocument(product));
     });
   }

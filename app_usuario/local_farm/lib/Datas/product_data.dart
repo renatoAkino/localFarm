@@ -27,6 +27,13 @@ class ProductData{
 
   }
 
+  ProductData.fromResumedDocument(Map<String, dynamic> map){
+    id = map['product_id'];
+    price = map['product']['price'];
+    title = map['product']['title'];
+    quantity = map['quantity'];
+  }
+
   Future<void> getFarmData() async {
          DocumentSnapshot snapshot = await Firestore.instance.collection('farms').document(farm_id).get();
          farmData = FarmData.fromDocument(snapshot);
@@ -35,7 +42,8 @@ class ProductData{
   Map<String, dynamic> toResumeMap(){
     return{
       'title' : title,
-      'price' : price
+      'price' : price,
+      'farm_id' : farm_id
     };
   }
 
