@@ -2,20 +2,21 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:localfarm/Datas/product_data.dart';
+import 'package:localfarm/Datas/post_data.dart';
+import 'package:localfarm/Datas/post_data.dart';
 import 'package:localfarm/Screens/store_screen.dart';
 
 class FeedTile extends StatelessWidget {
-  final ProductData product;
+  final PostData post;
 
-  FeedTile(this.product);
+  FeedTile(this.post);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 25.0),
+      padding: const EdgeInsets.only(bottom: 5.0),
       child: Container(
-        // color: Colors.green[50],
+        color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -28,20 +29,20 @@ class FeedTile extends StatelessWidget {
             //     Container(
             //       decoration: BoxDecoration(
             //         image: DecorationImage(
-            //             image: NetworkImage(product.images['0']),
+            //             image: NetworkImage(post.images['0']),
             //             fit: BoxFit.cover),
             //       ),
             //     ),
             //     Container(
             //       decoration: BoxDecoration(
             //           image: DecorationImage(
-            //               image: NetworkImage(product.images['1']),
+            //               image: NetworkImage(post.images['1']),
             //               fit: BoxFit.cover)),
             //     ),
             //     Container(
             //       decoration: BoxDecoration(
             //         image: DecorationImage(
-            //             image: NetworkImage(product.images['2']),
+            //             image: NetworkImage(post.images['2']),
             //             fit: BoxFit.cover),
             //       ),
             //     ),
@@ -53,9 +54,9 @@ class FeedTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   FutureBuilder(
-                    future: product.getFarmData(),
+                    future: post.getFarmData(),
                     builder: (context, snapshot) {
-                      if (product.farmData != null) {
+                      if (post.farmData != null) {
                         return Row(
                           children: <Widget>[
                             Container(
@@ -65,7 +66,7 @@ class FeedTile extends StatelessWidget {
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
-                                  image: NetworkImage(product.farmData.image),
+                                  image: NetworkImage(post.farmData.image),
                                 ),
                               ),
                             ),
@@ -76,7 +77,7 @@ class FeedTile extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  product.farmData.name,
+                                  post.farmData.name,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 16),
@@ -100,7 +101,7 @@ class FeedTile extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => StoreScreen(product.farmData)));
+                          builder: (context) => StoreScreen(post.farmData)));
                     },
                     icon: Icon(Icons.more_vert),
                   )
@@ -124,7 +125,7 @@ class FeedTile extends StatelessWidget {
                             bottomRight: Radius.circular(20.0),
                           ),
                           image: DecorationImage(
-                              image: NetworkImage(product.images['0']),
+                              image: NetworkImage(post.images['0']),
                               fit: BoxFit.cover)),
                     ),
                   ),
@@ -156,7 +157,7 @@ class FeedTile extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
               child: Text(
-                '32 curtidas',
+                '32 gostaram',
                 style: TextStyle(fontSize: 13, color: Colors.grey),
                 maxLines: 2,
               ),
@@ -182,7 +183,7 @@ class FeedTile extends StatelessWidget {
                       // height: MediaQuery.of(context).size.height * 0.2,
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: Text(
-                        product.description,
+                        post.description,
                         // overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             // fontSize: 11.0,

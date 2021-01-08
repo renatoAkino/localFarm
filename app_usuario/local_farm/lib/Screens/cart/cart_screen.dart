@@ -7,8 +7,8 @@ import 'package:localfarm/Models/cart_model.dart';
 import 'package:localfarm/Models/user_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import 'login_screen.dart';
-import 'package:localfarm/widgets/cart_item.dart';
+import '../login_screen.dart';
+import 'package:localfarm/Screens/cart/components/cart_item.dart';
 
 class CartScreen extends StatefulWidget {
   @override
@@ -260,7 +260,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(5, 5, 10, 5),
-                    width: 180.0,
+                    width: 190.0,
                     height: 60.0,
                     child: FlatButton(
                       // color: Theme.of(context).accentColor,

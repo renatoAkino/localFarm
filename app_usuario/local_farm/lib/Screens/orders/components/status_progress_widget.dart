@@ -20,7 +20,7 @@ class StatusProgressWidget extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.3,
           // color: Color.fromRGBO(93, 97, 115, 1),
           // color: Colors.green[50],
-          color: Colors.grey[100],
+          color: Colors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

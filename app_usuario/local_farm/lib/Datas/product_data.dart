@@ -7,7 +7,7 @@ class ProductData {
   String farm_id;
   Map<String, dynamic> images = Map();
   double price;
-  double quantity;
+  int quantity;
   String title;
   String type;
 
@@ -19,7 +19,7 @@ class ProductData {
     farm_id = snapshot['farm'];
     images = snapshot['images'];
     price = snapshot['price'] + 0.0;
-    quantity = snapshot['quantity'] + 0.0;
+    quantity = snapshot['quantity'];
     title = snapshot['title'];
     type = snapshot['type'];
   }

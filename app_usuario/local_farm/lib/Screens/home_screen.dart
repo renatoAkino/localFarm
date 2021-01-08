@@ -2,14 +2,15 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Models/user_model.dart';
-import 'package:localfarm/Screens/cart_screen.dart';
-import 'package:localfarm/Screens/feed_screen.dart';
+import 'package:localfarm/Screens/cart/cart_screen.dart';
+import 'package:localfarm/Screens/feed/feed_screen.dart';
 import 'package:localfarm/Screens/search_screen.dart';
 import 'package:localfarm/widgets/home_appBar.dart';
 
 import 'dashboard/dashboard_screen.dart';
 import 'edit_user_screen.dart';
 import 'orders/orders_screen.dart';
+import 'search/search_farmers_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -39,7 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
               color: (_pageIndex == 0) ? Colors.white : Colors.green,
             ),
             Icon(
-              Icons.search,
+              // Icons.search,
+              Icons.explore_outlined,
               color: (_pageIndex == 1) ? Colors.white : Colors.green,
             ),
             Icon(
@@ -72,7 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
         return DashboardScreen();
         break;
       case 1:
-        return SearchScreen();
+        // return SearchScreen();
+        return SearchFarmersScreen();
+
         break;
       case 2:
         return FeedScreen();
