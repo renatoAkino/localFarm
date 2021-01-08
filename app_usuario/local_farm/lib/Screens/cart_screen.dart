@@ -40,24 +40,31 @@ class _CartScreenState extends State<CartScreen> {
               );
             } else {
               return Column(
-                children: model.products.map((product) {
-                  return FutureBuilder(
-                    future: Firestore.instance
-                        .collection('products')
-                        .document(product.product_id)
-                        .get(),
-                    builder: (context, snapshot) {
-                      product.productData =
-                          ProductData.fromDocument(snapshot.data);
-                      double price =
-                          product.quantity * product.productData.price;
-                      return Container(
-                        padding: EdgeInsets.all(20),
-                        child: Text(
-                            "${product.quantity}  ${product.productData.title} ----------- R\$$price"),
-                      );
-                    },
-                  );
+                children: model.products.map(
+                  (product) {
+                    return FutureBuilder(
+                      future: Firestore.instance
+                          .collection('products')
+                          .document(product.product_id)
+                          .get(),
+                      builder: (context, snapshot) {
+                        if(snapshot.hasData){
+                          product.productData =
+                              ProductData.fromDocument(snapshot.data);
+                          double price =
+                              product.quantity * product.productData.price;
+                          return Container(
+                            padding: EdgeInsets.all(20),
+                            child: Text(
+                                "${product.quantity}  ${product.productData.title} ----------- R\$$price"),
+                          );
+                        }
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+
+                      },
+                    );
                 }).toList(),
               );
             }

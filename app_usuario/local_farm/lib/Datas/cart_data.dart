@@ -4,6 +4,7 @@ class CartData{
 
   String cart_id;
   String product_id;
+  String farm_id;
   int quantity;
   ProductData productData;
 
@@ -13,13 +14,15 @@ class CartData{
     cart_id = document.documentID;
     product_id = document.data['product_id'];
     quantity = document.data['quantity'];
+    farm_id = document.data['farm_id'];
   }
 
   Map<String, dynamic> toMap(){
     return{
       'product_id' : product_id,
       'quantity' : quantity,
-      'product' : productData.toResumeMap()
+      'product' : productData.toResumeMap(),
+      'farm_id' : productData.farm_id
     };
   }
 }

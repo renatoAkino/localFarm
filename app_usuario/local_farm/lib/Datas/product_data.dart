@@ -3,7 +3,6 @@ import 'package:localfarm/Datas/farm_data.dart';
 
 class ProductData{
   String id;
-  int data_public;
   String description;
   String farm_id;
   Map<String, dynamic> images = Map();
@@ -16,7 +15,6 @@ class ProductData{
 
   ProductData.fromDocument(DocumentSnapshot snapshot){
     id = snapshot.documentID;
-    data_public = snapshot['data_public'];
     description = snapshot['description'];
     farm_id = snapshot['farm'];
     images = snapshot['images'];
