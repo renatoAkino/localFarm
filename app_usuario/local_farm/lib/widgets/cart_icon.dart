@@ -7,7 +7,7 @@ class CartIconWidget extends StatefulWidget {
 }
 
 class _CartIconWidgetState extends State<CartIconWidget> {
-  int counter = 2;
+  int counter = 1;
   @override
   Widget build(BuildContext context) {
     return Stack(
