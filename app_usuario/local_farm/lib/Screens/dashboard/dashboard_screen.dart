@@ -87,7 +87,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               ),
               SizedBox(height: 10.0),
               Card(
-                elevation: 0,
+                elevation: 1.5,
                 // color: Colors.lightGreen,
                 color: Colors.white,
                 shape: RoundedRectangleBorder(

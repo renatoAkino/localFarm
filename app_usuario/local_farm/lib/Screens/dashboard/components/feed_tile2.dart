@@ -14,7 +14,7 @@ class FeedTile2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 0,
+      // height: 0,
       width: 370,
       child: Card(
         shape: RoundedRectangleBorder(
