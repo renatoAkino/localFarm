@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/farm_data.dart';
+import 'package:localfarm/Screens/feed/feed_screen.dart';
 
 class ProfileScreenTab extends StatefulWidget {
   final FarmData farmData;
@@ -12,6 +13,6 @@ class ProfileScreenTab extends StatefulWidget {
 class _ProfileScreenTabState extends State<ProfileScreenTab> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return FeedScreen();
   }
 }
