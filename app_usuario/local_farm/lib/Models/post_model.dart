@@ -4,21 +4,18 @@ import 'package:localfarm/Datas/order_data.dart';
 import 'package:localfarm/Datas/post_data.dart';
 import 'package:localfarm/Models/user_model.dart';
 
-class PostModel{
+class PostModel {
   UserModel user;
 
-  Future<List<PostData>>loadOrders() async {
+  Future<List<PostData>> loadOrders() async {
     List<PostData> posts;
-    QuerySnapshot query = await Firestore.instance.collection('post').getDocuments();
-    posts = query.documents.map(
-        (post){
-          posts.add(PostData.fromDocument(post));
-        }
-        
-    ).toList();
+
+    QuerySnapshot query =
+        await Firestore.instance.collection('post').getDocuments();
+    posts = query.documents.map((post) {
+      posts.add(PostData.fromDocument(post));
+    }).toList();
 
     return posts;
   }
-
-
 }

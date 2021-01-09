@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:localfarm/Screens/cart_screen.dart';
+import 'package:localfarm/Screens/cart/cart_screen.dart';
 
 class CartIconWidget extends StatefulWidget {
   @override
