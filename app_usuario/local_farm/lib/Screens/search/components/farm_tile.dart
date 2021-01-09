@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/farm_data.dart';
+import 'package:localfarm/Screens/farm/farm_screen_teste.dart';
+import 'package:localfarm/Screens/farm/farm_screen.dart';
 import 'package:localfarm/Screens/store_screen.dart';
 
 class FarmTile extends StatelessWidget {
@@ -16,8 +18,15 @@ class FarmTile extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10.0),
       child: InkWell(
         onTap: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => StoreScreen(farm)));
+          // Navigator.of(context).push(MaterialPageRoute(
+          //     builder: (context) => CustomSliverHeaderDemo()));
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => FarmScreen(farm),
+            ),
+          );
+          // Navigator.of(context)
+          //     .push(MaterialPageRoute(builder: (context) => StoreScreen(farm)));
         },
         child: Card(
           shape: RoundedRectangleBorder(
@@ -117,8 +126,8 @@ class FarmTile extends StatelessWidget {
                     Row(
                       children: [
                         Icon(
-                          Icons.location_on_outlined,
-                          color: Colors.grey,
+                          Icons.location_on,
+                          color: Colors.grey[400],
                         ),
                         SizedBox(
                           width: 5,
@@ -133,8 +142,8 @@ class FarmTile extends StatelessWidget {
                     Row(
                       children: [
                         Icon(
-                          Icons.star_outline,
-                          color: Colors.grey,
+                          Icons.turned_in,
+                          color: Colors.grey[400],
                         ),
                         SizedBox(
                           width: 5,
@@ -149,9 +158,9 @@ class FarmTile extends StatelessWidget {
                     Row(
                       children: [
                         Icon(
-                          Icons.local_shipping_outlined,
+                          Icons.local_shipping,
                           // Icons.moped,
-                          color: Colors.grey,
+                          color: Colors.grey[400],
                         ),
                         SizedBox(
                           width: 5,

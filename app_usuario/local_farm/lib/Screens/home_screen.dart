@@ -9,6 +9,7 @@ import 'package:localfarm/widgets/home_appBar.dart';
 
 import 'dashboard/dashboard_screen.dart';
 import 'edit_user_screen.dart';
+import 'farm/farm_screen_teste.dart';
 import 'orders/orders_screen.dart';
 import 'search/search_farmers_screen.dart';
 
@@ -75,7 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
         return DashboardScreen();
         break;
       case 1:
-        // return SearchScreen();
         return SearchFarmersScreen();
 
         break;
