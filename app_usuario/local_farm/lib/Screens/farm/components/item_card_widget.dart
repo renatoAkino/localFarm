@@ -26,7 +26,7 @@ class ItemCard extends StatelessWidget {
               // For  demo we use fixed height  and width
               // Now we dont need them
               // height: 180,
-              // width: 160,
+              width: MediaQuery.of(context).size.width * 0.5,
               decoration: BoxDecoration(
                 // color: product.color,
                 color: Colors.white,
