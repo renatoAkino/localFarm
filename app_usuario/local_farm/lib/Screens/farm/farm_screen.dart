@@ -196,7 +196,8 @@ class _FarmScreenState extends State<FarmScreen>
           controller: this.tabController,
           children: <Widget>[
             StoreScreenTab(widget.farmData),
-            ProfileScreenTab(widget.farmData),
+            // ProfileScreenTab(widget.farmData),
+            ProfileScreenTab(),
           ],
         ),
       ),
