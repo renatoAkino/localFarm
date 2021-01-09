@@ -56,34 +56,33 @@ class _FarmScreenState extends State<FarmScreen>
                       return FlexibleSpaceBar(
                         centerTitle: true,
                         titlePadding: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).size.height * 0.08),
+                            bottom: MediaQuery.of(context).size.height * 0.07),
                         title: top < 110
                             ? Text(
                                 this.widget.farmData.name,
                                 style: TextStyle(color: Colors.green),
                               )
-                            : Container(
-                                height: 100,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      this.widget.farmData.name,
-                                      style: TextStyle(
-                                        color: Colors.grey[800],
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w700,
-                                      ),
+                            : Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    this.widget.farmData.name,
+                                    style: TextStyle(
+                                      color: Colors.grey[800],
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w700,
                                     ),
-                                    Text(
-                                      'Sr. João dos Santos ',
-                                      style: TextStyle(
-                                        color: Colors.grey[600],
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                  top < 140
+                                      ? Text("")
+                                      : Text(
+                                          'Sr. João dos Santos ',
+                                          style: TextStyle(
+                                            color: Colors.grey[600],
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                ],
                               ),
                         background: Stack(
                           // fit: StackFit.expand,

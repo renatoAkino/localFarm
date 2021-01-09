@@ -5,6 +5,8 @@ import 'package:localfarm/Datas/farm_data.dart';
 import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/widgets/products_tile.dart';
 
+import '../product_detail/product_detail_screen.dart';
+import '../product_screen.dart';
 import 'components/categories_widget.dart';
 import 'components/item_card_widget.dart';
 
@@ -67,6 +69,19 @@ class _StoreScreenTabState extends State<StoreScreenTab> {
                           //     ),
                           //   ),
                           // );
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailsScreen(
+                                  product: productData,
+                                ),
+                              ));
+
+                          //
+                          // Navigator.of(context).push(MaterialPageRoute(
+                          //     builder: (context) =>
+                          //         ProductScreen(productData)));
                         },
                       );
                     },
