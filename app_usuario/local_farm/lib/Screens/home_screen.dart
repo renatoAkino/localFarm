@@ -75,7 +75,6 @@ class _HomeScreenState extends State<HomeScreen> {
         return DashboardScreen();
         break;
       case 1:
-        // return SearchScreen();
         return SearchFarmersScreen();
 
         break;

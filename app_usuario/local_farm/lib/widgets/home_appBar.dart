@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/cart/cart_screen.dart';
 import 'package:localfarm/Screens/edit_user_screen.dart';
@@ -75,7 +76,12 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           Icon(
             Icons.location_on,
             color: Colors.green,
+            size: 30.0,
           ),
+          // SvgPicture.asset(
+          //   'assets/icons/location-pin.svg',
+          //   height: 30.0,
+          // ),
           Flexible(
             child: Container(
               padding: EdgeInsets.only(left: 10.0),
