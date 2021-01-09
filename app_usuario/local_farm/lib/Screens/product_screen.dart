@@ -77,19 +77,19 @@ class _ProductScreenState extends State<ProductScreen> {
                       fit: BoxFit.cover),
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(productData.images['1']),
-                        fit: BoxFit.cover)),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(productData.images['2']),
-                      fit: BoxFit.cover),
-                ),
-              ),
+              // Container(
+              //   decoration: BoxDecoration(
+              //       image: DecorationImage(
+              //           image: NetworkImage(productData.images['1']),
+              //           fit: BoxFit.cover)),
+              // ),
+              // Container(
+              //   decoration: BoxDecoration(
+              //     image: DecorationImage(
+              //         image: NetworkImage(productData.images['2']),
+              //         fit: BoxFit.cover),
+              //   ),
+              // ),
             ],
           ),
           ListView(

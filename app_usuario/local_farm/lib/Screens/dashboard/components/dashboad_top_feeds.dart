@@ -26,7 +26,7 @@ class _TopFeedsWidgetState extends State<TopFeedsWidget> {
           );
         } else {
           return SizedBox(
-            height: 280,
+            height: MediaQuery.of(context).size.height / 2.4,
             // width: 1500,
             // child: ListView(
             //   // shrinkWrap: true,
