@@ -38,7 +38,8 @@ dependencies:
   flutter_svg: ^0.19.1
   day_picker: ^1.0.1
   filter_list: ^0.0.5
-  
+  # f_datetimerangepicker: ^0.1.4
+  intl: ^0.16.1
 
 
 dev_dependencies:
@@ -70,7 +71,7 @@ flutter:
     # - assets/frutas.png
     # - assets/legumes.png
 
-  
+
     # - assets/logo.png
     # - assets/cc.png
     # - assets/food1.jpeg

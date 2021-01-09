@@ -93,7 +93,7 @@ class FarmTile extends StatelessWidget {
                               height: 4,
                             ),
                             Text(
-                              'Estrada de Ouro Fino, Goiás',
+                              farm.addres,
                               style: TextStyle(color: Colors.grey),
                             ),
                           ],
@@ -124,7 +124,7 @@ class FarmTile extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          '15 km',
+                          '${farm.distance} km',
                           style: TextStyle(color: Colors.grey),
                           maxLines: 2,
                         ),
@@ -140,7 +140,7 @@ class FarmTile extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          '584',
+                          farm.followers.toString(),
                           style: TextStyle(color: Colors.grey),
                           maxLines: 2,
                         ),

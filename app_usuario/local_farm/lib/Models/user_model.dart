@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_format/date_format.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:localfarm/Datas/farm_data.dart';
+import 'package:localfarm/Models/farm_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 
@@ -120,14 +122,54 @@ class UserModel extends Model{
     if(isLoggedin()){
       return userData['name'].toString();
     }else{
-      return 'Teste';
+      return '';
     }
   }
   String getId(){
     if(isLoggedin()){
       return firebaseUser.uid;
     }else{
-      return 'Teste';
+      return '';
+  }
+  }
+
+  String getAdress(){
+    if(isLoggedin()){
+      return userData['adress'].toString();
+    }else{
+      return '';
+    }
+  }
+
+  Future<void> followFarm(String farm_id) async {
+    bool follow = false;
+    QuerySnapshot snapshot = await Firestore.instance.collection('users').document(firebaseUser.uid).collection('followFarms').getDocuments();
+    snapshot.documents.forEach((element) {
+      if(farm_id == element.documentID){
+        follow = true;
+      }
+    });
+    if(!follow) {
+      await Firestore.instance.collection('users').document(firebaseUser.uid)
+          .collection('followFarms').document(farm_id)
+          .setData({'farm_id': farm_id});
+      DocumentSnapshot query = await Firestore.instance.collection('farms')
+          .document(farm_id)
+          .get();
+      int f = query.data['followers'];
+      f += 1;
+      Firestore.instance.collection('farms').document(farm_id).updateData(
+          {'followers': f});
+    }else{
+      await Firestore.instance.collection('users').document(firebaseUser.uid).collection('followFarms').document(farm_id).delete();
+      DocumentSnapshot query = await Firestore.instance.collection('farms')
+          .document(farm_id)
+          .get();
+      int f = query.data['followers'];
+      f -= 1;
+      Firestore.instance.collection('farms').document(farm_id).updateData(
+          {'followers': f});
+
     }
   }
 }

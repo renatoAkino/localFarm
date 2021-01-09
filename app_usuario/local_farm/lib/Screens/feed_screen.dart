@@ -1,22 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/widgets/feed_tile.dart';
 
-import 'order_tile.dart';
-
-class OrdersList extends StatefulWidget {
-  final String status;
-
-  const OrdersList({Key key, this.status = 'Em Andamento'}) : super(key: key);
-
+class FeedScreen extends StatefulWidget {
   @override
-  _OrdersListState createState() => _OrdersListState();
+  _FeedScreenState createState() => _FeedScreenState();
 }
 
-class _OrdersListState extends State<OrdersList>
-    with AutomaticKeepAliveClientMixin {
+class _FeedScreenState extends State<FeedScreen> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<QuerySnapshot>(
@@ -32,18 +24,12 @@ class _OrdersListState extends State<OrdersList>
         } else {
           return ListView(
             children: snapshot.data.documents.map((doc) {
-              //ALTERAR PARA PEDIDOS (PRECISO DO MODEL PEDIDOS PARA PUXAR DO SERVER)
               ProductData data = ProductData.fromDocument(doc);
-              // return FeedTile(data);
-              return OrderTile();
-              //
+              return FeedTile(data);
             }).toList(),
           );
         }
       },
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
