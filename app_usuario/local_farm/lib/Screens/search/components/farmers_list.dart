@@ -1,30 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:localfarm/Datas/farm_data.dart';
 import 'package:localfarm/Datas/order_data.dart';
 import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/Screens/feed/components/feed_tile.dart';
+import 'package:day_picker/day_picker.dart';
 
-import 'order_tile.dart';
+import 'farm_tile.dart';
 
-class OrdersList extends StatefulWidget {
-  final String status;
-
-  const OrdersList({Key key, this.status = 'Em Andamento'}) : super(key: key);
-
+class FarmersList extends StatefulWidget {
   @override
-  _OrdersListState createState() => _OrdersListState();
+  _FarmersListState createState() => _FarmersListState();
 }
 
-class _OrdersListState extends State<OrdersList>
+class _FarmersListState extends State<FarmersList>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<QuerySnapshot>(
-      future: Firestore.instance
-          .collection('orders')
-          .orderBy('status')
-          .getDocuments(),
+      future: Firestore.instance.collection('farms').getDocuments(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(
@@ -33,10 +28,9 @@ class _OrdersListState extends State<OrdersList>
         } else {
           return ListView(
             children: snapshot.data.documents.map((doc) {
-              //ALTERAR PARA PEDIDOS (PRECISO DO MODEL PEDIDOS PARA PUXAR DO SERVER)
-              OrderData data = OrderData.fromDocument(doc);
-              // return FeedTile(data);
-              return OrderTile(data);
+              FarmData data = FarmData.fromDocument(doc);
+              return FarmTile(data);
+              // return FarmTile();
               //
             }).toList(),
           );

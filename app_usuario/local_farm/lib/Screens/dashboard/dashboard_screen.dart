@@ -1,14 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:localfarm/Screens/orders/order_detail_screen.dart';
 import 'package:localfarm/tmp/categories.dart';
 import 'package:localfarm/tmp/foods.dart';
 import 'package:localfarm/Screens/dashboard/components/dashboard_category.dart';
 import 'package:localfarm/Screens/dashboard/components/dashboard_grid_product.dart';
 import 'package:localfarm/Screens/dashboard/components/dashboard_promos.dart';
 import 'package:localfarm/Screens/dashboard/components/dashboard_slider_item.dart';
-import 'package:localfarm/widgets/dashboad_top_feeds.dart';
-import 'package:localfarm/widgets/feed_tile.dart';
+import 'package:localfarm/Screens/dashboard/components/dashboad_top_feeds.dart';
+import 'package:localfarm/Screens/feed/components/feed_tile.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -65,7 +66,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                   itemBuilder: (BuildContext context, int index) {
                     Map cat = categoriesSvg[index];
                     // print(cat['icon']);
-                    return HomeCategory(
+                    return ListaCategoriasWidget(
                       icon: cat['icon'],
                       title: cat['name'],
                       // items: cat['items'].toString(),
@@ -124,17 +125,26 @@ class _DashboardScreenState extends State<DashboardScreen>
                                 // color: Colors.grey[100],
                                 ),
                           ),
-                          trailing: Container(
-                            height: 40,
-                            width: 40,
-                            child: Icon(
-                              Icons.arrow_right,
-                              color: Colors.green,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.green[50],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
+                          trailing: InkWell(
+                            onTap: () {
+                              // Navigator.of(context).push(
+                              //   MaterialPageRoute(
+                              //     builder: (context) => OrderDetailScreen(order),
+                              //   ),
+                              // );
+                            },
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              child: Icon(
+                                Icons.arrow_right,
+                                color: Colors.green,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.green[50],
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                              ),
                             ),
                           ),
                         ),

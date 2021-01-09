@@ -36,6 +36,8 @@ dependencies:
   font_awesome_flutter: ^8.5.0
   carousel_pro: ^1.0.0
   flutter_svg: ^0.19.1
+  day_picker: ^1.0.1
+  filter_list: ^0.0.5
   
 
 
