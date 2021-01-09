@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/Models/cart_model.dart';
 import 'package:localfarm/Models/user_model.dart';
@@ -21,10 +22,38 @@ class _CartScreenState extends State<CartScreen> {
     super.initState();
   }
 
+  DateTime selectedDate = DateTime.now();
+
+  final dataFormatada = new DateFormat('dd/MM/yyyy');
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2020, 8),
+        lastDate: DateTime(2025),
+        builder: (BuildContext context, Widget child) {
+          return Theme(
+            data: ThemeData.light().copyWith(
+              primaryColor: Colors.green,
+              accentColor: Colors.green,
+              colorScheme: ColorScheme.light(primary: Colors.green),
+              buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+            ),
+            child: child,
+          );
+        });
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
+
+  double totalPrice = 0.0;
+
   @override
   Widget build(BuildContext context) {
     bool hasProducts = false;
-    double totalPrice = 0.0;
 
     return Scaffold(
       appBar: AppBar(
@@ -32,10 +61,10 @@ class _CartScreenState extends State<CartScreen> {
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         title: Text(
-          "Carrinho",
+          "Meu Carrinho",
           style: TextStyle(
             fontSize: 23,
-            fontWeight: FontWeight.w800,
+            // fontWeight: FontWeight.w800,
           ),
         ),
         elevation: 0.0,
@@ -51,10 +80,10 @@ class _CartScreenState extends State<CartScreen> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 80),
+        padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 80),
         child: ListView(
           children: <Widget>[
-            SizedBox(height: 10.0),
+            SizedBox(height: 0.0),
             ScopedModelDescendant<CartModel>(
               builder: (context, child, model) {
                 if (model.isLoading && UserModel.of(context).isLoggedin()) {
@@ -106,53 +135,97 @@ class _CartScreenState extends State<CartScreen> {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.edit,
-                            ),
-                          ),
+                          // IconButton(
+                          //   onPressed: () {},
+                          //   icon: Icon(
+                          //     Icons.edit,
+                          //   ),
+                          // ),
                         ],
                       ),
+                      SizedBox(height: 10.0),
                       ListTile(
+                        // tileColor: Colors.grey[200],
                         title: Text(
                           "Avenida Um, 35",
                           style: TextStyle(
 //                    fontSize: 15,
-                            fontWeight: FontWeight.w900,
+                            fontWeight: FontWeight.bold,
                             // color: Colors.green,
                           ),
                         ),
                         subtitle: Text(
                             "1278 Loving Acres Road Kansas City, MO 64110"),
+                        trailing: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.edit,
+                          ),
+                        ),
                         // trailing: Icon(Icons.edit),
                       ),
-                      SizedBox(height: 10.0),
+                      SizedBox(height: 20.0),
+                      // Text(
+                      //   "Método de Pagamento",
+                      //   style: TextStyle(
+                      //     fontSize: 15,
+                      //     // fontWeight: FontWeight.w400,
+                      //   ),
+                      // ),
+                      // // SizedBox(
+                      // //   height: 10,
+                      // // ),
+                      // Card(
+                      //   elevation: 2.0,
+                      //   child: ListTile(
+                      //     title: Text("José da Silva"),
+                      //     subtitle: Text(
+                      //       "5506 7744 8610 9638",
+                      //       style: TextStyle(
+                      //         fontSize: 13,
+                      //         // fontWeight: FontWeight.w900,
+                      //       ),
+                      //     ),
+                      //     leading: Icon(
+                      //       FontAwesomeIcons.creditCard,
+                      //       size: 50.0,
+                      //       color: Colors.green,
+                      //     ),
+                      //     trailing: IconButton(
+                      //       onPressed: () {},
+                      //       icon: Icon(
+                      //         Icons.keyboard_arrow_down,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(height: 20.0),
                       Text(
-                        "Método de Pagamento",
+                        "Agendar entrega",
                         style: TextStyle(
                           fontSize: 15,
                           // fontWeight: FontWeight.w400,
                         ),
                       ),
+                      SizedBox(height: 10),
                       Card(
-                        elevation: 4.0,
+                        elevation: 2.0,
                         child: ListTile(
-                          title: Text("José da Silva"),
+                          title: Text("${dataFormatada.format(selectedDate)}"),
                           subtitle: Text(
-                            "5506 7744 8610 9638",
+                            "8:00 - 10:00",
                             style: TextStyle(
                               fontSize: 13,
-                              fontWeight: FontWeight.w900,
+                              // fontWeight: FontWeight.w900,
                             ),
                           ),
                           leading: Icon(
-                            FontAwesomeIcons.creditCard,
+                            FontAwesomeIcons.calendarCheck,
                             size: 50.0,
                             color: Colors.green,
                           ),
                           trailing: IconButton(
-                            onPressed: () {},
+                            onPressed: () => _selectDate(context),
                             icon: Icon(
                               Icons.keyboard_arrow_down,
                             ),
@@ -184,7 +257,6 @@ class _CartScreenState extends State<CartScreen> {
                                   product.quantity * product.productData.price;
 
                               totalPrice += prodPrice;
-                              print(totalPrice);
 
                               return CartItem(
                                 img: product.productData.images['0'],
@@ -207,84 +279,108 @@ class _CartScreenState extends State<CartScreen> {
           ],
         ),
       ),
-      bottomSheet: Card(
-        elevation: 4.0,
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "Total",
-                          style: TextStyle(
-                            // fontSize: 13,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        hasProducts
-                            ? Text(
-                                totalPrice
-                                    .toString(), //CORRIGIR ESTADO DO VALOR PARA FUTURE
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w900,
-                                  // color: Theme.of(context).accentColor,
-                                  color: Colors.green,
-                                ),
-                              )
-                            : Text(
-                                r"R$ 0,00",
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w900,
-                                  // color: Theme.of(context).accentColor,
-                                  color: Colors.green,
-                                ),
-                              ),
-                        Text(
-                          "Taxas de entrega inclusas",
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(5, 5, 10, 5),
-                    width: 190.0,
-                    height: 60.0,
-                    child: FlatButton(
-                      // color: Theme.of(context).accentColor,
-                      color: Colors.green,
-                      child: Text(
-                        "Confirmar Pedido".toUpperCase(),
+      bottomSheet: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Total",
                         style: TextStyle(
-                          color: Colors.white,
+                            // fontSize: 13,
+                            // fontWeight: FontWeight.w400,
+                            ),
+                      ),
+                      hasProducts
+                          ? Text(
+                              totalPrice
+                                  .toString(), //CORRIGIR ESTADO DO VALOR PARA FUTURE
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w900,
+                                // color: Theme.of(context).accentColor,
+                                color: Colors.green,
+                              ),
+                            )
+                          : Text(
+                              // r"R$ 0,00",
+                              totalPrice.toString(),
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                // color: Theme.of(context).accentColor,
+                                color: Colors.green,
+                              ),
+                            ),
+                      Text(
+                        "Taxas de entrega inclusas",
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15.0),
+                  child: SizedBox(
+                    height: 50,
+                    child: FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18)),
+                      // color: product.color,
+                      color: Colors.green,
                       onPressed: () {
                         if (hasProducts) {
                           hasProducts = false;
                           return _showMyDialog(context);
                         }
                       },
+                      child: Text(
+                        "Finalizar Compra".toUpperCase(),
+                        style: TextStyle(
+                          fontSize: 17,
+                          // fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
-                ],
-              ),
-            ],
-          ),
-          height: 80,
+                ),
+                // Container(
+                //   padding: EdgeInsets.fromLTRB(5, 5, 10, 5),
+                //   width: 190.0,
+                //   height: 60.0,
+                //   child: FlatButton(
+                //     // color: Theme.of(context).accentColor,
+                //     color: Colors.green,
+                //     child: Text(
+                //       "Confirmar Pedido".toUpperCase(),
+                //       style: TextStyle(
+                //         color: Colors.white,
+                //       ),
+                //     ),
+                //     onPressed: () {
+                //       if (hasProducts) {
+                //         hasProducts = false;
+                //         return _showMyDialog(context);
+                //       }
+                //     },
+                //   ),
+                // ),
+              ],
+            ),
+          ],
         ),
+        height: 80,
       ),
     );
   }
@@ -310,6 +406,7 @@ Future<void> _showMyDialog(BuildContext context) async {
             child: Text('Ok'),
             onPressed: () {
               CartModel.of(context).finishOrder();
+              Navigator.of(context).pop();
               Navigator.of(context).pop();
             },
           ),

@@ -38,7 +38,7 @@ class FarmTile extends StatelessWidget {
               Stack(
                 children: <Widget>[
                   Container(
-                    height: MediaQuery.of(context).size.height / 3.2,
+                    height: MediaQuery.of(context).size.height / 6,
                     width: MediaQuery.of(context).size.width,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(0.0),

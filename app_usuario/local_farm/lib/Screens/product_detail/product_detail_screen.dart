@@ -29,6 +29,56 @@ class DetailsScreen extends StatelessWidget {
         actions: <Widget>[CartIconWidget()],
       ),
       body: Body(product: product),
+      bottomNavigationBar: Container(
+        color: Colors.grey[50],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+          child: Row(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(right: 15),
+                height: 50,
+                width: 58,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(
+                    // color: product.color,
+                    color: Colors.green,
+                  ),
+                ),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.add_shopping_cart,
+                    color: Colors.green,
+                  ),
+                  color: Colors.grey,
+                  onPressed: () {},
+                ),
+              ),
+              Expanded(
+                child: SizedBox(
+                  height: 50,
+                  child: FlatButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18)),
+                    // color: product.color,
+                    color: Colors.orange,
+                    onPressed: () {},
+                    child: Text(
+                      "Adicionar ao carrinho".toUpperCase(),
+                      style: TextStyle(
+                        fontSize: 17,
+                        // fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -16,7 +16,7 @@ class Body extends StatelessWidget {
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: size.height,
+            height: size.height * 0.9,
             child: Stack(
               children: <Widget>[
                 Container(
@@ -102,53 +102,53 @@ class Body extends StatelessWidget {
                       CartCounter(product: product),
                       // CounterWithFavBtn(),
                       SizedBox(height: size.height * 0.04),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 15),
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(right: 15),
-                              height: 50,
-                              width: 58,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(18),
-                                border: Border.all(
-                                  // color: product.color,
-                                  color: Colors.green,
-                                ),
-                              ),
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.add_shopping_cart,
-                                  color: Colors.green,
-                                ),
-                                color: Colors.grey,
-                                onPressed: () {},
-                              ),
-                            ),
-                            Expanded(
-                              child: SizedBox(
-                                height: 50,
-                                child: FlatButton(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18)),
-                                  // color: product.color,
-                                  color: Colors.orange,
-                                  onPressed: () {},
-                                  child: Text(
-                                    "Adicionar ao carrinho".toUpperCase(),
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      // fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(vertical: 15),
+                      //   child: Row(
+                      //     children: <Widget>[
+                      //       Container(
+                      //         margin: EdgeInsets.only(right: 15),
+                      //         height: 50,
+                      //         width: 58,
+                      //         decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(18),
+                      //           border: Border.all(
+                      //             // color: product.color,
+                      //             color: Colors.green,
+                      //           ),
+                      //         ),
+                      //         child: IconButton(
+                      //           icon: Icon(
+                      //             Icons.add_shopping_cart,
+                      //             color: Colors.green,
+                      //           ),
+                      //           color: Colors.grey,
+                      //           onPressed: () {},
+                      //         ),
+                      //       ),
+                      //       Expanded(
+                      //         child: SizedBox(
+                      //           height: 50,
+                      //           child: FlatButton(
+                      //             shape: RoundedRectangleBorder(
+                      //                 borderRadius: BorderRadius.circular(18)),
+                      //             // color: product.color,
+                      //             color: Colors.orange,
+                      //             onPressed: () {},
+                      //             child: Text(
+                      //               "Adicionar ao carrinho".toUpperCase(),
+                      //               style: TextStyle(
+                      //                 fontSize: 17,
+                      //                 // fontWeight: FontWeight.bold,
+                      //                 color: Colors.white,
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
