@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:localfarm/Models/user_model.dart';
-import 'package:localfarm/Screens/cart/cart_screen.dart';
 import 'package:localfarm/Screens/edit_user_screen.dart';
 import 'package:localfarm/Screens/login_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../Screens/cart/components/cart_icon.dart';
+import 'cart_icon.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   AppBar appBar = AppBar();
@@ -87,7 +86,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               padding: EdgeInsets.only(left: 10.0),
               // width: 130,
               child: Text(
-                'Rua Itapoã, 58',
+                UserModel.of(context).getAdress(),
                 overflow: TextOverflow.ellipsis,
               ),
             ),

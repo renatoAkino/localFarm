@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../categories_screen.dart';
-
-class ListaCategoriasWidget extends StatefulWidget {
+class HomeCategory extends StatefulWidget {
   final String icon;
   final String title;
   // final String items;
   final Function tap;
   final bool isHome;
 
-  ListaCategoriasWidget(
+  HomeCategory(
       {Key key,
       @required this.icon,
       @required this.title,
@@ -20,22 +18,22 @@ class ListaCategoriasWidget extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ListaCategoriasWidgetState createState() => _ListaCategoriasWidgetState();
+  _HomeCategoryState createState() => _HomeCategoryState();
 }
 
-class _ListaCategoriasWidgetState extends State<ListaCategoriasWidget> {
+class _HomeCategoryState extends State<HomeCategory> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: widget.isHome
           ? () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return CategoriesScreen();
-                  },
-                ),
-              );
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(
+              //     builder: (BuildContext context){
+              //       return CategoriesScreen();
+              //     },
+              //   ),
+              // );
             }
           : widget.tap,
       child: Card(

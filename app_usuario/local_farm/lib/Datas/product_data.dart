@@ -7,7 +7,7 @@ class ProductData {
   String farm_id;
   Map<String, dynamic> images = Map();
   double price;
-  int quantity;
+  double quantity;
   String title;
   String type;
 
@@ -19,12 +19,12 @@ class ProductData {
     farm_id = snapshot['farm'];
     images = snapshot['images'];
     price = snapshot['price'] + 0.0;
-    quantity = snapshot['quantity'];
+    quantity = snapshot['quantity'] + 0.0;
     title = snapshot['title'];
     type = snapshot['type'];
   }
 
-  ProductData.fromResumedDocument(Map<String, dynamic> map) {
+  ProductData.fromResumedDocument(Map<String, dynamic> map){
     id = map['product_id'];
     price = map['product']['price'];
     title = map['product']['title'];
@@ -32,12 +32,16 @@ class ProductData {
   }
 
   Future<void> getFarmData() async {
-    DocumentSnapshot snapshot =
-        await Firestore.instance.collection('farms').document(farm_id).get();
+    DocumentSnapshot snapshot = await Firestore.instance.collection('farms')
+        .document(farm_id)
+        .get();
     farmData = FarmData.fromDocument(snapshot);
   }
-
   Map<String, dynamic> toResumeMap() {
-    return {'title': title, 'price': price, 'farm_id': farm_id};
+    return {
+      'title': title,
+      'price': price,
+      'farm_id': farm_id
+    };
   }
 }

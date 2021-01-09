@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:localfarm/Datas/post_data.dart';
 import 'package:localfarm/Datas/product_data.dart';
-import 'package:localfarm/Screens/feed/components/feed_tile.dart';
+import 'package:localfarm/widgets/feed_tile.dart';
 import 'package:localfarm/widgets/products_tile.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -42,9 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
             future: Firestore.instance.collection('products').getDocuments(),
             builder: (context, snapshot) {
               if (_search == null || _search == "") {
-                return Center(
-                  child: Text('Erro ao carregar coleção'),
-                );
+                return Container();
               }
 
               if (!snapshot.hasData) {
@@ -58,8 +55,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     if (data.title
                         .toLowerCase()
                         .contains(_search.toLowerCase())) {
-                      // return ProductTile(data); ////// ALTEREI PRA ARRUMAR DEPOIS (preciso fazer o tile dos produtos)
-                      return Container(height: 200, width: 400);
+                      return FeedTile(data);
                     } else
                       return Container();
                   }).toList(),

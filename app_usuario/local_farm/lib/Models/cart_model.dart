@@ -93,7 +93,9 @@ class CartModel extends Model{
           'shipPrice' : shipPrice,
           'productsPrice' : productsPrice,
           'totalPrice' : productsPrice + shipPrice,
-          'status' : 1
+          'status' : 1,
+          'order_date' : Timestamp.fromDate(DateTime.now()),
+          'ship_date' : Timestamp.fromDate(genShipDay()),
         }
     );
 
@@ -117,6 +119,11 @@ class CartModel extends Model{
     return refOrder.documentID;
   }
 
+
+  DateTime genShipDay(){
+    DateTime today = DateTime.now();
+    return today.add(new Duration(days: 7));
+  }
 
 
 }

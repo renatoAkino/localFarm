@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:localfarm/Datas/farm_data.dart';
 import 'package:localfarm/Datas/product_data.dart';
+import 'package:localfarm/Screens/cart/cart_screen.dart';
 import 'package:localfarm/widgets/category_list.dart';
 import 'package:localfarm/widgets/farm_header.dart';
 import 'package:localfarm/widgets/products_grid.dart';
 import 'package:localfarm/widgets/products_tile.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-import 'cart/cart_screen.dart';
 
 class StoreScreen extends StatefulWidget {
   final FarmData farmData;
