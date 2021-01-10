@@ -114,7 +114,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                             width: 40,
                           ),
                           title: Text(
-                            'Sr. João dos Santos',
+                            '<Sr. João dos Santos>',
                             style: TextStyle(
                               // color: Colors.white,
                             ),

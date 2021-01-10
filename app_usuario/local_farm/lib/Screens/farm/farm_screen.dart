@@ -76,7 +76,7 @@ class _FarmScreenState extends State<FarmScreen>
                                   top < 140
                                       ? Text("")
                                       : Text(
-                                          'Sr. João dos Santos',
+                                          '<Sr. João dos Santos>',
                                           style: TextStyle(
                                             color: Colors.grey[600],
                                             fontSize: 12,
@@ -196,8 +196,8 @@ class _FarmScreenState extends State<FarmScreen>
           controller: this.tabController,
           children: <Widget>[
             StoreScreenTab(widget.farmData),
-            // ProfileScreenTab(widget.farmData),
-            ProfileScreenTab(),
+            ProfileScreenTab(widget.farmData),
+            // ProfileScreenTab(),
           ],
         ),
       ),
