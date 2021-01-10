@@ -35,7 +35,7 @@ class ItemCard extends StatelessWidget {
               child: Hero(
                 tag: "${product.id}",
                 child: Image.network(
-                  product.images['0'],
+                  product.image,
                   // fit: BoxFit.cover,
                 ),
               ),
@@ -75,7 +75,7 @@ class ItemCard extends StatelessWidget {
                   child: Container(
                     width: 100,
                     child: Text(
-                      "${product.title}",
+                      "${product.name}",
                       style: TextStyle(
                         fontSize: 16.0,
                         // fontWeight: FontWeight.w900,
@@ -112,14 +112,14 @@ class ItemCard extends StatelessWidget {
                 // ),
                 Text(
                   // " $rating ($raters Reviews)",
-                  "<Kg/Unidade>",
+                  product.soldPer,
                   style: TextStyle(
                     fontSize: 11.0,
                   ),
                 ),
                 Text(
                   // " $rating ($raters Reviews)",
-                  "<10>/${product.quantity}",
+                  "${product.quantity}",
                   style: TextStyle(
                     fontSize: 11.0,
                   ),

@@ -107,20 +107,20 @@ class _DashboardScreenState extends State<DashboardScreen>
                                 image: AssetImage('assets/cesta.png'),
                               ),
                               borderRadius: BorderRadius.all(
-                                Radius.circular(10.0),
+                                Radius.circular(0.0),
                               ),
                             ),
-                            height: 40,
-                            width: 40,
+                            height: 50,
+                            width: 50,
                           ),
                           title: Text(
-                            '<ID Pedido>',
+                            '<Fazenda Atalaia>',
                             style: TextStyle(
                                 // color: Colors.white,
                                 ),
                           ),
                           subtitle: Text(
-                            'Fazenda Atalaia',
+                            '<ID Pedido>',
                             style: TextStyle(
                                 // color: Colors.grey[100],
                                 ),
