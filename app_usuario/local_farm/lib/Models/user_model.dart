@@ -3,12 +3,10 @@ import 'package:date_format/date_format.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:localfarm/Datas/farm_data.dart';
-import 'package:localfarm/Models/farm_model.dart';
+// import 'package:localfarm/Models/farm_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-
-class UserModel extends Model{
-
+class UserModel extends Model {
   //intâncias do firebase para login
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseUser firebaseUser;
@@ -16,8 +14,8 @@ class UserModel extends Model{
   Map<String, dynamic> userData = Map();
   bool isLoading = false;
 
-  static UserModel of(BuildContext context) => ScopedModel.of<UserModel>(context);
-
+  static UserModel of(BuildContext context) =>
+      ScopedModel.of<UserModel>(context);
 
   @override
   void addListener(VoidCallback listener) {
@@ -26,33 +24,43 @@ class UserModel extends Model{
     _loadCurrentUser();
   }
 
-  void signUp({@required Map<String, dynamic> userData, @required String pass, @required VoidCallback onSucess, @required VoidCallback onFailed}){
+  void signUp(
+      {@required Map<String, dynamic> userData,
+      @required String pass,
+      @required VoidCallback onSucess,
+      @required VoidCallback onFailed}) {
     _loadChangeStatus();
     print(userData['email']);
     print(pass);
-    _auth.createUserWithEmailAndPassword(email: userData['email'], password: pass).then(
-            (result) async {
-              firebaseUser = result.user;
-              await _saveUserData(userData);
-              onSucess();
-              _loadChangeStatus();
-            }).catchError(
-            (e){
-              onFailed();
-              _loadChangeStatus();
-            });
+    _auth
+        .createUserWithEmailAndPassword(
+            email: userData['email'], password: pass)
+        .then((result) async {
+      firebaseUser = result.user;
+      await _saveUserData(userData);
+      onSucess();
+      _loadChangeStatus();
+    }).catchError((e) {
+      onFailed();
+      _loadChangeStatus();
+    });
   }
 
-  void signIn({@required String email, @required String pass, @required VoidCallback onSucess, @required VoidCallback onFailed}){
+  void signIn(
+      {@required String email,
+      @required String pass,
+      @required VoidCallback onSucess,
+      @required VoidCallback onFailed}) {
     _loadChangeStatus();
 
-    _auth.signInWithEmailAndPassword(email: email, password: pass).then(
-            (result){
+    _auth
+        .signInWithEmailAndPassword(email: email, password: pass)
+        .then((result) {
       firebaseUser = result.user;
       _loadCurrentUser();
       _loadChangeStatus();
       onSucess();
-    }).catchError((e){
+    }).catchError((e) {
       _loadChangeStatus();
       onFailed();
     });
@@ -60,12 +68,15 @@ class UserModel extends Model{
 
   //Coletar os dados do usuário do banco
   Future<void> _loadCurrentUser() async {
-    if(firebaseUser == null){
+    if (firebaseUser == null) {
       firebaseUser = await _auth.currentUser();
     }
-    if(firebaseUser != null){
-      if(userData['name'] == null){
-        DocumentSnapshot docUser = await Firestore.instance.collection('users').document(firebaseUser.uid).get();
+    if (firebaseUser != null) {
+      if (userData['name'] == null) {
+        DocumentSnapshot docUser = await Firestore.instance
+            .collection('users')
+            .document(firebaseUser.uid)
+            .get();
         userData = docUser.data;
       }
     }
@@ -74,34 +85,40 @@ class UserModel extends Model{
 
   //Salvar Dados do Usuário
   Future<void> _saveUserData(Map<String, dynamic> userData) async {
-      this.userData = userData;
-      await Firestore.instance.collection('users').document(firebaseUser.uid).setData(userData);
-  }
-
-  Future<void> updateUserData({@required Map<String, dynamic> userData, @required VoidCallback onSucess, @required VoidCallback onFailed}) async {
     this.userData = userData;
-    await Firestore.instance.collection('users').document(firebaseUser.uid).updateData(userData).then(
-        (result){
-          onSucess();
-        }
-    ).catchError(
-            (e){
-              onFailed();
-            }
-            );
+    await Firestore.instance
+        .collection('users')
+        .document(firebaseUser.uid)
+        .setData(userData);
   }
 
-  void _loadChangeStatus(){
-    if(isLoading){
+  Future<void> updateUserData(
+      {@required Map<String, dynamic> userData,
+      @required VoidCallback onSucess,
+      @required VoidCallback onFailed}) async {
+    this.userData = userData;
+    await Firestore.instance
+        .collection('users')
+        .document(firebaseUser.uid)
+        .updateData(userData)
+        .then((result) {
+      onSucess();
+    }).catchError((e) {
+      onFailed();
+    });
+  }
+
+  void _loadChangeStatus() {
+    if (isLoading) {
       isLoading = false;
-    }else{
+    } else {
       isLoading = true;
     }
 
     notifyListeners();
   }
 
-  bool isLoggedin(){
+  bool isLoggedin() {
     return firebaseUser != null;
   }
 
@@ -114,62 +131,76 @@ class UserModel extends Model{
     notifyListeners();
   }
 
-  void setBirth(DateTime date){
+  void setBirth(DateTime date) {
     userData['birth'] = Timestamp.fromDate(date);
   }
 
-  String getName(){
-    if(isLoggedin()){
+  String getName() {
+    if (isLoggedin()) {
       return userData['name'].toString();
-    }else{
+    } else {
       return '';
     }
   }
-  String getId(){
-    if(isLoggedin()){
+
+  String getId() {
+    if (isLoggedin()) {
       return firebaseUser.uid;
-    }else{
+    } else {
       return '';
-  }
+    }
   }
 
-  String getAdress(){
-    if(isLoggedin()){
+  String getAdress() {
+    if (isLoggedin()) {
       return userData['adress'].toString();
-    }else{
+    } else {
       return '';
     }
   }
 
   Future<void> followFarm(String farm_id) async {
     bool follow = false;
-    QuerySnapshot snapshot = await Firestore.instance.collection('users').document(firebaseUser.uid).collection('followFarms').getDocuments();
+    QuerySnapshot snapshot = await Firestore.instance
+        .collection('users')
+        .document(firebaseUser.uid)
+        .collection('followFarms')
+        .getDocuments();
     snapshot.documents.forEach((element) {
-      if(farm_id == element.documentID){
+      if (farm_id == element.documentID) {
         follow = true;
       }
     });
-    if(!follow) {
-      await Firestore.instance.collection('users').document(firebaseUser.uid)
-          .collection('followFarms').document(farm_id)
-          .setData({'farm_id': farm_id});
-      DocumentSnapshot query = await Firestore.instance.collection('farms')
+    if (!follow) {
+      await Firestore.instance
+          .collection('users')
+          .document(firebaseUser.uid)
+          .collection('followFarms')
           .document(farm_id)
-          .get();
+          .setData({'farm_id': farm_id});
+      DocumentSnapshot query =
+          await Firestore.instance.collection('farms').document(farm_id).get();
       int f = query.data['followers'];
       f += 1;
-      Firestore.instance.collection('farms').document(farm_id).updateData(
-          {'followers': f});
-    }else{
-      await Firestore.instance.collection('users').document(firebaseUser.uid).collection('followFarms').document(farm_id).delete();
-      DocumentSnapshot query = await Firestore.instance.collection('farms')
+      Firestore.instance
+          .collection('farms')
           .document(farm_id)
-          .get();
+          .updateData({'followers': f});
+    } else {
+      await Firestore.instance
+          .collection('users')
+          .document(firebaseUser.uid)
+          .collection('followFarms')
+          .document(farm_id)
+          .delete();
+      DocumentSnapshot query =
+          await Firestore.instance.collection('farms').document(farm_id).get();
       int f = query.data['followers'];
       f -= 1;
-      Firestore.instance.collection('farms').document(farm_id).updateData(
-          {'followers': f});
-
+      Firestore.instance
+          .collection('farms')
+          .document(farm_id)
+          .updateData({'followers': f});
     }
   }
 }
