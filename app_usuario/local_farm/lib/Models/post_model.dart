@@ -5,18 +5,25 @@ import 'package:localfarm/Datas/post_data.dart';
 import 'package:localfarm/Models/user_model.dart';
 
 class PostModel{
-  UserModel user;
 
-  Future<List<PostData>>loadOrders() async {
-    List<PostData> posts;
-    QuerySnapshot query = await Firestore.instance.collection('post').getDocuments();
-    posts = query.documents.map(
-        (post){
-          posts.add(PostData.fromDocument(post));
-        }
-        
-    ).toList();
+  Future<List<PostData>>loadUserPost(String userId) async {
+    List<PostData> posts = List<PostData>();
+    if(userId.isNotEmpty) {
+      QuerySnapshot farms = await Firestore.instance.collection('users')
+          .document(userId).collection('followFarms')
+          .getDocuments();
+      farms.documents.forEach((farm) async {
+        QuerySnapshot query = await Firestore.instance.collection('posts')
+            .where('farm', isEqualTo: farm.documentID)
+            .getDocuments();
+        query.documents.forEach(
+                (post) {
+              posts.add(PostData.fromDocument(post));
+            }
 
+        );
+      });
+    }
     return posts;
   }
 
