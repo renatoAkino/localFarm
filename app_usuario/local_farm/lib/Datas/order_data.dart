@@ -21,7 +21,7 @@ class OrderData {
   OrderData.fromDocument(DocumentSnapshot document) {
     order_id = document.documentID;
     client_id = document.data['clientID'];
-    // farm_id = document.data['farmID'];
+    farm_id = document.data['farmID'];
     productsPrice = document.data['productsPrice'];
     shipPrice = document.data['shipPrice'];
     status = document.data['status'];
