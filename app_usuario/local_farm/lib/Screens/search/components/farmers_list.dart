@@ -10,16 +10,27 @@ import 'package:day_picker/day_picker.dart';
 import 'farm_tile.dart';
 
 class FarmersList extends StatefulWidget {
+  final int filter;
+
+  const FarmersList(this.filter);
+
   @override
   _FarmersListState createState() => _FarmersListState();
 }
 
 class _FarmersListState extends State<FarmersList>
+
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    Future<QuerySnapshot> query;
+    switch(widget.filter){
+      case 1 : query = Firestore.instance.collection('farms').orderBy('distance').getDocuments(); break;
+      case 2 : query = Firestore.instance.collection('farms').getDocuments(); break;
+      case 3 : query = Firestore.instance.collection('farms').orderBy('followers', descending: true).getDocuments(); break;
+    }
     return FutureBuilder<QuerySnapshot>(
-      future: Firestore.instance.collection('farms').getDocuments(),
+      future: query,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(

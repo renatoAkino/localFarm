@@ -72,12 +72,42 @@ class UserModel extends Model {
       firebaseUser = await _auth.currentUser();
     }
     if (firebaseUser != null) {
+      //RECEBENDO OS DADOS DO USUÁRIO
       if (userData['name'] == null) {
         DocumentSnapshot docUser = await Firestore.instance
             .collection('users')
             .document(firebaseUser.uid)
             .get();
         userData = docUser.data;
+
+        //RECEBENDO AS FAZENDAS QUE O USUÁRIO SEGUE
+        QuerySnapshot followFarms = await Firestore.instance
+            .collection('users')
+            .document(firebaseUser.uid)
+            .collection('followFarms')
+            .getDocuments();
+        List<dynamic> mapFarms;
+        mapFarms = followFarms.documents.map((e) {
+          if(e.data != null){
+            return e.data['farm_id'];
+          }
+        }).toList();
+        userData.addAll({'followFarms' : mapFarms});
+
+        //RECEBENDO OS POSTS QUE O USUÁRIO DEU LIKE
+        QuerySnapshot likedPosts = await Firestore.instance
+            .collection('users')
+            .document(firebaseUser.uid)
+            .collection('likedPosts')
+            .getDocuments();
+        List<dynamic> postsList;
+        postsList = likedPosts.documents.map((e) {
+          if(e.data != null){
+            return e.data['post_id'];
+          }
+        }).toList();
+        userData.addAll({'likedPosts' : postsList});
+
       }
     }
     notifyListeners();
@@ -186,6 +216,9 @@ class UserModel extends Model {
           .collection('farms')
           .document(farm_id)
           .updateData({'followers': f});
+      List farms = userData['followFarms'];
+      farms.add(farm_id);
+      userData['follwFarms'] = farms;
     } else {
       await Firestore.instance
           .collection('users')
@@ -201,6 +234,76 @@ class UserModel extends Model {
           .collection('farms')
           .document(farm_id)
           .updateData({'followers': f});
+      List farms = userData['followFarms'];
+      farms.remove(farm_id);
+      userData['follwFarms'] = farms;
     }
+  }
+
+  bool checkfollowFarm(farm_id){
+    if(userData.isNotEmpty) {
+      List farms = userData['followFarms'];
+      return farms.contains(farm_id);
+    }
+    return false;
+  }
+
+  Future<void> likePost(String postId) async {
+    bool like = false;
+    QuerySnapshot snapshot = await Firestore.instance
+        .collection('users')
+        .document(firebaseUser.uid)
+        .collection('likedPosts')
+        .getDocuments();
+    snapshot.documents.forEach((element) {
+      if (postId == element.documentID) {
+        like = true;
+      }
+    });
+    if (!like) {
+      await Firestore.instance
+          .collection('users')
+          .document(firebaseUser.uid)
+          .collection('likedPosts')
+          .document(postId)
+          .setData({'post_id': postId});
+      DocumentSnapshot query =
+      await Firestore.instance.collection('posts').document(postId).get();
+      int l = query.data['likes'];
+      l += 1;
+      Firestore.instance
+          .collection('posts')
+          .document(postId)
+          .updateData({'likes': l});
+      List posts = userData['likedPosts'];
+      posts.add(postId);
+      userData['likedPosts'] = posts;
+    } else {
+      await Firestore.instance
+          .collection('users')
+          .document(firebaseUser.uid)
+          .collection('likedPosts')
+          .document(postId)
+          .delete();
+      DocumentSnapshot query =
+      await Firestore.instance.collection('posts').document(postId).get();
+      int l = query.data['likes'];
+      l -= 1;
+      Firestore.instance
+          .collection('posts')
+          .document(postId)
+          .updateData({'likes': l});
+      List posts = userData['likedPosts'];
+      posts.remove(postId);
+      userData['likedPosts'] = posts;
+    }
+  }
+
+  bool checkLikedPost(postId){
+    if(userData.isNotEmpty) {
+      List farms = userData['likedPosts'];
+      return farms.contains(postId);
+    }
+    return false;
   }
 }

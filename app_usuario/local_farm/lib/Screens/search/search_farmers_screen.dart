@@ -15,7 +15,7 @@ class SearchFarmersScreen extends StatefulWidget {
 }
 
 class _SearchFarmersScreenState extends State<SearchFarmersScreen> {
-  String _search;
+  int _search = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class _SearchFarmersScreenState extends State<SearchFarmersScreen> {
 
       //CONTENT
       // FarmersList(filterBy),
-      body: FarmersList(),
+      body: FarmersList(_search),
       // ],
       // ),
       // ),
@@ -113,10 +113,14 @@ class _SearchFarmersScreenState extends State<SearchFarmersScreen> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
                     side: BorderSide(color: Colors.green)),
-                color: Colors.green,
-                textColor: Colors.white,
+                color: _search == 1 ? Colors.green : Colors.white,
+                textColor: _search == 1 ? Colors.white : Colors.green,
                 padding: EdgeInsets.all(8.0),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    _search = 1;
+                  });
+                },
                 child: Row(
                   children: [
                     Icon(
@@ -135,11 +139,14 @@ class _SearchFarmersScreenState extends State<SearchFarmersScreen> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
                     side: BorderSide(color: Colors.green)),
-                color: Colors.transparent,
-                textColor: Colors.green,
+                color: _search == 2 ? Colors.green : Colors.white,
+                textColor: _search == 2 ? Colors.white : Colors.green,
                 padding: EdgeInsets.all(8.0),
                 onPressed: () {
                   _openFilterDialog();
+                  setState(() {
+                    _search = 2;
+                  });
                 },
                 child: Row(
                   children: [
@@ -180,10 +187,14 @@ class _SearchFarmersScreenState extends State<SearchFarmersScreen> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
                     side: BorderSide(color: Colors.green)),
-                color: Colors.transparent,
-                textColor: Colors.green,
+                color: _search == 3 ? Colors.green : Colors.white,
+                textColor: _search == 3 ? Colors.white : Colors.green,
                 padding: EdgeInsets.all(8.0),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    _search = 3;
+                  });
+                },
                 child: Row(
                   children: [
                     Icon(
