@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:localfarm/Datas/order_data.dart';
 
 class OrderDetailScreen extends StatelessWidget {
@@ -52,7 +54,7 @@ class OrderDetailScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text('data do pedido'),
-                  Text('<15/05/2020>'),
+                  Text(_formatDate(order.order_date)),
                 ],
               ),
               Row(
@@ -65,7 +67,7 @@ class OrderDetailScreen extends StatelessWidget {
               SizedBox(
                 height: 30,
               ),
-              Text('Itens:'), //TODO transformar em row dinamica com base no lenght
+              Text('Itens:'),
               SizedBox(
                 height: 10,
               ),
@@ -120,7 +122,7 @@ class OrderDetailScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text('data agendada'),
-                  Text('<20/05/2020>'),
+                  Text(_formatDate(this.order.ship_date)),
                 ],
               ),
               Row(
@@ -134,6 +136,12 @@ class OrderDetailScreen extends StatelessWidget {
           ),
         ));
   }
+}
+
+String _formatDate(Timestamp date) {
+  var formattedDate;
+  date != null? formattedDate = DateFormat("dd/MM/yyyy").format(date.toDate()) : formattedDate = "";
+  return formattedDate;
 }
 
 Widget _buildRow(OrderData order) {

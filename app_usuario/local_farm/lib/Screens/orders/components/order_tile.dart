@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:localfarm/Datas/order_data.dart';
 import 'package:localfarm/Screens/store_screen.dart';
 
@@ -71,7 +72,8 @@ class OrderTile extends StatelessWidget {
                         height: 4,
                       ),
                       Text(
-                        '14/12/2020',
+                        // '14/12/2020',
+                        _formatDate(this.order.order_date),
                         style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.bold
                           // color: Colors.white,
@@ -250,4 +252,10 @@ class OrderTile extends StatelessWidget {
       ),
     );
   }
+}
+
+String _formatDate(Timestamp date) {
+  var formattedDate;
+  date != null? formattedDate = DateFormat("dd/MM/yyyy").format(date.toDate()) : formattedDate = "";
+  return formattedDate;
 }
