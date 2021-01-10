@@ -104,7 +104,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 fit: BoxFit.cover,
-                                image: AssetImage('assets/farmer2.jpeg'),
+                                image: AssetImage('assets/cesta.png'),
                               ),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10.0),
@@ -114,16 +114,16 @@ class _DashboardScreenState extends State<DashboardScreen>
                             width: 40,
                           ),
                           title: Text(
-                            '<Sr. João dos Santos>',
+                            '<ID Pedido>',
                             style: TextStyle(
-                              // color: Colors.white,
-                            ),
+                                // color: Colors.white,
+                                ),
                           ),
                           subtitle: Text(
                             'Fazenda Atalaia',
                             style: TextStyle(
-                              // color: Colors.grey[100],
-                            ),
+                                // color: Colors.grey[100],
+                                ),
                           ),
                           trailing: InkWell(
                             onTap: () {
@@ -143,7 +143,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                               decoration: BoxDecoration(
                                 color: Colors.green[50],
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(10.0)),
                               ),
                             ),
                           ),
@@ -172,14 +172,14 @@ class _DashboardScreenState extends State<DashboardScreen>
                               Text(
                                 'Sexta, 08 de Janeiro',
                                 style: TextStyle(
-                                  // color: Colors.white,
-                                ),
+                                    // color: Colors.white,
+                                    ),
                               ),
                               Text(
                                 '8:00 - 10:00',
                                 style: TextStyle(
-                                  // color: Colors.white,
-                                ),
+                                    // color: Colors.white,
+                                    ),
                               ),
                             ],
                           ),
