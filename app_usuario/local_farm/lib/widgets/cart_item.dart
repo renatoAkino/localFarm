@@ -42,14 +42,13 @@ class CartItem extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 0.0, right: 10.0),
                   child: Container(
-                    color: Colors.white,
                     height: MediaQuery.of(context).size.width / 3.5,
                     width: MediaQuery.of(context).size.width / 3,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.network(
                         "$img",
-                        fit: BoxFit.contain,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -62,10 +61,10 @@ class CartItem extends StatelessWidget {
                       "$name",
                       style: TextStyle(
                         fontSize: 20,
-                        // fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w900,
                       ),
                     ),
-                    SizedBox(height: 5.0),
+                    SizedBox(height: 10.0),
                     Row(
                       children: <Widget>[
                         // SmoothStarRating(
@@ -77,7 +76,7 @@ class CartItem extends StatelessWidget {
                         // ),
                         // SizedBox(width: 6.0),
                         Text(
-                          "<Fazenda Monte Belo>",
+                          "Fazenda Monte Belo",
                           style: TextStyle(
                             // fontSize: 12,
                             fontWeight: FontWeight.w300,
@@ -112,9 +111,9 @@ class CartItem extends StatelessWidget {
                         Text(
                           "Total",
                           style: TextStyle(
-                              // fontSize: 11.0,
-                              // fontWeight: FontWeight.w300,
-                              ),
+                            // fontSize: 11.0,
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
                         SizedBox(width: 10.0),
                         Text(

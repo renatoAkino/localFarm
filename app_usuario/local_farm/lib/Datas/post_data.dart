@@ -27,7 +27,7 @@ class PostData {
 
   Future<void> getFarmData() async {
     DocumentSnapshot snapshot =
-        await Firestore.instance.collection('farms').document(farm_id).get();
+    await Firestore.instance.collection('farms').document(farm_id).get();
     farmData = FarmData.fromDocument(snapshot);
   }
 }

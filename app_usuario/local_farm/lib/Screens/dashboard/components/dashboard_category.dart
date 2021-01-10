@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../categories_screen.dart';
-
 class ListaCategoriasWidget extends StatefulWidget {
   final String icon;
   final String title;
@@ -29,13 +27,13 @@ class _ListaCategoriasWidgetState extends State<ListaCategoriasWidget> {
     return InkWell(
       onTap: widget.isHome
           ? () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return CategoriesScreen();
-                  },
-                ),
-              );
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(
+              //     builder: (BuildContext context){
+              //       return CategoriesScreen();
+              //     },
+              //   ),
+              // );
             }
           : widget.tap,
       child: Card(

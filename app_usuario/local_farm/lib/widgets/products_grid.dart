@@ -12,18 +12,19 @@ class ProductsGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.symmetric(vertical: 15),
+      padding: EdgeInsets.only(top: 60),
       child: StaggeredGridView.countBuilder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-          crossAxisCount: 2,
-          itemBuilder: (context, index){
-            ProductData productData = ProductData.fromDocument(snapshot.data.documents[index]);
-            return ProductsTile(productData);
-          },
-          itemCount: snapshot.data.documents.length,
-          staggeredTileBuilder: (_) => StaggeredTile.fit(1),
-      )
+        crossAxisCount: 2,
+        itemBuilder: (context, index) {
+          ProductData productData =
+              ProductData.fromDocument(snapshot.data.documents[index]);
+          return ProductsTile(productData);
+        },
+        itemCount: snapshot.data.documents.length,
+        staggeredTileBuilder: (_) => StaggeredTile.fit(1),
+      ),
     );
   }
 }

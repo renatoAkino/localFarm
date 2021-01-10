@@ -13,6 +13,8 @@ class OrderData {
   double shipPrice;
   int status;
   double totalPrice;
+  Timestamp order_date;
+  Timestamp ship_date;
 
   FarmData farmData;
 
@@ -27,11 +29,13 @@ class OrderData {
     document.data['products'].forEach((product) {
       products.add(ProductData.fromResumedDocument(product));
     });
+    order_date = document.data['order_date'];
+    ship_date = document.data['ship_date'];
   }
 
   Future<void> getFarmData() async {
     DocumentSnapshot snapshot =
-        await Firestore.instance.collection('farms').document(farm_id).get();
+    await Firestore.instance.collection('farms').document(farm_id).get();
     farmData = FarmData.fromDocument(snapshot);
   }
 }

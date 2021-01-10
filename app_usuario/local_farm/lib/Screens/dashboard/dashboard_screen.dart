@@ -87,7 +87,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               ),
               SizedBox(height: 10.0),
               Card(
-                elevation: 0,
+                elevation: 1.5,
                 // color: Colors.lightGreen,
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
@@ -104,7 +104,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 fit: BoxFit.cover,
-                                image: AssetImage('assets/farmer2.jpeg'),
+                                image: AssetImage('assets/cesta.png'),
                               ),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10.0),
@@ -114,7 +114,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                             width: 40,
                           ),
                           title: Text(
-                            'Sr. João dos Santos',
+                            '<ID Pedido>',
                             style: TextStyle(
                                 // color: Colors.white,
                                 ),
