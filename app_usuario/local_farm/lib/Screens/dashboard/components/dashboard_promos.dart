@@ -32,9 +32,10 @@ class _ImageCarouselState extends State<ImageCarousel>
       boxFit: BoxFit.cover,
       dotBgColor: Colors.transparent,
       images: [
-        new AssetImage('assets/promo3.jpeg'),
-        new AssetImage('assets/promo2.jpeg'),
-        // new AssetImage('assets/promo5.jpeg'),
+        new AssetImage('assets/promo5.png'),
+        new AssetImage('assets/promo3.png'),
+        new AssetImage('assets/promo7.png'),
+        new AssetImage('assets/promo6.png'),
         // new AssetImage('assets/food4.jpeg'),
         // new AssetImage('assets/food5.jpeg'),
       ],

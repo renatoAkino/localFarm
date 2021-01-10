@@ -25,7 +25,7 @@ class ItemCard extends StatelessWidget {
               padding: EdgeInsets.all(10),
               // For  demo we use fixed height  and width
               // Now we dont need them
-              // height: 180,
+              // height: 35,
               width: MediaQuery.of(context).size.width * 0.5,
               decoration: BoxDecoration(
                 // color: product.color,
@@ -35,7 +35,7 @@ class ItemCard extends StatelessWidget {
               child: Hero(
                 tag: "${product.id}",
                 child: Image.network(
-                  product.images['0'],
+                  product.image,
                   // fit: BoxFit.cover,
                 ),
               ),
@@ -75,7 +75,7 @@ class ItemCard extends StatelessWidget {
                   child: Container(
                     width: 100,
                     child: Text(
-                      "${product.title}",
+                      "${product.name}",
                       style: TextStyle(
                         fontSize: 16.0,
                         // fontWeight: FontWeight.w900,
@@ -99,7 +99,8 @@ class ItemCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 5.0, top: 2.0, left: 8.0),
+            padding:
+                EdgeInsets.only(bottom: 5.0, top: 2.0, left: 8.0, right: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -112,14 +113,14 @@ class ItemCard extends StatelessWidget {
                 // ),
                 Text(
                   // " $rating ($raters Reviews)",
-                  "<Kg/Unidade>",
+                  "disponíveis: ${product.quantity}",
                   style: TextStyle(
                     fontSize: 11.0,
                   ),
                 ),
                 Text(
                   // " $rating ($raters Reviews)",
-                  "<10>/${product.quantity}",
+                  product.soldPer,
                   style: TextStyle(
                     fontSize: 11.0,
                   ),

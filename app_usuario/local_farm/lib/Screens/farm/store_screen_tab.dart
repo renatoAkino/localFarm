@@ -19,11 +19,14 @@ class StoreScreenTab extends StatefulWidget {
 
 class _StoreScreenTabState extends State<StoreScreenTab> {
   @override
-  @override
   Widget build(BuildContext context) {
     return FutureBuilder<QuerySnapshot>(
       // Alterar para os pedidos
-      future: Firestore.instance.collection('products').getDocuments(),
+      future: Firestore.instance
+          .collection('farms')
+          .document(widget.farmData.id)
+          .collection('products')
+          .getDocuments(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(
