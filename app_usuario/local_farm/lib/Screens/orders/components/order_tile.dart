@@ -125,7 +125,7 @@ class OrderTile extends StatelessWidget {
                       ),
                       Text(
                         // r'R$ 64,51',
-                        'R\$ ${order.totalPrice.toString()}',
+                        'R\$ ${order.totalPrice.toStringAsFixed(2)}',
                         style: TextStyle(
                           fontSize: 16,
                           // color: Colors.white,
@@ -186,7 +186,7 @@ class OrderTile extends StatelessWidget {
                 index: order.status,
               ),
               // SimpleRoundOnlyIconButton(),
-              // A OARTIR DAQUI É SÓ O BOTÃO
+              // A PARTIR DAQUI É SÓ O BOTÃO
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -233,7 +233,7 @@ class OrderTile extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => OrderDetailScreen(),
+                                  builder: (context) => OrderDetailScreen(this.order),
                                 ),
                               );
                             },
