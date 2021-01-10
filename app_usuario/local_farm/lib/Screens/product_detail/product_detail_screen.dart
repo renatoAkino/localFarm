@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:localfarm/Datas/cart_data.dart';
 import 'package:localfarm/Datas/farm_data.dart';
 import 'package:localfarm/Datas/product_data.dart';
+import 'package:localfarm/Models/cart_model.dart';
+import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/cart/components/cart_icon.dart';
 
 import 'components/body.dart';
@@ -38,22 +41,23 @@ class DetailsScreen extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(right: 15),
                 height: 50,
-                width: 58,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
-                  border: Border.all(
-                    // color: product.color,
-                    color: Colors.green,
-                  ),
-                ),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.add_shopping_cart,
-                    color: Colors.green,
-                  ),
-                  color: Colors.grey,
-                  onPressed: () {},
-                ),
+                // width: 80,
+                width: MediaQuery.of(context).size.width * 0.3,
+                // decoration: BoxDecoration(
+                //   borderRadius: BorderRadius.circular(18),
+                //   border: Border.all(
+                //     // color: product.color,
+                //     color: Colors.green,
+                //   ),
+                // ),
+                // child: IconButton(
+                //   icon: Icon(
+                //     Icons.add_shopping_cart,
+                //     color: Colors.green,
+                //   ),
+                //   color: Colors.grey,
+                //   onPressed: () {},
+                // ),
               ),
               Expanded(
                 child: SizedBox(
@@ -63,15 +67,27 @@ class DetailsScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(18)),
                     // color: product.color,
                     color: Colors.orange,
-                    onPressed: () {},
                     child: Text(
                       "Adicionar ao carrinho".toUpperCase(),
                       style: TextStyle(
-                        fontSize: 17,
+                        fontSize: 16,
                         // fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
+                    onPressed: () {
+                      // if (UserModel.of(context).isLoggedin()) {
+                      //   CartData cartData = CartData();
+                      //   cartData.product_id = product.id;
+                      //   // PRECISA BUSCAR A QUANTIDADE DO CONTADOR cart_counter.dart
+                      //   cartData.quantity = quantity;
+                      //   cartData.productData = product;
+
+                      //   CartModel.of(context).addCartItem(cartData);
+                      // } else {
+                      //   onFailed();
+                      // }
+                    },
                   ),
                 ),
               ),

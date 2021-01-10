@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/post_data.dart';
 import 'package:localfarm/Datas/post_data.dart';
+import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/store_screen.dart';
 
 class FeedTile extends StatelessWidget {
@@ -134,8 +135,10 @@ class FeedTile extends StatelessWidget {
                   right: -10.0,
                   bottom: 3.0,
                   child: RawMaterialButton(
-                    onPressed: () {},
-                    fillColor: Colors.white,
+                    onPressed: () {
+                      UserModel.of(context).likePost(post.post_id);
+                    },
+                    fillColor: UserModel.of(context).checkLikedPost(post.post_id) ? Colors.green : Colors.white,
                     shape: CircleBorder(),
                     elevation: 4.0,
                     child: Padding(
@@ -143,7 +146,7 @@ class FeedTile extends StatelessWidget {
                       child: Icon(
                         // isFav ? Icons.favorite : Icons.favorite_border,
                         Icons.favorite_border,
-                        color: Colors.green,
+                        color: UserModel.of(context).checkLikedPost(post.post_id) ? Colors.white : Colors.green,
                         size: 17,
                       ),
                     ),
