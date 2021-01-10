@@ -1,11 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:localfarm/Models/user_model.dart';
-import 'package:localfarm/Screens/cart/cart_screen.dart';
 import 'package:localfarm/Screens/feed/feed_screen.dart';
 import 'package:localfarm/Screens/login_screen.dart';
 import 'package:localfarm/Screens/search_screen.dart';
+
 import 'package:localfarm/widgets/home_appBar.dart';
 
 import 'dashboard/dashboard_screen.dart';
@@ -19,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool _isBottomCartVisible = true;
   int _pageIndex = 0;
 
   @override
@@ -67,6 +67,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: _getPage(_pageIndex),
+      // backgroundColor: Color.fromRGBO(247, 246, 237, 1),
+      // backgroundColor: Color.fromRGBO(250, 252, 247, 1),
     );
   }
 
@@ -74,6 +76,49 @@ class _HomeScreenState extends State<HomeScreen> {
     switch (index) {
       case 0:
         return DashboardScreen();
+        // return Stack(
+        //   alignment: Alignment.center,
+        //   children: [
+        //     DashboardScreen(),
+        //     Visibility(
+        //       visible: _isBottomCartVisible,
+        //       child: Positioned(
+        //         bottom: 0,
+        //         child: MaterialButton(
+        //           onPressed: () {},
+        //           textColor: Colors.white,
+        //           padding: const EdgeInsets.all(0.0),
+        //           child: Container(
+        //             width: 88,
+        //             height: 30,
+        //             decoration: BoxDecoration(
+        //                 color: Color(0xff00D99E),
+        //                 borderRadius: BorderRadius.circular(15),
+        //                 boxShadow: [
+        //                   BoxShadow(
+        //                       blurRadius: 5,
+        //                       offset: Offset(0, 15),
+        //                       color: Color(0xff00D99E).withOpacity(.6),
+        //                       spreadRadius: -9)
+        //                 ]),
+        //             child: Row(
+        //               mainAxisAlignment: MainAxisAlignment.center,
+        //               children: <Widget>[
+        //                 SizedBox(width: 6),
+        //                 Text("CART",
+        //                     style: TextStyle(
+        //                       fontSize: 10,
+        //                       color: Colors.white,
+        //                       letterSpacing: 1,
+        //                     ))
+        //               ],
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     )
+        //   ],
+        // );
         break;
       case 1:
         return SearchFarmersScreen();

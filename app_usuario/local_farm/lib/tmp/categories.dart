@@ -10,8 +10,8 @@ List categories = [
 
 List categoriesSvg = [
   {"name": "Frutas", "icon": 'assets/icons/apple.svg'},
+  {"name": "Legumes", "icon": 'assets/icons/lettuce.svg'},
   {"name": "Pães", "icon": 'assets/icons/bread.svg'},
   {"name": "Ovos", "icon": 'assets/icons/eggs.svg'},
-  {"name": "Legumes", "icon": 'assets/icons/lettuce.svg'},
   {"name": "Mel", "icon": 'assets/icons/honey.svg'},
 ];
