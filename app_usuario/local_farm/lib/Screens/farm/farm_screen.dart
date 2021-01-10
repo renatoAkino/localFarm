@@ -3,18 +3,19 @@ import 'package:localfarm/Datas/farm_data.dart';
 import 'package:localfarm/Screens/cart/cart_screen.dart';
 import 'package:localfarm/Screens/cart/components/cart_icon.dart';
 
+import 'components/infos_widget.dart';
 import 'profile_screen_tab.dart';
 import 'store_screen_tab.dart';
 
-class FarmScreen extends StatefulWidget {
+class FarmScreenSemProd extends StatefulWidget {
   final FarmData farmData;
-  FarmScreen(this.farmData);
+  FarmScreenSemProd(this.farmData);
 
   @override
-  _FarmScreenState createState() => _FarmScreenState();
+  _FarmScreenSemProdState createState() => _FarmScreenSemProdState();
 }
 
-class _FarmScreenState extends State<FarmScreen>
+class _FarmScreenSemProdState extends State<FarmScreenSemProd>
     with SingleTickerProviderStateMixin {
   TabController tabController;
 
@@ -27,6 +28,7 @@ class _FarmScreenState extends State<FarmScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.white,
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
@@ -46,9 +48,10 @@ class _FarmScreenState extends State<FarmScreen>
                   // floating: true,
                   primary: true,
                   forceElevated: innerBoxIsScrolled,
-                  backgroundColor: Colors.grey[50],
+                  // backgroundColor: Colors.grey[50],
+                  backgroundColor: Colors.white,
                   elevation: 0,
-                  expandedHeight: MediaQuery.of(context).size.height * 0.42,
+                  expandedHeight: MediaQuery.of(context).size.height * 0.56,
                   flexibleSpace: LayoutBuilder(
                     builder: (context, constraints) {
                       var top = constraints.biggest.height;
@@ -60,89 +63,33 @@ class _FarmScreenState extends State<FarmScreen>
                         title: top < 110
                             ? Text(
                                 this.widget.farmData.name,
-                                style: TextStyle(color: Colors.green),
+                                style: TextStyle(
+                                    color: Colors.green, fontSize: 15),
                               )
-                            : Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    this.widget.farmData.name,
-                                    style: TextStyle(
-                                      color: Colors.grey[800],
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                  top < 140
-                                      ? Text("")
-                                      : Text(
-                                          // widget.farmData.addres,
-                                          'Sr. José da Silva',
-                                          style: TextStyle(
-                                            color: Colors.grey[600],
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                ],
-                              ),
+                            : FarmInfosWidget(widget.farmData, top),
                         background: Stack(
                           // fit: StackFit.expand,
                           children: [
                             Image.network(
                               widget.farmData.image,
-                              fit: BoxFit.cover,
-                              // height: 300,
+                              // 'https://cdn2.f-cdn.com/contestentries/1756878/17693014/5e89d34a7b27c_thumb900.jpg',
+                              fit: BoxFit.contain,
+                              alignment: AlignmentDirectional.topEnd,
+                              height: MediaQuery.of(context).size.height * 0.5,
+                              // width: 300,
                             ),
                             Positioned(
-                              top: MediaQuery.of(context).size.height * 0.25,
+                              top: MediaQuery.of(context).size.height * 0.22,
                               child: Container(
-                                // child: Column(
-                                //   mainAxisAlignment: MainAxisAlignment.center,
-                                //   children: [
-                                //     Text(
-                                //       this.widget.farmData.name,
-                                //       style: TextStyle(
-                                //         color: Colors.grey[800],
-                                //         fontSize: 20,
-                                //         fontWeight: FontWeight.w700,
-                                //       ),
-                                //     ),
-                                //     Text(
-                                //       'Sr. João dos Santos ',
-                                //       style: TextStyle(
-                                //         color: Colors.grey[600],
-                                //         fontSize: 16,
-                                //       ),
-                                //     ),
-                                //   ],
-                                // ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
-                                  color: Colors.grey[50],
+                                  // COR DO FUNDO DAS INFOS
+                                  color: Colors.white,
                                 ),
                                 height:
-                                    MediaQuery.of(context).size.height * 0.2,
+                                    MediaQuery.of(context).size.height * 0.4,
                                 // color: Colors.blue,
                                 width: MediaQuery.of(context).size.width,
-                              ),
-                            ),
-                            Positioned(
-                              right: MediaQuery.of(context).size.width * 0.35,
-                              bottom: MediaQuery.of(context).size.height * 0.14,
-                              child: Container(
-                                width: 120.0,
-                                height: 120.0,
-                                decoration: new BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: new DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: AssetImage('assets/farmer.jpeg'),
-                                  ),
-                                  border: new Border.all(
-                                    color: Colors.grey[100],
-                                    width: 4.0,
-                                  ),
-                                ),
                               ),
                             ),
                           ],
@@ -152,45 +99,28 @@ class _FarmScreenState extends State<FarmScreen>
                   ),
                   // title: Text(
                   //   widget.farmData.name,
-                  //   style: TextStyle(color: Colors.grey[600]),
+                  //   style: TextStyle(color: Colors.green),
                   // ),
-                  bottom: TabBar(
-                    labelStyle: TextStyle(fontSize: 16),
-                    labelColor: Colors.green[600],
-                    indicatorColor: Colors.green,
-                    controller: this.tabController,
-                    tabs: <Widget>[
-                      Tab(text: 'Loja'),
-                      Tab(text: 'Perfil'),
-                    ],
+                  bottom: PreferredSize(
+                    preferredSize: Size.fromHeight(23.0),
+                    child: TabBar(
+                      // unselectedLabelColor: Colors.green[200],
+                      labelStyle: TextStyle(fontSize: 16),
+                      labelColor: Colors.orange,
+                      // indicatorColor: Colors.green[700],
+                      indicatorColor: Colors.orange,
+                      // indicatorWeight: 4,
+                      controller: this.tabController,
+                      // indicatorSize: TabBarIndicatorSize.label,
+                      tabs: <Widget>[
+                        Tab(text: 'Loja'),
+                        Tab(text: 'Perfil'),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-            // SliverPersistentHeader(
-            //   pinned: true,
-            //   delegate: StickyTabBarDelegate(
-            //     child: TabBar(
-            //       labelStyle: TextStyle(fontSize: 16),
-            //       labelColor: Colors.green[600],
-            //       indicatorColor: Colors.green,
-            //       controller: this.tabController,
-            //       tabs: <Widget>[
-            //         Tab(text: 'Loja'),
-            //         Tab(text: 'Perfil'),
-            //       ],
-            //     ),
-            //   ),
-            // ),
-            // SliverFillRemaining(
-            //   child: TabBarView(
-            //     controller: this.tabController,
-            //     children: <Widget>[
-            //       StoreScreenTab(widget.farmData),
-            //       ProfileScreenTab(widget.farmData),
-            //     ],
-            //   ),
-            // ),
           ];
         },
         body: TabBarView(

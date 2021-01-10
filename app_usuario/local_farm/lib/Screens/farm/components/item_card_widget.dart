@@ -113,7 +113,7 @@ class ItemCard extends StatelessWidget {
                 // ),
                 Text(
                   // " $rating ($raters Reviews)",
-                  "dísponíveis: ~ ${product.quantity}",
+                  "disponíveis: ${product.quantity}",
                   style: TextStyle(
                     fontSize: 11.0,
                   ),

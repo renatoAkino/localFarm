@@ -20,7 +20,7 @@ class ProductTitleWithImage extends StatelessWidget {
         children: <Widget>[
           Text(
             // "<Fazenda do Sol>",
-            "",
+            "Produto",
             style: TextStyle(color: Colors.white),
           ),
           Text(

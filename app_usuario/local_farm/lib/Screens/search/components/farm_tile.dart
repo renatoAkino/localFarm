@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/farm_data.dart';
 import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/farm/farm_screen.dart';
-import 'package:localfarm/Screens/farm/farm_screen_sem_prod.dart';
+import 'package:localfarm/Screens/farm/farm_screen.dart';
 import 'package:localfarm/Screens/store_screen.dart';
 
 class FarmTile extends StatelessWidget {
