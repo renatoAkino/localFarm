@@ -20,7 +20,7 @@ class StatusProgressWidget extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.3,
           // color: Color.fromRGBO(93, 97, 115, 1),
           // color: Colors.green[50],
-          color: Colors.grey[100],
+          color: Colors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -100,53 +100,53 @@ class StatusProgressWidget extends StatelessWidget {
   Widget icon1Check(bool isChecked) {
     return isChecked
         ? Icon(
-            Icons.shopping_basket_outlined,
-            // color: Colors.greenAccent,
-            color: Colors.green,
-          )
+      Icons.shopping_basket_outlined,
+      // color: Colors.greenAccent,
+      color: Colors.green,
+    )
         : Icon(
-            Icons.shopping_basket_outlined,
-            color: Colors.grey,
-          );
+      Icons.shopping_basket_outlined,
+      color: Colors.grey,
+    );
   }
 
   Widget icon2Check(bool isChecked) {
     return isChecked
         ? Icon(
-            Icons.today_outlined,
-            // color: Colors.greenAccent,
-            color: Colors.green,
-          )
+      Icons.today_outlined,
+      // color: Colors.greenAccent,
+      color: Colors.green,
+    )
         : Icon(
-            Icons.today_outlined,
-            color: Colors.grey,
-          );
+      Icons.today_outlined,
+      color: Colors.grey,
+    );
   }
 
   Widget icon3Check(bool isChecked) {
     return isChecked
         ? Icon(
-            Icons.payment,
-            // color: Colors.greenAccent,
-            color: Colors.green,
-          )
+      Icons.payment,
+      // color: Colors.greenAccent,
+      color: Colors.green,
+    )
         : Icon(
-            Icons.payment,
-            color: Colors.grey,
-          );
+      Icons.payment,
+      color: Colors.grey,
+    );
   }
 
   Widget icon4Check(bool isChecked) {
     return isChecked
         ? Icon(
-            Icons.delivery_dining,
-            // color: Colors.greenAccent,
-            color: Colors.green,
-          )
+      Icons.delivery_dining,
+      // color: Colors.greenAccent,
+      color: Colors.green,
+    )
         : Icon(
-            Icons.delivery_dining,
-            color: Colors.grey,
-          );
+      Icons.delivery_dining,
+      color: Colors.grey,
+    );
   }
 
   // -------------------------------- SPACER TOP ------------------------------------
@@ -178,16 +178,16 @@ class StatusProgressWidget extends StatelessWidget {
   Widget tick(bool isChecked) {
     return isChecked
         ? Icon(
-            Icons.check_circle,
-            // color: Colors.greenAccent,
-            color: Colors.green,
-            size: 30,
-          )
+      Icons.check_circle,
+      // color: Colors.greenAccent,
+      color: Colors.green,
+      size: 30,
+    )
         : Icon(
-            Icons.radio_button_unchecked,
-            color: Colors.grey,
-            size: 30,
-          );
+      Icons.radio_button_unchecked,
+      color: Colors.grey,
+      size: 30,
+    );
   }
 
   // -------------------------------- SPACER CENTER ---------------------------------
@@ -218,16 +218,16 @@ class StatusProgressWidget extends StatelessWidget {
   Widget line(bool isChecked) {
     return isChecked
         ? Container(
-            // color: Colors.greenAccent,
-            color: Colors.green,
-            height: 5.0,
-            width: 50,
-          )
+      // color: Colors.greenAccent,
+      color: Colors.green,
+      height: 5.0,
+      width: 50,
+    )
         : Container(
-            color: Colors.grey,
-            height: 5.0,
-            width: 50,
-          );
+      color: Colors.grey,
+      height: 5.0,
+      width: 50,
+    );
   }
 
 // -------------------------------- TEXTS ----------------------------------------
@@ -252,80 +252,80 @@ class StatusProgressWidget extends StatelessWidget {
     // String texto = 'Montar\nCesta';
     return isChecked
         ? Text(
-            'Cesta\nMontada',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              // color: Colors.greenAccent,
-              color: Colors.green,
-            ),
-          )
+      'Cesta\nMontada',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        // color: Colors.greenAccent,
+        color: Colors.green,
+      ),
+    )
         : Text(
-            'Montar\nCesta',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.grey,
-            ),
-          );
+      'Montar\nCesta',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: Colors.grey,
+      ),
+    );
   }
 
   Widget text2Check(bool isChecked) {
     // String texto = 'Agendar\nEntrega';
     return isChecked
         ? Text(
-            'Entrega\nAgendada',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              // color: Colors.greenAccent,
-              color: Colors.green,
-            ),
-          )
+      'Entrega\nAgendada',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        // color: Colors.greenAccent,
+        color: Colors.green,
+      ),
+    )
         : Text(
-            'Agendar\nEntrega',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.grey,
-            ),
-          );
+      'Agendar\nEntrega',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: Colors.grey,
+      ),
+    );
   }
 
   Widget text3Check(bool isChecked) {
     // String texto = 'Efetuar\nPagamento';
     return isChecked
         ? Text(
-            'Pagamento\nEfetuado',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              // color: Colors.greenAccent,
-              color: Colors.green,
-            ),
-          )
+      'Pagamento\nEfetuado',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        // color: Colors.greenAccent,
+        color: Colors.green,
+      ),
+    )
         : Text(
-            'Efetuar\nPagamento',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.grey,
-            ),
-          );
+      'Efetuar\nPagamento',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: Colors.grey,
+      ),
+    );
   }
 
   Widget text4Check(bool isChecked) {
     // String texto = 'Aguardar\nEntrega';
     return isChecked
         ? Text(
-            'Entrega\nRecebida',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              // color: Colors.greenAccent,
-              color: Colors.green,
-            ),
-          )
+      'Entrega\nRecebida',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        // color: Colors.greenAccent,
+        color: Colors.green,
+      ),
+    )
         : Text(
-            'Aguardar\nEntrega',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.grey,
-            ),
-          );
+      'Aguardar\nEntrega',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: Colors.grey,
+      ),
+    );
   }
 
   // -------------------------------- SPACER TOP ------------------------------------

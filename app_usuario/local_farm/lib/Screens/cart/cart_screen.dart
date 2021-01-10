@@ -251,22 +251,26 @@ class _CartScreenState extends State<CartScreen> {
                                 .document(product.product_id)
                                 .get(),
                             builder: (context, snapshot) {
-                              product.productData =
-                                  ProductData.fromDocument(snapshot.data);
-                              double prodPrice =
-                                  product.quantity * product.productData.price;
+                              if(snapshot.hasData){
+                                product.productData =
+                                    ProductData.fromDocument(snapshot.data);
+                                double prodPrice =
+                                    product.quantity * product.productData.price;
 
-                              totalPrice += prodPrice;
+                                totalPrice += prodPrice;
 
-                              return CartItem(
-                                img: product.productData.images['0'],
-                                isFav: false,
-                                name: product.productData.title,
-                                price: prodPrice,
-                                quantity: product.quantity,
-                                rating: 5.0,
-                                raters: 23,
-                              );
+                                return CartItem(
+                                  img: product.productData.images['0'],
+                                  isFav: false,
+                                  name: product.productData.title,
+                                  price: prodPrice,
+                                  quantity: product.quantity,
+                                  rating: 5.0,
+                                  raters: 23,
+                                );
+                              }else{
+                                return Container();
+                              }
                             },
                           );
                         }).toList(),

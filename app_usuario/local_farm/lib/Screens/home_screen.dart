@@ -2,13 +2,15 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Models/user_model.dart';
-import 'package:localfarm/Screens/feed_screen.dart';
+import 'package:localfarm/Screens/cart/cart_screen.dart';
+import 'package:localfarm/Screens/feed/feed_screen.dart';
 import 'package:localfarm/Screens/search_screen.dart';
 import 'package:localfarm/widgets/home_appBar.dart';
 
 import 'dashboard/dashboard_screen.dart';
 import 'edit_user_screen.dart';
 import 'orders/orders_screen.dart';
+import 'search/search_farmers_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -25,19 +27,36 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: HomeAppBar(),
       bottomNavigationBar: Container(
         height: 66,
-        color: Colors.green,
+        color: Colors.transparent,
         child: CurvedNavigationBar(
           height: 55.0,
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.transparent,
           index: _pageIndex,
           // buttonBackgroundColor: Theme.of(context).primaryColor,
-          buttonBackgroundColor: Colors.white,
+          buttonBackgroundColor: Colors.green,
           items: <Widget>[
-            Icon(Icons.home_outlined),
-            Icon(Icons.search),
-            Icon(Icons.camera_alt_outlined),
-            Icon(Icons.assignment_outlined),
-            Icon(Icons.person_outline),
+            Icon(
+              Icons.home_outlined,
+              color: (_pageIndex == 0) ? Colors.white : Colors.green,
+            ),
+            Icon(
+              // Icons.search,
+              // Icons.explore_outlined,
+              Icons.storefront,
+              color: (_pageIndex == 1) ? Colors.white : Colors.green,
+            ),
+            Icon(
+              Icons.camera_alt_outlined,
+              color: (_pageIndex == 2) ? Colors.white : Colors.green,
+            ),
+            Icon(
+              Icons.assignment_outlined,
+              color: (_pageIndex == 3) ? Colors.white : Colors.green,
+            ),
+            Icon(
+              Icons.person_outline,
+              color: (_pageIndex == 4) ? Colors.white : Colors.green,
+            ),
           ],
           onTap: (index) {
             setState(() {
@@ -57,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
         break;
       case 1:
         return SearchFarmersScreen();
+
         break;
       case 2:
         return FeedScreen();

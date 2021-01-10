@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:localfarm/Datas/order_data.dart';
 import 'package:localfarm/Datas/product_data.dart';
-import 'package:localfarm/widgets/feed_tile.dart';
+import 'package:localfarm/Screens/feed/components/feed_tile.dart';
 
 import 'order_tile.dart';
 
@@ -21,8 +22,8 @@ class _OrdersListState extends State<OrdersList>
   Widget build(BuildContext context) {
     return FutureBuilder<QuerySnapshot>(
       future: Firestore.instance
-          .collection('products')
-          .orderBy('data_public')
+          .collection('orders')
+          .orderBy('status')
           .getDocuments(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
@@ -33,9 +34,9 @@ class _OrdersListState extends State<OrdersList>
           return ListView(
             children: snapshot.data.documents.map((doc) {
               //ALTERAR PARA PEDIDOS (PRECISO DO MODEL PEDIDOS PARA PUXAR DO SERVER)
-              ProductData data = ProductData.fromDocument(doc);
+              OrderData data = OrderData.fromDocument(doc);
               // return FeedTile(data);
-              return OrderTile();
+              return OrderTile(data);
               //
             }).toList(),
           );

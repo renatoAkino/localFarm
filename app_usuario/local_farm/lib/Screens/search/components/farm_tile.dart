@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/farm_data.dart';
+import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/farm/farm_screen.dart';
 import 'package:localfarm/Screens/store_screen.dart';
 
@@ -61,7 +62,9 @@ class FarmTile extends StatelessWidget {
                     right: -10.0,
                     bottom: 0.0,
                     child: RawMaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        UserModel.of(context).followFarm(farm.id);
+                      },
                       fillColor: Colors.white,
                       shape: CircleBorder(),
                       elevation: 4.0,
