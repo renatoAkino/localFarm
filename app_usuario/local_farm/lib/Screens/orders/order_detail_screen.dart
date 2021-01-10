@@ -156,10 +156,6 @@ Widget _buildRow(OrderData order) {
 }
 
 List<Widget> _buildItensList(OrderData order) {
-  order.getFarmData();
-  // var farmName = order.farmData.name;
-  log(order.farmData.toString());
-  // log(order.farm_id);
   List<Widget> itens = [];
   for(var i = 0; i < order.products.length; i++) {
      itens.add( Row(
@@ -169,7 +165,7 @@ List<Widget> _buildItensList(OrderData order) {
            children: [
              Text(order.products[i].title, style: TextStyle(fontSize: 20)),
              Text(order.products[i].quantity.toString() + ' un. x R\$ ' + order.products[i].price.toStringAsFixed(2)),
-             Text("farmName")
+             Text(order.products[i].farm_name == null ? "" : order.products[i].farm_name)
            ],
          ),
          Text('R\$ ' + (order.products[i].quantity * order.products[i].price).toStringAsFixed(2)),
