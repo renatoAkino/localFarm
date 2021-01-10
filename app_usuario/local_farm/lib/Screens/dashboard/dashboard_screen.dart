@@ -57,7 +57,7 @@ class _DashboardScreenState extends State<DashboardScreen>
             //   height: 18.0,
             // ),
             Container(
-              height: 65.0,
+              height: 80.0,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
