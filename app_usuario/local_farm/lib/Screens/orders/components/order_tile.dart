@@ -24,7 +24,7 @@ class OrderTile extends StatelessWidget {
         // color: Color.fromRGBO(93, 97, 115, 1),
         color: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,9 +75,9 @@ class OrderTile extends StatelessWidget {
                         // '14/12/2020',
                         _formatDate(this.order.order_date),
                         style:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold
-                          // color: Colors.white,
-                        ),
+                            TextStyle(fontSize: 18, fontWeight: FontWeight.bold
+                                // color: Colors.white,
+                                ),
                       ),
                     ],
                   ),
@@ -193,9 +193,9 @@ class OrderTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(top: 10.0),
+                    // margin: const EdgeInsets.only(top: 10.0),
                     padding: const EdgeInsets.only(left: 0.0, right: 0.0),
-                    width: 160,
+                    width: MediaQuery.of(context).size.width * 0.5,
                     child: new Row(
                       children: <Widget>[
                         new Expanded(
@@ -235,7 +235,8 @@ class OrderTile extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => OrderDetailScreen(this.order),
+                                  builder: (context) =>
+                                      OrderDetailScreen(this.order),
                                 ),
                               );
                             },
@@ -256,6 +257,8 @@ class OrderTile extends StatelessWidget {
 
 String _formatDate(Timestamp date) {
   var formattedDate;
-  date != null? formattedDate = DateFormat("dd/MM/yyyy").format(date.toDate()) : formattedDate = "";
+  date != null
+      ? formattedDate = DateFormat("dd/MM/yyyy").format(date.toDate())
+      : formattedDate = "";
   return formattedDate;
 }

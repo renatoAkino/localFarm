@@ -32,8 +32,7 @@ class OrderDetailScreen extends StatelessWidget {
                 children: [
                   Text(
                       // '<nº do status>'
-                      this.order.status.toString()
-                  ),
+                      this.order.status.toString()),
                 ],
               ),
               SizedBox(
@@ -140,7 +139,9 @@ class OrderDetailScreen extends StatelessWidget {
 
 String _formatDate(Timestamp date) {
   var formattedDate;
-  date != null? formattedDate = DateFormat("dd/MM/yyyy").format(date.toDate()) : formattedDate = "";
+  date != null
+      ? formattedDate = DateFormat("dd/MM/yyyy").format(date.toDate())
+      : formattedDate = "";
   return formattedDate;
 }
 
@@ -155,22 +156,26 @@ Widget _buildRow(OrderData order) {
 
 List<Widget> _buildItensList(OrderData order) {
   List<Widget> itens = [];
-  for(var i = 0; i < order.products.length; i++) {
-     itens.add( Row(
-       mainAxisAlignment: MainAxisAlignment.spaceAround,
-       children: [
-         Column(
-           children: [
-             Text(
-               order.products[i].title,
-               style: TextStyle(fontSize: 20),
-             ),
-             Text(order.products[i].quantity.toString() + ' un. x R\$ ' + order.products[i].price.toStringAsFixed(2)),
-           ],
-         ),
-         Text('R\$ ' + (order.products[i].quantity * order.products[i].price).toStringAsFixed(2)),
-       ],
-     ));
+  for (var i = 0; i < order.products.length; i++) {
+    itens.add(Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Column(
+          children: [
+            Text(
+              order.products[i].title,
+              style: TextStyle(fontSize: 20),
+            ),
+            Text(order.products[i].quantity.toString() +
+                ' un. x R\$ ' +
+                order.products[i].price.toStringAsFixed(2)),
+          ],
+        ),
+        Text('R\$ ' +
+            (order.products[i].quantity * order.products[i].price)
+                .toStringAsFixed(2)),
+      ],
+    ));
   }
   return itens;
 }
