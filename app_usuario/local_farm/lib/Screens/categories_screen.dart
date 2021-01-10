@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:localfarm/tmp/categories.dart';
 
-import 'Screens/dashboard/components/dashboard_category.dart';
-import 'Screens/dashboard/components/dashboard_grid_product.dart';
-import 'tmp/foods.dart';
+import 'dashboard/components/dashboard_category.dart';
+import 'dashboard/components/dashboard_grid_product.dart';
+import '../tmp/foods.dart';
 
 class CategoriesScreen extends StatefulWidget {
   @override

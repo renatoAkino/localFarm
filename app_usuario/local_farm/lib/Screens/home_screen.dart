@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/cart/cart_screen.dart';
 import 'package:localfarm/Screens/feed/feed_screen.dart';
+import 'package:localfarm/Screens/login_screen.dart';
 import 'package:localfarm/Screens/search_screen.dart';
 import 'package:localfarm/widgets/home_appBar.dart';
 
@@ -100,6 +101,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   child: Text(
                     "Editar Perfil",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  )),
+              FlatButton(
+                  color: Colors.orange,
+                  padding: EdgeInsets.all(8),
+                  onPressed: () {
+                    UserModel.of(context).logout();
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                    );
+                  },
+                  child: Text(
+                    "Logout",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ))

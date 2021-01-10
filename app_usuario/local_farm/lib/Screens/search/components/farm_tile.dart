@@ -63,9 +63,9 @@ class FarmTile extends StatelessWidget {
                     bottom: 0.0,
                     child: RawMaterialButton(
                       onPressed: () {
-                        UserModel.of(context).followFarm(farm.id);
+                          UserModel.of(context).followFarm(farm.id);
                       },
-                      fillColor: Colors.white,
+                      fillColor: UserModel.of(context).checkfollowFarm(farm.id) ? Colors.green : Colors.white,
                       shape: CircleBorder(),
                       elevation: 4.0,
                       child: Padding(
@@ -73,7 +73,7 @@ class FarmTile extends StatelessWidget {
                         child: Icon(
                           // isFav ? Icons.favorite : Icons.favorite_border,
                           Icons.turned_in_not,
-                          color: Colors.green,
+                          color: UserModel.of(context).checkfollowFarm(farm.id) ? Colors.white : Colors.green,
                           size: 30,
                         ),
                       ),
