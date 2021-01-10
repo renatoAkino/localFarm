@@ -25,7 +25,7 @@ class ItemCard extends StatelessWidget {
               padding: EdgeInsets.all(10),
               // For  demo we use fixed height  and width
               // Now we dont need them
-              // height: 180,
+              // height: 35,
               width: MediaQuery.of(context).size.width * 0.5,
               decoration: BoxDecoration(
                 // color: product.color,
@@ -99,7 +99,8 @@ class ItemCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 5.0, top: 2.0, left: 8.0),
+            padding:
+                EdgeInsets.only(bottom: 5.0, top: 2.0, left: 8.0, right: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -112,14 +113,14 @@ class ItemCard extends StatelessWidget {
                 // ),
                 Text(
                   // " $rating ($raters Reviews)",
-                  product.soldPer,
+                  "dísponíveis: ~ ${product.quantity}",
                   style: TextStyle(
                     fontSize: 11.0,
                   ),
                 ),
                 Text(
                   // " $rating ($raters Reviews)",
-                  "${product.quantity}",
+                  product.soldPer,
                   style: TextStyle(
                     fontSize: 11.0,
                   ),

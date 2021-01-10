@@ -76,7 +76,8 @@ class _FarmScreenState extends State<FarmScreen>
                                   top < 140
                                       ? Text("")
                                       : Text(
-                                          '<Sr. João dos Santos>',
+                                          // widget.farmData.addres,
+                                          'Sr. José da Silva',
                                           style: TextStyle(
                                             color: Colors.grey[600],
                                             fontSize: 12,

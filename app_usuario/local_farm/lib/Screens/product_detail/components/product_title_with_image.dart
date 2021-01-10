@@ -19,11 +19,12 @@ class ProductTitleWithImage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "<Fazenda do Sol>",
+            // "<Fazenda do Sol>",
+            "",
             style: TextStyle(color: Colors.white),
           ),
           Text(
-            product.title,
+            product.name,
             style: Theme.of(context)
                 .textTheme
                 .headline4
@@ -42,7 +43,13 @@ class ProductTitleWithImage extends StatelessWidget {
                             // fontWeight: FontWeight.bold,
                           ),
                     ),
-                    TextSpan(text: "< Un/Kg >"),
+                    TextSpan(
+                      text: 'por ' + product.soldPer,
+                      style: Theme.of(context).textTheme.headline6.copyWith(
+                            color: Colors.white,
+                            // fontWeight: FontWeight.bold,
+                          ),
+                    ),
                   ],
                 ),
               ),
@@ -58,7 +65,7 @@ class ProductTitleWithImage extends StatelessWidget {
                     //   fit: BoxFit.fill,
                     // ),
                     child: Image.network(
-                      product.images['0'],
+                      product.image,
                       fit: BoxFit.contain,
                     ),
                   ),
