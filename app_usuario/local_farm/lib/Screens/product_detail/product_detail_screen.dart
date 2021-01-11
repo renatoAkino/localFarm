@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:localfarm/Datas/cart_data.dart';
-import 'package:localfarm/Datas/farm_data.dart';
 import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/Models/cart_model.dart';
 import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/cart/components/cart_icon.dart';
 import 'package:localfarm/stores/count_mobx.dart';
-import 'package:mobx/mobx.dart';
-import 'package:provider/provider.dart';
 
-import '../login_screen.dart';
 import 'components/body.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -101,14 +96,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             cartData.quantity = numItems.count;
                             cartData.productData = widget.product;
 
-                            print(cartData.productData.name);
+                            // print(cartData.productData.name);
                             print(cartData.productData.quantity);
 
                             CartModel.of(context).addCartItem(cartData);
+
+                            // _showMyDialog(context);
                             //   // } else {
                             //   //   onFailed();
                             //   // }
                           }
+                          // return _showMyDialog(context);
                         },
                       ),
                     ),
@@ -121,4 +119,31 @@ class _DetailsScreenState extends State<DetailsScreen> {
       ),
     );
   }
+}
+
+Future<void> _showMyDialog(BuildContext context) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Item Inserido!'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Clique em Ok para continuar comprando'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Ok'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

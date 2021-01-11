@@ -183,14 +183,18 @@ class OrderTile extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 10,
-              ),
+              // SizedBox(
+              //   height: 10,
+              // ),
+
+              /*
               //index de 0 à 4
               StatusProgressWidget(
                 index: order.status,
-                // dark: true,
+              // dark: true,
               ),
+              */
+
               // SimpleRoundOnlyIconButton(),
               // A PARTIR DAQUI É SÓ O BOTÃO
               Row(
@@ -207,7 +211,7 @@ class OrderTile extends StatelessWidget {
                             shape: new RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(10.0)),
                             splashColor: Colors.green,
-                            color: Colors.orange,
+                            color: Colors.green,
                             child: new Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:localfarm/Datas/post_data.dart';
+import 'package:localfarm/Screens/farm/%5Bantigo%5Dfarm_screen.dart';
 import 'package:localfarm/Screens/store_screen.dart';
 
 class FeedTile2 extends StatelessWidget {
@@ -65,7 +66,7 @@ class FeedTile2 extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => StoreScreen(post.farmData)));
+                          builder: (context) => FarmScreen(post.farmData)));
                     },
                     icon: Icon(Icons.more_vert),
                   )

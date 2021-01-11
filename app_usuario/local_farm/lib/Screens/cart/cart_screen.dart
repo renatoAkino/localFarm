@@ -1,13 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:localfarm/Datas/cart_data.dart';
 import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/Models/cart_model.dart';
 import 'package:localfarm/Models/user_model.dart';
+import 'package:localfarm/stores/cart_store.dart';
+import 'package:mobx/mobx.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import '../edit_user_screen.dart';
 import '../login_screen.dart';
 import 'package:localfarm/Screens/cart/components/cart_item.dart';
 
@@ -17,6 +22,8 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  // CartStore valorTotal = CartStore();
+
   @override
   void initState() {
     super.initState();
@@ -148,7 +155,7 @@ class _CartScreenState extends State<CartScreen> {
                       ListTile(
                         // tileColor: Colors.grey[200],
                         title: Text(
-                          "Avenida Um, 35",
+                          UserModel.of(context).getAdress(),
                           style: TextStyle(
 //                    fontSize: 15,
                             fontWeight: FontWeight.bold,
@@ -156,9 +163,19 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                         ),
                         subtitle: Text(
-                            "1278 Loving Acres Road Kansas City, MO 64110"),
+                          // '<complemento, CEP>'
+                          "nº " +
+                              UserModel.of(context)
+                                  .userData['adress_complement'] +
+                              ", CEP: " +
+                              UserModel.of(context).userData['cep'],
+                        ),
                         trailing: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => EditUserScreen()));
+                          },
                           icon: Icon(
                             Icons.edit,
                           ),
@@ -244,6 +261,7 @@ class _CartScreenState extends State<CartScreen> {
                       SizedBox(
                         height: 15,
                       ),
+
                       Column(
                         children: model.products.map((product) {
                           return FutureBuilder(
@@ -256,10 +274,21 @@ class _CartScreenState extends State<CartScreen> {
                                 product.productData =
                                     ProductData.fromDocument(snapshot.data);
 
+                                // valorTotal.somar(product.productData.price *
+                                //     product.quantity);
+                                // print(valorTotal.vTotal.toStringAsFixed(2));
+
+                                soma(product);
+                                // totalPrice = valorTotal.vTotal;
+                                print('valor total:' +
+                                    model.getProductsPrice().toString());
+
                                 return CartItem(
                                   img: product.productData.image,
                                   name: product.productData.name,
-                                  price: product.productData.price,
+                                  // price: product.productData.price,
+                                  price: product.productData.price *
+                                      product.quantity,
                                   quantity: product.quantity,
                                   fazendaName:
                                       product.productData.farm_name.toString(),
@@ -298,27 +327,45 @@ class _CartScreenState extends State<CartScreen> {
                             // fontWeight: FontWeight.w400,
                             ),
                       ),
-                      hasProducts
-                          ? Text(
-                              totalPrice
-                                  .toString(), //CORRIGIR ESTADO DO VALOR PARA FUTURE
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w900,
-                                // color: Theme.of(context).accentColor,
-                                color: Colors.green,
-                              ),
-                            )
-                          : Text(
-                              // r"R$ 0,00",
-                              totalPrice.toString(),
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                // color: Theme.of(context).accentColor,
-                                color: Colors.green,
-                              ),
-                            ),
+
+                      // Text(CartModel.of(context).getProductsPrice().toString()),
+                      // ScopedModelDescendant<CartModel>(
+                      //     builder: (context, child, model) {
+                      //   if (model.isLoading) {
+                      //     return Center(child: CircularProgressIndicator());
+                      //   } else {
+                      //     // double res = CartModel.of(context).getProductsPrice();
+                      //     // return Text(res.toString());
+                      //     print('++++' + model.getProductsPrice().toString());
+                      //     return Text(model.getProductsPrice().toString());
+                      //   }
+                      // }),
+
+                      // Observer(
+                      //   builder: (_) {
+                      //     return Text(
+                      //       valorTotal.vTotal.toStringAsFixed(2),
+                      //       // totalPrice.toString(),
+                      //       style: TextStyle(
+                      //         fontSize: 22,
+                      //         fontWeight: FontWeight.bold,
+                      //         // color: Theme.of(context).accentColor,
+                      //         color: Colors.green,
+                      //       ),
+                      //     );
+                      //   },
+                      // ),
+
+                      Text(
+                        // valorTotal.vTotal.toStringAsFixed(2),
+                        totalPrice.toString(),
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          // color: Theme.of(context).accentColor,
+                          color: Colors.green,
+                        ),
+                      ),
                       Text(
                         "Taxas de entrega inclusas",
                         style: TextStyle(
@@ -355,27 +402,6 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ),
                 ),
-                // Container(
-                //   padding: EdgeInsets.fromLTRB(5, 5, 10, 5),
-                //   width: 190.0,
-                //   height: 60.0,
-                //   child: FlatButton(
-                //     // color: Theme.of(context).accentColor,
-                //     color: Colors.green,
-                //     child: Text(
-                //       "Confirmar Pedido".toUpperCase(),
-                //       style: TextStyle(
-                //         color: Colors.white,
-                //       ),
-                //     ),
-                //     onPressed: () {
-                //       if (hasProducts) {
-                //         hasProducts = false;
-                //         return _showMyDialog(context);
-                //       }
-                //     },
-                //   ),
-                // ),
               ],
             ),
           ],
@@ -383,6 +409,25 @@ class _CartScreenState extends State<CartScreen> {
         height: 80,
       ),
     );
+  }
+
+  void soma(CartData product) {
+    totalPrice += product.productData.price * product.quantity;
+  }
+
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   autorun((_) {
+  //     setState(() {
+  //       totalPrice = valorTotal.vTotal;
+  //     });
+  //   });
+  // }
+
+  Future<Widget> total(CartModel model) async {
+    var tot = model.getProductsPrice();
+    return Text(tot.toString());
   }
 }
 

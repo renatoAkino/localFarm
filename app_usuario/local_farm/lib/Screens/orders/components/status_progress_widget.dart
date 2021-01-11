@@ -12,15 +12,17 @@ class StatusProgressWidget extends StatelessWidget {
   StatusProgressWidget({@required this.index, this.dark});
 
   Color colorFundo = Colors.white;
-  Color colorUnselected = Colors.grey;
-  Color colorSelected = Colors.green[600];
+  Color colorUnselected = Colors.grey[300];
+  Color colorSelected = Colors.lightGreen[700];
 
   @override
   Widget build(BuildContext context) {
     if (dark == true) {
-      colorFundo = Color.fromRGBO(93, 97, 115, 1);
-      colorUnselected = Colors.grey[100];
-      colorSelected = Colors.greenAccent;
+      // colorFundo = Color.fromRGBO(93, 97, 115, 1);
+      // colorFundo = Color.fromRGBO(240, 239, 225, 1);
+      colorFundo = Colors.grey[50];
+      colorUnselected = Colors.grey;
+      colorSelected = Colors.green;
     }
     return SingleChildScrollView(
       child: Padding(

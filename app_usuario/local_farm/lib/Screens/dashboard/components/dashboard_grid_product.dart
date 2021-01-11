@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/product_data.dart';
+import 'package:localfarm/Screens/product_detail/product_detail_screen.dart';
 
 class GridProduct extends StatelessWidget {
   final ProductData productData;
@@ -104,13 +105,15 @@ class GridProduct extends StatelessWidget {
         ],
       ),
       onTap: () {
-        // Navigator.of(context).push(
-        //   MaterialPageRoute(
-        //     builder: (BuildContext context){
-        //       return ProductDetails();
-        //     },
-        //   ),
-        // );
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (BuildContext context) {
+              return DetailsScreen(
+                product: productData,
+              );
+            },
+          ),
+        );
       },
     );
   }
