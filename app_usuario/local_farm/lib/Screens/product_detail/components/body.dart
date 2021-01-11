@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localfarm/Datas/cart_data.dart';
 import 'package:localfarm/Datas/product_data.dart';
 
 import 'cart_counter.dart';
@@ -6,8 +7,9 @@ import 'product_title_with_image.dart';
 
 class Body extends StatelessWidget {
   final ProductData product;
+  final CartData cartData;
 
-  const Body({Key key, this.product}) : super(key: key);
+  const Body({Key key, this.product, this.cartData}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // It provide us total height and width
@@ -101,7 +103,7 @@ class Body extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: size.height * 0.02),
-                      CartCounter(product: product),
+                      CartCounter(product: product, cartData: cartData),
                       // CounterWithFavBtn(),
                       SizedBox(height: size.height * 0.04),
                       // Padding(

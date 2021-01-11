@@ -6,12 +6,22 @@ class StatusProgressWidget extends StatelessWidget {
 
   // double deviceWidth(BuildContext context) => MediaQuery.of(context).size.width;
   final int index;
+  final bool dark;
   // final int lines;
 
-  StatusProgressWidget({@required this.index});
+  StatusProgressWidget({@required this.index, this.dark});
+
+  Color colorFundo = Colors.white;
+  Color colorUnselected = Colors.grey;
+  Color colorSelected = Colors.green[600];
 
   @override
   Widget build(BuildContext context) {
+    if (dark == true) {
+      colorFundo = Color.fromRGBO(93, 97, 115, 1);
+      colorUnselected = Colors.grey[100];
+      colorSelected = Colors.greenAccent;
+    }
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(top: 0.0),
@@ -20,7 +30,7 @@ class StatusProgressWidget extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.3,
           // color: Color.fromRGBO(93, 97, 115, 1),
           // color: Colors.green[50],
-          color: Colors.white,
+          color: colorFundo,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -64,11 +74,11 @@ class StatusProgressWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   text1(),
-                  spacerBottom(),
+                  spacerBottom(context),
                   text2(),
-                  spacerBottom(),
+                  spacerBottom(context),
                   text3(),
-                  spacerBottom(),
+                  spacerBottom(context),
                   text4(),
                 ],
               ),
@@ -102,11 +112,11 @@ class StatusProgressWidget extends StatelessWidget {
         ? Icon(
             Icons.shopping_basket_outlined,
             // color: Colors.greenAccent,
-            color: Colors.green,
+            color: colorSelected,
           )
         : Icon(
             Icons.shopping_basket_outlined,
-            color: Colors.grey,
+            color: colorUnselected,
           );
   }
 
@@ -115,11 +125,11 @@ class StatusProgressWidget extends StatelessWidget {
         ? Icon(
             Icons.today_outlined,
             // color: Colors.greenAccent,
-            color: Colors.green,
+            color: colorSelected,
           )
         : Icon(
             Icons.today_outlined,
-            color: Colors.grey,
+            color: colorUnselected,
           );
   }
 
@@ -128,11 +138,11 @@ class StatusProgressWidget extends StatelessWidget {
         ? Icon(
             Icons.payment,
             // color: Colors.greenAccent,
-            color: Colors.green,
+            color: colorSelected,
           )
         : Icon(
             Icons.payment,
-            color: Colors.grey,
+            color: colorUnselected,
           );
   }
 
@@ -141,11 +151,11 @@ class StatusProgressWidget extends StatelessWidget {
         ? Icon(
             Icons.delivery_dining,
             // color: Colors.greenAccent,
-            color: Colors.green,
+            color: colorSelected,
           )
         : Icon(
             Icons.delivery_dining,
-            color: Colors.grey,
+            color: colorUnselected,
           );
   }
 
@@ -180,12 +190,12 @@ class StatusProgressWidget extends StatelessWidget {
         ? Icon(
             Icons.check_circle,
             // color: Colors.greenAccent,
-            color: Colors.green,
+            color: colorSelected,
             size: 30,
           )
         : Icon(
             Icons.radio_button_unchecked,
-            color: Colors.grey,
+            color: colorUnselected,
             size: 30,
           );
   }
@@ -219,12 +229,12 @@ class StatusProgressWidget extends StatelessWidget {
     return isChecked
         ? Container(
             // color: Colors.greenAccent,
-            color: Colors.green,
+            color: colorSelected,
             height: 5.0,
             width: 50,
           )
         : Container(
-            color: Colors.grey,
+            color: colorUnselected,
             height: 5.0,
             width: 50,
           );
@@ -256,14 +266,14 @@ class StatusProgressWidget extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               // color: Colors.greenAccent,
-              color: Colors.green,
+              color: colorSelected,
             ),
           )
         : Text(
             'Montar\nCesta',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.grey,
+              color: colorUnselected,
             ),
           );
   }
@@ -276,14 +286,14 @@ class StatusProgressWidget extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               // color: Colors.greenAccent,
-              color: Colors.green,
+              color: colorSelected,
             ),
           )
         : Text(
             'Agendar\nEntrega',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.grey,
+              color: colorUnselected,
             ),
           );
   }
@@ -296,14 +306,14 @@ class StatusProgressWidget extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               // color: Colors.greenAccent,
-              color: Colors.green,
+              color: colorSelected,
             ),
           )
         : Text(
             'Efetuar\nPagamento',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.grey,
+              color: colorUnselected,
             ),
           );
   }
@@ -316,23 +326,23 @@ class StatusProgressWidget extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               // color: Colors.greenAccent,
-              color: Colors.green,
+              color: colorSelected,
             ),
           )
         : Text(
             'Aguardar\nEntrega',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.grey,
+              color: colorUnselected,
             ),
           );
   }
 
   // -------------------------------- SPACER TOP ------------------------------------
 
-  Widget spacerBottom() {
+  Widget spacerBottom(BuildContext context) {
     return Container(
-      width: 20.0,
+      width: MediaQuery.of(context).size.width * 0.05,
     );
   }
 }

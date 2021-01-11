@@ -40,13 +40,18 @@ dependencies:
   filter_list: ^0.0.5
   # f_datetimerangepicker: ^0.1.4
   intl: ^0.16.1
+  flutter_mobx: ^1.1.0+2
+
+  # teste
+  mobx: ^1.2.1+4
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-
+  mobx_codegen: ^1.1.2
+  build_runner: ^1.10.12
+  
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

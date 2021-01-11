@@ -7,15 +7,25 @@ import 'package:localfarm/Models/cart_model.dart';
 import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/cart/components/cart_icon.dart';
 
+import '../login_screen.dart';
 import 'components/body.dart';
 
-class DetailsScreen extends StatelessWidget {
+class DetailsScreen extends StatefulWidget {
   final ProductData product;
 
   const DetailsScreen({Key key, this.product}) : super(key: key);
+
+  @override
+  _DetailsScreenState createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  CartData cartData = CartData();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       // each product have a color
       // backgroundColor: product.color,
       backgroundColor: Colors.green,
@@ -31,7 +41,9 @@ class DetailsScreen extends StatelessWidget {
         //ìcone do carrinho
         actions: <Widget>[CartIconWidget()],
       ),
-      body: Body(product: product),
+      body: Body(product: widget.product, cartData: cartData),
+
+      /// FOOTER BOTÃO ADICIONAR AO CARRINHO
       bottomNavigationBar: Container(
         color: Colors.grey[50],
         child: Padding(
@@ -63,32 +75,34 @@ class DetailsScreen extends StatelessWidget {
                 child: SizedBox(
                   height: 50,
                   child: FlatButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18)),
-                    // color: product.color,
-                    color: Colors.orange,
-                    child: Text(
-                      "Adicionar ao carrinho".toUpperCase(),
-                      style: TextStyle(
-                        fontSize: 16,
-                        // fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18)),
+                      // color: product.color,
+                      color: Colors.orange,
+                      child: Text(
+                        "Adicionar ao carrinho".toUpperCase(),
+                        style: TextStyle(
+                          fontSize: 16,
+                          // fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                    onPressed: () {
-                      // if (UserModel.of(context).isLoggedin()) {
-                      //   CartData cartData = CartData();
-                      //   cartData.product_id = product.id;
-                      //   // PRECISA BUSCAR A QUANTIDADE DO CONTADOR cart_counter.dart
-                      //   cartData.quantity = quantity;
-                      //   cartData.productData = product;
+                      onPressed: () {
+                        // if (UserModel.of(context).isLoggedin()) {
+                        //   // CartData cartData = CartData();
+                        //   cartData.product_id = widget.product.id;
+                        //   // PRECISA BUSCAR A QUANTIDADE DO CONTADOR cart_counter.dart
+                        //   // cartData.quantity = quantity;
+                        //   cartData.productData = widget.product;
 
-                      //   CartModel.of(context).addCartItem(cartData);
-                      // } else {
-                      //   onFailed();
-                      // }
-                    },
-                  ),
+                        //   print(cartData.productData.name);
+                        //   print(cartData.productData.quantity);
+
+                        //   CartModel.of(context).addCartItem(cartData);
+                        // } else {
+                        //   onFailed();
+                        // }
+                      }),
                 ),
               ),
             ],
@@ -96,5 +110,38 @@ class DetailsScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void onFailed() {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: GestureDetector(
+          child: Text(
+            "Clique e faça login para adicionar ao carrinho",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          onTap: () {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => LoginScreen()));
+          }),
+      backgroundColor: Theme.of(context).primaryColor,
+      duration: Duration(seconds: 3),
+    ));
+  }
+
+  void onSuccess() {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text(
+        "Adicionado ao Carrinho",
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      backgroundColor: Theme.of(context).primaryColor,
+      duration: Duration(seconds: 3),
+    ));
   }
 }

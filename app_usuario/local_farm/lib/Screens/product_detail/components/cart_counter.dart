@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:localfarm/Datas/cart_data.dart';
 import 'package:localfarm/Datas/product_data.dart';
 
 class CartCounter extends StatefulWidget {
   final ProductData product;
+  final CartData cartData;
 
-  const CartCounter({
-    Key key,
-    @required this.product,
-  }) : super(key: key);
+  const CartCounter({Key key, @required this.product, this.cartData})
+      : super(key: key);
 
   @override
   _CartCounterState createState() => _CartCounterState();

@@ -183,9 +183,10 @@ class OrderTile extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
+              //index de 0 à 4
               StatusProgressWidget(
-                //index de 0 à 4
                 index: order.status,
+                // dark: true,
               ),
               // SimpleRoundOnlyIconButton(),
               // A PARTIR DAQUI É SÓ O BOTÃO
