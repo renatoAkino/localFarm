@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:localfarm/Datas/product_data.dart';
 
 class GridProduct extends StatelessWidget {
-  final String name;
-  final String img;
-  final bool isFav;
-  final double rating;
-  final int raters;
+  final ProductData productData;
 
-  GridProduct(
-      {Key key,
-      @required this.name,
-      @required this.img,
-      @required this.isFav,
-      @required this.rating,
-      @required this.raters})
-      : super(key: key);
+  const GridProduct(this.productData);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +22,7 @@ class GridProduct extends StatelessWidget {
                 width: MediaQuery.of(context).size.width / 2.2,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
-                  child: Image.asset(
-                    "$img",
-                    fit: BoxFit.cover,
-                  ),
+                  child: Image.network(productData.image, fit: BoxFit.fill,)
                 ),
               ),
               // Positioned(
@@ -64,7 +53,7 @@ class GridProduct extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 2.0, top: 8.0),
                   child: Text(
-                    "$name",
+                    productData.name,
                     style: TextStyle(
                       fontSize: 16.0,
                       // fontWeight: FontWeight.w900,
@@ -75,7 +64,7 @@ class GridProduct extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 2.0, top: 8.0, left: 5.0),
                   child: Text(
-                    r"R$ 3,50",
+                    "R\$ ${productData.price}",
                     style: TextStyle(
                       fontSize: 16.0,
                       // fontWeight: FontWeight.w900,

@@ -63,6 +63,13 @@ class OrderDetailScreen extends StatelessWidget {
                   Text('<Fazenda por do Sol>'),
                 ],
               ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //   children: [
+              //     Text('Estabelecimento'),
+              //     Text('<Fazenda por do Sol>'),
+              //   ],
+              // ),
               SizedBox(
                 height: 30,
               ),
@@ -162,13 +169,13 @@ List<Widget> _buildItensList(OrderData order) {
       children: [
         Column(
           children: [
-            Text(
-              order.products[i].title,
-              style: TextStyle(fontSize: 20),
-            ),
+            Text(order.products[i].name, style: TextStyle(fontSize: 20)),
             Text(order.products[i].quantity.toString() +
                 ' un. x R\$ ' +
                 order.products[i].price.toStringAsFixed(2)),
+            Text(order.products[i].farm_name == null
+                ? ""
+                : order.products[i].farm_name)
           ],
         ),
         Text('R\$ ' +

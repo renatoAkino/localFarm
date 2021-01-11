@@ -4,17 +4,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/farm_data.dart';
 import 'package:localfarm/Models/user_model.dart';
+import 'package:localfarm/Screens/farm/%5Bantigo%5Dfarm_screen.dart';
+import 'package:localfarm/Screens/farm/farm_screen.dart';
 import 'package:localfarm/Screens/farm/farm_screen.dart';
 import 'package:localfarm/Screens/farm/farm_screen.dart';
 import 'package:localfarm/Screens/store_screen.dart';
 
-class FarmTile extends StatelessWidget {
+class FarmTile extends StatefulWidget {
   final FarmData farm;
 
   FarmTile(this.farm);
 
   @override
+  _FarmTileState createState() => _FarmTileState();
+}
+
+class _FarmTileState extends State<FarmTile> {
+  @override
   Widget build(BuildContext context) {
+    bool checkFollow = UserModel.of(context).checkfollowFarm(widget.farm.id);
+    FarmData farm = widget.farm;
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: InkWell(
@@ -25,6 +34,7 @@ class FarmTile extends StatelessWidget {
             MaterialPageRoute(
               // builder: (context) => FarmScreen(farm),
               builder: (context) => FarmScreenSemProd(farm),
+
             ),
           );
           // Navigator.of(context)
@@ -54,7 +64,7 @@ class FarmTile extends StatelessWidget {
                               // bottomRight: Radius.circular(20.0),
                               ),
                           image: DecorationImage(
-                              image: NetworkImage(farm.image),
+                              image: NetworkImage(widget.farm.image),
                               fit: BoxFit.cover),
                         ),
                       ),
@@ -65,9 +75,11 @@ class FarmTile extends StatelessWidget {
                     bottom: 0.0,
                     child: RawMaterialButton(
                       onPressed: () {
-                          UserModel.of(context).followFarm(farm.id);
+                          setState(() {
+                            UserModel.of(context).followFarm(widget.farm.id);
+                          });
                       },
-                      fillColor: UserModel.of(context).checkfollowFarm(farm.id) ? Colors.green : Colors.white,
+                      fillColor: checkFollow ? Colors.green : Colors.white,
                       shape: CircleBorder(),
                       elevation: 4.0,
                       child: Padding(
@@ -75,7 +87,7 @@ class FarmTile extends StatelessWidget {
                         child: Icon(
                           // isFav ? Icons.favorite : Icons.favorite_border,
                           Icons.turned_in_not,
-                          color: UserModel.of(context).checkfollowFarm(farm.id) ? Colors.white : Colors.green,
+                          color: checkFollow ? Colors.white : Colors.green,
                           size: 30,
                         ),
                       ),
@@ -98,7 +110,7 @@ class FarmTile extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              farm.name,
+                              widget.farm.name,
                               style: TextStyle(
                                   fontWeight: FontWeight.w500, fontSize: 16),
                             ),
@@ -106,7 +118,7 @@ class FarmTile extends StatelessWidget {
                               height: 4,
                             ),
                             Text(
-                              farm.addres,
+                              widget.farm.addres,
                               style: TextStyle(color: Colors.grey),
                             ),
                           ],
@@ -137,7 +149,7 @@ class FarmTile extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          '${farm.distance} km',
+                          '${widget.farm.distance} km',
                           style: TextStyle(color: Colors.grey),
                           maxLines: 2,
                         ),
@@ -153,7 +165,7 @@ class FarmTile extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          farm.followers.toString(),
+                          widget.farm.followers.toString(),
                           style: TextStyle(color: Colors.grey),
                           maxLines: 2,
                         ),

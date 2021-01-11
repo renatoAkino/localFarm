@@ -7,13 +7,19 @@ import 'package:localfarm/Datas/post_data.dart';
 import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/store_screen.dart';
 
-class FeedTile extends StatelessWidget {
+class FeedTile extends StatefulWidget {
   final PostData post;
 
   FeedTile(this.post);
 
   @override
+  _FeedTileState createState() => _FeedTileState();
+}
+
+class _FeedTileState extends State<FeedTile> {
+  @override
   Widget build(BuildContext context) {
+    bool checkLike = UserModel.of(context).checkLikedPost(widget.post.post_id);
     return Padding(
       padding: const EdgeInsets.only(bottom: 5.0),
       child: Container(
@@ -55,9 +61,9 @@ class FeedTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   FutureBuilder(
-                    future: post.getFarmData(),
+                    future: widget.post.getFarmData(),
                     builder: (context, snapshot) {
-                      if (post.farmData != null) {
+                      if (widget.post.farmData != null) {
                         return Row(
                           children: <Widget>[
                             Container(
@@ -67,7 +73,7 @@ class FeedTile extends StatelessWidget {
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
-                                  image: NetworkImage(post.farmData.image),
+                                  image: NetworkImage(widget.post.farmData.image),
                                 ),
                               ),
                             ),
@@ -78,7 +84,7 @@ class FeedTile extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  post.farmData.name,
+                                  widget.post.farmData.name,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 16),
@@ -102,7 +108,7 @@ class FeedTile extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => StoreScreen(post.farmData)));
+                          builder: (context) => StoreScreen(widget.post.farmData)));
                     },
                     icon: Icon(Icons.more_vert),
                   )
@@ -126,7 +132,7 @@ class FeedTile extends StatelessWidget {
                             bottomRight: Radius.circular(20.0),
                           ),
                           image: DecorationImage(
-                              image: NetworkImage(post.images['0']),
+                              image: NetworkImage(widget.post.images['0']),
                               fit: BoxFit.cover)),
                     ),
                   ),
@@ -136,9 +142,12 @@ class FeedTile extends StatelessWidget {
                   bottom: 3.0,
                   child: RawMaterialButton(
                     onPressed: () {
-                      UserModel.of(context).likePost(post.post_id);
+                      setState(() {
+                        UserModel.of(context).likePost(widget.post.post_id);
+                      });
+
                     },
-                    fillColor: UserModel.of(context).checkLikedPost(post.post_id) ? Colors.green : Colors.white,
+                    fillColor: checkLike ? Colors.green : Colors.white,
                     shape: CircleBorder(),
                     elevation: 4.0,
                     child: Padding(
@@ -146,7 +155,7 @@ class FeedTile extends StatelessWidget {
                       child: Icon(
                         // isFav ? Icons.favorite : Icons.favorite_border,
                         Icons.favorite_border,
-                        color: UserModel.of(context).checkLikedPost(post.post_id) ? Colors.white : Colors.green,
+                        color: checkLike ? Colors.white : Colors.green,
                         size: 17,
                       ),
                     ),
@@ -186,7 +195,7 @@ class FeedTile extends StatelessWidget {
                       // height: MediaQuery.of(context).size.height * 0.2,
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: Text(
-                        post.description,
+                        widget.post.description,
                         // overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             // fontSize: 11.0,

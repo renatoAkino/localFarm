@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/Screens/orders/order_detail_screen.dart';
 import 'package:localfarm/tmp/categories.dart';
 import 'package:localfarm/tmp/foods.dart';
@@ -200,6 +202,7 @@ class _DashboardScreenState extends State<DashboardScreen>
             ),
             SizedBox(height: 10.0),
             //Slider Here
+
             TopFeedsWidget(),
 //             Column(
 //               children: [
@@ -257,31 +260,32 @@ class _DashboardScreenState extends State<DashboardScreen>
               ],
             ),
             SizedBox(height: 0.0),
+            FutureBuilder<QuerySnapshot>(
+                future:
+                    Firestore.instance.collection('products').getDocuments(),
+                builder: (context, snapshot) {
+                  if(snapshot.hasData){
+                    return GridView(
+                      shrinkWrap: true,
+                      primary: false,
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: MediaQuery.of(context).size.width /
+                            (MediaQuery.of(context).size.height / 1.25),
+                      ),
+                      children: snapshot.data.documents.map(
+                              (document){
+                            ProductData product = ProductData.fromDocument(document);
+                            return GridProduct(product);
+                          }
+                      ).toList(),
 
-            GridView.builder(
-              shrinkWrap: true,
-              primary: false,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: MediaQuery.of(context).size.width /
-                    (MediaQuery.of(context).size.height / 1.25),
-              ),
-              itemCount: foods == null ? 0 : foods.length,
-              itemBuilder: (BuildContext context, int index) {
-//                Food food = Food.fromJson(foods[index]);
-                Map food = foods[index];
-//                print(foods);
-//                print(foods.length);
-                return GridProduct(
-                  img: food['img'],
-                  isFav: false,
-                  name: food['name'],
-                  rating: 5.0,
-                  raters: 23,
-                );
-              },
-            ),
+                    );
+                  }
+                  return Container();
+                }),
+
 
             SizedBox(height: 30),
           ],

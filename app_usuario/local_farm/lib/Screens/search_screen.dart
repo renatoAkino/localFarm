@@ -52,7 +52,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 return ListView(
                   children: snapshot.data.documents.map((doc) {
                     ProductData data = ProductData.fromDocument(doc);
-                    if (data.title
+                    if (data.name
                         .toLowerCase()
                         .contains(_search.toLowerCase())) {
                       return FeedTile(data);

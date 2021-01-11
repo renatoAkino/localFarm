@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -172,7 +174,8 @@ class OrderTile extends StatelessWidget {
                   //   },
                   // ),
                   Text(
-                    'Fazenda Monte Verde',
+                    // this.order.products[0].name,
+                    _getFarmName(this.order),
                     style: TextStyle(
                       fontSize: 16,
                       // color: Colors.white,
@@ -262,4 +265,22 @@ String _formatDate(Timestamp date) {
       ? formattedDate = DateFormat("dd/MM/yyyy").format(date.toDate())
       : formattedDate = "";
   return formattedDate;
+}
+
+String _getFarmName(OrderData order) {
+  var farmName;
+  var quantityFarmers = order.products.length;
+  if (order.products[0].farm_name == null) {
+    farmName = "";
+  } else {
+    if (quantityFarmers > 1) {
+      farmName = order.products[0].farm_name +
+          " + " +
+          (quantityFarmers - 1).toString();
+    } else {
+      farmName = order.products[0].farm_name;
+    }
+  }
+
+  return farmName;
 }
