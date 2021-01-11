@@ -53,6 +53,7 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String idUser = UserModel.of(context).getId();
     bool hasProducts = false;
 
     return Scaffold(
@@ -254,19 +255,14 @@ class _CartScreenState extends State<CartScreen> {
                               if (snapshot.hasData) {
                                 product.productData =
                                     ProductData.fromDocument(snapshot.data);
-                                double prodPrice = product.quantity *
-                                    product.productData.price;
-
-                                totalPrice += prodPrice;
 
                                 return CartItem(
                                   img: product.productData.image,
-                                  isFav: false,
                                   name: product.productData.name,
-                                  price: prodPrice,
+                                  price: product.productData.price,
                                   quantity: product.quantity,
-                                  rating: 5.0,
-                                  raters: 23,
+                                  fazendaName:
+                                      product.productData.farm_name.toString(),
                                 );
                               } else {
                                 return Container();
@@ -410,7 +406,6 @@ Future<void> _showMyDialog(BuildContext context) async {
             child: Text('Ok'),
             onPressed: () {
               CartModel.of(context).finishOrder();
-              Navigator.of(context).pop();
               Navigator.of(context).pop();
             },
           ),
