@@ -174,7 +174,7 @@ class OrderTile extends StatelessWidget {
                   //   },
                   // ),
                   Text(
-                    // this.order.products[0].name,
+                    // this.order.products[0].farm_name,
                     _getFarmName(this.order),
                     style: TextStyle(
                       fontSize: 16,
