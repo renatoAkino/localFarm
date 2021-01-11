@@ -7,6 +7,7 @@ import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/farm/%5Bantigo%5Dfarm_screen.dart';
 import 'package:localfarm/Screens/farm/farm_screen.dart';
 import 'package:localfarm/Screens/farm/farm_screen.dart';
+import 'package:localfarm/Screens/farm/farm_screen.dart';
 import 'package:localfarm/Screens/store_screen.dart';
 
 class FarmTile extends StatefulWidget {
