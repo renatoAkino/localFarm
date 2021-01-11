@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:localfarm/Datas/farm_data.dart';
 import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/Models/user_model.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -80,6 +81,7 @@ class CartModel extends Model{
   Future<String> finishOrder() async {
 
     if(products.length == 0) return null;
+    FarmData farmData;
 
     isLoading = true;
     notifyListeners();

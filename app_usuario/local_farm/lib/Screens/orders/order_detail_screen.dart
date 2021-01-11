@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -56,13 +58,13 @@ class OrderDetailScreen extends StatelessWidget {
                   Text(_formatDate(order.order_date)),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text('Estabelecimento'),
-                  Text('<Fazenda por do Sol>'),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //   children: [
+              //     Text('Estabelecimento'),
+              //     Text('<Fazenda por do Sol>'),
+              //   ],
+              // ),
               SizedBox(
                 height: 30,
               ),
@@ -156,26 +158,22 @@ Widget _buildRow(OrderData order) {
 
 List<Widget> _buildItensList(OrderData order) {
   List<Widget> itens = [];
-  for (var i = 0; i < order.products.length; i++) {
-    itens.add(Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Column(
-          children: [
-            Text(
-              order.products[i].title,
-              style: TextStyle(fontSize: 20),
-            ),
-            Text(order.products[i].quantity.toString() +
-                ' un. x R\$ ' +
-                order.products[i].price.toStringAsFixed(2)),
-          ],
-        ),
-        Text('R\$ ' +
-            (order.products[i].quantity * order.products[i].price)
-                .toStringAsFixed(2)),
-      ],
-    ));
+
+  for(var i = 0; i < order.products.length; i++) {
+     itens.add( Row(
+       mainAxisAlignment: MainAxisAlignment.spaceAround,
+       children: [
+         Column(
+           children: [
+             Text(order.products[i].title, style: TextStyle(fontSize: 20)),
+             Text(order.products[i].quantity.toString() + ' un. x R\$ ' + order.products[i].price.toStringAsFixed(2)),
+             Text(order.products[i].farm_name == null ? "" : order.products[i].farm_name)
+           ],
+         ),
+         Text('R\$ ' + (order.products[i].quantity * order.products[i].price).toStringAsFixed(2)),
+       ],
+     ));
+
   }
   return itens;
 }
