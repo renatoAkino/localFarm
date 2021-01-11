@@ -261,6 +261,7 @@ String _formatDate(Timestamp date) {
   var formattedDate;
   date != null? formattedDate = DateFormat("dd/MM/yyyy").format(date.toDate()) : formattedDate = "";
   return formattedDate;
+
 }
 
 String _getFarmName(OrderData order) {

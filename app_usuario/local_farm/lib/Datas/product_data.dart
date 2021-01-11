@@ -7,12 +7,11 @@ class ProductData {
   String id;
   String description;
   String farm_id;
-  String farm_name;
-  Map<String, dynamic> images = Map();
+  //Map<String, dynamic> images = Map();
   String image;
   double price;
   int quantity;
-  String title;
+  //String title;
   String name;
   String soldPer;
   String type;
@@ -23,11 +22,12 @@ class ProductData {
     id = snapshot.documentID;
     description = snapshot['description'];
     farm_id = snapshot['farm'];
-    images = snapshot['images'];
+    //images = snapshot['images'];
     image = snapshot['image'];
     price = snapshot['price'] + 0.0;
     quantity = snapshot['quantity'];
-    title = snapshot['title'];
+    //title = snapshot['title'];
+
     name = snapshot['name'];
     soldPer = snapshot['sold-per'];
     type = snapshot['type'];
@@ -36,7 +36,7 @@ class ProductData {
   ProductData.fromResumedDocument(Map<String, dynamic> map) {
     id = map['product_id'];
     price = map['product']['price'];
-    title = map['product']['title'];
+    name = map['product']['title'];
     quantity = map['quantity'];
     farm_id = map['farm_id'];
     getFarmName().then((name) {
@@ -51,7 +51,9 @@ class ProductData {
   }
 
   Map<String, dynamic> toResumeMap() {
-    return {'title': title, 'price': price, 'farm_id': farm_id};
+
+    return {'title': name, 'price': price, 'farm_id': farm_id};
+
   }
 
   Future<String> getFarmName() async{
@@ -64,5 +66,6 @@ class ProductData {
       farmName = farm.name;
     }
     return farmName;
+
   }
 }

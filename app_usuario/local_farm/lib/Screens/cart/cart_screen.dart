@@ -260,9 +260,9 @@ class _CartScreenState extends State<CartScreen> {
                                 totalPrice += prodPrice;
 
                                 return CartItem(
-                                  img: product.productData.images['0'],
+                                  img: product.productData.image,
                                   isFav: false,
-                                  name: product.productData.title,
+                                  name: product.productData.name,
                                   price: prodPrice,
                                   quantity: product.quantity,
                                   rating: 5.0,

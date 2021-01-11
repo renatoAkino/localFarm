@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -57,6 +55,15 @@ class OrderDetailScreen extends StatelessWidget {
                 children: [
                   Text('data do pedido'),
                   Text(_formatDate(order.order_date)),
+
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text('Estabelecimento'),
+                  Text('<Fazenda por do Sol>'),
+
                 ],
               ),
               // Row(

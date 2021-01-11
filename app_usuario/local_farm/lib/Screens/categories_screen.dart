@@ -97,13 +97,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               itemCount: foods == null ? 0 : foods.length,
               itemBuilder: (BuildContext context, int index) {
                 Map food = foods[index];
-                return GridProduct(
-                  img: food['img'],
-                  isFav: false,
-                  name: food['name'],
-                  rating: 5.0,
-                  raters: 23,
-                );
+                return Container();
+//                return GridProduct(
+//                  img: food['img'],
+//                  isFav: false,
+//                  name: food['name'],
+//                  rating: 5.0,
+//                  raters: 23,
+//                );
               },
             ),
           ],

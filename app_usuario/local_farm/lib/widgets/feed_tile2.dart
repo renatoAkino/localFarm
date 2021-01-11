@@ -73,7 +73,7 @@ class FeedTile2 extends StatelessWidget {
                 child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(product.images['0']),
+                    image: NetworkImage(product.image),
                     fit: BoxFit.cover),
               ),
             )),
@@ -110,7 +110,7 @@ class FeedTile2 extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          product.title,
+                          product.name,
                           style: TextStyle(
                             // fontWeight: FontWeight.bold,
                             fontSize: 18,
