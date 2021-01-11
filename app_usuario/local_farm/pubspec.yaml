@@ -44,6 +44,7 @@ dependencies:
 
   # teste
   mobx: ^1.2.1+4
+  provider: ^4.3.2+3
 
 
 dev_dependencies:

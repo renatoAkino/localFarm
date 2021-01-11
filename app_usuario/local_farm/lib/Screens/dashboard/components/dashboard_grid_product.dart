@@ -6,8 +6,6 @@ class GridProduct extends StatelessWidget {
 
   const GridProduct(this.productData);
 
-
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -18,13 +16,16 @@ class GridProduct extends StatelessWidget {
           Stack(
             children: <Widget>[
               Container(
-                height: MediaQuery.of(context).size.height / 3.6,
-                width: MediaQuery.of(context).size.width / 2.2,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(productData.image, fit: BoxFit.fill,)
-                ),
-              ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.white,
+                  ),
+                  height: MediaQuery.of(context).size.height / 3.6,
+                  width: MediaQuery.of(context).size.width / 2.2,
+                  child: Image.network(
+                    productData.image,
+                    fit: BoxFit.contain,
+                  )),
               // Positioned(
               //   right: -10.0,
               //   bottom: 3.0,
@@ -52,13 +53,17 @@ class GridProduct extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.only(bottom: 2.0, top: 8.0),
-                  child: Text(
-                    productData.name,
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      // fontWeight: FontWeight.w900,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    child: Text(
+                      productData.name,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        // fontWeight: FontWeight.w900,
+                      ),
+                      maxLines: 2,
                     ),
-                    maxLines: 2,
                   ),
                 ),
                 Padding(

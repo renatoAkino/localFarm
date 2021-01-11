@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:localfarm/Datas/cart_data.dart';
 import 'package:localfarm/Datas/farm_data.dart';
@@ -6,6 +7,9 @@ import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/Models/cart_model.dart';
 import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/cart/components/cart_icon.dart';
+import 'package:localfarm/stores/count_mobx.dart';
+import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
 
 import '../login_screen.dart';
 import 'components/body.dart';
@@ -20,12 +24,10 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
-  CartData cartData = CartData();
+  ItemCounterStore numItems = ItemCounterStore();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       // each product have a color
       // backgroundColor: product.color,
       backgroundColor: Colors.green,
@@ -41,7 +43,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         //ìcone do carrinho
         actions: <Widget>[CartIconWidget()],
       ),
-      body: Body(product: widget.product, cartData: cartData),
+      body: Body(product: widget.product, numItems: numItems),
 
       /// FOOTER BOTÃO ADICIONAR AO CARRINHO
       bottomNavigationBar: Container(
@@ -71,77 +73,52 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 //   onPressed: () {},
                 // ),
               ),
-              Expanded(
-                child: SizedBox(
-                  height: 50,
-                  child: FlatButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18)),
-                      // color: product.color,
-                      color: Colors.orange,
-                      child: Text(
-                        "Adicionar ao carrinho".toUpperCase(),
-                        style: TextStyle(
-                          fontSize: 16,
-                          // fontWeight: FontWeight.bold,
-                          color: Colors.white,
+              Observer(
+                builder: (_) {
+                  return Expanded(
+                    child: SizedBox(
+                      height: 50,
+                      child: FlatButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18)),
+                        // color: product.color,
+                        color: Colors.orange,
+                        child: Text(
+                          "Adicionar ao carrinho".toUpperCase(),
+                          // numItems.count.toString().toUpperCase(),
+                          style: TextStyle(
+                            fontSize: 16,
+                            // fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
+                        onPressed: () {
+                          print(numItems.count);
+                          if (UserModel.of(context).isLoggedin()) {
+                            CartData cartData = CartData();
+                            cartData.product_id = widget.product.id;
+                            // PRECISA BUSCAR A QUANTIDADE DO CONTADOR cart_counter.dart
+                            cartData.quantity = numItems.count;
+                            cartData.productData = widget.product;
+
+                            print(cartData.productData.name);
+                            print(cartData.productData.quantity);
+
+                            CartModel.of(context).addCartItem(cartData);
+                            //   // } else {
+                            //   //   onFailed();
+                            //   // }
+                          }
+                        },
                       ),
-                      onPressed: () {
-                        // if (UserModel.of(context).isLoggedin()) {
-                        //   // CartData cartData = CartData();
-                        //   cartData.product_id = widget.product.id;
-                        //   // PRECISA BUSCAR A QUANTIDADE DO CONTADOR cart_counter.dart
-                        //   // cartData.quantity = quantity;
-                        //   cartData.productData = widget.product;
-
-                        //   print(cartData.productData.name);
-                        //   print(cartData.productData.quantity);
-
-                        //   CartModel.of(context).addCartItem(cartData);
-                        // } else {
-                        //   onFailed();
-                        // }
-                      }),
-                ),
-              ),
+                    ),
+                  );
+                },
+              )
             ],
           ),
         ),
       ),
     );
-  }
-
-  void onFailed() {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: GestureDetector(
-          child: Text(
-            "Clique e faça login para adicionar ao carrinho",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          onTap: () {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => LoginScreen()));
-          }),
-      backgroundColor: Theme.of(context).primaryColor,
-      duration: Duration(seconds: 3),
-    ));
-  }
-
-  void onSuccess() {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: Text(
-        "Adicionado ao Carrinho",
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      backgroundColor: Theme.of(context).primaryColor,
-      duration: Duration(seconds: 3),
-    ));
   }
 }
