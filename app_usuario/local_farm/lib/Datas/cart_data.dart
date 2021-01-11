@@ -23,7 +23,7 @@ class CartData {
       'quantity': quantity,
       'product': productData.toResumeMap(),
       'farm_id': productData.farm_id,
-      // 'farm_name' : productData.farmData.name
+      'farm_name': productData.farmData.name
     };
   }
 }

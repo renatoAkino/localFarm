@@ -158,6 +158,7 @@ Widget _buildRow(OrderData order) {
 
 List<Widget> _buildItensList(OrderData order) {
   List<Widget> itens = [];
+
   for (var i = 0; i < order.products.length; i++) {
     itens.add(Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -8,6 +8,7 @@ class ProductData {
   String description;
   String farm_id;
   String farm_name;
+  Map<String, dynamic> images = Map();
   String image;
   double price;
   int quantity;
