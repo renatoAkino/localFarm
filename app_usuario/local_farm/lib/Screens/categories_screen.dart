@@ -27,6 +27,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         centerTitle: true,
         title: Text(
           "Categorias",
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: Colors.black54,
+          ),
         ),
         elevation: 0.0,
         actions: <Widget>[
@@ -53,7 +58,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           children: <Widget>[
             SizedBox(height: 10.0),
             Container(
-              height: 65.0,
+              height: 80.0,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
@@ -92,13 +97,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               itemCount: foods == null ? 0 : foods.length,
               itemBuilder: (BuildContext context, int index) {
                 Map food = foods[index];
-                return GridProduct(
-                  img: food['img'],
-                  isFav: false,
-                  name: food['name'],
-                  rating: 5.0,
-                  raters: 23,
-                );
+                return Container();
+//                return GridProduct(
+//                  img: food['img'],
+//                  isFav: false,
+//                  name: food['name'],
+//                  rating: 5.0,
+//                  raters: 23,
+//                );
               },
             ),
           ],

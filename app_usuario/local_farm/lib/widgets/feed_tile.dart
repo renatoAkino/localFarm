@@ -122,7 +122,7 @@ class FeedTile extends StatelessWidget {
                             bottomRight: Radius.circular(20.0),
                           ),
                           image: DecorationImage(
-                              image: NetworkImage(product.images['0']),
+                              image: NetworkImage(product.image),
                               fit: BoxFit.cover)),
                     ),
                   ),

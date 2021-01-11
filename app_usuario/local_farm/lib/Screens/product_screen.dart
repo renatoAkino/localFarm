@@ -73,7 +73,7 @@ class _ProductScreenState extends State<ProductScreen> {
               Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: NetworkImage(productData.images['0']),
+                      image: NetworkImage(productData.image),
                       fit: BoxFit.cover),
                 ),
               ),
@@ -101,7 +101,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
-                      productData.title,
+                      productData.name,
                       style: TextStyle(fontSize: 27),
                     ),
                     Text(

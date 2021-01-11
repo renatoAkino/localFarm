@@ -1,6 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:localfarm/Datas/order_data.dart';
 
 class OrderDetailScreen extends StatelessWidget {
+  final OrderData order;
+
+  OrderDetailScreen(this.order);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +30,10 @@ class OrderDetailScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('<nº do status>'),
+                  Text(
+                      // '<nº do status>'
+                      this.order.status.toString()
+                  ),
                 ],
               ),
               SizedBox(
@@ -37,14 +47,14 @@ class OrderDetailScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text('código'),
-                  Text('<123456>'),
+                  Text(this.order.order_id),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text('data do pedido'),
-                  Text('<15/05/2020>'),
+                  Text(_formatDate(order.order_date)),
                 ],
               ),
               Row(
@@ -61,66 +71,7 @@ class OrderDetailScreen extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        'Abacate verde',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      Text('<5> unidades x R\$ <3,54>'),
-                    ],
-                  ),
-                  Text('R\$ <54,54>'),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        'Abacate verde',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      Text('<5> unidades x R\$ <3,54>'),
-                    ],
-                  ),
-                  Text('R\$ <54,54>'),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        'Abacate verde',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      Text('<5> unidades x R\$ <3,54>'),
-                    ],
-                  ),
-                  Text('R\$ <54,54>'),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        'Abacate verde',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      Text('<5> unidades x R\$ <3,54>'),
-                    ],
-                  ),
-                  Text('R\$ <54,54>'),
-                ],
-              ),
+              _buildRow(this.order),
               SizedBox(
                 height: 10,
               ),
@@ -131,7 +82,7 @@ class OrderDetailScreen extends StatelessWidget {
                     'Total',
                     style: TextStyle(fontSize: 20),
                   ),
-                  Text('R\$ <225,54>'),
+                  Text('R\$ ' + this.order.totalPrice.toStringAsFixed(2)),
                 ],
               ),
               SizedBox(
@@ -171,7 +122,7 @@ class OrderDetailScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text('data agendada'),
-                  Text('<20/05/2020>'),
+                  Text(_formatDate(this.order.ship_date)),
                 ],
               ),
               Row(
@@ -185,4 +136,41 @@ class OrderDetailScreen extends StatelessWidget {
           ),
         ));
   }
+}
+
+String _formatDate(Timestamp date) {
+  var formattedDate;
+  date != null? formattedDate = DateFormat("dd/MM/yyyy").format(date.toDate()) : formattedDate = "";
+  return formattedDate;
+}
+
+Widget _buildRow(OrderData order) {
+  return Container(
+    padding: EdgeInsets.all(16.0),
+    child: Column(
+      children: _buildItensList(order),
+    ),
+  );
+}
+
+List<Widget> _buildItensList(OrderData order) {
+  List<Widget> itens = [];
+  for(var i = 0; i < order.products.length; i++) {
+     itens.add( Row(
+       mainAxisAlignment: MainAxisAlignment.spaceAround,
+       children: [
+         Column(
+           children: [
+             Text(
+               order.products[i].name,
+               style: TextStyle(fontSize: 20),
+             ),
+             Text(order.products[i].quantity.toString() + ' un. x R\$ ' + order.products[i].price.toStringAsFixed(2)),
+           ],
+         ),
+         Text('R\$ ' + (order.products[i].quantity * order.products[i].price).toStringAsFixed(2)),
+       ],
+     ));
+  }
+  return itens;
 }

@@ -62,10 +62,10 @@ class _CartScreenState extends State<CartScreen> {
         automaticallyImplyLeading: false,
         title: Text(
           "Meu Carrinho",
-          style: TextStyle(
-            fontSize: 23,
-            // fontWeight: FontWeight.w800,
-          ),
+          style: Theme.of(context)
+              .textTheme
+              .headline4
+              .copyWith(color: Colors.green, fontWeight: FontWeight.bold),
         ),
         elevation: 0.0,
         actions: <Widget>[
@@ -80,7 +80,7 @@ class _CartScreenState extends State<CartScreen> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 80),
+        padding: EdgeInsets.fromLTRB(15.0, 10, 15.0, 80),
         child: ListView(
           children: <Widget>[
             SizedBox(height: 0.0),
@@ -251,24 +251,24 @@ class _CartScreenState extends State<CartScreen> {
                                 .document(product.product_id)
                                 .get(),
                             builder: (context, snapshot) {
-                              if(snapshot.hasData){
+                              if (snapshot.hasData) {
                                 product.productData =
                                     ProductData.fromDocument(snapshot.data);
-                                double prodPrice =
-                                    product.quantity * product.productData.price;
+                                double prodPrice = product.quantity *
+                                    product.productData.price;
 
                                 totalPrice += prodPrice;
 
                                 return CartItem(
-                                  img: product.productData.images['0'],
+                                  img: product.productData.image,
                                   isFav: false,
-                                  name: product.productData.title,
+                                  name: product.productData.name,
                                   price: prodPrice,
                                   quantity: product.quantity,
                                   rating: 5.0,
                                   raters: 23,
                                 );
-                              }else{
+                              } else {
                                 return Container();
                               }
                             },

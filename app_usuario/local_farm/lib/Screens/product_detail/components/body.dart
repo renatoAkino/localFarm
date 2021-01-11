@@ -77,9 +77,11 @@ class Body extends StatelessWidget {
                               text: TextSpan(
                                 style: TextStyle(color: Colors.black),
                                 children: [
-                                  TextSpan(text: "Em Estoque\n"),
+                                  TextSpan(text: "Disponível\n"),
                                   TextSpan(
-                                      text: "${product.quantity}/50",
+                                      text: '~' +
+                                          product.quantity.toString() +
+                                          product.soldPer,
                                       style:
                                           Theme.of(context).textTheme.headline6
                                       // .copyWith(fontWeight: FontWeight.bold),

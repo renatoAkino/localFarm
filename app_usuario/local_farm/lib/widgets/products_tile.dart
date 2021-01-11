@@ -32,7 +32,7 @@ class ProductsTile extends StatelessWidget {
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20)),
                   child: Image(
-                    image: NetworkImage(productData.images['0']),
+                    image: NetworkImage(productData.name),
                   ),
                 ),
               ),
@@ -47,7 +47,7 @@ class ProductsTile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            productData.title,
+                            productData.name,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
