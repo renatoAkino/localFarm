@@ -56,7 +56,7 @@ class GridProduct extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 2.0, top: 8.0),
                   child: Container(
-                    width: MediaQuery.of(context).size.width * 0.3,
+                    width: MediaQuery.of(context).size.width * 0.2,
                     child: Text(
                       productData.name,
                       overflow: TextOverflow.ellipsis,

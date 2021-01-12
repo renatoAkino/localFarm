@@ -22,10 +22,10 @@ class OrderData {
     order_id = document.documentID;
     client_id = document.data['clientID'];
     // farm_id = document.data['farm_id'];
-    productsPrice = document.data['productsPrice'];
-    shipPrice = document.data['shipPrice'];
+    productsPrice = document.data['productsPrice'] + 0.0;
+    shipPrice = document.data['shipPrice'] + 0.0;
     status = document.data['status'];
-    totalPrice = document.data['totalPrice'];
+    totalPrice = document.data['totalPrice'] + 0.0;
     document.data['products'].forEach((product) {
       products.add(ProductData.fromResumedDocument(product));
     });
@@ -35,7 +35,7 @@ class OrderData {
 
   Future<void> getFarmData() async {
     DocumentSnapshot snapshot =
-    await Firestore.instance.collection('farms').document(farm_id).get();
+        await Firestore.instance.collection('farms').document(farm_id).get();
     farmData = FarmData.fromDocument(snapshot);
   }
 }
