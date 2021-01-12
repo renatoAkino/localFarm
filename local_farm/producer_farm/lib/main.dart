@@ -5,6 +5,7 @@ import 'package:producerfarm/Screens/login_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'Models/user_model.dart';
+import 'Screens/farm/farm_screen.dart';
 
 void main() {
   return runApp(MyApp());
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
               builder: (context, child, model) {
                 return MaterialApp(
                   title: "Local Farm",
-                  home: LoginScreen(),
+                  home: FarmScreen(),
                   localizationsDelegates: [
                     GlobalMaterialLocalizations.delegate,
                     GlobalWidgetsLocalizations.delegate

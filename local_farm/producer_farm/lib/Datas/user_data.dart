@@ -17,15 +17,16 @@ class UserData{
   UserData();
 
   UserData.fromDocument(DocumentSnapshot document){
-    String userId = document.id;
+    userId = document.id;
     Map<String, dynamic> data = document.data();
-    String name = data['name'];
-    String email = data['email'];
-    String cep = data['cep'];
-    String adress = data['adress'];
-    String adressComplement = data['adress_complement'];
+    name = data['name'];
+    email = data['email'];
+    cep = data['cep'];
+    adress = data['adress'];
+    adressComplement = data['adress_complement'];
     //DateTime birth = document.data['birth'];
-    String gender = data['gender'];
+    gender = data['gender'];
+
   }
 
 
