@@ -176,6 +176,7 @@ class OrderTile extends StatelessWidget {
                   Text(
                     // this.order.products[0].farm_name,
                     _getFarmName(this.order),
+                    // _getProducerName(this.order),
                     style: TextStyle(
                       fontSize: 16,
                       // color: Colors.white,
@@ -261,6 +262,8 @@ class OrderTile extends StatelessWidget {
       ),
     );
   }
+
+  String _getProducerName(OrderData order) {}
 }
 
 String _formatDate(Timestamp date) {
