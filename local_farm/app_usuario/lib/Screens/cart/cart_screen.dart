@@ -291,7 +291,7 @@ class _CartScreenState extends State<CartScreen> {
                                       product.quantity,
                                   quantity: product.quantity,
                                   fazendaName:
-                                      product.productData.farm_name.toString(),
+                                      product.productData.farm_name,
                                 );
                               } else {
                                 return Container();
