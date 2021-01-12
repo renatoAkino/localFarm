@@ -37,7 +37,7 @@ class _EditUserScreenState extends State<EditUserScreen> {
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         title: Text(
-          "Carrinho",
+          "Editar Perfil",
           style: TextStyle(
             fontSize: 23,
             fontWeight: FontWeight.w800,

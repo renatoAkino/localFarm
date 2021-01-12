@@ -35,7 +35,6 @@ class _OrdersListState extends State<OrdersList>
         } else {
           return ListView(
             children: snapshot.data.documents.map((doc) {
-              //ALTERAR PARA PEDIDOS (PRECISO DO MODEL PEDIDOS PARA PUXAR DO SERVER)
               OrderData data = OrderData.fromDocument(doc);
               // return FeedTile(data);
               return OrderTile(data);

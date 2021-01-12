@@ -3,12 +3,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/edit_user_screen.dart';
 import 'package:localfarm/Screens/login_screen.dart';
+import 'package:localfarm/stores/cart_store.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'cart_icon.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   AppBar appBar = AppBar();
+  CartStore countItens = CartStore();
 
   @override
   Size get preferredSize => new Size.fromHeight(appBar.preferredSize.height);
@@ -96,7 +98,11 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           // ),
           IconButton(
             icon: Icon(Icons.arrow_drop_down),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => EditUserScreen()),
+              );
+            },
           ),
         ],
       ),
