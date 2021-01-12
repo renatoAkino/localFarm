@@ -52,14 +52,13 @@ class ProductData {
   }
 
   Map<String, dynamic> toResumeMap() {
-
     return {'title': name, 'price': price, 'farm_id': farm_id};
-
   }
 
-  Future<String> getFarmName() async{
+  Future<String> getFarmName() async {
     var farmName;
-    DocumentSnapshot snapshot = await Firestore.instance.collection('farms').document(farm_id).get();
+    DocumentSnapshot snapshot =
+        await Firestore.instance.collection('farms').document(farm_id).get();
     FarmData farm = FarmData.fromDocument(snapshot);
     if (farm == null) {
       farmName = "";

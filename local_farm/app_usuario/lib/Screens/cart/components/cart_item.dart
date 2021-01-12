@@ -5,20 +5,17 @@ class CartItem extends StatelessWidget {
   final String img;
   final double price;
   final int quantity;
-  final bool isFav;
-  final double rating;
-  final int raters;
+  final String fazendaName;
+  // final bool isFav;
 
-  CartItem(
-      {Key key,
-      @required this.name,
-      @required this.img,
-      @required this.price,
-      @required this.quantity,
-      @required this.isFav,
-      @required this.rating,
-      @required this.raters})
-      : super(key: key);
+  CartItem({
+    Key key,
+    @required this.name,
+    @required this.img,
+    @required this.price,
+    @required this.quantity,
+    @required this.fazendaName,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -77,7 +74,7 @@ class CartItem extends StatelessWidget {
                         // ),
                         // SizedBox(width: 6.0),
                         Text(
-                          "<Fazenda Monte Belo>",
+                          fazendaName,
                           style: TextStyle(
                             // fontSize: 12,
                             fontWeight: FontWeight.w300,

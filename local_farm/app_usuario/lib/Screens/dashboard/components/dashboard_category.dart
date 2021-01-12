@@ -39,10 +39,10 @@ class _ListaCategoriasWidgetState extends State<ListaCategoriasWidget> {
             }
           : widget.tap,
       child: Padding(
-        padding: const EdgeInsets.only(right: 20.0),
+        padding: const EdgeInsets.only(right: 10.0),
         child: Container(
-          height: 80,
-          width: 80,
+          height: 90,
+          width: 90,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
             color: Colors.white,

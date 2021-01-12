@@ -6,12 +6,24 @@ class StatusProgressWidget extends StatelessWidget {
 
   // double deviceWidth(BuildContext context) => MediaQuery.of(context).size.width;
   final int index;
+  final bool dark;
   // final int lines;
 
-  StatusProgressWidget({@required this.index});
+  StatusProgressWidget({@required this.index, this.dark});
+
+  Color colorFundo = Colors.white;
+  Color colorUnselected = Colors.grey[300];
+  Color colorSelected = Colors.lightGreen[700];
 
   @override
   Widget build(BuildContext context) {
+    if (dark == true) {
+      // colorFundo = Color.fromRGBO(93, 97, 115, 1);
+      // colorFundo = Color.fromRGBO(240, 239, 225, 1);
+      colorFundo = Colors.grey[50];
+      colorUnselected = Colors.grey;
+      colorSelected = Colors.green;
+    }
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(top: 0.0),
@@ -20,7 +32,7 @@ class StatusProgressWidget extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.3,
           // color: Color.fromRGBO(93, 97, 115, 1),
           // color: Colors.green[50],
-          color: Colors.white,
+          color: colorFundo,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -64,11 +76,11 @@ class StatusProgressWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   text1(),
-                  spacerBottom(),
+                  spacerBottom(context),
                   text2(),
-                  spacerBottom(),
+                  spacerBottom(context),
                   text3(),
-                  spacerBottom(),
+                  spacerBottom(context),
                   text4(),
                 ],
               ),
@@ -100,53 +112,53 @@ class StatusProgressWidget extends StatelessWidget {
   Widget icon1Check(bool isChecked) {
     return isChecked
         ? Icon(
-      Icons.shopping_basket_outlined,
-      // color: Colors.greenAccent,
-      color: Colors.green,
-    )
+            Icons.shopping_basket_outlined,
+            // color: Colors.greenAccent,
+            color: colorSelected,
+          )
         : Icon(
-      Icons.shopping_basket_outlined,
-      color: Colors.grey,
-    );
+            Icons.shopping_basket_outlined,
+            color: colorUnselected,
+          );
   }
 
   Widget icon2Check(bool isChecked) {
     return isChecked
         ? Icon(
-      Icons.today_outlined,
-      // color: Colors.greenAccent,
-      color: Colors.green,
-    )
+            Icons.today_outlined,
+            // color: Colors.greenAccent,
+            color: colorSelected,
+          )
         : Icon(
-      Icons.today_outlined,
-      color: Colors.grey,
-    );
+            Icons.today_outlined,
+            color: colorUnselected,
+          );
   }
 
   Widget icon3Check(bool isChecked) {
     return isChecked
         ? Icon(
-      Icons.payment,
-      // color: Colors.greenAccent,
-      color: Colors.green,
-    )
+            Icons.payment,
+            // color: Colors.greenAccent,
+            color: colorSelected,
+          )
         : Icon(
-      Icons.payment,
-      color: Colors.grey,
-    );
+            Icons.payment,
+            color: colorUnselected,
+          );
   }
 
   Widget icon4Check(bool isChecked) {
     return isChecked
         ? Icon(
-      Icons.delivery_dining,
-      // color: Colors.greenAccent,
-      color: Colors.green,
-    )
+            Icons.delivery_dining,
+            // color: Colors.greenAccent,
+            color: colorSelected,
+          )
         : Icon(
-      Icons.delivery_dining,
-      color: Colors.grey,
-    );
+            Icons.delivery_dining,
+            color: colorUnselected,
+          );
   }
 
   // -------------------------------- SPACER TOP ------------------------------------
@@ -178,16 +190,16 @@ class StatusProgressWidget extends StatelessWidget {
   Widget tick(bool isChecked) {
     return isChecked
         ? Icon(
-      Icons.check_circle,
-      // color: Colors.greenAccent,
-      color: Colors.green,
-      size: 30,
-    )
+            Icons.check_circle,
+            // color: Colors.greenAccent,
+            color: colorSelected,
+            size: 30,
+          )
         : Icon(
-      Icons.radio_button_unchecked,
-      color: Colors.grey,
-      size: 30,
-    );
+            Icons.radio_button_unchecked,
+            color: colorUnselected,
+            size: 30,
+          );
   }
 
   // -------------------------------- SPACER CENTER ---------------------------------
@@ -218,16 +230,16 @@ class StatusProgressWidget extends StatelessWidget {
   Widget line(bool isChecked) {
     return isChecked
         ? Container(
-      // color: Colors.greenAccent,
-      color: Colors.green,
-      height: 5.0,
-      width: 50,
-    )
+            // color: Colors.greenAccent,
+            color: colorSelected,
+            height: 5.0,
+            width: 50,
+          )
         : Container(
-      color: Colors.grey,
-      height: 5.0,
-      width: 50,
-    );
+            color: colorUnselected,
+            height: 5.0,
+            width: 50,
+          );
   }
 
 // -------------------------------- TEXTS ----------------------------------------
@@ -252,87 +264,87 @@ class StatusProgressWidget extends StatelessWidget {
     // String texto = 'Montar\nCesta';
     return isChecked
         ? Text(
-      'Cesta\nMontada',
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        // color: Colors.greenAccent,
-        color: Colors.green,
-      ),
-    )
+            'Cesta\nMontada',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              // color: Colors.greenAccent,
+              color: colorSelected,
+            ),
+          )
         : Text(
-      'Montar\nCesta',
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        color: Colors.grey,
-      ),
-    );
+            'Montar\nCesta',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: colorUnselected,
+            ),
+          );
   }
 
   Widget text2Check(bool isChecked) {
     // String texto = 'Agendar\nEntrega';
     return isChecked
         ? Text(
-      'Entrega\nAgendada',
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        // color: Colors.greenAccent,
-        color: Colors.green,
-      ),
-    )
+            'Entrega\nAgendada',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              // color: Colors.greenAccent,
+              color: colorSelected,
+            ),
+          )
         : Text(
-      'Agendar\nEntrega',
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        color: Colors.grey,
-      ),
-    );
+            'Agendar\nEntrega',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: colorUnselected,
+            ),
+          );
   }
 
   Widget text3Check(bool isChecked) {
     // String texto = 'Efetuar\nPagamento';
     return isChecked
         ? Text(
-      'Pagamento\nEfetuado',
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        // color: Colors.greenAccent,
-        color: Colors.green,
-      ),
-    )
+            'Pagamento\nEfetuado',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              // color: Colors.greenAccent,
+              color: colorSelected,
+            ),
+          )
         : Text(
-      'Efetuar\nPagamento',
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        color: Colors.grey,
-      ),
-    );
+            'Efetuar\nPagamento',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: colorUnselected,
+            ),
+          );
   }
 
   Widget text4Check(bool isChecked) {
     // String texto = 'Aguardar\nEntrega';
     return isChecked
         ? Text(
-      'Entrega\nRecebida',
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        // color: Colors.greenAccent,
-        color: Colors.green,
-      ),
-    )
+            'Entrega\nRecebida',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              // color: Colors.greenAccent,
+              color: colorSelected,
+            ),
+          )
         : Text(
-      'Aguardar\nEntrega',
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        color: Colors.grey,
-      ),
-    );
+            'Aguardar\nEntrega',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: colorUnselected,
+            ),
+          );
   }
 
   // -------------------------------- SPACER TOP ------------------------------------
 
-  Widget spacerBottom() {
+  Widget spacerBottom(BuildContext context) {
     return Container(
-      width: 20.0,
+      width: MediaQuery.of(context).size.width * 0.05,
     );
   }
 }
