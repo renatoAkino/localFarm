@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:producerfarm/Models/user_model.dart';
+import 'package:producerfarm/Screens/orders/order_screen.dart';
+import 'package:scoped_model/scoped_model.dart';
+
+import '../../Models/user_model.dart';
+import '../../Models/user_model.dart';
+import '../../Models/user_model.dart';
+import '../login_screen.dart';
 
 class FarmScreen extends StatefulWidget {
   @override
@@ -9,15 +16,101 @@ class FarmScreen extends StatefulWidget {
 class _FarmScreenState extends State<FarmScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        elevation: 2,
-        title: Text(UserModel.of(context).userData.name),
-      ),
-      body: Container(
+    return ScopedModelDescendant<UserModel>(
 
-      ),
-    );
+        builder: (context, child, model){
+          if(model.isLoggedin()){
+            print(model.firebaseUser.uid);
+          }
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.green,
+              elevation: 2,
+              title: Text(UserModel.of(context).isLoggedin() ? UserModel.of(context).userData.name : ''),
+            ),
+            body: Container(
+              child: Column(
+                children: [
+                  model.isLoggedin() ?
+                  Container(
+                    child: Column(
+                      children: [
+                        Text(model.userData.farmData.farmId),
+                        Text(model.userData.farmData.name),
+                        Text(model.userData.farmData.distance.toString()),
+                        Text(model.userData.farmData.image),
+                        Text(model.userData.farmData.followers.toString()),
+
+                        FlatButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              model.logout();
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => LoginScreen()
+                              ));
+                            },
+                            child: Text(
+                              "Logout",
+                              style: TextStyle(
+                                  color: Theme
+                                      .of(context)
+                                      .accentColor,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                        FlatButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => OrderScreen()
+                              ));
+                            },
+                            child: Text(
+                              "Pedidos",
+                              style: TextStyle(
+                                  color: Theme
+                                      .of(context)
+                                      .accentColor,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                        FlatButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => OrderScreen()
+                              ));
+                            },
+                            child: Text(
+                              "Produtos",
+                              style: TextStyle(
+                                  color: Theme
+                                      .of(context)
+                                      .accentColor,
+                                  fontWeight: FontWeight.bold),
+                            ))
+
+                      ],
+                    )
+                  ) :
+                  FlatButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => LoginScreen()
+                        ));
+                      },
+                      child: Text(
+                        "Faça Login",
+                        style: TextStyle(
+                            color: Theme
+                                .of(context)
+                                .accentColor,
+                            fontWeight: FontWeight.bold),
+                      ))
+                ],
+              ),
+
+            ),
+          );
+        });
   }
 }
