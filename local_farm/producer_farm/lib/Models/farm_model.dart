@@ -5,6 +5,7 @@ import 'package:producerfarm/Models/user_model.dart';
 class FarmModel{
    
   Future<FarmData> getFarmData(String farmId) async{
+    print(farmId);
     DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance.collection('farms').doc(farmId).get();
     return FarmData.fromDocument(documentSnapshot);
   }

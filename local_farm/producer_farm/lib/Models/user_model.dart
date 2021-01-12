@@ -6,6 +6,10 @@ import 'package:producerfarm/Datas/user_data.dart';
 import 'package:producerfarm/Models/farm_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import '../Datas/user_data.dart';
+import '../Datas/user_data.dart';
+import 'farm_model.dart';
+
 class UserModel extends Model{
   FirebaseAuth _auth = FirebaseAuth.instance;
   User firebaseUser;
@@ -27,6 +31,7 @@ class UserModel extends Model{
       firebaseUser = await _auth.currentUser;
     }
     if (firebaseUser != null) {
+      print('recebendo dados do usuário');
       //RECEBENDO OS DADOS DO USUÁRIO
       if (userData.name == null) {
         DocumentSnapshot docUser = await FirebaseFirestore.instance
@@ -34,22 +39,20 @@ class UserModel extends Model{
             .doc(firebaseUser.uid)
             .get();
         userData = UserData.fromDocument(docUser);
-        print(userData.name);
-
         //RECEBENDO AS FAZENDAS QUE O USUÁRIO SEGUE
         QuerySnapshot querySnapshot = await FirebaseFirestore.instance
             .collection('users')
-            .doc(firebaseUser.uid)
-            .collection('Farm')
+            .doc(userData.userId)
+            .collection('farm')
             .get();
-        FarmModel farmModel;
+        FarmModel farmModel = FarmModel();
         userData.farmData = await farmModel.getFarmData(querySnapshot.docs.first.id);
-
+        print('recebeu dados da fazenda');
         //RECEBENDO OS POSTS QUE O USUÁRIO DEU LIKE
 //        QuerySnapshot likedPosts = await Firestore.instance
 //            .collection('users')
 //            .document(firebaseUser.uid)
-//            .collection('likedPosts')
+//            .collection('farm')
 //            .getDocuments();
 //        List<dynamic> postsList;
 //        postsList = likedPosts.documents.map((e) {
@@ -76,11 +79,13 @@ class UserModel extends Model{
     _auth
         .signInWithEmailAndPassword(email: email, password: pass)
         .then((result) {
+          print("sucess");
       firebaseUser = result.user;
       _loadCurrentUser();
       _loadChangeStatus();
       onSucess();
     }).catchError((e) {
+      print("fail");
       _loadChangeStatus();
       onFailed();
     });
