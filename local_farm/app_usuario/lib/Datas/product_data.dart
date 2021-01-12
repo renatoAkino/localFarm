@@ -66,7 +66,7 @@ class ProductData {
     } else {
       farmName = farm.name;
     }
+    log(farmName);
     return farmName;
-
   }
 }

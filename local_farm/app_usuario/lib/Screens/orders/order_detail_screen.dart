@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:localfarm/Datas/order_data.dart';
+import 'package:flutter/foundation.dart';
 
 class OrderDetailScreen extends StatelessWidget {
   final OrderData order;
@@ -61,8 +62,8 @@ class OrderDetailScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('Estabelecimento'),
-                  Text('<Fazenda por do Sol>'),
+                  // Text('Estabelecimento'),
+                  // Text('<Fazenda por do Sol>'),
 
                 ],
               ),
@@ -165,6 +166,7 @@ Widget _buildRow(OrderData order) {
 List<Widget> _buildItensList(OrderData order) {
   List<Widget> itens = [];
   for(var i = 0; i < order.products.length; i++) {
+    debugPrint(order.products.toString());
      itens.add( Row(
        mainAxisAlignment: MainAxisAlignment.spaceAround,
        children: [

@@ -64,7 +64,7 @@ class GridProduct extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 2.0, top: 8.0, left: 5.0),
                   child: Text(
-                    "R\$ ${productData.price}",
+                    "R\$ ${productData.price.toStringAsFixed(2)}",
                     style: TextStyle(
                       fontSize: 16.0,
                       // fontWeight: FontWeight.w900,
