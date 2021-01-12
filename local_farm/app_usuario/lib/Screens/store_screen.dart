@@ -12,7 +12,6 @@ import 'package:localfarm/widgets/products_grid.dart';
 import 'package:localfarm/widgets/products_tile.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-
 class StoreScreen extends StatefulWidget {
   final FarmData farmData;
   StoreScreen(this.farmData);
@@ -32,15 +31,15 @@ class _StoreScreenState extends State<StoreScreen> {
       appBar: AppBar(
         elevation: 0,
         flexibleSpace: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: <Color>[
-                Theme.of(context).primaryColor,
-                Color.fromARGB(255, 180, 233, 218)
-              ])),
-        ),
+            // decoration: BoxDecoration(
+            //     gradient: LinearGradient(
+            //         begin: Alignment.topLeft,
+            //         end: Alignment.bottomRight,
+            //         colors: <Color>[
+            //       Theme.of(context).primaryColor,
+            //       Color.fromARGB(255, 180, 233, 218)
+            //     ])),
+            ),
         actions: <Widget>[
           IconButton(
             onPressed: () {
@@ -64,14 +63,14 @@ class _StoreScreenState extends State<StoreScreen> {
         children: <Widget>[
           Container(
             height: 160,
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                  Theme.of(context).primaryColor,
-                  Theme.of(context).primaryColor.withOpacity(0.3)
-                ])),
+            // decoration: BoxDecoration(
+            //     gradient: LinearGradient(
+            //         begin: Alignment.topLeft,
+            //         end: Alignment.bottomRight,
+            //         colors: [
+            //       Theme.of(context).primaryColor,
+            //       Theme.of(context).primaryColor.withOpacity(0.3)
+            //     ])),
           ),
           Container(
             margin: EdgeInsets.only(top: 150),
