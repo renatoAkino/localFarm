@@ -72,6 +72,35 @@ class _FarmScreenState extends State<FarmScreen> {
                                     color: Theme.of(context).accentColor,
                                     fontWeight: FontWeight.bold),
                               )),
+                          // FlatButton(
+                          //     padding: EdgeInsets.zero,
+                          //     onPressed: () {
+                          //       Navigator.push(
+                          //           context,
+                          //           MaterialPageRoute(
+                          //               builder: (context) => OrderScreen()));
+                          //     },
+                          //     child: Text(
+                          //       "Pedidos",
+                          //       style: TextStyle(
+                          //           color: Theme.of(context).accentColor,
+                          //           fontWeight: FontWeight.bold),
+                          //     )),
+                          // FlatButton(
+                          //   padding: EdgeInsets.zero,
+                          //   onPressed: () {
+                          //     Navigator.push(
+                          //         context,
+                          //         MaterialPageRoute(
+                          //             builder: (context) => ProductScreen()));
+                          //   },
+                          //   child: Text(
+                          //     "Produtos",
+                          //     style: TextStyle(
+                          //         color: Theme.of(context).accentColor,
+                          //         fontWeight: FontWeight.bold),
+                          //   ),
+                          // )
                         ],
                       ),
                     )
