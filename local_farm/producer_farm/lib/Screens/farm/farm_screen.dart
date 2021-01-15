@@ -75,7 +75,7 @@ class _FarmScreenState extends State<FarmScreen> {
                                 height: 5,
                               ),
                               Text(
-                                'Responsável',
+                                'Descrição',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -83,38 +83,49 @@ class _FarmScreenState extends State<FarmScreen> {
                               SizedBox(
                                 height: 15,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Text(
-                                        model.userData.name,
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                      Text(
-                                        model.userData.adress +
-                                            ' - ' +
-                                            model.userData.adressComplement,
-                                        style: TextStyle(
-                                            // fontSize: 20,
-                                            ),
-                                      ),
-                                      Text(
-                                        'CEP: ' + model.userData.cep,
-                                        style: TextStyle(
-                                            // fontSize: 20,
-                                            ),
-                                      ),
-                                    ],
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0),
+                                child: Container(
+                                  child: Text(
+                                    '<Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris se pirulitá. Cevadis im ampola pa arma uma pindureta. Posuere libero varius.>',
+                                    // textAlign: TextAlign.left,
                                   ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
+                                ),
+                              )
+
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.center,
+                              //   children: [
+                              //     Column(
+                              //       children: [
+                              //         Text(
+                              //           model.userData.name,
+                              //           style: TextStyle(
+                              //             fontSize: 20,
+                              //           ),
+                              //         ),
+                              //         Text(
+                              //           model.userData.adress +
+                              //               ' - ' +
+                              //               model.userData.adressComplement,
+                              //           style: TextStyle(
+                              //               // fontSize: 20,
+                              //               ),
+                              //         ),
+                              //         Text(
+                              //           'CEP: ' + model.userData.cep,
+                              //           style: TextStyle(
+                              //               // fontSize: 20,
+                              //               ),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //   ],
+                              // ),
+                              // SizedBox(
+                              //   height: 5,
+                              // ),
 
                               // Row(
                               //   mainAxisAlignment:

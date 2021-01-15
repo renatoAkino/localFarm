@@ -36,6 +36,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       // Text(model.userData.farmData.distance.toString()),
                       // Text(model.userData.farmData.image),
                       // Text(model.userData.farmData.followers.toString()),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                model.userData.name,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Text(
+                                model.userData.adress +
+                                    ' - ' +
+                                    model.userData.adressComplement,
+                                style: TextStyle(
+                                    // fontSize: 20,
+                                    ),
+                              ),
+                              Text(
+                                'CEP: ' + model.userData.cep,
+                                style: TextStyle(
+                                    // fontSize: 20,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 55,
+                      ),
                       FlatButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {

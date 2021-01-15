@@ -77,7 +77,7 @@ class _FloatingCardState extends State<FloatingCard> {
                             color: Colors.green,
                           ),
                           Text(
-                            ' <12>',
+                            '<12>',
                             // cargo ?? '',
                             textAlign: TextAlign.start,
                             style: new TextStyle(

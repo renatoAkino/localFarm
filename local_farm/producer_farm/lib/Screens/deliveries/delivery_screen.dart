@@ -17,6 +17,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
           backgroundColor: Colors.white,
           // leading: Image.asset('local_farm/producer_farm/assets/logo.png'),
           elevation: 1.5,
+          centerTitle: true,
           title: Text('Entregas'),
           actions: <Widget>[],
         ),

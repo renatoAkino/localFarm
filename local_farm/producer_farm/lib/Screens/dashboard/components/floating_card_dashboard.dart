@@ -21,54 +21,51 @@ class _FloatingCardDashboardState extends State<FloatingCardDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey[300].withOpacity(0.3),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: Offset(0, 3), // changes position of shadow
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey[300].withOpacity(0.3),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+          // color: Colors.green.withOpacity(0.7),
+          color: Colors.white,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                widget.listInfoCards[widget.index]['count'].toString(),
+                style: TextStyle(
+                  fontSize: 60,
+                  // color: Colors.blueGrey,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                widget.listInfoCards[widget.index]['title'],
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  // color: Colors.grey[500],
+                  color: Colors.green,
+
+                  // fontWeight: FontWeight.bold,
+                ),
               ),
             ],
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            ),
-            // color: Colors.green.withOpacity(0.7),
-            color: Colors.white,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  widget.listInfoCards[widget.index]['count'].toString(),
-                  style: TextStyle(
-                    fontSize: 60,
-                    // color: Colors.blueGrey,
-                    color: Colors.green[700],
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  widget.listInfoCards[widget.index]['title'],
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 15,
-                    // color: Colors.grey[500],
-                    color: Colors.black38,
-
-                    // fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
           ),
         ),
       ),
