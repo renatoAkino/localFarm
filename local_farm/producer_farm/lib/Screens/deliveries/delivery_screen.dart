@@ -11,6 +11,11 @@ class DeliveryScreen extends StatelessWidget {
       elevation: 1.5,
       title: Text('Entregas'),
       actions: <Widget>[],
-    ));
+    ),
+    body: Row(
+      children: [
+        Container()
+      ],
+    ),);
   }
 }
