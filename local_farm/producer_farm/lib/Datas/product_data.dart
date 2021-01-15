@@ -31,4 +31,18 @@ class ProductData {
     quantity = map['quantity'];
     farm_id = map['farm_id'];
   }
+
+  Map<String, dynamic>  toMap(){
+      return {
+        'prodict_id' : productId,
+        'description' : description,
+        'farm_id' : farm_id,
+        'image' : image,
+        'price' : price,
+        'quantity' : quantity,
+        'name' : name,
+        'soldPer' : soldPer,
+        'type' : type,
+      };
+  }
 }
