@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:producerfarm/Models/user_model.dart';
+import 'package:producerfarm/Screens/farm/components/post_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../Models/user_model.dart';
@@ -72,20 +73,20 @@ class _FarmScreenState extends State<FarmScreen> {
                                     color: Theme.of(context).accentColor,
                                     fontWeight: FontWeight.bold),
                               )),
-                          // FlatButton(
-                          //     padding: EdgeInsets.zero,
-                          //     onPressed: () {
-                          //       Navigator.push(
-                          //           context,
-                          //           MaterialPageRoute(
-                          //               builder: (context) => OrderScreen()));
-                          //     },
-                          //     child: Text(
-                          //       "Pedidos",
-                          //       style: TextStyle(
-                          //           color: Theme.of(context).accentColor,
-                          //           fontWeight: FontWeight.bold),
-                          //     )),
+                           FlatButton(
+                               padding: EdgeInsets.zero,
+                               onPressed: () {
+                                 Navigator.push(
+                                     context,
+                                     MaterialPageRoute(
+                                         builder: (context) => PostScreen()));
+                               },
+                               child: Text(
+                                 "Posts",
+                                 style: TextStyle(
+                                     color: Theme.of(context).accentColor,
+                                     fontWeight: FontWeight.bold),
+                               )),
                           // FlatButton(
                           //   padding: EdgeInsets.zero,
                           //   onPressed: () {

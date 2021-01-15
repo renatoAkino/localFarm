@@ -19,4 +19,15 @@ class FarmData {
     image = data['image'];
     name = data['name'];
   }
+
+  Map<String, dynamic> toMap(){
+    return {
+      'farm_id' : farmId,
+      'addres' : adress,
+      'distance' : distance,
+      'followers' : followers,
+      'image' : image,
+      'name' : name,
+    };
+  }
 }
