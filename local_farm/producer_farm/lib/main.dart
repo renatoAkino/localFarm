@@ -6,6 +6,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import 'Models/user_model.dart';
 import 'Screens/farm/farm_screen.dart';
+import 'Screens/tab_screen.dart';
 
 void main() {
   return runApp(MyApp());
@@ -14,7 +15,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return  FutureBuilder(
+    return FutureBuilder(
       // Initialize FlutterFire
       future: Firebase.initializeApp(),
       builder: (context, snapshot) {
@@ -24,8 +25,9 @@ class MyApp extends StatelessWidget {
             child: ScopedModelDescendant<UserModel>(
               builder: (context, child, model) {
                 return MaterialApp(
-                  title: "Local Farm",
-                  home: FarmScreen(),
+                  // title: "Local Farm",
+                  home: TabScreen(),
+
                   localizationsDelegates: [
                     GlobalMaterialLocalizations.delegate,
                     GlobalWidgetsLocalizations.delegate
@@ -43,9 +45,10 @@ class MyApp extends StatelessWidget {
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return Center(child: CircularProgressIndicator(),);
+        return Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
-
   }
 }
