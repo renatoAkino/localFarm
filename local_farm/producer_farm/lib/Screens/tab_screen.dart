@@ -4,6 +4,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'package:producerfarm/Screens/farm/farm_screen.dart';
 
+import 'Dashboard/dashboard_screen.dart';
 import 'deliveries/delivery_screen.dart';
 import 'deliveries/delivery_screen.dart';
 import 'login_screen.dart';
@@ -35,26 +36,28 @@ class _TabScreenState extends State<TabScreen> {
           buttonBackgroundColor: Colors.green,
           items: <Widget>[
             Icon(
-              Icons.bar_chart,
+              Icons.home,
               color: (_pageIndex == 0) ? Colors.white : Colors.green,
             ),
             Icon(
-              // Icons.search,
-              // Icons.explore_outlined,
-              Icons.storefront,
+              Icons.bar_chart,
               color: (_pageIndex == 1) ? Colors.white : Colors.green,
             ),
             Icon(
-              Icons.assignment_outlined,
+              Icons.storefront,
               color: (_pageIndex == 2) ? Colors.white : Colors.green,
             ),
             Icon(
-              Icons.local_shipping_outlined,
+              Icons.assignment_outlined,
               color: (_pageIndex == 3) ? Colors.white : Colors.green,
             ),
             Icon(
-              Icons.person_outline,
+              Icons.local_shipping_outlined,
               color: (_pageIndex == 4) ? Colors.white : Colors.green,
+            ),
+            Icon(
+              Icons.person_outline,
+              color: (_pageIndex == 5) ? Colors.white : Colors.green,
             ),
           ],
           onTap: (index) {
@@ -74,17 +77,22 @@ class _TabScreenState extends State<TabScreen> {
     switch (index) {
       case 0:
         return FarmScreen();
+        // return DashboardScreen();
         break;
       case 1:
-        return ProductScreen();
+        // return FarmScreen();
+        return DashboardScreen();
         break;
       case 2:
-        return OrderScreen();
+        return ProductScreen();
         break;
       case 3:
-        return DeliveryScreen();
+        return OrderScreen();
         break;
       case 4:
+        return DeliveryScreen();
+        break;
+      case 5:
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
