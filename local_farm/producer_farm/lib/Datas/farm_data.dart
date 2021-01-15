@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class FarmData{
+class FarmData {
   String farmId;
   String adress;
   int distance;
@@ -10,7 +10,7 @@ class FarmData{
 
   FarmData();
 
-  FarmData.fromDocument(DocumentSnapshot documentSnapshot){
+  FarmData.fromDocument(DocumentSnapshot documentSnapshot) {
     farmId = documentSnapshot.id;
     Map<String, dynamic> data = documentSnapshot.data();
     adress = data['adress'];
@@ -19,6 +19,4 @@ class FarmData{
     image = data['image'];
     name = data['name'];
   }
-
-
 }

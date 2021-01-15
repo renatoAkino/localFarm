@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:localfarm/Datas/order_data.dart';
-import 'package:flutter/foundation.dart';
+import 'package:producerfarm/Datas/order_data.dart';
 
 import './components/status_progress_widget.dart';
 
@@ -58,7 +57,6 @@ class OrderDetailScreen extends StatelessWidget {
                       ),
                       StatusProgressWidget(
                         index: order.status,
-                        // dark: true,
                       ),
                     ],
                   ),
@@ -337,9 +335,6 @@ List<Widget> _buildItensList(OrderData order) {
                   order.products[i].price.toStringAsFixed(2),
               style: TextStyle(fontSize: 16, color: Colors.grey[700]),
             ),
-            Text(order.products[i].farm_name == null
-                ? ""
-                : order.products[i].farm_name)
           ],
         ),
         Text(

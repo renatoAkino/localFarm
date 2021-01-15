@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ProductData{
+class ProductData {
   String productId;
   String description;
   String farm_id;
@@ -30,8 +30,5 @@ class ProductData{
     name = map['product']['title'];
     quantity = map['quantity'];
     farm_id = map['farm_id'];
-
   }
-
-
 }

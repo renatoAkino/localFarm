@@ -28,7 +28,7 @@ class ProductData {
     price = snapshot['price'] + 0.0;
     quantity = snapshot['quantity'];
     //title = snapshot['title'];
-
+    farm_name = snapshot['farm_name'];
     name = snapshot['name'];
     soldPer = snapshot['sold-per'];
     type = snapshot['type'];
@@ -36,13 +36,11 @@ class ProductData {
 
   ProductData.fromResumedDocument(Map<String, dynamic> map) {
     id = map['product_id'];
-    price = map['product']['price'];
+    price = map['product']['price'] + 0.0;
     name = map['product']['title'];
     quantity = map['quantity'];
     farm_id = map['farm_id'];
-    getFarmName().then((name) {
-      farm_name = name;
-    });
+    farm_name = map['farm_name'];
   }
 
   Future<void> getFarmData() async {
@@ -55,16 +53,17 @@ class ProductData {
     return {'title': name, 'price': price, 'farm_id': farm_id};
   }
 
-  Future<String> getFarmName() async {
-    var farmName;
-    DocumentSnapshot snapshot =
-        await Firestore.instance.collection('farms').document(farm_id).get();
-    FarmData farm = FarmData.fromDocument(snapshot);
-    if (farm == null) {
-      farmName = "";
-    } else {
-      farmName = farm.name;
-    }
-    return farmName;
-  }
+  // Future<String> getFarmName() async {
+  //   var farmName;
+  //   DocumentSnapshot snapshot =
+  //       await Firestore.instance.collection('farms').document(farm_id).get();
+  //   FarmData farm = FarmData.fromDocument(snapshot);
+  //   if (farm == null) {
+  //     farmName = "";
+  //   } else {
+  //     farmName = farm.name;
+  //   }
+  //   log(farmName);
+  //   return farmName;
+  // }
 }
