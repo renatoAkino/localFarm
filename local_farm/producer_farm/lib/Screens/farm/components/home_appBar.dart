@@ -1,77 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:producerfarm/Models/user_model.dart';
-
 import 'package:scoped_model/scoped_model.dart';
+
+import '../../login_screen.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   AppBar appBar = AppBar();
+  UserModel model;
+  HomeAppBar({
+    Key key,
+    this.model,
+  }) : super(key: key);
 
   @override
   Size get preferredSize => new Size.fromHeight(appBar.preferredSize.height);
 
   @override
   Widget build(BuildContext context) {
-    // return AppBar(
-    //   backgroundColor: Colors.transparent,
-    //   elevation: 0,
-    //   title: Row(
-    //     mainAxisAlignment: MainAxisAlignment.start,
-    //     children: [
-    //       SizedBox(
-    //         width: 10,
-    //       ),
-    //       Icon(
-    //         Icons.menu,
-    //         color: Colors.green,
-    //         size: 30.0,
-    //       ),
-    //       // SvgPicture.asset(
-    //       //   'assets/icons/location-pin.svg',
-    //       //   height: 30.0,
-    //       // ),
-    //       Flexible(
-    //         child: Container(
-    //           padding: EdgeInsets.only(left: 15.0),
-    //           // width: 130,
-    //           child: Text(
-    //             UserModel.of(context).isLoggedin()
-    //                 ? UserModel.of(context).userData.name
-    //                 : '',
-    //             overflow: TextOverflow.ellipsis,
-    //             style: TextStyle(color: Colors.black87),
-    //             textAlign: TextAlign.center,
-    //           ),
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    //   titleSpacing: 0,
-    //   // actions: <Widget>[
-    //   //   IconButton(
-    //   //     onPressed: () {
-    //   //       Navigator.of(context).push(
-    //   //         MaterialPageRoute(
-    //   //           // builder: (context) => CartScreen(),
-    //   //           builder: (context) => CartScreen(),
-    //   //         ),
-    //   //       );
-    //   //     },
-    //   //     icon: Icon(Icons.shopping_cart_outlined),
-    //   //   ),
-    //   // ],
-    // );
     return AppBar(
       backgroundColor: Colors.white,
       // backgroundColor: Colors.blueGrey[50],
       elevation: 0,
       centerTitle: true,
-      leading: IconButton(
-        icon: Icon(
-          Icons.menu,
-          color: Colors.green,
-        ),
-        onPressed: () {},
-      ),
+      // leading: IconButton(
+      //   icon: Icon(
+      //     Icons.menu,
+      //     color: Colors.green,
+      //   ),
+      //   onPressed: () {},
+      // ),
       title: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,6 +58,19 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
+      actions: [
+        IconButton(
+          icon: Icon(
+            Icons.exit_to_app,
+            color: Colors.green,
+          ),
+          onPressed: () {
+            model.logout();
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => LoginScreen()));
+          },
+        )
+      ],
     );
   }
 }

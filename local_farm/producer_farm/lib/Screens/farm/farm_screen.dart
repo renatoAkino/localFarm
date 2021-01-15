@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:producerfarm/Models/user_model.dart';
-import 'package:producerfarm/Screens/farm/components/post_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../Models/user_model.dart';
-import '../../Models/user_model.dart';
 import '../../Models/user_model.dart';
 import '../login_screen.dart';
 import 'components/floating_card_info.dart';
 import 'components/home_appBar.dart';
+import 'components/selos_widget.dart';
 
 class FarmScreen extends StatefulWidget {
   @override
@@ -25,7 +23,8 @@ class _FarmScreenState extends State<FarmScreen> {
           print(model.firebaseUser.uid);
         }
         return Scaffold(
-          appBar: HomeAppBar(),
+          backgroundColor: Colors.white,
+          appBar: HomeAppBar(model: model),
           body: Stack(
             children: [
               Container(
@@ -47,62 +46,143 @@ class _FarmScreenState extends State<FarmScreen> {
                 child: FloatingCard(),
               ),
               model.isLoggedin()
-                  ? Padding(
-                      padding: const EdgeInsets.only(
-                          top: 110.0, left: 15.0, right: 15.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(model.userData.farmData.farmId),
-                          Text(model.userData.farmData.name),
-                          Text(model.userData.farmData.distance.toString()),
-                          Text(model.userData.farmData.image),
-                          Text(model.userData.farmData.followers.toString()),
-                          FlatButton(
-                              padding: EdgeInsets.zero,
-                              onPressed: () {
-                                model.logout();
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginScreen()));
-                              },
-                              child: Text(
-                                "Logout",
+                  ? Positioned(
+                      top: size.height * 0.4,
+                      child: Container(
+                        // color: Colors.blue,
+                        width: size.width,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Selos',
                                 style: TextStyle(
-                                    color: Theme.of(context).accentColor,
-                                    fontWeight: FontWeight.bold),
-                              )),
-                           FlatButton(
-                               padding: EdgeInsets.zero,
-                               onPressed: () {
-                                 Navigator.push(
-                                     context,
-                                     MaterialPageRoute(
-                                         builder: (context) => PostScreen()));
-                               },
-                               child: Text(
-                                 "Posts",
-                                 style: TextStyle(
-                                     color: Theme.of(context).accentColor,
-                                     fontWeight: FontWeight.bold),
-                               )),
-                          // FlatButton(
-                          //   padding: EdgeInsets.zero,
-                          //   onPressed: () {
-                          //     Navigator.push(
-                          //         context,
-                          //         MaterialPageRoute(
-                          //             builder: (context) => ProductScreen()));
-                          //   },
-                          //   child: Text(
-                          //     "Produtos",
-                          //     style: TextStyle(
-                          //         color: Theme.of(context).accentColor,
-                          //         fontWeight: FontWeight.bold),
-                          //   ),
-                          // )
-                        ],
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              SelosFarmWidget(model.userData.farmData),
+                              SizedBox(
+                                height: 20,
+                              ),
+
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                'Responsável',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Text(
+                                        model.userData.name,
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      Text(
+                                        model.userData.adress +
+                                            ' - ' +
+                                            model.userData.adressComplement,
+                                        style: TextStyle(
+                                            // fontSize: 20,
+                                            ),
+                                      ),
+                                      Text(
+                                        'CEP: ' + model.userData.cep,
+                                        style: TextStyle(
+                                            // fontSize: 20,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+
+                              // Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   children: [
+                              //     Text(
+                              //       'Estabelecimento',
+                              //       style: TextStyle(
+                              //         fontWeight: FontWeight.bold,
+                              //       ),
+                              //     ),
+                              //     Text(model.userData.farmData.name),
+                              //   ],
+                              // ),
+                              // SizedBox(
+                              //   height: 5,
+                              // ),
+                              // Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   children: [
+                              //     Text(
+                              //       'Responsável',
+                              //       style: TextStyle(
+                              //         fontWeight: FontWeight.bold,
+                              //       ),
+                              //     ),
+                              //     Text(model.userData.name),
+                              //   ],
+                              // ),
+                              // SizedBox(
+                              //   height: 5,
+                              // ),
+                              // Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   children: [
+                              //     Text(
+                              //       'Endereço',
+                              //       style: TextStyle(
+                              //         fontWeight: FontWeight.bold,
+                              //       ),
+                              //     ),
+                              //     Text(model.userData.adress),
+                              //   ],
+                              // ),
+                              // SizedBox(
+                              //   height: 20,
+                              // ),
+
+                              // FlatButton(
+                              //     padding: EdgeInsets.zero,
+                              //     onPressed: () {
+                              //       Navigator.push(
+                              //           context,
+                              //           MaterialPageRoute(
+                              //               builder: (context) =>
+                              //                   PostScreen()));
+                              //     },
+                              //     child: Text(
+                              //       "Posts",
+                              //       style: TextStyle(
+                              //           color: Theme.of(context).accentColor,
+                              //           fontWeight: FontWeight.bold),
+                              //     )),
+                            ],
+                          ),
+                        ),
                       ),
                     )
                   : FlatButton(

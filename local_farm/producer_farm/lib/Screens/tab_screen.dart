@@ -4,12 +4,13 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'package:producerfarm/Screens/farm/farm_screen.dart';
 
-import 'Dashboard/dashboard_screen.dart';
+import 'dashboard/dashboard_screen.dart';
 import 'deliveries/delivery_screen.dart';
 import 'deliveries/delivery_screen.dart';
 import 'login_screen.dart';
 import 'orders/order_screen.dart';
 import 'product/product_screen.dart';
+import 'profile/profile_screen.dart';
 
 class TabScreen extends StatefulWidget {
   @override
@@ -93,43 +94,7 @@ class _TabScreenState extends State<TabScreen> {
         return DeliveryScreen();
         break;
       case 5:
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Perfil"),
-              FlatButton(
-                color: Colors.orange,
-                padding: EdgeInsets.all(8),
-                onPressed: () {
-                  // model.logout();
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => LoginScreen()));
-                },
-                child: Text(
-                  "Logout",
-                  style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              FlatButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()));
-                  },
-                  child: Text(
-                    "Login",
-                    style: TextStyle(
-                        color: Theme.of(context).accentColor,
-                        fontWeight: FontWeight.bold),
-                  )),
-            ],
-          ),
-        );
+        return ProfileScreen();
         break;
     }
     return Container();
