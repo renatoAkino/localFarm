@@ -5,6 +5,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:producerfarm/Screens/farm/farm_screen.dart';
 
 import 'deliveries/delivery_screen.dart';
+import 'deliveries/delivery_screen.dart';
 import 'login_screen.dart';
 import 'orders/order_screen.dart';
 import 'product/product_screen.dart';

@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:producerfarm/Datas/routing_data.dart';
-import 'teste.json' as testeJson;
 
 class RoutingRepository {
   // loadJson() async {
