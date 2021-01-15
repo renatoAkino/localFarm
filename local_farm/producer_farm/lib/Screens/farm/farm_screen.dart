@@ -57,21 +57,21 @@ class _FarmScreenState extends State<FarmScreen> {
                           Text(model.userData.farmData.distance.toString()),
                           Text(model.userData.farmData.image),
                           Text(model.userData.farmData.followers.toString()),
-                          FlatButton(
-                              padding: EdgeInsets.zero,
-                              onPressed: () {
-                                model.logout();
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginScreen()));
-                              },
-                              child: Text(
-                                "Logout",
-                                style: TextStyle(
-                                    color: Theme.of(context).accentColor,
-                                    fontWeight: FontWeight.bold),
-                              )),
+                          // FlatButton(
+                          //     padding: EdgeInsets.zero,
+                          //     onPressed: () {
+                          //       model.logout();
+                          //       Navigator.push(
+                          //           context,
+                          //           MaterialPageRoute(
+                          //               builder: (context) => LoginScreen()));
+                          //     },
+                          //     child: Text(
+                          //       "Logout",
+                          //       style: TextStyle(
+                          //           color: Theme.of(context).accentColor,
+                          //           fontWeight: FontWeight.bold),
+                          //     )),
                           // FlatButton(
                           //     padding: EdgeInsets.zero,
                           //     onPressed: () {
