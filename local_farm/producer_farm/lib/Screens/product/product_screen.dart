@@ -6,6 +6,8 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../Models/user_model.dart';
 import '../../Models/user_model.dart';
+import 'edit_product_screen.dart';
+import 'insert_product_screen.dart';
 
 class ProductScreen extends StatefulWidget {
   @override
@@ -24,12 +26,21 @@ class _ProductScreenState extends State<ProductScreen> {
         elevation: 1.5,
         title: Text('Meus Produtos'),
         actions: <Widget>[
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.add,
-              color: Colors.green,
-              size: 30,
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => InsertProductScreen(),
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.add,
+                color: Colors.green,
+                size: 30,
+              ),
             ),
           )
         ],
@@ -161,7 +172,7 @@ class _ProductScreenState extends State<ProductScreen> {
                             children: <Widget>[
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    top: 0, bottom: 10, left: 15, right: 10),
+                                    top: 0, bottom: 10, left: 20, right: 10),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
@@ -175,7 +186,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 15, right: 10),
+                                    const EdgeInsets.only(left: 20, right: 10),
                                 child: Column(
                                   children: [
                                     Text(productData.description),
@@ -229,7 +240,15 @@ class _ProductScreenState extends State<ProductScreen> {
                                             width: 10,
                                           ),
                                           FlatButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EditProductScreen(
+                                                          productData),
+                                                ),
+                                              );
+                                            },
                                             textColor: Colors.white,
                                             color: Colors.green,
                                             // padding: const EdgeInsets.all(8.0),

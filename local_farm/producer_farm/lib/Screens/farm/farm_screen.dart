@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:producerfarm/Models/user_model.dart';
-import 'package:producerfarm/Screens/orders/product_screen.dart';
-import 'package:producerfarm/Screens/product/order_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../Models/user_model.dart';

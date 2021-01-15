@@ -12,7 +12,7 @@ class OrderData {
   double shipPrice;
   int status;
   double totalPrice;
-  DateTime order_date;
+  Timestamp order_date;
   Timestamp ship_date;
 
   FarmData farmData;
@@ -29,9 +29,7 @@ class OrderData {
     data['products'].forEach((product) {
       products.add(ProductData.fromResumedDocument(product));
     });
-    order_date = DateTime.fromMicrosecondsSinceEpoch(
-            data['order_date'].microsecondsSinceEpoch)
-        .toLocal();
+    order_date = data['order_date'];
     ship_date = data['ship_date'];
   }
 

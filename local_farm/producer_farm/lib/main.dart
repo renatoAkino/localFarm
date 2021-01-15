@@ -6,7 +6,6 @@ import 'package:scoped_model/scoped_model.dart';
 
 import 'Models/user_model.dart';
 import 'Screens/farm/farm_screen.dart';
-import 'Screens/orders/product_screen.dart';
 import 'Screens/tab_screen.dart';
 
 void main() {
