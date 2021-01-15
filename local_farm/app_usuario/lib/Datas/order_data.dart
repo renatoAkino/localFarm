@@ -8,6 +8,7 @@ class OrderData {
   String order_id;
   String client_id;
   String farm_id;
+  // String farm_name;
   List<ProductData> products = [];
   double productsPrice;
   double shipPrice;
@@ -21,7 +22,6 @@ class OrderData {
   OrderData.fromDocument(DocumentSnapshot document) {
     order_id = document.documentID;
     client_id = document.data['clientID'];
-    // farm_id = document.data['farm_id'];
     productsPrice = document.data['productsPrice'] + 0.0;
     shipPrice = document.data['shipPrice'] + 0.0;
     status = document.data['status'];

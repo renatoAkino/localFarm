@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/product_data.dart';
 
@@ -71,7 +73,7 @@ class GridProduct extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 2.0, top: 8.0, left: 5.0),
                   child: Text(
-                    "R\$ ${productData.price}",
+                    "R\$ ${productData.price.toStringAsFixed(2)}",
                     style: TextStyle(
                       fontSize: 16.0,
                       // fontWeight: FontWeight.w900,
@@ -95,7 +97,7 @@ class GridProduct extends StatelessWidget {
                 // ),
                 Text(
                   // " $rating ($raters Reviews)",
-                  "Fazenda Atalaia",
+                  productData.farm_name,
                   style: TextStyle(
                     fontSize: 11.0,
                   ),
@@ -118,6 +120,12 @@ class GridProduct extends StatelessWidget {
       },
     );
   }
+
+  // String _getFarmName(ProductData productData) {
+  //   var farmName;
+  //   productData.getFarmName().then((name) => farmName = name);
+  //   log(farmName);
+  // }
 }
 
 /*
