@@ -45,14 +45,25 @@ class _FloatingCardDashboardState extends State<FloatingCardDashboard> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                widget.listInfoCards[widget.index]['count'].toString(),
-                style: TextStyle(
-                  fontSize: 60,
-                  // color: Colors.blueGrey,
-                  color: Colors.black87,
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'R\$ ',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  Text(
+                    widget.listInfoCards[widget.index]['count'].toString() +
+                        ',00',
+                    style: TextStyle(
+                      fontSize: 30,
+                      // color: Colors.blueGrey,
+                      color: Colors.green[800],
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
               Text(
                 widget.listInfoCards[widget.index]['title'],
@@ -60,7 +71,7 @@ class _FloatingCardDashboardState extends State<FloatingCardDashboard> {
                 style: TextStyle(
                   fontSize: 15,
                   // color: Colors.grey[500],
-                  color: Colors.green,
+                  color: Colors.grey,
 
                   // fontWeight: FontWeight.bold,
                 ),

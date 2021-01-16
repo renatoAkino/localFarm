@@ -78,6 +78,29 @@ class _FeedTileState extends State<FeedTile> {
                 ),
                 Positioned(
                   right: -10.0,
+                  bottom: 45.0,
+                  child: RawMaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        // UserModel.of(context).likePost(widget.post.post_id);
+                      });
+                    },
+                    fillColor: checkLike ? Colors.green : Colors.white,
+                    shape: CircleBorder(),
+                    elevation: 4.0,
+                    child: Padding(
+                      padding: EdgeInsets.all(5),
+                      child: Icon(
+                        // isFav ? Icons.favorite : Icons.favorite_border,
+                        Icons.mode_edit,
+                        color: Colors.blue,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  right: -10.0,
                   bottom: 3.0,
                   child: RawMaterialButton(
                     onPressed: () {
@@ -92,9 +115,9 @@ class _FeedTileState extends State<FeedTile> {
                       padding: EdgeInsets.all(5),
                       child: Icon(
                         // isFav ? Icons.favorite : Icons.favorite_border,
-                        Icons.favorite_border,
-                        color: checkLike ? Colors.white : Colors.green,
-                        size: 17,
+                        Icons.delete_outline,
+                        color: Colors.red,
+                        size: 20,
                       ),
                     ),
                   ),
@@ -139,7 +162,7 @@ class _FeedTileState extends State<FeedTile> {
             ),
 
             SizedBox(
-              height: 10,
+              height: 20,
             ),
           ],
         ),

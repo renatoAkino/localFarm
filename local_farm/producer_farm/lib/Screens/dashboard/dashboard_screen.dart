@@ -16,10 +16,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> listInfoCards = [
-      {'title': 'Vendas\nHoje', 'count': 3, 'page': 'pagina'},
-      {'title': 'Vendas nos\núltimos 7 dias', 'count': 15, 'page': 'pagina'},
-      // {'title': 'Em Rota\nde Entrega', 'count': 42, 'page': 'pagina'},
-      // {'title': 'Em Rota\nde Entrega', 'count': 42, 'page': 'pagina'},
+      // {'title': 'Vendas\nHoje', 'count': 3, 'page': 'pagina'},
+      // {'title': 'Vendas nos\núltimos 7 dias', 'count': 15, 'page': 'pagina'},
+      {'title': 'Hoje', 'count': 352, 'page': 'pagina'},
+      {'title': 'Total Mês', 'count': 5230, 'page': 'pagina'},
     ];
     Size size = MediaQuery.of(context).size;
     //
@@ -36,13 +36,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
             centerTitle: true,
             backgroundColor: Colors.white,
             // leading: Image.asset('local_farm/producer_farm/assets/logo.png'),
-            elevation: 1.5,
+            elevation: 0,
             title: Text(
               'Dashboard',
               style: TextStyle(
-                // fontSize: 25,
+                fontSize: 30,
                 color: Colors.black87,
               ),
+            ),
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.green,
+              ),
+              onPressed: () => Navigator.pop(context),
             ),
             actions: <Widget>[],
           ),
@@ -94,7 +101,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       child: Row(
                         children: [
                           Text(
-                            'Faturamento Mensal',
+                            'Histórico Mensal',
                             textAlign: TextAlign.center,
                             style:
                                 TextStyle(fontSize: 18, color: Colors.black45),

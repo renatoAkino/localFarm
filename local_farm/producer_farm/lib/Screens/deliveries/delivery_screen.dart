@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:producerfarm/Datas/vroom_req.dart';
 
+import 'calendar_screen.dart';
+
 class DeliveryScreen extends StatefulWidget {
   @override
   _DeliveryScreenState createState() => _DeliveryScreenState();
@@ -21,8 +23,39 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
           title: Text('Entregas'),
           actions: <Widget>[],
         ),
-        body: Row(
-          children: [Text(_showJSON())],
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              _showJSON(),
+            ),
+            Center(
+              child: FlatButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CalendarScreen()));
+                  },
+                  child: Container(
+                    width: 120,
+                    height: 40,
+                    color: Colors.orange,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Center(
+                        child: Text(
+                          "Calendario",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  )),
+            ),
+          ],
         ));
   }
 
