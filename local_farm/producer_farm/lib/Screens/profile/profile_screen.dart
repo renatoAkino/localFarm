@@ -97,6 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       FlatButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
+                            model.logout();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -124,13 +125,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               : FlatButton(
                   padding: EdgeInsets.zero,
                   onPressed: () {
+                    model.logout();
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => LoginScreen()));
                   },
                   child: Text(
                     "Faça Login",
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                        color: Colors.black, fontWeight: FontWeight.bold),
                   )),
         );
       },

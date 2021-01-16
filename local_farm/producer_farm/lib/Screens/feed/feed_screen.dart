@@ -15,10 +15,11 @@ class _FeedScreenState extends State<FeedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         title: Text('Suas Postagens'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.green),

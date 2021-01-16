@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:producerfarm/Models/user_model.dart';
+import 'package:producerfarm/Screens/dashboard/dashboard_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../login_screen.dart';
@@ -22,13 +23,21 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       // backgroundColor: Colors.blueGrey[50],
       elevation: 0,
       centerTitle: true,
-      // leading: IconButton(
-      //   icon: Icon(
-      //     Icons.menu,
-      //     color: Colors.green,
-      //   ),
-      //   onPressed: () {},
-      // ),
+      leading: IconButton(
+        icon: Icon(
+          Icons.attach_money,
+          color: Colors.green,
+          size: 30,
+        ),
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              // builder: (context) => CartScreen(),
+              builder: (context) => DashboardScreen(),
+            ),
+          );
+        },
+      ),
       title: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
