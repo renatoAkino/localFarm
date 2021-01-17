@@ -10,10 +10,10 @@ class RoutingController {
 
   final state = ValueNotifier<RoutingState>(RoutingState.start);
 
-  Future start() async {
+  Future start(String body) async {
     state.value = RoutingState.loading;
     try {
-      dados = await RoutingRepository.getRoute();
+      dados = await RoutingRepository.getRoute(body);
       state.value = RoutingState.sucess;
       print('sucesso!');
     } catch (e) {

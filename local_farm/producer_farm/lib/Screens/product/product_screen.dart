@@ -6,6 +6,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../Models/user_model.dart';
 import '../../Models/user_model.dart';
+import 'delete_screen.dart';
 import 'edit_product_screen.dart';
 import 'insert_product_screen.dart';
 
@@ -226,7 +227,14 @@ class _ProductScreenState extends State<ProductScreen> {
                                         children: [
                                           FlatButton(
                                             // onPressed: showAlertDialog(),
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DeleteScreen(productData),
+                                                ),
+                                              );
+                                            },
                                             textColor: Colors.white,
                                             color: Colors.red,
                                             // padding: const EdgeInsets.all(8.0),

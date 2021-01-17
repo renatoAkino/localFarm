@@ -239,9 +239,9 @@ class OrderScreen extends StatelessWidget {
     );
   }
 
-  String _dataFormatada(Timestamp dataEntr) {
+  String _dataFormatada(DateTime dataEntr) {
     if (dataEntr != null) {
-      DateTime dateAbertura = DateTime.parse(dataEntr.toDate().toString());
+      DateTime dateAbertura = DateTime.parse(dataEntr.toString());
       DateFormat dateFormat = DateFormat("dd/MM/yyyy");
       String formattedDate = dateFormat.format(dateAbertura);
       return formattedDate;

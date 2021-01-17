@@ -294,10 +294,10 @@ class OrderDetailScreen extends StatelessWidget {
   }
 }
 
-String _formatDate(Timestamp date) {
+String _formatDate(DateTime date) {
   var formattedDate;
   date != null
-      ? formattedDate = DateFormat("dd/MM/yyyy").format(date.toDate())
+      ? formattedDate = DateFormat("dd/MM/yyyy").format(date)
       : formattedDate = "";
   return formattedDate;
 }

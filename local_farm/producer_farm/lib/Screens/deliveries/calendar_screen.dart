@@ -11,6 +11,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../constants.dart';
 import 'components/week_buttons.dart';
+import 'delivery_screen.dart';
 import 'map_screen.dart';
 
 class CalendarScreen extends StatefulWidget {
@@ -19,21 +20,81 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
+  var datesList = [];
+  var _stateDate = DateTime.now();
+  var pickedDay = DateTime.now().day;
+
+  @override
+  void initState() {
+    super.initState();
+    for (int i = -2; i < 5; i++) {
+      DateTime date = _stateDate;
+      date = date.add(Duration(days: i));
+      datesList.add(date);
+    }
+  }
+
+  void isPicked() {}
+
   @override
   Widget build(BuildContext context) {
+    List weekList = [
+      {
+        "name": DateFormat('E').format(datesList[0]),
+        "day": datesList[0].day.toString(),
+        "today": datesList[0].day == pickedDay,
+      },
+      {
+        "name": DateFormat('E').format(datesList[1]),
+        "day": datesList[1].day.toString(),
+        "today": datesList[1].day == pickedDay,
+      },
+      {
+        "name": DateFormat('E').format(datesList[2]),
+        "day": datesList[2].day.toString(),
+        "today": datesList[2].day == pickedDay,
+      },
+      {
+        "name": DateFormat('E').format(datesList[3]),
+        "day": datesList[3].day.toString(),
+        "today": datesList[3].day == pickedDay,
+      },
+      {
+        "name": DateFormat('E').format(datesList[4]),
+        "day": datesList[4].day.toString(),
+        "today": datesList[4].day == pickedDay,
+      },
+      {
+        "name": DateFormat('E').format(datesList[5]),
+        "day": datesList[5].day.toString(),
+        "today": datesList[5].day == pickedDay,
+      },
+      {
+        "name": DateFormat('E').format(datesList[6]),
+        "day": datesList[6].day.toString(),
+        "today": datesList[6].day == pickedDay,
+      },
+    ];
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.white,
-        // leading: Image.asset('local_farm/producer_farm/assets/logo.png'),
         elevation: 0,
         title: Text('Agenda de Entregas'),
         actions: <Widget>[],
       ),
       body: ScopedModelDescendant<UserModel>(
         builder: (context, child, model) {
+          DateTime _now = DateTime.now();
+          DateTime _start = DateTime(_now.year, _now.month, _now.day, 0, 0);
+          DateTime _end = DateTime(_now.year, _now.month, _now.day, 23, 59, 59);
           return FutureBuilder<QuerySnapshot>(
-            future: FirebaseFirestore.instance.collection('orders').get(),
+            future: FirebaseFirestore.instance
+                .collection('orders')
+                .where('ship_date', isGreaterThanOrEqualTo: _start)
+                .where('ship_date', isLessThanOrEqualTo: _end)
+                .get(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Stack(
@@ -45,44 +106,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
                         shrinkWrap: true,
                         itemCount: 7,
                         itemBuilder: (BuildContext context, int index) {
-                          List weekList = [
-                            {
-                              "name": "Seg",
-                              "day": '12',
-                              "today": false,
-                            },
-                            {
-                              "name": "Ter",
-                              "day": '13',
-                              "today": false,
-                            },
-                            {
-                              "name": "Qua",
-                              "day": '14',
-                              "today": true,
-                            },
-                            {
-                              "name": "Qui",
-                              "day": '15',
-                              "today": false,
-                            },
-                            {
-                              "name": "Sex",
-                              "day": '16',
-                              "today": false,
-                            },
-                            {
-                              "name": "Sab",
-                              "day": '17',
-                              "today": false,
-                            },
-                            {
-                              "name": "Dom",
-                              "day": '18',
-                              "today": false,
-                            },
-                          ];
-
                           Map dayWeek = weekList[index];
                           return WeekButtonsWidget(
                             day: dayWeek['day'],
@@ -99,25 +122,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                         children: snapshot.data.docs.map((e) {
                           OrderData orderData = OrderData.fromDocument(e);
 
-                          // obtendo o Map do arquivo constants.dart a partir do índice
-                          var mapStatus = Constants.statusOrder.entries
-                              .firstWhere(
-                                  (element) => element.key == orderData.status);
-                          //Filtrando a cor indicada no value do tipo Map selecionado acima
-                          var cor = mapStatus.value.entries
-                              .firstWhere((e) => e.key == 'cor')
-                              .value;
-                          //Filtrando o status indicado no value do tipo Map selecionado acima
-                          var status = mapStatus.value.entries
-                              .firstWhere((e) => e.key == 'status')
-                              .value;
-                          //Filtrando o ícone indicada no value do tipo Map selecionado acima
-                          var icon = mapStatus.value.entries
-                              .firstWhere((e) => e.key == 'icon')
-                              .value;
-
-                          String dataAberturaFormatada =
-                              _dataFormatada(orderData.order_date);
+                          // String dataAberturaFormatada =
+                          //     _dataFormatada(orderData.order_date);
                           String dataEntregaFormatada =
                               _dataFormatada(orderData.ship_date);
 
@@ -128,78 +134,82 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                 right: 15,
                                 top: 5,
                               ),
-                              child: Card(
-                                color: Colors.white,
-                                child: ListTile(
-                                  leading: Container(
-                                    height: 70,
-                                    width: 70,
-                                    // child: SvgPicture.asset(
-                                    //   'assets/icons/map.svg',
-                                    //   // color: Colors.green,
-                                    // ),
-                                    child: Image.network(
-                                      'https://i.pinimg.com/originals/0d/42/c9/0d42c959ec3772af1f73d04fd8d3811f.png',
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  title: Padding(
-                                    padding: const EdgeInsets.only(top: 10.0),
-                                    child: Text('José da Silva'),
-                                  ),
-                                  subtitle: Padding(
-                                    padding: const EdgeInsets.all(0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.calendar_today,
-                                              size: 15,
-                                              color: Colors.grey,
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text('10:00 - 12:00, 14 mar 2021'),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.location_pin,
-                                              size: 15,
-                                              color: Colors.grey,
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text('Rua Saturnino de Brito, 156'),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  trailing: IconButton(
-                                    icon: Icon(
-                                      Icons.add_location_alt_outlined,
-                                      color: Colors.green,
-                                      size: 25,
-                                    ),
-                                    onPressed: () {},
+                              child: ListTile(
+                                tileColor: Colors.white,
+                                leading: Container(
+                                  height: 70,
+                                  width: 70,
+                                  // child: SvgPicture.asset(
+                                  //   'assets/icons/map.svg',
+                                  //   // color: Colors.green,
+                                  // ),
+                                  child: Image.network(
+                                    'https://i.pinimg.com/originals/0d/42/c9/0d42c959ec3772af1f73d04fd8d3811f.png',
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
+                                title: Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: Text('<José da Silva>'),
+                                ),
+                                subtitle: Padding(
+                                  padding: const EdgeInsets.all(0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.calendar_today,
+                                            size: 15,
+                                            color: Colors.grey,
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(dataEntregaFormatada +
+                                              ' <8:00 - 18:00>'),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.location_pin,
+                                            size: 15,
+                                            color: Colors.grey,
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Flexible(
+                                            child: Text(
+                                              '<Rua Saturnino de Brito, 156>',
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                // trailing: IconButton(
+                                //   icon: Icon(
+                                //     Icons.add_location_alt_outlined,
+                                //     color: Colors.green,
+                                //     size: 25,
+                                //   ),
+                                //   onPressed: () {},
+                                // ),
                               ),
                             ),
                             onTap: () {
@@ -224,15 +234,17 @@ class _CalendarScreenState extends State<CalendarScreen> {
       ),
       bottomSheet: FlatButton(
         onPressed: () {
-          //adicionar função de mudança no status
-          // Navigator.of(context).pop();
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => MapRoutingScreen(),
-            ),
-          );
+          // //adicionar função de mudança no status
+          // // Navigator.of(context).pop();
+          // Navigator.of(context).push(
+          //   MaterialPageRoute(
+          //     // builder: (context) => MapRoutingScreen(),
+          //     builder: (context) => DeliveryScreen(),
+          //   ),
+          // );
+          _onLoading();
         },
-        color: Colors.white,
+        color: Colors.transparent,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
@@ -267,14 +279,57 @@ class _CalendarScreenState extends State<CalendarScreen> {
     );
   }
 
-  String _dataFormatada(Timestamp dataEntr) {
+  String _dataFormatada(DateTime dataEntr) {
     if (dataEntr != null) {
-      DateTime dateAbertura = DateTime.parse(dataEntr.toDate().toString());
+      DateTime dateAbertura = DateTime.parse(dataEntr.toString());
       DateFormat dateFormat = DateFormat("dd/MM/yyyy");
       String formattedDate = dateFormat.format(dateAbertura);
       return formattedDate;
     }
     return '--';
     // Convertendo a string de data pra DateTime e alterando o formato de exibição
+  }
+
+  void _onLoading() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+            height: 100,
+            width: 200,
+            child: Row(
+              // mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(
+                  backgroundColor: Colors.white,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Calculando",
+                  style: TextStyle(color: Colors.green, fontSize: 25),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+    Future.delayed(
+      Duration(seconds: 3),
+      () {
+        Navigator.pop(context); //pop dialog
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => DeliveryScreen(),
+          ),
+        );
+      },
+    );
   }
 }
