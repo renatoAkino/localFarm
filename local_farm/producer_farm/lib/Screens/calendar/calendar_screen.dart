@@ -5,14 +5,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:producerfarm/Datas/order_data.dart';
 import 'package:producerfarm/Models/user_model.dart';
+import 'package:producerfarm/Screens/deliveries/delivery_screen.dart';
 import 'package:producerfarm/Screens/orders/confirmation_screen.dart';
 import 'package:producerfarm/Screens/orders/order_detail_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../constants.dart';
 import 'components/week_buttons.dart';
-import 'delivery_screen.dart';
-import 'map_screen.dart';
 
 class CalendarScreen extends StatefulWidget {
   @override

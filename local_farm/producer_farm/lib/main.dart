@@ -4,7 +4,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'Models/user_model.dart';
-import 'Screens/deliveries/calendar_screen.dart';
 import 'Screens/deliveries/delivery_screen.dart';
 import 'Screens/tab_screen.dart';
 
@@ -26,8 +25,8 @@ class MyApp extends StatelessWidget {
               builder: (context, child, model) {
                 return MaterialApp(
                   // title: "Local Farm",
-                  home: TabScreen(),
-                  // home: DeliveryScreen(),
+                  // home: TabScreen(),
+                  home: DeliveryScreen(),
 
                   localizationsDelegates: [
                     GlobalMaterialLocalizations.delegate,

@@ -1,156 +1,111 @@
 import 'package:flutter/material.dart';
 import 'package:producerfarm/Controllers/routing_controller.dart';
+import 'package:producerfarm/Screens/deliveries/components/list_adresses.dart';
 
 import 'launcher_google_maps.dart';
 
-class CustomFeaturedListsText extends StatefulWidget {
-  // List<Step> spr;
+/// Content of the DraggableBottomSheet's child SingleChildScrollView
+class CustomScrollViewContent extends StatelessWidget {
   RoutingController controller;
-  CustomFeaturedListsText({
+  CustomScrollViewContent({
     Key key,
-    // this.spr,
     this.controller,
   }) : super(key: key);
   @override
-  _CustomFeaturedListsTextState createState() =>
-      _CustomFeaturedListsTextState();
-}
-
-class _CustomFeaturedListsTextState extends State<CustomFeaturedListsText> {
-  List<Step> spr = [];
-
-  int _currentstep = 0;
-
-  void _movetonext() {
-    setState(
-      () {
-        if (_currentstep < spr.length - 1) {
-          _currentstep++;
-        } else {
-          _currentstep = 0;
-        }
-      },
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 12.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      margin: const EdgeInsets.all(0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 12),
+            CustomDraggingHandle(),
+            SizedBox(height: 5),
+            CustomHeaderBottom(controller: controller),
+            SizedBox(height: 16),
+            Divider(),
+            SizedBox(height: 12),
+            CustomFeaturedListsText(
+              controller: controller,
+            ),
+            SizedBox(height: 16),
+          ],
+        ),
+      ),
     );
   }
+}
 
-  void _movetostart() {
-    setState(() {
-      if (_currentstep > 0) {
-        _currentstep--;
-      } else {
-        _currentstep = 0;
-      }
-    });
-  }
-
+class CustomHeaderBottom extends StatelessWidget {
+  RoutingController controller;
+  CustomHeaderBottom({
+    Key key,
+    this.controller,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    spr = widget.controller.spr;
-    return Theme(
-        data: ThemeData(
-            accentColor: Colors.green,
-            primarySwatch: Colors.green,
-            colorScheme: ColorScheme.light(primary: Colors.green)),
-        child: Stepper(
-          physics: NeverScrollableScrollPhysics(),
-          steps: spr,
-          type: StepperType.vertical,
-          currentStep: _currentstep,
-          onStepContinue: _movetonext,
-          onStepCancel: _movetostart,
-          // onStepTapped: (int step) => setState(() => _currentstep = step),
-          controlsBuilder: (BuildContext context,
-              {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                TextButton(
-                  onPressed: () {
-                    double lat = widget.controller.dados.routes[0]
-                        .steps[_currentstep].location[0];
-                    double lon = widget.controller.dados.routes[0]
-                        .steps[_currentstep].location[1];
-
-                    try {
-                      MapUtils.openMap(lat, lon);
-                    } catch (e) {
-                      print('Erro ao conectar Maps');
-                    }
-                  },
-                  child: Container(
-                    width: 100,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.green,
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(5),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.navigation,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'INICIAR',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: onStepContinue,
-                  child: Container(
-                    width: 100,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.blue,
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(5),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.check,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Finalizar',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Visibility(
-                  child: IconButton(
-                    onPressed: onStepCancel,
-                    icon: Icon(
-                      Icons.arrow_circle_up,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  visible: _currentstep > 0,
-                ),
-              ],
-            );
+    return ListTile(
+      title: Text(
+        "Rota de Entrega",
+        style: TextStyle(fontSize: 25, color: Colors.black87),
+      ),
+      subtitle: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Text("7 entregas\t\t\t\t\t\t~25km"),
+          Text("${controller.numJobs} entregas\t\t\t\t\t\t~25km"),
+          SizedBox(
+            height: 2,
+          ),
+          Text("${controller.totalDur} de percurso"),
+        ],
+      ),
+      trailing: Container(
+        width: 100,
+        height: 40,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.green,
+        ),
+        child: FlatButton(
+          onPressed: () {
+            var lat = controller.firstLocation[0];
+            var lon = controller.firstLocation[1];
+            try {
+              MapUtils.openMap(lat, lon);
+            } catch (e) {
+              print('Erro ao conectar Maps');
+            }
           },
-        ));
+          child: Center(
+            child: Text(
+              'INICIAR',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomDraggingHandle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 5,
+      width: 30,
+      decoration: BoxDecoration(
+          color: Colors.grey[200], borderRadius: BorderRadius.circular(16)),
+    );
   }
 }
 
