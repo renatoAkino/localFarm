@@ -76,6 +76,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     ];
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.white,
@@ -99,7 +100,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 return Stack(
                   children: [
                     Container(
-                      height: 70.0,
+                      height: 80.0,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
@@ -136,7 +137,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                               child: ListTile(
                                 tileColor: Colors.white,
                                 leading: Container(
-                                  height: 70,
+                                  height: 50,
                                   width: 70,
                                   // child: SvgPicture.asset(
                                   //   'assets/icons/map.svg',
@@ -247,7 +248,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            color: Colors.green,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.green,
+            ),
             height: 50,
             width: MediaQuery.of(context).size.width * 0.9,
             child: Padding(
@@ -301,14 +305,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
             child: Row(
               // mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 CircularProgressIndicator(
                   backgroundColor: Colors.white,
                 ),
-                SizedBox(
-                  width: 10,
-                ),
+                // SizedBox(
+                //   width: 15,
+                // ),
                 Text(
                   "Calculando",
                   style: TextStyle(color: Colors.green, fontSize: 25),

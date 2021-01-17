@@ -25,8 +25,8 @@ class MyApp extends StatelessWidget {
               builder: (context, child, model) {
                 return MaterialApp(
                   // title: "Local Farm",
-                  // home: TabScreen(),
-                  home: DeliveryScreen(),
+                  home: TabScreen(),
+                  // home: DeliveryScreen(),
 
                   localizationsDelegates: [
                     GlobalMaterialLocalizations.delegate,

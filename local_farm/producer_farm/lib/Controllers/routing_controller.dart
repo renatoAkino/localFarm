@@ -60,7 +60,8 @@ class RoutingController {
     for (var i in dados.routes) {
       for (var j in i.steps) {
         if (j.type == "job") {
-          spr.add(Step(
+          spr.add(
+            Step(
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -152,7 +153,9 @@ class RoutingController {
                 ),
               ),
               state: StepState.indexed,
-              isActive: true));
+              isActive: true,
+            ),
+          );
         }
       }
     }

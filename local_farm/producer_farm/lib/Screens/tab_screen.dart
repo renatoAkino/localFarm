@@ -32,14 +32,15 @@ class _TabScreenState extends State<TabScreen> {
         color: Colors.transparent,
         child: CurvedNavigationBar(
           height: 55.0,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
           index: _pageIndex,
+          color: Colors.green,
           // buttonBackgroundColor: Theme.of(context).primaryColor,
           buttonBackgroundColor: Colors.green,
           items: <Widget>[
             Icon(
-              Icons.home,
-              color: (_pageIndex == 0) ? Colors.white : Colors.green,
+              Icons.home_outlined,
+              color: Colors.white,
             ),
             // Icon(
             //   Icons.bar_chart,
@@ -47,19 +48,19 @@ class _TabScreenState extends State<TabScreen> {
             // ),
             Icon(
               Icons.storefront,
-              color: (_pageIndex == 1) ? Colors.white : Colors.green,
+              color: Colors.white,
             ),
             Icon(
               Icons.assignment_outlined,
-              color: (_pageIndex == 2) ? Colors.white : Colors.green,
+              color: Colors.white,
             ),
             Icon(
               Icons.local_shipping_outlined,
-              color: (_pageIndex == 3) ? Colors.white : Colors.green,
+              color: Colors.white,
             ),
             Icon(
               Icons.person_outline,
-              color: (_pageIndex == 4) ? Colors.white : Colors.green,
+              color: Colors.white,
             ),
           ],
           onTap: (index) {
