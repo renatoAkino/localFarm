@@ -30,4 +30,12 @@ class FarmData {
       'name' : name,
     };
   }
+
+  Future<FarmData> getFarmData(String farmId) async {
+    FarmData farmData;
+    var snapshot = await FirebaseFirestore.instance.collection('farms').doc(farmId).get();
+    // DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('farms').doc(farmId).get();
+    // FarmData farmData = FarmData.fromDocument(snapshot);
+    return FarmData.fromDocument(snapshot);
+  }
 }
