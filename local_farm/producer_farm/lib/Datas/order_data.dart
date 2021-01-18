@@ -12,8 +12,10 @@ class OrderData {
   double shipPrice;
   int status;
   double totalPrice;
-  Timestamp order_date;
-  Timestamp ship_date;
+  // Timestamp order_date;
+  DateTime order_date;
+  // Timestamp ship_date;
+  DateTime ship_date;
 
   FarmData farmData;
 
@@ -29,8 +31,8 @@ class OrderData {
     data['products'].forEach((product) {
       products.add(ProductData.fromResumedDocument(product));
     });
-    order_date = data['order_date'];
-    ship_date = data['ship_date'];
+    order_date = data['order_date'].toDate();
+    ship_date = data['ship_date'].toDate();
   }
 
   Future<void> getFarmData() async {

@@ -32,10 +32,11 @@ class WeekButtonsWidgetState extends State<WeekButtonsWidget> {
         // );
       },
       child: Padding(
-        padding: const EdgeInsets.only(top: 10.0, left: 15),
+        padding: const EdgeInsets.only(top: 10.0, left: 10, bottom: 10),
+        // padding: EdgeInsets.all(8),
         child: widget.isToday
             ? Container(
-                height: 60,
+                height: 50,
                 width: 60,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),

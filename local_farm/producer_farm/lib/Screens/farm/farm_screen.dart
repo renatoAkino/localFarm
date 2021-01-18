@@ -25,28 +25,28 @@ class _FarmScreenState extends State<FarmScreen> {
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: HomeAppBar(model: model),
-          body: Stack(
-            children: [
-              Container(
-                height: size.height * 0.3,
-                width: size.width,
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  // borderRadius: BorderRadius.only(
-                  //   bottomLeft: Radius.circular(20.0),
-                  //   bottomRight: Radius.circular(20.0),
-                  // ),
-                ),
-                child: Image.network(
-                  model.userData.farmData.image,
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-              Center(
-                child: FloatingCard(),
-              ),
-              model.isLoggedin()
-                  ? Positioned(
+          body: model.isLoggedin()
+              ? Stack(
+                  children: [
+                    Container(
+                      height: size.height * 0.3,
+                      width: size.width,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        // borderRadius: BorderRadius.only(
+                        //   bottomLeft: Radius.circular(20.0),
+                        //   bottomRight: Radius.circular(20.0),
+                        // ),
+                      ),
+                      child: Image.network(
+                        model.userData.farmData.image,
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+                    Center(
+                      child: FloatingCard(),
+                    ),
+                    Positioned(
                       top: size.height * 0.4,
                       child: Container(
                         // color: Colors.blue,
@@ -196,22 +196,21 @@ class _FarmScreenState extends State<FarmScreen> {
                         ),
                       ),
                     )
-                  : FlatButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginScreen()));
-                      },
-                      child: Text(
-                        "Faça Login",
-                        style: TextStyle(
-                            color: Theme.of(context).accentColor,
-                            fontWeight: FontWeight.bold),
-                      ))
-            ],
-          ),
+                  ],
+                )
+              : FlatButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
+                  },
+                  child: Text(
+                    "Faça Login",
+                    style: TextStyle(
+                        color: Theme.of(context).accentColor,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
         );
       },
     );

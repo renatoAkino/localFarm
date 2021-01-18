@@ -41,6 +41,12 @@ dependencies:
   fl_chart: ^0.12.2
   flutter_svg: ^0.19.1
   image_picker: ^0.6.7+21
+  url_launcher: ^5.7.10
+  google_maps_flutter: ^1.1.1
+  # google_map_polyline: 
+  permission: ^0.1.7
+  flutter_datetime_picker: ^1.4.0
+  flutter_polyline_points: ^0.2.4
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/widgets.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -13,12 +15,7 @@ class RoutingRepository {
   //   print(jsonResult);
   // }
 
-  static Future<Routing> getRoute() async {
-    String jsonBody =
-        // "{\"vehicles\":[{\"id\":1,\"start\":[2.35044,48.71764],\"end\":[2.35044,48.71764],\"capacity\":[30],\"time_window\":[1600416000,1600430400]}],\"jobs\":[{\"id\":1,\"service\":300,\"location\":[1.98935,48.701]},{\"id\":2,\"service\":300,\"location\":[2.03655,48.61128]},{\"id\":5,\"service\":300,\"location\":[2.28325,48.5958]},{\"id\":6,\"service\":300,\"location\":[2.89357,48.90736]}]}";
-        "{'vehicles':[{'id':1,'start':[2.35044,48.71764],'end':[2.35044,48.71764],'capacity':[30],'time_window':[1600416000,1600430400]}],'jobs':[{'id':1,'service':300,'location':[1.98935,48.701]},{'id':2,'service':300,'location':[2.03655,48.61128]},{'id':5,'service':300,'location':[2.28325,48.5958]},{'id':6,'service':300,'location':[2.89357,48.90736]}]}";
-    final route = Routing();
-
+  static Future<Routing> getRoute(String body) async {
     var url = "http://solver.vroom-project.org";
 
     var header = {
@@ -26,8 +23,9 @@ class RoutingRepository {
       'Accept': 'application/json',
     };
 
-    var body = jsonDecode(jsonBody);
+    // var body = jsonDecode(jsonBody);
 
+/*
     print(body);
 
     final response = await http.post(url, headers: header, body: body);
@@ -36,32 +34,143 @@ class RoutingRepository {
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
 
-/*
-    List listaResponse = json.decode(response.body);
+    Map decodeResp = json.decode(response.body);
 
-    for (Map map in listaResponse) {
-      Order c = Order.fromJson(map);
-      orders.add(c);
-    }
+    Routing routing = Routing.fromJson(decodeResp);
+*/
 
-    // orders.add(Client(
-    //     nome: 'erstóstenes', email: 'era@gmail.com', telefone: '365478945'));
-    // orders.add(
-    //     Client(nome: 'jânio', email: 'jan@gmail.com', telefone: '364333945'));
-    // orders.add(Client(
-    //     nome: 'péricles', email: 'per@gmail.com', telefone: '000478945'));
-    // orders.add(Client(
-    //     nome: 'pitágoras', email: 'pit@gmail.com', telefone: '10999945'));
-    // orders.add(Client(
-    //     nome: 'manolo', email: 'manolo@gmail.com', telefone: '20999945'));
-    // orders.add(
-    //     Client(nome: 'jezabel', email: 'jez@gmail.com', telefone: '301111145'));
-    // orders.add(
-    //     Client(nome: 'natal', email: 'nat@gmail.com', telefone: '111119995'));
-
-    // print('orders>>>>>> $orders');
-
-    */
-    return route;
+    return routing;
   }
 }
+
+Routing routing = Routing(
+  code: 0,
+  summary: Summary(
+      cost: 11045,
+      unassigned: 0,
+      delivery: [0],
+      pickup: [0],
+      service: 1200,
+      duration: 11045,
+      waitingTime: 0,
+      priority: 0,
+      violations: [],
+      computingTimes: ComputingTimes(loading: 6, solving: 0),
+      amount: [0]),
+  routes: [
+    Routes(
+      vehicle: 1,
+      cost: 11045,
+      delivery: [0],
+      amount: [0],
+      pickup: [0],
+      service: 1200,
+      duration: 11045,
+      waitingTime: 0,
+      priority: 0,
+      steps: [
+        Steps(
+          type: "start",
+          location: [-23.438620855027683, -46.53742358994361],
+          service: 0,
+          waitingTime: 0,
+          load: [0],
+          // arrival: Timestamp.fromMillisecondsSinceEpoch(1600416000),
+          arrival: 1600416000,
+          duration: 0,
+          violations: [],
+        ),
+        Steps(
+          type: "job",
+          location: [-23.4285211719474, -46.54286454392993],
+          id: 6,
+          service: 300,
+          waitingTime: 0,
+          job: 6,
+          load: [0],
+          // arrival: Timestamp.fromMillisecondsSinceEpoch(1600418710),
+          arrival: 1600418710,
+          duration: 2710,
+          violations: [],
+        ),
+        Steps(
+          type: "job",
+          location: [-23.43576626864311, -46.546855686214364],
+          id: 1,
+          service: 300,
+          waitingTime: 0,
+          job: 1,
+          load: [0],
+          // arrival: Timestamp.fromMillisecondsSinceEpoch(1600423395),
+          arrival: 1600423395,
+          duration: 7095,
+          violations: [],
+        ),
+        Steps(
+          type: "job",
+          location: [-23.433442382820278, -46.52659998800095],
+          id: 2,
+          service: 300,
+          waitingTime: 0,
+          job: 2,
+          load: [0],
+          // arrival: Timestamp.fromMillisecondsSinceEpoch(1600424746),
+          arrival: 1600424746,
+          duration: 8146,
+          violations: [],
+        ),
+        Steps(
+          type: "job",
+          location: [-23.44981553925481, -46.527945117333864],
+          id: 5,
+          service: 300,
+          waitingTime: 0,
+          job: 5,
+          load: [0],
+          // arrival: Timestamp.fromMillisecondsSinceEpoch(1600426546),
+          arrival: 1600426546,
+          duration: 9646,
+          violations: [],
+        ),
+        Steps(
+          type: "job",
+          location: [-23.443458330786086, -46.52455385945282],
+          id: 7,
+          service: 300,
+          waitingTime: 0,
+          job: 7,
+          load: [0],
+          // arrival: Timestamp.fromMillisecondsSinceEpoch(1600426546),
+          arrival: 1600427046,
+          duration: 9646,
+          violations: [],
+        ),
+        Steps(
+          type: "job",
+          location: [-23.4534574161746, -46.52816104883616],
+          id: 3,
+          service: 300,
+          waitingTime: 0,
+          job: 3,
+          load: [0],
+          // arrival: Timestamp.fromMillisecondsSinceEpoch(1600426546),
+          arrival: 1600427546,
+          duration: 9646,
+          violations: [],
+        ),
+        Steps(
+          type: "end",
+          location: [-23.438620855027683, -46.53742358994361],
+          service: 0,
+          waitingTime: 0,
+          load: [0],
+          // arrival: Timestamp.fromMillisecondsSinceEpoch(1600428245),
+          arrival: 1600428245,
+          duration: 11045,
+          violations: [],
+        ),
+      ],
+      violations: [],
+    )
+  ],
+);

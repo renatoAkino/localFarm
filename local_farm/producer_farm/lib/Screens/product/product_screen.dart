@@ -6,6 +6,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import '../../Models/user_model.dart';
 import '../../Models/user_model.dart';
+import 'delete_screen.dart';
 import 'edit_product_screen.dart';
 import 'insert_product_screen.dart';
 
@@ -19,11 +20,12 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.white,
         // leading: Image.asset('local_farm/producer_farm/assets/logo.png'),
-        elevation: 1.5,
+        elevation: 0,
         title: Text('Meus Produtos'),
         actions: <Widget>[
           Padding(
@@ -226,7 +228,14 @@ class _ProductScreenState extends State<ProductScreen> {
                                         children: [
                                           FlatButton(
                                             // onPressed: showAlertDialog(),
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DeleteScreen(productData),
+                                                ),
+                                              );
+                                            },
                                             textColor: Colors.white,
                                             color: Colors.red,
                                             // padding: const EdgeInsets.all(8.0),

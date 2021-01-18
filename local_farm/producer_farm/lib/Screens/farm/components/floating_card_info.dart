@@ -59,9 +59,9 @@ class _FloatingCardState extends State<FloatingCard> {
             elevation: 4,
             margin: EdgeInsets.only(
                 bottom: deviceHeight(context) * 0.18, left: 20.0, right: 20.0),
-            color: Colors.white,
+            color: Colors.green,
             child: Container(
-              width: deviceHeight(context) * 0.5,
+              width: deviceHeight(context) * 0.50,
               height: deviceWidth(context) * 0.22,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -74,14 +74,14 @@ class _FloatingCardState extends State<FloatingCard> {
                         children: [
                           Icon(
                             Icons.favorite_border,
-                            color: Colors.green,
+                            color: Colors.white,
                           ),
                           Text(
-                            ' <12>',
+                            ' 12',
                             // cargo ?? '',
                             textAlign: TextAlign.start,
                             style: new TextStyle(
-                                color: Colors.black87,
+                                color: Colors.white,
                                 fontSize: 25.0,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -92,7 +92,7 @@ class _FloatingCardState extends State<FloatingCard> {
                         // depto ?? '',
                         textAlign: TextAlign.start,
                         style: new TextStyle(
-                          color: Colors.green,
+                          color: Colors.white,
                           fontSize: 14.0,
                         ),
                       ),
@@ -106,14 +106,14 @@ class _FloatingCardState extends State<FloatingCard> {
                         children: [
                           Icon(
                             Icons.camera_alt_outlined,
-                            color: Colors.green,
+                            color: Colors.white,
                           ),
                           Text(
                             ' ' + snapshot.data.docs.length.toString(),
                             // cargo ?? '',
                             textAlign: TextAlign.start,
                             style: new TextStyle(
-                                color: Colors.black87,
+                                color: Colors.white,
                                 fontSize: 25.0,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -124,7 +124,7 @@ class _FloatingCardState extends State<FloatingCard> {
                         // depto ?? '',
                         textAlign: TextAlign.start,
                         style: new TextStyle(
-                          color: Colors.green,
+                          color: Colors.white,
                           fontSize: 14.0,
                         ),
                       ),
@@ -138,7 +138,7 @@ class _FloatingCardState extends State<FloatingCard> {
                         children: [
                           Icon(
                             Icons.turned_in_not,
-                            color: Colors.green,
+                            color: Colors.white,
                           ),
                           Text(
                             ' ' +
@@ -150,7 +150,7 @@ class _FloatingCardState extends State<FloatingCard> {
                             // cargo ?? '',
                             textAlign: TextAlign.start,
                             style: new TextStyle(
-                                color: Colors.black87,
+                                color: Colors.white,
                                 fontSize: 25.0,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -161,7 +161,7 @@ class _FloatingCardState extends State<FloatingCard> {
                         // depto ?? '',
                         textAlign: TextAlign.start,
                         style: new TextStyle(
-                          color: Colors.green,
+                          color: Colors.white,
                           fontSize: 14.0,
                         ),
                       ),
