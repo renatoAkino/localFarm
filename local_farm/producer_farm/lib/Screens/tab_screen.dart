@@ -40,25 +40,25 @@ class _TabScreenState extends State<TabScreen> {
               Icons.home,
               color: (_pageIndex == 0) ? Colors.white : Colors.green,
             ),
+            // Icon(
+            //   Icons.bar_chart,
+            //   color: (_pageIndex == 1) ? Colors.white : Colors.green,
+            // ),
             Icon(
-              Icons.bar_chart,
+              Icons.storefront,
               color: (_pageIndex == 1) ? Colors.white : Colors.green,
             ),
             Icon(
-              Icons.storefront,
+              Icons.assignment_outlined,
               color: (_pageIndex == 2) ? Colors.white : Colors.green,
             ),
             Icon(
-              Icons.assignment_outlined,
+              Icons.local_shipping_outlined,
               color: (_pageIndex == 3) ? Colors.white : Colors.green,
             ),
             Icon(
-              Icons.local_shipping_outlined,
-              color: (_pageIndex == 4) ? Colors.white : Colors.green,
-            ),
-            Icon(
               Icons.person_outline,
-              color: (_pageIndex == 5) ? Colors.white : Colors.green,
+              color: (_pageIndex == 4) ? Colors.white : Colors.green,
             ),
           ],
           onTap: (index) {
@@ -80,19 +80,19 @@ class _TabScreenState extends State<TabScreen> {
         return FarmScreen();
         // return DashboardScreen();
         break;
+      // case 1:
+      //   return DashboardScreen();
+      //   break;
       case 1:
-        return DashboardScreen();
-        break;
-      case 2:
         return ProductScreen();
         break;
-      case 3:
+      case 2:
         return OrderScreen();
         break;
-      case 4:
+      case 3:
         return DeliveryScreen();
         break;
-      case 5:
+      case 4:
         return ProfileScreen();
         break;
     }
