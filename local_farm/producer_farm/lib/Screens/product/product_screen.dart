@@ -150,7 +150,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                       Text(
                                         'R\$ ' +
                                             productData.price
-                                                .toStringAsPrecision(2),
+                                                .toStringAsFixed(2),
                                         style: TextStyle(
                                           fontSize: 16,
                                         ),
