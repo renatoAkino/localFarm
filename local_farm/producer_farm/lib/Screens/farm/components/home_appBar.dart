@@ -25,7 +25,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       leading: IconButton(
         icon: Icon(
-          Icons.attach_money,
+          Icons.show_chart,
           color: Colors.green,
           size: 30,
         ),
