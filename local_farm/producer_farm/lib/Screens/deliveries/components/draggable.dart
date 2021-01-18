@@ -33,7 +33,9 @@ class CustomScrollViewContent extends StatelessWidget {
             CustomFeaturedListsText(
               controller: controller,
             ),
-            SizedBox(height: 16),
+            controller.numJobs > 5
+                ? SizedBox(height: 56)
+                : SizedBox(height: 206),
           ],
         ),
       ),
@@ -71,7 +73,7 @@ class CustomHeaderBottom extends StatelessWidget {
         height: 40,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.green,
+          color: Colors.orange,
         ),
         child: FlatButton(
           onPressed: () {

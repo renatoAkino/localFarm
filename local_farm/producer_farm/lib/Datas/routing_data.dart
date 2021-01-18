@@ -55,18 +55,19 @@ class Summary {
   List<Null> violations;
   ComputingTimes computingTimes;
 
-  Summary(
-      {this.cost,
-      this.unassigned,
-      this.delivery,
-      this.amount,
-      this.pickup,
-      this.service,
-      this.duration,
-      this.waitingTime,
-      this.priority,
-      this.violations,
-      this.computingTimes});
+  Summary({
+    this.cost,
+    this.unassigned,
+    this.delivery,
+    this.amount,
+    this.pickup,
+    this.service,
+    this.duration,
+    this.waitingTime,
+    this.priority,
+    this.violations,
+    this.computingTimes,
+  });
 
   Summary.fromJson(Map<String, dynamic> json) {
     cost = json['cost'];
@@ -141,19 +142,22 @@ class Routes {
   int priority;
   List<Steps> steps;
   List<Null> violations;
+  String geometry;
 
-  Routes(
-      {this.vehicle,
-      this.cost,
-      this.delivery,
-      this.amount,
-      this.pickup,
-      this.service,
-      this.duration,
-      this.waitingTime,
-      this.priority,
-      this.steps,
-      this.violations});
+  Routes({
+    this.vehicle,
+    this.cost,
+    this.delivery,
+    this.amount,
+    this.pickup,
+    this.service,
+    this.duration,
+    this.waitingTime,
+    this.priority,
+    this.steps,
+    this.violations,
+    this.geometry,
+  });
 
   Routes.fromJson(Map<String, dynamic> json) {
     vehicle = json['vehicle'];
@@ -170,6 +174,7 @@ class Routes {
       json['steps'].forEach((v) {
         steps.add(new Steps.fromJson(v));
       });
+      geometry = json['geometry'];
     }
     // if (json['violations'] != null) {
     //   violations = new List<Null>();
@@ -193,6 +198,7 @@ class Routes {
     if (this.steps != null) {
       data['steps'] = this.steps.map((v) => v.toJson()).toList();
     }
+    data['geometry'] = this.geometry;
     // if (this.violations != null) {
     //   data['violations'] = this.violations.map((v) => v.toJson()).toList();
     // }
