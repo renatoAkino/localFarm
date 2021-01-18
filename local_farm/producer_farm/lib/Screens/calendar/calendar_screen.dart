@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:producerfarm/Datas/order_data.dart';
 import 'package:producerfarm/Models/user_model.dart';
 import 'package:producerfarm/Screens/deliveries/delivery_screen.dart';
+import 'package:producerfarm/Screens/deliveries/pick_infos_screen.dart';
 import 'package:producerfarm/Screens/orders/confirmation_screen.dart';
 import 'package:producerfarm/Screens/orders/order_detail_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -81,7 +82,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text('Agenda de Entregas'),
+        title: Text('Entregas de Hoje'),
         actions: <Widget>[],
       ),
       body: ScopedModelDescendant<UserModel>(
@@ -130,8 +131,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           return InkWell(
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                left: 15.0,
-                                right: 15,
+                                left: 5.0,
+                                right: 5.0,
                                 top: 5,
                               ),
                               child: ListTile(
@@ -139,14 +140,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                 leading: Container(
                                   height: 50,
                                   width: 70,
-                                  // child: SvgPicture.asset(
-                                  //   'assets/icons/map.svg',
-                                  //   // color: Colors.green,
-                                  // ),
-                                  child: Image.network(
-                                    'https://i.pinimg.com/originals/0d/42/c9/0d42c959ec3772af1f73d04fd8d3811f.png',
-                                    fit: BoxFit.cover,
+                                  child: SvgPicture.asset(
+                                    // 'assets/icons/map.svg',
+                                    'assets/icons/order.svg',
+                                    color: Colors.green,
                                   ),
+                                  // child: Image.network(
+                                  //   'https://i.pinimg.com/originals/0d/42/c9/0d42c959ec3772af1f73d04fd8d3811f.png',
+                                  //   fit: BoxFit.cover,
+                                  // ),
                                 ),
                                 title: Padding(
                                   padding: const EdgeInsets.only(top: 10.0),
@@ -232,53 +234,65 @@ class _CalendarScreenState extends State<CalendarScreen> {
           );
         },
       ),
-      bottomSheet: FlatButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // //adicionar função de mudança no status
-          // // Navigator.of(context).pop();
-          // Navigator.of(context).push(
-          //   MaterialPageRoute(
-          //     // builder: (context) => MapRoutingScreen(),
-          //     builder: (context) => DeliveryScreen(),
-          //   ),
-          // );
-          _onLoading();
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => PickInfosScreen(),
+            ),
+          );
         },
-        color: Colors.transparent,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.green,
-            ),
-            height: 50,
-            width: MediaQuery.of(context).size.width * 0.9,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.refresh,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      'Otimizar rota',
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
+        label: Text('INICIAR'),
+        icon: Icon(Icons.navigation),
+        backgroundColor: Colors.orange,
       ),
+      // bottomSheet: FlatButton(
+      //   onPressed: () {
+      //     // //adicionar função de mudança no status
+      //     // // Navigator.of(context).pop();
+      //     Navigator.of(context).push(
+      //       MaterialPageRoute(
+      //         // builder: (context) => MapRoutingScreen(),
+      //         builder: (context) => PickInfosScreen(),
+      //       ),
+      //     );
+      //     // _onLoading();
+      //   },
+      //   color: Colors.white,
+      //   child: Padding(
+      //     padding: const EdgeInsets.all(8.0),
+      //     child: Container(
+      //       decoration: BoxDecoration(
+      //         borderRadius: BorderRadius.circular(10),
+      //         color: Colors.green,
+      //       ),
+      //       height: 50,
+      //       width: MediaQuery.of(context).size.width * 0.9,
+      //       child: Padding(
+      //         padding: const EdgeInsets.all(8.0),
+      //         child: Center(
+      //           child: Row(
+      //             mainAxisAlignment: MainAxisAlignment.center,
+      //             children: [
+      //               // Icon(
+      //               //   Icons.navigation,
+      //               //   color: Colors.white,
+      //               // ),
+      //               // SizedBox(
+      //               //   width: 10,
+      //               // ),
+      //               Text(
+      //                 'Iniciar Entregas',
+      //                 style: TextStyle(fontSize: 20, color: Colors.white),
+      //                 textAlign: TextAlign.center,
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 

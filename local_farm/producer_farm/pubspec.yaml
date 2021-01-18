@@ -45,6 +45,7 @@ dependencies:
   google_maps_flutter: ^1.1.1
   # google_map_polyline: 
   permission: ^0.1.7
+  flutter_datetime_picker: ^1.4.0
 
 dev_dependencies:
   flutter_test:

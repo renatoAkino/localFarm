@@ -19,6 +19,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           print(model.firebaseUser.uid);
         }
         return Scaffold(
+          backgroundColor: Colors.white,
           appBar: AppBar(
             centerTitle: true,
             backgroundColor: Colors.white,

@@ -107,6 +107,18 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
     return Stack(
       children: [
         CustomGoogleMap(controller: controller),
+        Positioned(
+          top: 25,
+          left: 10,
+          child: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              // color: Colors.green,
+              // size: 30,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
         DraggableScrollableSheet(
           initialChildSize: 0.30,
           minChildSize: 0.15,
@@ -117,7 +129,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
             );
           },
         ),
-        // ListBuilderRotas(controller),
+        // ListBuilder Rotas(controller),
       ],
     );
   }

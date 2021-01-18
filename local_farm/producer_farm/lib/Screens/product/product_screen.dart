@@ -25,7 +25,7 @@ class _ProductScreenState extends State<ProductScreen> {
         centerTitle: true,
         backgroundColor: Colors.white,
         // leading: Image.asset('local_farm/producer_farm/assets/logo.png'),
-        elevation: 1.5,
+        elevation: 0,
         title: Text('Meus Produtos'),
         actions: <Widget>[
           Padding(

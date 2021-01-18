@@ -5,6 +5,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import 'Models/user_model.dart';
 import 'Screens/deliveries/delivery_screen.dart';
+import 'Screens/deliveries/pick_infos_screen.dart';
 import 'Screens/tab_screen.dart';
 
 void main() {
