@@ -7,12 +7,12 @@ class Constants {
   static const statusOrder = {
     1: {
       'status': 'Aguardando\nAgendamento',
-      'cor': Colors.blue,
+      'cor': Colors.orange,
       'icon': Icons.calendar_today
     },
     2: {
       'status': 'Aguardando\nPagamento',
-      'cor': Colors.orange,
+      'cor': Colors.red,
       'icon': Icons.credit_card
     },
     3: {

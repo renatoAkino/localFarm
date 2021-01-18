@@ -13,11 +13,12 @@ class OrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.white,
         // leading: Image.asset('local_farm/producer_farm/assets/logo.png'),
-        elevation: 1.5,
+        elevation: 0,
         title: Text('Pedidos'),
         actions: <Widget>[],
       ),
@@ -56,7 +57,7 @@ class OrderScreen extends StatelessWidget {
                         child: Container(
                           margin:
                               EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                          height: 170,
+                          height: 120,
                           decoration: BoxDecoration(
                             // border: Border.all(color: Colors.white, width: 2.0),
 
@@ -80,7 +81,7 @@ class OrderScreen extends StatelessWidget {
                             children: [
                               Container(
                                 color: cor,
-                                width: 10,
+                                width: 5,
                               ),
                               SizedBox(
                                 width: 10,
@@ -153,9 +154,9 @@ class OrderScreen extends StatelessWidget {
                                           // ),
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
+                                      // SizedBox(
+                                      //   height: 15,
+                                      // ),
                                       Text('Valor Total: R\$' +
                                           orderData.totalPrice
                                               .toStringAsFixed(2)),
@@ -239,9 +240,9 @@ class OrderScreen extends StatelessWidget {
     );
   }
 
-  String _dataFormatada(Timestamp dataEntr) {
+  String _dataFormatada(DateTime dataEntr) {
     if (dataEntr != null) {
-      DateTime dateAbertura = DateTime.parse(dataEntr.toDate().toString());
+      DateTime dateAbertura = DateTime.parse(dataEntr.toString());
       DateFormat dateFormat = DateFormat("dd/MM/yyyy");
       String formattedDate = dateFormat.format(dateAbertura);
       return formattedDate;
