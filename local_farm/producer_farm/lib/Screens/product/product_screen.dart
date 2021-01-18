@@ -105,6 +105,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         child: Padding(
                           padding: const EdgeInsets.all(3.0),
                           child: ExpansionTile(
+                            backgroundColor: Colors.green[100],
                             title: Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 15.0),
