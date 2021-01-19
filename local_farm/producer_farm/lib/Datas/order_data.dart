@@ -11,9 +11,11 @@ class OrderData {
   String client_name;
   String client_tel;
   String client_address;
+  String client_cep;
   String farm_id;
   List<ProductData> products = [];
-  List<UserData> location = [];
+  // Loc location;
+  List<dynamic> location;
   double productsPrice;
   double shipPrice;
   int status;
@@ -32,7 +34,8 @@ class OrderData {
     client_name = data['clientName'];
     client_tel = data['clientTel'];
     client_address = data['clientAddress'];
-    location = data['location']; //lat -23.4264637 - lon -46.5615487
+    client_cep = data['clientCep'];
+    location = data['locationLatLon']; //lat -23.4264637 - lon -46.5615487
     // farm_id = document.data['farm_id'];
     productsPrice = data['productsPrice'] + 0.0;
     shipPrice = data['shipPrice'] + 0.0;

@@ -142,7 +142,7 @@ class Routes {
   int priority;
   List<Steps> steps;
   List<Null> violations;
-  String geometry;
+  // String geometry;
 
   Routes({
     this.vehicle,
@@ -156,7 +156,7 @@ class Routes {
     this.priority,
     this.steps,
     this.violations,
-    this.geometry,
+    // this.geometry,
   });
 
   Routes.fromJson(Map<String, dynamic> json) {
@@ -174,7 +174,7 @@ class Routes {
       json['steps'].forEach((v) {
         steps.add(new Steps.fromJson(v));
       });
-      geometry = json['geometry'];
+      // geometry = json['geometry'];
     }
     // if (json['violations'] != null) {
     //   violations = new List<Null>();
@@ -198,7 +198,7 @@ class Routes {
     if (this.steps != null) {
       data['steps'] = this.steps.map((v) => v.toJson()).toList();
     }
-    data['geometry'] = this.geometry;
+    // data['geometry'] = this.geometry;
     // if (this.violations != null) {
     //   data['violations'] = this.violations.map((v) => v.toJson()).toList();
     // }

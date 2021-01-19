@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:producerfarm/Datas/order_data.dart';
 import 'package:producerfarm/Datas/routing_data.dart';
 import 'package:producerfarm/Repositories/routing_repository.dart';
 
@@ -25,7 +26,7 @@ class RoutingController {
 
   List<Marker> markers = [];
 
-  Future start(String body) async {
+  Future start(String body, List<OrderData> orderDataList) async {
     state.value = RoutingState.loading;
     try {
       dados = await RoutingRepository.getRoute(body);
@@ -39,7 +40,7 @@ class RoutingController {
       firstLocation = dados.routes[0].steps[0].location;
 
       // GERA A LISTA DE Steps QUE PREENCHERÃO A LISTA ORDENADA DAS ENTREGAS
-      _stepGen(dados);
+      _stepGen(dados, orderDataList);
 
       // GERA A LISTA DE Marks QUE Serão os pontos no mapa
       _markersGen(dados);
@@ -96,10 +97,18 @@ class RoutingController {
     }
   }
 
-  void _stepGen(Routing dados) {
+  void _stepGen(Routing dados, List<OrderData> orderDataList) {
     for (var i in dados.routes) {
       for (var j in i.steps) {
         if (j.type == "job") {
+          print(j.id);
+
+          String endereco = orderDataList[j.id].client_address;
+          // print(endereco);
+          String name = orderDataList[j.id].client_name;
+          String tel = orderDataList[j.id].client_tel;
+          String cep = orderDataList[j.id].client_cep;
+          String pedido = orderDataList[j.id].order_id;
           spr.add(
             Step(
               title: Row(
@@ -108,7 +117,8 @@ class RoutingController {
                   Flexible(
                     child: Text(
                       // 'Rua José de Alencar, 38',
-                      'endereço id:' + j.id.toString(),
+                      // 'endereço id:' + j.id.toString(),
+                      endereco,
                       style: TextStyle(fontSize: 20),
                     ),
                   ),
@@ -120,7 +130,8 @@ class RoutingController {
                   ),
                 ],
               ),
-              subtitle: Text('07132-580, Jd Drummond, Guarulhos'),
+              // subtitle: Text('07132-580, Jd Drummond, Guarulhos'),
+              subtitle: Text('CEP: ' + cep),
               content: Padding(
                 padding: const EdgeInsets.only(bottom: 15.0),
                 child: Container(
@@ -138,7 +149,8 @@ class RoutingController {
                           ),
                           SizedBox(height: 5),
                           Text(
-                            'José Roberto',
+                            // 'José Roberto',
+                            name,
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
@@ -152,7 +164,7 @@ class RoutingController {
                           ),
                           SizedBox(height: 5),
                           Text(
-                            '09:00 - 12:00',
+                            '08:00 - 18:00',
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
@@ -166,7 +178,8 @@ class RoutingController {
                           ),
                           SizedBox(height: 5),
                           Text(
-                            '(11)98457-6458',
+                            // '(11)98457-6458',
+                            tel,
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
@@ -183,11 +196,29 @@ class RoutingController {
                           ),
                           SizedBox(height: 5),
                           Text(
-                            'A54dXf45697',
+                            // 'A54dXf45697',
+                            pedido,
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
                       ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       'Localização',
+                      //       style: TextStyle(color: Colors.grey),
+                      //     ),
+                      //     SizedBox(height: 5),
+                      //     Text(
+                      //       // 'A54dXf45697',
+                      //       orderDataList[j.id].location[0].toString() +
+                      //           '\n' +
+                      //           orderDataList[j.id].location[1].toString(),
+                      //       style: TextStyle(color: Colors.grey),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),

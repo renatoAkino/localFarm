@@ -1,13 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
+import 'package:producerfarm/Datas/order_data.dart';
 import 'package:producerfarm/Screens/deliveries/delivery_screen.dart';
 
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-
 class PickInfosScreen extends StatefulWidget {
+  List<OrderData> orderDataList;
+  PickInfosScreen({
+    Key key,
+    this.orderDataList,
+  }) : super(key: key);
   @override
   _PickInfosScreenState createState() => _PickInfosScreenState();
 }
@@ -22,6 +27,7 @@ class _PickInfosScreenState extends State<PickInfosScreen> {
   final Location location = Location();
 
   LocationData _location;
+
   String lat = 'Latitude ';
   String lon = ' Longitude';
   String _error;
@@ -31,7 +37,7 @@ class _PickInfosScreenState extends State<PickInfosScreen> {
       _error = null;
     });
     try {
-      final LocationData _locationResult = await location.getLocation();
+      LocationData _locationResult = await location.getLocation();
       setState(() {
         _location = _locationResult;
         lat = _location.latitude.toString();
@@ -124,9 +130,21 @@ class _PickInfosScreenState extends State<PickInfosScreen> {
 // ======================================================================
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
-              child: Text(
-                'Hora de início do trajeto:',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Hora de início do trajeto:',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Horário inicial da jornada de trabalho',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
               ),
             ),
 
@@ -197,9 +215,21 @@ class _PickInfosScreenState extends State<PickInfosScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
-              child: Text(
-                'Hora de fim do trajeto:',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Hora de fim do trajeto:',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Horário máximo da jornada de trabalho',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
               ),
             ),
             //============================================================
@@ -272,7 +302,7 @@ class _PickInfosScreenState extends State<PickInfosScreen> {
         visible: _time != "" && _timeEnd != "" && lon != ' Longitude',
         child: FlatButton(
           onPressed: () {
-            _onLoading();
+            _onLoading(widget.orderDataList, initialTime, finalTime, _location);
           },
           color: Colors.white,
           child: Padding(
@@ -313,18 +343,19 @@ class _PickInfosScreenState extends State<PickInfosScreen> {
     );
   }
 
-  String _dataFormatada(DateTime dataEntr) {
-    if (dataEntr != null) {
-      DateTime dateAbertura = DateTime.parse(dataEntr.toString());
-      DateFormat dateFormat = DateFormat("dd/MM/yyyy");
-      String formattedDate = dateFormat.format(dateAbertura);
-      return formattedDate;
-    }
-    return '--';
-    // Convertendo a string de data pra DateTime e alterando o formato de exibição
-  }
+  // String _dataFormatada(DateTime dataEntr) {
+  //   if (dataEntr != null) {
+  //     DateTime dateAbertura = DateTime.parse(dataEntr.toString());
+  //     DateFormat dateFormat = DateFormat("dd/MM/yyyy");
+  //     String formattedDate = dateFormat.format(dateAbertura);
+  //     return formattedDate;
+  //   }
+  //   return '--';
+  //   // Convertendo a string de data pra DateTime e alterando o formato de exibição
+  // }
 
-  void _onLoading() {
+  void _onLoading(List<OrderData> orderDataList, Timestamp initialTime,
+      Timestamp finalTime, LocationData location) {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -360,7 +391,11 @@ class _PickInfosScreenState extends State<PickInfosScreen> {
         Navigator.pop(context); //pop dialog
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => DeliveryScreen(),
+            builder: (context) => DeliveryScreen(
+                orderDataList: orderDataList,
+                vehicleInitialTime: initialTime,
+                vehicleFinalTime: finalTime,
+                farmLocation: location),
           ),
         );
       },

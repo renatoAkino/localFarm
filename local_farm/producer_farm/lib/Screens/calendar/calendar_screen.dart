@@ -24,6 +24,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
   var _stateDate = DateTime.now();
   var pickedDay = DateTime.now().day;
 
+  List<OrderData> orderDataList = [];
+
   @override
   void initState() {
     super.initState();
@@ -125,6 +127,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           String dataEntregaFormatada =
                               _dataFormatada(orderData.ship_date);
 
+                          orderDataList.add(orderData);
+
                           return InkWell(
                             child: Padding(
                               padding: const EdgeInsets.only(
@@ -188,7 +192,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                             width: 5,
                                           ),
                                           Flexible(
-                                            child: Text(orderData.client_address,
+                                            child: Text(
+                                              orderData.client_address,
                                               overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
@@ -196,7 +201,30 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                       ),
                                       SizedBox(
                                         height: 10,
-                                      )
+                                      ),
+                                      // Row(
+                                      //   children: [
+                                      //     Icon(
+                                      //       Icons.credit_card,
+                                      //       size: 15,
+                                      //       color: Colors.grey,
+                                      //     ),
+                                      //     SizedBox(
+                                      //       width: 5,
+                                      //     ),
+                                      //     Flexible(
+                                      //       child: Text(
+                                      //         'R\$ ' +
+                                      //             orderData.totalPrice
+                                      //                 .toStringAsPrecision(2),
+                                      //         overflow: TextOverflow.ellipsis,
+                                      //       ),
+                                      //     ),
+                                      //   ],
+                                      // ),
+                                      // SizedBox(
+                                      //   height: 10,
+                                      // )
                                     ],
                                   ),
                                 ),
@@ -234,7 +262,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => PickInfosScreen(),
+              builder: (context) =>
+                  PickInfosScreen(orderDataList: orderDataList),
             ),
           );
         },

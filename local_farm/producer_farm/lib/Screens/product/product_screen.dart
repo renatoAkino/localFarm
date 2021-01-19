@@ -51,7 +51,7 @@ class _ProductScreenState extends State<ProductScreen> {
       ),
       body: ScopedModelDescendant<UserModel>(
         builder: (context, child, model) {
-          log("id: " + model.userData.farmData.farmId);
+          print(model.userData.farmData.farmId);
           return FutureBuilder<QuerySnapshot>(
               future: FirebaseFirestore.instance
                   .collection('farms')
