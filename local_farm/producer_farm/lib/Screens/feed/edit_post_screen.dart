@@ -2,30 +2,40 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:producerfarm/Datas/post_data.dart';
 import 'package:producerfarm/Models/post_model.dart';
 import 'package:producerfarm/Models/user_model.dart';
 
-class InsertPostScreen extends StatefulWidget {
+class EditPostScreen extends StatefulWidget {
+  final PostData postData;
+
+  const EditPostScreen(this.postData);
+
   @override
-  _InsertPostScreenState createState() => _InsertPostScreenState();
+  _EditPostScreenState createState() => _EditPostScreenState();
 }
 
-//talvez esse link ajude
-// https://www.coderzheaven.com/2019/04/30/upload-image-in-flutter-using-php/
-
-class _InsertPostScreenState extends State<InsertPostScreen> {
+class _EditPostScreenState extends State<EditPostScreen> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String _imageUrl;
   String _typeText;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    initialValues();
+  }
+
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         elevation: 2,
         centerTitle: true,
@@ -120,22 +130,50 @@ class _InsertPostScreenState extends State<InsertPostScreen> {
                       child: RaisedButton(
                         child: const Text('Postar'),
                         onPressed: (){
-                          if(_formKey.currentState.validate() && _imageUrl != null){
+
+                          if(_formKey.currentState.validate()){
                             PostData postData = PostData();
-                            postData.likes = 0;
+                            postData.postId = widget.postData.postId;
+                            postData.likes = widget.postData.likes;
                             postData.farm_id = UserModel.of(context).userData.farmData.farmId;
                             postData.description = _descriptionController.text;
-                            postData.type = _typeText;
-                            postData.post_data = Timestamp.fromDate(DateTime.now());
-                            postData.images = {'0' : _imageUrl};
+                            postData.type =_typeText;
+                            postData.post_data = widget.postData.post_data;
+                            postData.images = widget.postData.images;
                             postData.title = _titleController.text;
 
-                            PostModel().insertPost(postData);
+                            PostModel().updatePost(postData, onSucess, onFailed, UserModel.of(context).userData.farmData.farmId);
                           }
                         },
                       )),
                 ],
               ))),
     );
+
   }
+  void initialValues() {
+    _titleController.text = widget.postData.title;
+    _descriptionController.text = widget.postData.description;
+
+  }
+
+  void onSucess() {
+    Navigator.of(context).pop(context);
+  }
+
+  void onFailed() {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text(
+        "Falha ao alterar dados",
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      backgroundColor: Theme.of(context).primaryColor,
+      duration: Duration(seconds: 3),
+    ));
+  }
+
+
 }
