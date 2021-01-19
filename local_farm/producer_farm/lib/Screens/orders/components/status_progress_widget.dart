@@ -344,7 +344,7 @@ class StatusProgressWidget extends StatelessWidget {
 
   Widget spacerBottom(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.03,
+      width: MediaQuery.of(context).size.width * 0.02,
     );
   }
 }
