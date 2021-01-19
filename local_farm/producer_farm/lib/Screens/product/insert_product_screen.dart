@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:producerfarm/Datas/product_data.dart';
+import 'package:producerfarm/Models/product_model.dart';
 import 'package:producerfarm/Models/user_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -10,11 +14,13 @@ class InsertProductScreen extends StatefulWidget {
 }
 
 class _InsertProductScreenState extends State<InsertProductScreen> {
-  final _cepController = TextEditingController();
-  final _adressController = TextEditingController();
-  final _adressComplementController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _priceController = TextEditingController();
+  final _quantityController = TextEditingController();
   final _birthController = TextEditingController();
-  String _genderText;
+  String _imageUrl;
+  String _typeText;
+  String _soldPerText;
   final _nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -61,6 +67,16 @@ class _InsertProductScreenState extends State<InsertProductScreen> {
                         key: _formKey,
                         child: Column(
                           children: <Widget>[
+                            OutlineButton(
+                              onPressed: () async {
+                               setState(() async {
+                                 final PickedFile imgFile = await ImagePicker().getImage(source: ImageSource.gallery);
+                                 _imageUrl = await ProductModel().insertImage(File(imgFile.path));
+                               });
+
+                              },
+                              child: Text(_imageUrl == null ? 'Adicionar Imagem' : 'Imagem Selecionada'),
+                            ),
                             TextFormField(
                               controller: _nameController,
                               decoration:
@@ -82,10 +98,10 @@ class _InsertProductScreenState extends State<InsertProductScreen> {
                                 height: 2,
                                 color: Colors.grey[350],
                               ),
-                              value: _genderText,
+                              value: _typeText,
                               onChanged: (String newValue) {
                                 setState(() {
-                                  _genderText = newValue;
+                                  _typeText = newValue;
                                 });
                               },
                               items: <String>[
@@ -107,7 +123,7 @@ class _InsertProductScreenState extends State<InsertProductScreen> {
                             //   height: 16,
                             // ),
                             TextFormField(
-                              controller: _adressController,
+                              controller: _priceController,
                               decoration: InputDecoration(labelText: "Preço"),
                               onChanged: (text) {},
                               validator: (text) {
@@ -127,10 +143,10 @@ class _InsertProductScreenState extends State<InsertProductScreen> {
                                 height: 2,
                                 color: Colors.grey[350],
                               ),
-                              value: _genderText,
+                              value: _soldPerText,
                               onChanged: (String newValue) {
                                 setState(() {
-                                  _genderText = newValue;
+                                  _soldPerText = newValue;
                                 });
                               },
                               items: <String>[
@@ -147,7 +163,7 @@ class _InsertProductScreenState extends State<InsertProductScreen> {
                               height: 16,
                             ),
                             TextFormField(
-                              controller: _adressComplementController,
+                              controller: _quantityController,
                               decoration: InputDecoration(
                                   labelText: "Quantidade disponível"),
                               onChanged: (text) {},
@@ -165,7 +181,7 @@ class _InsertProductScreenState extends State<InsertProductScreen> {
                               height: 16,
                             ),
                             TextFormField(
-                              controller: _cepController,
+                              controller: _descriptionController,
                               decoration:
                                   InputDecoration(labelText: "Descrição"),
                               onChanged: (text) {},
@@ -201,21 +217,21 @@ class _InsertProductScreenState extends State<InsertProductScreen> {
                               ),
                             ),
                             onPressed: () {
-                              if (_formKey.currentState.validate()) {
-                                Map<String, dynamic> userData = Map();
+                              if (_formKey.currentState.validate() && _imageUrl != null) {
 
-                                userData['name'] = _nameController.text;
-                                userData['cep'] = _cepController.text;
-                                userData['adress'] = _adressController.text;
-                                userData['adress_complement'] =
-                                    _adressComplementController.text;
-                                userData['gender'] = _genderText;
+                                ProductData productData = ProductData();
+                                productData.name = _nameController.text;
+                                productData.type = _typeText;
+                                productData.price = double.parse(_priceController.text);
+                                productData.soldPer = _soldPerText;
+                                productData.quantity = int.parse(_quantityController.text);
+                                productData.description = _descriptionController.text;
+                                productData.farm_name = UserModel.of(context).userData.farmData.name;
+                                productData.farm_id = UserModel.of(context).userData.farmData.farmId;
+                                productData.image = _imageUrl;
 
-                                // model.updateProduct(
-                                //     // userData: userData,
-                                //     // onSucess: onSucess,
-                                //     // onFailed: onFailed
-                                //     );
+                                ProductModel productModel = ProductModel();
+                                productModel.insertProduct(productData);
                               }
                             },
                           )),

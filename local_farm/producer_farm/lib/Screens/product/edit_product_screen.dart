@@ -14,11 +14,13 @@ class EditProductScreen extends StatefulWidget {
 }
 
 class _EditProductScreenState extends State<EditProductScreen> {
-  final _cepController = TextEditingController();
-  final _adressController = TextEditingController();
-  final _adressComplementController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _priceController = TextEditingController();
+  final _quantityController = TextEditingController();
   final _birthController = TextEditingController();
-  String _genderText;
+  String _imageUrl;
+  String _typeText;
+  String _soldPerText;
   final _nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -68,7 +70,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             TextFormField(
                               controller: _nameController,
                               decoration:
-                                  InputDecoration(labelText: "Nome do Produto"),
+                              InputDecoration(labelText: "Nome do Produto"),
                               validator: (text) {
                                 if (text.isEmpty) {
                                   return "Nome inválido";
@@ -86,10 +88,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 height: 2,
                                 color: Colors.grey[350],
                               ),
-                              value: _genderText,
+                              value: _typeText,
                               onChanged: (String newValue) {
                                 setState(() {
-                                  _genderText = newValue;
+                                  _typeText = newValue;
                                 });
                               },
                               items: <String>[
@@ -111,7 +113,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             //   height: 16,
                             // ),
                             TextFormField(
-                              controller: _adressController,
+                              controller: _priceController,
                               decoration: InputDecoration(labelText: "Preço"),
                               onChanged: (text) {},
                               validator: (text) {
@@ -131,10 +133,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 height: 2,
                                 color: Colors.grey[350],
                               ),
-                              value: _genderText,
+                              value: _soldPerText,
                               onChanged: (String newValue) {
                                 setState(() {
-                                  _genderText = newValue;
+                                  _soldPerText = newValue;
                                 });
                               },
                               items: <String>[
@@ -151,7 +153,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               height: 16,
                             ),
                             TextFormField(
-                              controller: _adressComplementController,
+                              controller: _quantityController,
                               decoration: InputDecoration(
                                   labelText: "Quantidade disponível"),
                               onChanged: (text) {},
@@ -169,9 +171,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               height: 16,
                             ),
                             TextFormField(
-                              controller: _cepController,
+                              controller: _descriptionController,
                               decoration:
-                                  InputDecoration(labelText: "Descrição"),
+                              InputDecoration(labelText: "Descrição"),
                               onChanged: (text) {},
                               validator: (text) {
                                 if (text.isEmpty) {
@@ -199,27 +201,27 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                "Salvar",
+                                "Alterar",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 18),
                               ),
                             ),
                             onPressed: () {
                               if (_formKey.currentState.validate()) {
-                                Map<String, dynamic> userData = Map();
+                                ProductData productData = ProductData();
+                                productData.productId = widget.product.productId;
+                                productData.name = _nameController.text;
+                                productData.type = _typeText;
+                                productData.price = double.parse(_priceController.text);
+                                productData.soldPer = _soldPerText;
+                                productData.quantity = int.parse(_quantityController.text);
+                                productData.description = _descriptionController.text;
+                                productData.farm_name = UserModel.of(context).userData.farmData.name;
+                                productData.farm_id = UserModel.of(context).userData.farmData.farmId;
+                                productData.image = widget.product.image;
 
-                                userData['name'] = _nameController.text;
-                                userData['cep'] = _cepController.text;
-                                userData['adress'] = _adressController.text;
-                                userData['adress_complement'] =
-                                    _adressComplementController.text;
-                                userData['gender'] = _genderText;
-
-                                // model.updateProduct(
-                                //     // userData: userData,
-                                //     // onSucess: onSucess,
-                                //     // onFailed: onFailed
-                                //     );
+                                ProductModel productModel = ProductModel();
+                                productModel.updateProduct(productData, onSucess,onFailed, UserModel.of(context).userData.farmData.farmId);
                               }
                             },
                           )),
@@ -259,17 +261,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
   }
 
   void initialValues() {
-    // Timestamp timestamp = UserModel.of(context).userData['birth'];
-    // print(UserModel.of(context).userData['birth'].toString());
-    // DateTime date =
-    //     DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
-    // _cepController.text = UserModel.of(context).userData['cep'];
-    // _adressController.text = UserModel.of(context).userData['adress'];
-    // _adressComplementController.text =
-    //     UserModel.of(context).userData['adress_complement'];
-    // _birthController.text = formatDate(date, [dd, '/', mm, '/', yyyy]);
-    // //_genderText = UserModel.of(context).userData['gender'];
-    // _nameController.text = UserModel.of(context).userData['name'];
+    _nameController.text = widget.product.name;
+   // _typeText = widget.product.type;
+    _priceController.text = widget.product.price.toStringAsFixed(2);
+  //  _soldPerText = widget.product.soldPer;
+    _quantityController.text = widget.product.quantity.toString();
+    _descriptionController.text = widget.product.description;
   }
 
   void onSucess() {
