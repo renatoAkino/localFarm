@@ -1,8 +1,12 @@
 // import 'package:client/repositories/Routing_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:producerfarm/Datas/routing_data.dart';
 import 'package:producerfarm/Repositories/routing_repository.dart';
+
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong/latlong.dart';
 
 class RoutingController {
   Routing dados;
@@ -19,6 +23,8 @@ class RoutingController {
 
   List<Step> spr = [];
 
+  List<Marker> markers = [];
+
   Future start(String body) async {
     state.value = RoutingState.loading;
     try {
@@ -30,10 +36,13 @@ class RoutingController {
       Duration duracaoTotal = Duration(seconds: dados.summary.duration);
       totalDur = _printDuration(duracaoTotal);
 
-      firstLocation = dados.routes[0].steps[1].location;
+      firstLocation = dados.routes[0].steps[0].location;
 
       // GERA A LISTA DE Steps QUE PREENCHERÃO A LISTA ORDENADA DAS ENTREGAS
       _stepGen(dados);
+
+      // GERA A LISTA DE Marks QUE Serão os pontos no mapa
+      _markersGen(dados);
 
       print('sucesso!');
     } catch (e) {
@@ -54,6 +63,37 @@ class RoutingController {
     String horas = date.hour.toString();
     String min = date.minute.toString();
     return "${horas.padLeft(2, "0")}:${min.padLeft(2, "0")}";
+  }
+
+  void _markersGen(Routing dados) {
+    for (var i in dados.routes) {
+      for (var j in i.steps) {
+        if (j.type == "job") {
+          markers.add(
+            Marker(
+              width: 40.0,
+              height: 40.0,
+              point: LatLng(j.location[0], j.location[1]),
+              builder: (ctx) => Container(
+                child: SvgPicture.asset('assets/icons/placeholder.svg'),
+              ),
+            ),
+          );
+        } else if (j.type == "start") {
+          markers.add(
+            Marker(
+              width: 40.0,
+              height: 40.0,
+              point: LatLng(j.location[0], j.location[1]),
+              builder: (ctx) => Container(
+                child: SvgPicture.asset('assets/icons/farmhouse.svg'),
+                // child: SvgPicture.asset('assets/icons/pin_icon_green.svg'),
+              ),
+            ),
+          );
+        }
+      }
+    }
   }
 
   void _stepGen(Routing dados) {
