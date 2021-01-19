@@ -28,13 +28,13 @@ _showJSON() {
   var start = [-46.537106931209564, -23.439181110341664];
   var end = [-46.537106931209564, -23.439181110341664];
   var capacity = [30];
-  var time_window = [1600416000, 1600430400];
+  var timeWindow = [1600416000, 1600430400];
   Vehicles vehicles = Vehicles(
       id: vehicleId,
       start: start,
       end: end,
       capacity: capacity,
-      timeWindow: time_window);
+      timeWindow: timeWindow);
   List<Vehicles> listVehicles = [vehicles];
   Jobs job1 = Jobs(
       id: 1,
@@ -63,7 +63,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
     controller.start(req);
   }
 
-  _sucess() {
+  _success() {
     // List<Pedido> pedidos = snapshot.data;
     return _builder(context);
   }
@@ -98,7 +98,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
       case RoutingState.error:
         return _error();
       case RoutingState.sucess:
-        return _sucess();
+        return _success();
       default:
         return _start();
     }
@@ -169,61 +169,6 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
     );
   }
 
-  Container buildContainer(String currentFarmId) {
-    return Container(
-        child: FutureBuilder(
-            // future: getDeliveryData(),
-            future: _getFarmData(currentFarmId),
-            initialData: 'Aguardando os dados...',
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Center(
-                  child: Text(
-                    snapshot.data,
-                    style: TextStyle(fontSize: 20.0),
-                  ),
-                );
-              } else {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            }));
-  }
-
-  Future<String> getDeliveryData() async =>
-      await Future.delayed(Duration(seconds: 10), () {
-        return 'Dados recebidos...';
-      });
-
-  // String _showJSON() {
-  //   var json =
-  //       '{ "vehicles": [{"id": 1,"start": [2.35044,48.71764],"end": [2.35044,48.71764],"capacity": [30], "time_window": [1600416000,1600430400]}],"jobs": [{"id": 1,"service": 300,"location": [1.98935,48.701]},{"id": 2,"service": 300,"location": [2.03655,48.61128]},{"id": 5,"service": 300,"location": [2.28325,48.5958]},{"id": 6,"service": 300,"location": [2.89357,48.90736]}]}';
-  //   //Para montar a req baseada no banco vai precisar:
-  //   // loc da farm (em coordernadas) ? - (select * from farm where email/id =
-  //   // loc dos clientes (em coordenadas) ? - ()
-  //   var vehicleId = 1;
-  //   var start = [2.35044, 48.71764];
-  //   var end = [2.35044, 48.71764];
-  //   var capacity = [30];
-  //   var time_window = [1600416000, 1600430400];
-  //   Vehicles vehicles = Vehicles(
-  //       id: vehicleId,
-  //       start: start,
-  //       end: end,
-  //       capacity: capacity,
-  //       timeWindow: time_window);
-  //   List<Vehicles> listVehicles = [vehicles];
-  //   Jobs job1 = Jobs(id: 1, service: 300, location: [1.98935, 48.701]);
-  //   Jobs job2 = Jobs(id: 2, service: 300, location: [2.03655, 48.61128]);
-  //   Jobs job3 = Jobs(id: 5, service: 300, location: [2.28325, 48.5958]);
-  //   Jobs job4 = Jobs(id: 6, service: 300, location: [2.89357, 48.90736]);
-  //   List<Jobs> listJobs = [job1, job2, job3, job4];
-  //   VROOMReq vroomReq = VROOMReq(vehicles: listVehicles, jobs: listJobs);
-  //   String req = jsonEncode(vroomReq);
-  //   // print(req);
-  //   return req;
-  // }
 
   ListBuilderRotas(RoutingController controller) {
     return ListView.builder(
@@ -271,10 +216,4 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
     );
   }
 
-  Future<String> _getFarmData(String farmId) async {
-    FarmData farmData;
-    final farm = await farmData.getFarmData(farmId);
-    log(farmData.name);
-    return farmData.name;
-  }
 }

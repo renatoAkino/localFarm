@@ -1,13 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:producerfarm/Datas/product_data.dart';
+import 'package:producerfarm/Datas/user_data.dart';
 
 import 'farm_data.dart';
 
 class OrderData {
   String order_id;
   String client_id;
+  String client_name;
+  String client_tel;
+  String client_address;
   String farm_id;
   List<ProductData> products = [];
+  List<UserData> location = [];
   double productsPrice;
   double shipPrice;
   int status;
@@ -23,6 +29,10 @@ class OrderData {
     order_id = document.id;
     Map<String, dynamic> data = document.data();
     client_id = data['clientID'];
+    client_name = data['clientName'];
+    client_tel = data['clientTel'];
+    client_address = data['clientAddress'];
+    location = data['location']; //lat -23.4264637 - lon -46.5615487
     // farm_id = document.data['farm_id'];
     productsPrice = data['productsPrice'] + 0.0;
     shipPrice = data['shipPrice'] + 0.0;

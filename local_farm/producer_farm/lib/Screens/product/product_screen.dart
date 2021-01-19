@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:producerfarm/Datas/order_data.dart';
@@ -49,6 +51,7 @@ class _ProductScreenState extends State<ProductScreen> {
       ),
       body: ScopedModelDescendant<UserModel>(
         builder: (context, child, model) {
+          log("id: " + model.userData.farmData.farmId);
           return FutureBuilder<QuerySnapshot>(
               future: FirebaseFirestore.instance
                   .collection('farms')

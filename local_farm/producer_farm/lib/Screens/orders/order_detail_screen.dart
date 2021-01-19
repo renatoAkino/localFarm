@@ -221,14 +221,14 @@ class OrderDetailScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Entrega',
+                                  'Taxa de Entrega',
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.grey[700],
                                   ),
                                 ),
                                 Text(
-                                  'R\$ ' + order.shipPrice.toString(),
+                                  'R\$ ' + order.shipPrice.toStringAsFixed(2),
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
@@ -273,7 +273,7 @@ class OrderDetailScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   // '<8:00 - 12:00>',
-                                  '<8:00 - 12:00>',
+                                  '8:00 - 18:00',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:producerfarm/Datas/farm_data.dart';
 
 class UserData{
@@ -6,6 +7,8 @@ class UserData{
   String userId;
   String name;
   String email;
+  String telefone;
+  List<UserData> location = [];
   String cep;
   String adress;
   String adressComplement;
@@ -21,9 +24,11 @@ class UserData{
     Map<String, dynamic> data = document.data();
     name = data['name'];
     email = data['email'];
+    telefone = data['telefone'];
     cep = data['cep'];
     adress = data['adress'];
     adressComplement = data['adress_complement'];
+    location = data['location'];
     //DateTime birth = document.data['birth'];
     gender = data['gender'];
 

@@ -122,9 +122,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       child: ListView(
                         children: snapshot.data.docs.map((e) {
                           OrderData orderData = OrderData.fromDocument(e);
-
-                          // String dataAberturaFormatada =
-                          //     _dataFormatada(orderData.order_date);
                           String dataEntregaFormatada =
                               _dataFormatada(orderData.ship_date);
 
@@ -152,7 +149,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                 ),
                                 title: Padding(
                                   padding: const EdgeInsets.only(top: 10.0),
-                                  child: Text('<José da Silva>'),
+                                  child: Text(orderData.client_name),
                                 ),
                                 subtitle: Padding(
                                   padding: const EdgeInsets.all(0),
@@ -174,7 +171,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                             width: 5,
                                           ),
                                           Text(dataEntregaFormatada +
-                                              ' <8:00 - 18:00>'),
+                                              ' 8:00 - 18:00'),
                                         ],
                                       ),
                                       SizedBox(
@@ -191,8 +188,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                             width: 5,
                                           ),
                                           Flexible(
-                                            child: Text(
-                                              '<Rua Saturnino de Brito, 156>',
+                                            child: Text(orderData.client_address,
                                               overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
