@@ -7,6 +7,7 @@ class FarmData {
   int followers;
   String image;
   String name;
+  String description;
 
   FarmData();
 
@@ -18,16 +19,18 @@ class FarmData {
     followers = data['followers'];
     image = data['image'];
     name = data['name'];
+    description = data['description'];
   }
 
-  Map<String, dynamic> toMap(){
+  Map<String, dynamic> toMap() {
     return {
-      'farm_id' : farmId,
-      'addres' : adress,
-      'distance' : distance,
-      'followers' : followers,
-      'image' : image,
-      'name' : name,
+      'farm_id': farmId,
+      'addres': adress,
+      'distance': distance,
+      'followers': followers,
+      'image': image,
+      'name': name,
+      'description': description,
     };
   }
 }

@@ -88,9 +88,10 @@ class _FarmScreenState extends State<FarmScreen> {
                                     horizontal: 20.0),
                                 child: Container(
                                   child: Text(
-                                    '<Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris se pirulitá. Cevadis im ampola pa arma uma pindureta. Posuere libero varius.>',
-                                    // textAlign: TextAlign.left,
-                                  ),
+                                      // '<Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris se pirulitá. Cevadis im ampola pa arma uma pindureta. Posuere libero varius.>',
+                                      model.userData.farmData.description
+                                      // textAlign: TextAlign.left,
+                                      ),
                                 ),
                               )
 

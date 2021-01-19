@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:producerfarm/Datas/farm_data.dart';
 
-class UserData{
-
+class UserData {
   String userId;
   String name;
   String email;
@@ -13,10 +12,9 @@ class UserData{
   String gender;
   FarmData farmData;
 
-
   UserData();
 
-  UserData.fromDocument(DocumentSnapshot document){
+  UserData.fromDocument(DocumentSnapshot document) {
     userId = document.id;
     Map<String, dynamic> data = document.data();
     name = data['name'];
@@ -26,8 +24,5 @@ class UserData{
     adressComplement = data['adress_complement'];
     //DateTime birth = document.data['birth'];
     gender = data['gender'];
-
   }
-
-
 }

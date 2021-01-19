@@ -57,7 +57,7 @@ class OrderScreen extends StatelessWidget {
                         child: Container(
                           margin:
                               EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                          height: 120,
+                          height: 140,
                           decoration: BoxDecoration(
                             // border: Border.all(color: Colors.white, width: 2.0),
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:producerfarm/Controllers/routing_controller.dart';
+import 'package:producerfarm/Datas/order_data.dart';
 import 'package:producerfarm/Screens/deliveries/components/list_adresses.dart';
 
 import 'launcher_google_maps.dart';
@@ -7,9 +8,11 @@ import 'launcher_google_maps.dart';
 /// Content of the DraggableBottomSheet's child SingleChildScrollView
 class CustomScrollViewContent extends StatelessWidget {
   RoutingController controller;
+  List<OrderData> orderDataList;
   CustomScrollViewContent({
     Key key,
     this.controller,
+    this.orderDataList,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -31,8 +34,7 @@ class CustomScrollViewContent extends StatelessWidget {
             Divider(),
             SizedBox(height: 12),
             CustomFeaturedListsText(
-              controller: controller,
-            ),
+                controller: controller, orderDataList: orderDataList),
             controller.numJobs > 5
                 ? SizedBox(height: 56)
                 : SizedBox(height: 206),
@@ -77,8 +79,8 @@ class CustomHeaderBottom extends StatelessWidget {
         ),
         child: FlatButton(
           onPressed: () {
-            var lat = controller.firstLocation[0];
-            var lon = controller.firstLocation[1];
+            var lat = controller.dados.routes[0].steps[1].location[0];
+            var lon = controller.dados.routes[0].steps[1].location[1];
             try {
               MapUtils.openMap(lat, lon);
             } catch (e) {

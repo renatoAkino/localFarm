@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:producerfarm/Controllers/routing_controller.dart';
+import 'package:producerfarm/Datas/order_data.dart';
 
 import 'launcher_google_maps.dart';
 
 class CustomFeaturedListsText extends StatefulWidget {
   // List<Step> spr;
   RoutingController controller;
+  List<OrderData> orderDataList;
   CustomFeaturedListsText({
     Key key,
     // this.spr,
     this.controller,
+    this.orderDataList,
   }) : super(key: key);
   @override
   _CustomFeaturedListsTextState createState() =>
@@ -67,9 +70,11 @@ class _CustomFeaturedListsTextState extends State<CustomFeaturedListsText> {
                 TextButton(
                   onPressed: () {
                     double lat = widget.controller.dados.routes[0]
-                        .steps[_currentstep].location[0];
+                        .steps[_currentstep + 1].location[0];
                     double lon = widget.controller.dados.routes[0]
-                        .steps[_currentstep].location[1];
+                        .steps[_currentstep + 1].location[1];
+                    // double lat = widget.orderDataList[_currentstep].location[0];
+                    // double lon = widget.orderDataList[_currentstep].location[1];
 
                     try {
                       MapUtils.openMap(lat, lon);
