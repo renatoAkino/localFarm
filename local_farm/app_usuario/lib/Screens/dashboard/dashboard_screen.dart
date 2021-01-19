@@ -115,13 +115,13 @@ class _DashboardScreenState extends State<DashboardScreen>
                           width: 50,
                         ),
                         title: Text(
-                          '<Fazenda Atalaia>',
+                          'Fazenda Atalaia',
                           style: TextStyle(
                               // color: Colors.white,
                               ),
                         ),
                         subtitle: Text(
-                          '<ID Pedido>',
+                          'Pedido Nº: 3X548Pd1',
                           style: TextStyle(
                               // color: Colors.grey[100],
                               ),
@@ -171,7 +171,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Sexta, 08 de Janeiro',
+                              'Sexta, 22 de Janeiro',
                               style: TextStyle(
                                   // color: Colors.white,
                                   ),
@@ -264,7 +264,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                 future:
                     Firestore.instance.collection('products').getDocuments(),
                 builder: (context, snapshot) {
-                  if(snapshot.hasData){
+                  if (snapshot.hasData) {
                     return GridView(
                       shrinkWrap: true,
                       primary: false,
@@ -274,18 +274,15 @@ class _DashboardScreenState extends State<DashboardScreen>
                         childAspectRatio: MediaQuery.of(context).size.width /
                             (MediaQuery.of(context).size.height / 1.25),
                       ),
-                      children: snapshot.data.documents.map(
-                              (document){
-                            ProductData product = ProductData.fromDocument(document);
-                            return GridProduct(product);
-                          }
-                      ).toList(),
-
+                      children: snapshot.data.documents.map((document) {
+                        ProductData product =
+                            ProductData.fromDocument(document);
+                        return GridProduct(product);
+                      }).toList(),
                     );
                   }
                   return Container();
                 }),
-
 
             SizedBox(height: 30),
           ],
