@@ -197,9 +197,17 @@ class _PickInfosScreenState extends State<PickInfosScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
-              child: Text(
-                'Hora de fim do trajeto:',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              child: Column(
+                children: [
+                  Text(
+                    'Hora de fim do trajeto:',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Hora de fim do trajeto:',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
             ),
             //============================================================
