@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:localfarm/Datas/post_data.dart';
 import 'package:localfarm/Datas/post_data.dart';
 import 'package:localfarm/Models/user_model.dart';
+import 'package:localfarm/Screens/farm/farm_screen.dart';
 import 'package:localfarm/Screens/store_screen.dart';
 
 class FeedTile extends StatefulWidget {
@@ -73,7 +74,8 @@ class _FeedTileState extends State<FeedTile> {
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                   fit: BoxFit.cover,
-                                  image: NetworkImage(widget.post.farmData.image),
+                                  image:
+                                      NetworkImage(widget.post.farmData.image),
                                 ),
                               ),
                             ),
@@ -108,7 +110,8 @@ class _FeedTileState extends State<FeedTile> {
                   IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => StoreScreen(widget.post.farmData)));
+                          builder: (context) =>
+                              FarmScreenSemProd(widget.post.farmData)));
                     },
                     icon: Icon(Icons.more_vert),
                   )
@@ -145,7 +148,6 @@ class _FeedTileState extends State<FeedTile> {
                       setState(() {
                         UserModel.of(context).likePost(widget.post.post_id);
                       });
-
                     },
                     fillColor: checkLike ? Colors.green : Colors.white,
                     shape: CircleBorder(),
