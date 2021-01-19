@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:producerfarm/Datas/order_data.dart';
 import 'package:producerfarm/Datas/product_data.dart';
+import 'package:producerfarm/Models/product_model.dart';
+import 'package:producerfarm/Models/user_model.dart';
 
 class DeleteScreen extends StatelessWidget {
   final ProductData productData;
@@ -92,7 +94,7 @@ class DeleteScreen extends StatelessWidget {
       ),
       bottomSheet: FlatButton(
         onPressed: () {
-          //adicionar função que deleta produto
+          ProductModel().deleteProduct(productData.productId, UserModel.of(context).userData.farmData.farmId);
           Navigator.of(context).pop();
         },
         color: Colors.white,

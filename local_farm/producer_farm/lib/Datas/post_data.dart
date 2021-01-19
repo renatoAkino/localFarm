@@ -10,9 +10,12 @@ class PostData {
   Map<String, dynamic> images;
   String title;
   String type;
+  int likes;
   Timestamp post_data;
 
   FarmData farmData;
+
+  PostData();
 
   PostData.fromDocument(DocumentSnapshot snapshot) {
     postId = snapshot.id;
@@ -22,17 +25,18 @@ class PostData {
     images = data['images'];
     title = data['title'];
     type = data['type'];
-    //post_data = data['data_public'];
+    likes = data['likes'];
+    post_data = data['data_public'];
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'post_id': postId,
       'description': description,
       'farm': farm_id,
       'images': images,
       'title': title,
       'type': type,
+      'likes' : likes,
       'post_data': post_data,
     };
   }

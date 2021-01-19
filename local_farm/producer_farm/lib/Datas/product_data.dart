@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductData {
+  String farm_name;
   String productId;
   String description;
   String farm_id;
@@ -11,9 +12,12 @@ class ProductData {
   String soldPer;
   String type;
 
+  ProductData();
+
   ProductData.fromDocument(DocumentSnapshot snapshot) {
     productId = snapshot.id;
     Map<String, dynamic> data = snapshot.data();
+    farm_name = data['farm_name'];
     description = data['description'];
     farm_id = data['farm'];
     image = data['image'];
@@ -34,14 +38,14 @@ class ProductData {
 
   Map<String, dynamic>  toMap(){
       return {
-        'prodict_id' : productId,
         'description' : description,
         'farm_id' : farm_id,
+        'farm_name' : farm_name,
         'image' : image,
         'price' : price,
         'quantity' : quantity,
         'name' : name,
-        'soldPer' : soldPer,
+        'sold-per' : soldPer,
         'type' : type,
       };
   }

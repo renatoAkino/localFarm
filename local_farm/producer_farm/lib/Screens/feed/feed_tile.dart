@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:producerfarm/Datas/post_data.dart';
 import 'package:producerfarm/Models/user_model.dart';
+import 'package:producerfarm/Screens/feed/delete_post_screen.dart';
+import 'package:producerfarm/Screens/feed/edit_post_screen.dart';
 
 class FeedTile extends StatefulWidget {
   final PostData post;
@@ -82,7 +84,12 @@ class _FeedTileState extends State<FeedTile> {
                   child: RawMaterialButton(
                     onPressed: () {
                       setState(() {
-                        // UserModel.of(context).likePost(widget.post.post_id);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                EditPostScreen(widget.post),
+                          ),
+                        );
                       });
                     },
                     fillColor: checkLike ? Colors.green : Colors.white,
@@ -105,7 +112,14 @@ class _FeedTileState extends State<FeedTile> {
                   child: RawMaterialButton(
                     onPressed: () {
                       setState(() {
-                        // UserModel.of(context).likePost(widget.post.post_id);
+                        setState(() {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  DeletePostScreen(widget.post),
+                            ),
+                          );
+                        });
                       });
                     },
                     fillColor: checkLike ? Colors.green : Colors.white,

@@ -33,7 +33,6 @@ class CartModel extends Model {
         .then((doc) {
       cartData.cart_id = doc.documentID;
     });
-
     notifyListeners();
   }
 
