@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:localfarm/Datas/cart_data.dart';
+import 'package:localfarm/Models/cart_model.dart';
 
 class CartItem extends StatelessWidget {
   final String name;
@@ -6,6 +8,7 @@ class CartItem extends StatelessWidget {
   final double price;
   final int quantity;
   final String fazendaName;
+  final CartData cartData;
   // final bool isFav;
 
   CartItem({
@@ -15,6 +18,7 @@ class CartItem extends StatelessWidget {
     @required this.price,
     @required this.quantity,
     @required this.fazendaName,
+    @required this.cartData,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -142,7 +146,9 @@ class CartItem extends StatelessWidget {
                     textDirection: TextDirection.rtl,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  CartModel.of(context).removeCartItem(cartData);
+                },
               ),
             ),
           ],

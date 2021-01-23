@@ -63,7 +63,7 @@ class _StoreScreenTabState extends State<StoreScreenTab> {
                     //     ),
                     //   ),
                     // );
-
+                    productData.farm_id = widget.farmData.id;
                     Navigator.push(
                         context,
                         MaterialPageRoute(

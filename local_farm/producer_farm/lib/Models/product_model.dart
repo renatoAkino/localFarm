@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:producerfarm/Datas/product_data.dart';
 import 'package:producerfarm/Models/user_model.dart';
 
-class ProductModel {
+class ProductModel{
   Future<void> updateProduct(ProductData productData, VoidCallback onSucess, VoidCallback onFailed, String farm_id) async {
     await FirebaseFirestore.instance
         .collection('products')
@@ -60,6 +60,7 @@ class ProductModel {
         .collection('products')
         .doc(snapshot.docs.first.id)
         .set(productData.toMap());
+
 
     //FIM DA GAMBIARRA//
   }
