@@ -22,7 +22,7 @@ class ProductData {
   ProductData.fromDocument(DocumentSnapshot snapshot) {
     id = snapshot.documentID;
     description = snapshot['description'];
-    farm_id = snapshot['farm'];
+    farm_id = snapshot['farm_id'];
     //images = snapshot['images'];
     image = snapshot['image'];
     price = snapshot['price'] + 0.0;
@@ -50,7 +50,7 @@ class ProductData {
   }
 
   Map<String, dynamic> toResumeMap() {
-    return {'title': name, 'price': price, 'farm_id': farm_id};
+    return {'title': name, 'price': price};
   }
 
   // Future<String> getFarmName() async {

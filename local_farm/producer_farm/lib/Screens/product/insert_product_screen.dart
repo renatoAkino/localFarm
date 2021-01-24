@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:producerfarm/Datas/product_data.dart';
 import 'package:producerfarm/Models/product_model.dart';
 import 'package:producerfarm/Models/user_model.dart';
+import 'package:producerfarm/Screens/product/product_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class InsertProductScreen extends StatefulWidget {
@@ -69,13 +70,17 @@ class _InsertProductScreenState extends State<InsertProductScreen> {
                           children: <Widget>[
                             OutlineButton(
                               onPressed: () async {
-                               setState(() async {
-                                 final PickedFile imgFile = await ImagePicker().getImage(source: ImageSource.gallery);
-                                 _imageUrl = await ProductModel().insertImage(File(imgFile.path));
+                                final PickedFile imgFile = await ImagePicker().getImage(source: ImageSource.gallery);
+                                String _url = await ProductModel().insertImage(File(imgFile.path));
+                               setState((){
+                                 _imageUrl = _url;
                                });
 
                               },
                               child: Text(_imageUrl == null ? 'Adicionar Imagem' : 'Imagem Selecionada'),
+                              borderSide: BorderSide(
+                                color: _imageUrl == null ? Colors.grey : Colors.green
+                              ),
                             ),
                             TextFormField(
                               controller: _nameController,
@@ -232,6 +237,12 @@ class _InsertProductScreenState extends State<InsertProductScreen> {
 
                                 ProductModel productModel = ProductModel();
                                 productModel.insertProduct(productData);
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        ProductScreen(),
+                                  ),
+                                );
                               }
                             },
                           )),

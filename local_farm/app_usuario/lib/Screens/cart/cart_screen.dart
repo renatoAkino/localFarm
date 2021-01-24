@@ -292,6 +292,7 @@ class _CartScreenState extends State<CartScreen> {
                                   quantity: product.quantity,
                                   fazendaName:
                                       product.productData.farm_name,
+                                  cartData: product,
                                 );
                               } else {
                                 return Container();
@@ -449,8 +450,9 @@ Future<void> _showMyDialog(BuildContext context) async {
         actions: <Widget>[
           TextButton(
             child: Text('Ok'),
-            onPressed: () {
-              CartModel.of(context).finishOrder();
+            onPressed: () async {
+
+              CartModel.of(context).finishOrder(await UserModel.of(context).getLocation());
               Navigator.of(context).pop();
             },
           ),
