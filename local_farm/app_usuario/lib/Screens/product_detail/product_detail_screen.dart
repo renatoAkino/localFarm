@@ -11,7 +11,6 @@ import 'components/body.dart';
 
 class DetailsScreen extends StatefulWidget {
   final ProductData product;
-
   const DetailsScreen({Key key, this.product}) : super(key: key);
 
   @override
@@ -88,14 +87,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           ),
                         ),
                         onPressed: () {
-                          print(numItems.count);
+                          print(widget.product.farm_name);
                           if (UserModel.of(context).isLoggedin()) {
                             CartData cartData = CartData();
                             cartData.product_id = widget.product.id;
                             // PRECISA BUSCAR A QUANTIDADE DO CONTADOR cart_counter.dart
                             cartData.quantity = numItems.count;
                             cartData.productData = widget.product;
-
+                            cartData.farm_name = widget.product.farm_name;
+                            cartData.farm_id = widget.product.farm_id;
                             // print(cartData.productData.name);
                             print(cartData.productData.quantity);
 
@@ -119,6 +119,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
       ),
     );
   }
+
+
 }
 
 Future<void> _showMyDialog(BuildContext context) async {

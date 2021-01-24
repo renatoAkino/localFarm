@@ -42,136 +42,140 @@ class _FloatingCardState extends State<FloatingCard> {
         //     );
         //   }).toList(),
         // );
-        return InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                // builder: (context) => PostScreen(),
-                builder: (context) => FeedScreen(),
+        if(snapshot.hasData){
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  // builder: (context) => PostScreen(),
+                  builder: (context) => FeedScreen(),
+                ),
+              );
+            },
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
               ),
-            );
-          },
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            elevation: 4,
-            margin: EdgeInsets.only(
-                bottom: deviceHeight(context) * 0.18, left: 20.0, right: 20.0),
-            color: Colors.green,
-            child: Container(
-              width: deviceHeight(context) * 0.50,
-              height: deviceWidth(context) * 0.22,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.favorite_border,
-                            color: Colors.white,
-                          ),
-                          Text(
-                            ' 12',
-                            // cargo ?? '',
-                            textAlign: TextAlign.start,
-                            style: new TextStyle(
-                                color: Colors.white,
-                                fontSize: 25.0,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        'Curtidas',
-                        // depto ?? '',
-                        textAlign: TextAlign.start,
-                        style: new TextStyle(
-                          color: Colors.white,
-                          fontSize: 14.0,
+              elevation: 4,
+              margin: EdgeInsets.only(
+                  bottom: deviceHeight(context) * 0.18, left: 20.0, right: 20.0),
+              color: Colors.green,
+              child: Container(
+                width: deviceHeight(context) * 0.50,
+                height: deviceWidth(context) * 0.22,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.favorite_border,
+                              color: Colors.white,
+                            ),
+                            Text(
+                              ' 12',
+                              // cargo ?? '',
+                              textAlign: TextAlign.start,
+                              style: new TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.camera_alt_outlined,
+                        Text(
+                          'Curtidas',
+                          // depto ?? '',
+                          textAlign: TextAlign.start,
+                          style: new TextStyle(
                             color: Colors.white,
+                            fontSize: 14.0,
                           ),
-                          Text(
-                            ' ' + snapshot.data.docs.length.toString(),
-                            // cargo ?? '',
-                            textAlign: TextAlign.start,
-                            style: new TextStyle(
-                                color: Colors.white,
-                                fontSize: 25.0,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        'Posts',
-                        // depto ?? '',
-                        textAlign: TextAlign.start,
-                        style: new TextStyle(
-                          color: Colors.white,
-                          fontSize: 14.0,
                         ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.turned_in_not,
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.camera_alt_outlined,
+                              color: Colors.white,
+                            ),
+                            Text(
+                              ' ' + snapshot.data.docs.length.toString(),
+                              // cargo ?? '',
+                              textAlign: TextAlign.start,
+                              style: new TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          'Posts',
+                          // depto ?? '',
+                          textAlign: TextAlign.start,
+                          style: new TextStyle(
                             color: Colors.white,
+                            fontSize: 14.0,
                           ),
-                          Text(
-                            ' ' +
-                                UserModel.of(context)
-                                    .userData
-                                    .farmData
-                                    .followers
-                                    .toString(),
-                            // cargo ?? '',
-                            textAlign: TextAlign.start,
-                            style: new TextStyle(
-                                color: Colors.white,
-                                fontSize: 25.0,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        'Seguidores',
-                        // depto ?? '',
-                        textAlign: TextAlign.start,
-                        style: new TextStyle(
-                          color: Colors.white,
-                          fontSize: 14.0,
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.turned_in_not,
+                              color: Colors.white,
+                            ),
+                            Text(
+                              ' ' +
+                                  UserModel.of(context)
+                                      .userData
+                                      .farmData
+                                      .followers
+                                      .toString(),
+                              // cargo ?? '',
+                              textAlign: TextAlign.start,
+                              style: new TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          'Seguidores',
+                          // depto ?? '',
+                          textAlign: TextAlign.start,
+                          style: new TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        );
+          );
+        }else{
+          return Container();
+        }
       },
     );
   }

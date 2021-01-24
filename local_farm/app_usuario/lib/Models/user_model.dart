@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_format/date_format.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:localfarm/Datas/farm_data.dart';
+import 'package:location/location.dart';
 // import 'package:localfarm/Models/farm_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -10,7 +12,6 @@ class UserModel extends Model {
   //intâncias do firebase para login
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseUser firebaseUser;
-
   Map<String, dynamic> userData = Map();
   bool isLoading = false;
 
@@ -305,5 +306,18 @@ class UserModel extends Model {
       return farms.contains(postId);
     }
     return false;
+  }
+
+  Future<List<dynamic>> getLocation() async {
+    final Location location = Location();
+    LocationData locationData;
+    try {
+      final LocationData _locationResult = await location.getLocation();
+        locationData = _locationResult;
+    }catch(e){
+      print(e);
+    }
+
+    return [locationData.latitude, locationData.longitude];
   }
 }

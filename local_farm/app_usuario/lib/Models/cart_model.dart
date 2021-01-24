@@ -10,6 +10,8 @@ class CartModel extends Model {
   UserModel user;
 
   bool isLoading = false;
+  String farmId;
+  String farmName;
   List<CartData> products = [];
 
   String couponCode;
@@ -23,16 +25,28 @@ class CartModel extends Model {
       ScopedModel.of<CartModel>(context);
 
   void addCartItem(CartData cartData) {
-    products.add(cartData);
 
-    Firestore.instance
-        .collection('users')
-        .document(user.firebaseUser.uid)
-        .collection('cart')
-        .add(cartData.toMap())
-        .then((doc) {
-      cartData.cart_id = doc.documentID;
-    });
+    if(this.farmId == null){
+      this.farmId = cartData.farm_id;
+      this.farmName = cartData.farm_name;
+
+    }
+
+
+    if(this.farmId == cartData.farm_id){
+      products.add(cartData);
+
+      Firestore.instance
+          .collection('users')
+          .document(user.firebaseUser.uid)
+          .collection('cart')
+          .add(cartData.toMap())
+          .then((doc) {
+        cartData.cart_id = doc.documentID;
+      });
+    }else{
+      print('Farm diferrente');
+    }
     notifyListeners();
   }
 
@@ -44,8 +58,9 @@ class CartModel extends Model {
         .document(cartData.cart_id)
         .delete();
 
-    products.remove(cartData);
-
+    CartData listData = products.firstWhere((element) => element.product_id == cartData.product_id );
+    products.remove(listData);
+    print(products.length);
     notifyListeners();
   }
 
@@ -97,7 +112,7 @@ class CartModel extends Model {
     return price;
   }
 
-  Future<String> finishOrder() async {
+  Future<String> finishOrder(List<dynamic> shipLocation) async {
     if (products.length == 0) return null;
     FarmData farmData;
 
@@ -109,11 +124,18 @@ class CartModel extends Model {
     DocumentReference refOrder =
         await Firestore.instance.collection('orders').add({
       'clientID': user.firebaseUser.uid,
+      'clientAddress': user.userData['adress'],
+      'clientCep': user.userData['cep'],
+      'clientName': user.userData['name'],
+      'clientTel': user.userData['tel'],
       'products': products.map((cartProduct) => cartProduct.toMap()).toList(),
       'shipPrice': shipPrice,
+      'locationLatLon' : shipLocation,
       'productsPrice': productsPrice,
       'totalPrice': productsPrice + shipPrice,
       'status': 1,
+      'farmId' : this.farmId,
+      'farmName' : this.farmName,
       'order_date': Timestamp.fromDate(DateTime.now()),
       'ship_date': Timestamp.fromDate(genShipDay()),
     });

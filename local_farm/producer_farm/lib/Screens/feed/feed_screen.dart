@@ -45,7 +45,8 @@ class _FeedScreenState extends State<FeedScreen> {
           )
         ],
       ),
-      body: FutureBuilder<QuerySnapshot>(
+      body:
+      FutureBuilder<QuerySnapshot>(
         future: FirebaseFirestore.instance
             .collection('posts')
             .where('farm',

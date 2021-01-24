@@ -42,7 +42,7 @@ class UserModel extends Model{
         //RECEBENDO AS FAZENDAS QUE O USUÁRIO SEGUE
         QuerySnapshot querySnapshot = await FirebaseFirestore.instance
             .collection('users')
-            .doc(userData.userId)
+            .doc(firebaseUser.uid)
             .collection('farm')
             .get();
         FarmModel farmModel = FarmModel();
