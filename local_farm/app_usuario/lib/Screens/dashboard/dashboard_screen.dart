@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:localfarm/Datas/order_data.dart';
 import 'package:localfarm/Datas/product_data.dart';
 import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/orders/order_detail_screen.dart';
@@ -88,112 +89,114 @@ class _DashboardScreenState extends State<DashboardScreen>
               ),
             ),
             SizedBox(height: 10.0),
-            FutureBuilder(
-              future: Firestore.instance.collection('orders').where('clientID', isEqualTo: UserModel.of(context).getId()).orderBy('ship_date').getDocuments(),
+            FutureBuilder<QuerySnapshot>(
+              future: Firestore.instance.collection('orders').where('clientID', isEqualTo: UserModel.of(context).getId()).orderBy("ship_date").getDocuments(),
               builder: (context, snapshot){
-                return Card(
-                  elevation: 1.5,
-                  // color: Colors.lightGreen,
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  margin: EdgeInsets.only(top: 10, bottom: 10),
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 80,
-                        child: Center(
-                          child: ListTile(
-                            leading: Container(
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage('assets/cesta.png'),
-                                ),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(0.0),
-                                ),
-                              ),
-                              height: 50,
-                              width: 50,
-                            ),
-                            title: Text(
-                              '<Fazenda Atalaia>',
-                              style: TextStyle(
-                                // color: Colors.white,
-                              ),
-                            ),
-                            subtitle: Text(
-                              '<ID Pedido>',
-                              style: TextStyle(
-                                // color: Colors.grey[100],
-                              ),
-                            ),
-                            trailing: InkWell(
-                              onTap: () {
-                                // Navigator.of(context).push(
-                                //   MaterialPageRoute(
-                                //     builder: (context) => OrderDetailScreen(order),
-                                //   ),
-                                // );
-                              },
-                              child: Container(
-                                height: 40,
-                                width: 40,
-                                child: Icon(
-                                  Icons.arrow_right,
-                                  color: Colors.green,
-                                ),
+                if(snapshot.hasData){
+                  DocumentSnapshot document = snapshot.data.documents.first;
+                  Timestamp _snapshotDate = document.data['ship_date'];
+                  DateTime _date = DateTime.fromMillisecondsSinceEpoch(_snapshotDate.millisecondsSinceEpoch);
+                  return Card(
+                    elevation: 1.5,
+                    // color: Colors.lightGreen,
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    margin: EdgeInsets.only(top: 10, bottom: 10),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 80,
+                          child: Center(
+                            child: ListTile(
+                              leading: Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.green[50],
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage('assets/cesta.png'),
+                                  ),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(0.0),
+                                  ),
+                                ),
+                                height: 50,
+                                width: 50,
+                              ),
+                              title: Text(
+                                document.data['farmName'],
+                                style: TextStyle(
+                                  // color: Colors.white,
+                                ),
+                              ),
+                              subtitle: Text(
+                                document.documentID,
+                                style: TextStyle(
+                                  // color: Colors.grey[100],
+                                ),
+                              ),
+                              trailing: InkWell(
+                                onTap: () {
+                                   Navigator.of(context).push(
+                                     MaterialPageRoute(
+                                       builder: (context) => OrderDetailScreen(OrderData.fromDocument(document)),
+                                     ),
+                                   );
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 40,
+                                  child: Icon(
+                                    Icons.arrow_right,
+                                    color: Colors.green,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.green[50],
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      Divider(
-                        // height: MediaQuery.of(context).size.width * 0.6,
-                        endIndent: 40,
-                        indent: 40,
-                        height: 10,
-                        // color: Colors.white,
-                      ),
-                      Container(
-                        height: 70,
-                        child: Center(
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.access_time,
-                              // color: Colors.white,
-                              color: Colors.green,
-                            ),
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Sexta, 08 de Janeiro',
-                                  style: TextStyle(
-                                    // color: Colors.white,
+                        Divider(
+                          // height: MediaQuery.of(context).size.width * 0.6,
+                          endIndent: 40,
+                          indent: 40,
+                          height: 10,
+                          // color: Colors.white,
+                        ),
+                        Container(
+                          height: 70,
+                          child: Center(
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.access_time,
+                                // color: Colors.white,
+                                color: Colors.green,
+                              ),
+                              title: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    _date.toString(),
+                                    style: TextStyle(
+                                      // color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '8:00 - 10:00',
-                                  style: TextStyle(
-                                    // color: Colors.white,
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
+                      ],
+                    ),
+                  );
+                }else{
+                  return Container();
+                }
+
               },
             ),
 

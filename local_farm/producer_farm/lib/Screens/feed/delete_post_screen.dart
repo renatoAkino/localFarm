@@ -51,7 +51,7 @@ class _DeletePostScreenState extends State<DeletePostScreen> {
                     color: Colors.redAccent,
                   ),
                   Text(
-                    'Tem certeza que deseja deletar esse produto?',
+                    'Tem certeza que deseja deletar esse post?',
                     style: TextStyle(fontSize: 20),
                     textAlign: TextAlign.center,
                   ),
