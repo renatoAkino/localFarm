@@ -1,8 +1,11 @@
+import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_format/date_format.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:localfarm/Datas/farm_data.dart';
+import 'package:location/location.dart';
 // import 'package:localfarm/Models/farm_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -10,7 +13,6 @@ class UserModel extends Model {
   //intâncias do firebase para login
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseUser firebaseUser;
-
   Map<String, dynamic> userData = Map();
   bool isLoading = false;
 
@@ -88,11 +90,11 @@ class UserModel extends Model {
             .getDocuments();
         List<dynamic> mapFarms;
         mapFarms = followFarms.documents.map((e) {
-          if(e.data != null){
+          if (e.data != null) {
             return e.data['farm_id'];
           }
         }).toList();
-        userData.addAll({'followFarms' : mapFarms});
+        userData.addAll({'followFarms': mapFarms});
 
         //RECEBENDO OS POSTS QUE O USUÁRIO DEU LIKE
         QuerySnapshot likedPosts = await Firestore.instance
@@ -102,12 +104,11 @@ class UserModel extends Model {
             .getDocuments();
         List<dynamic> postsList;
         postsList = likedPosts.documents.map((e) {
-          if(e.data != null){
+          if (e.data != null) {
             return e.data['post_id'];
           }
         }).toList();
-        userData.addAll({'likedPosts' : postsList});
-
+        userData.addAll({'likedPosts': postsList});
       }
     }
     notifyListeners();
@@ -240,8 +241,8 @@ class UserModel extends Model {
     }
   }
 
-  bool checkfollowFarm(farm_id){
-    if(userData.isNotEmpty) {
+  bool checkfollowFarm(farm_id) {
+    if (userData.isNotEmpty) {
       List farms = userData['followFarms'];
       return farms.contains(farm_id);
     }
@@ -268,7 +269,7 @@ class UserModel extends Model {
           .document(postId)
           .setData({'post_id': postId});
       DocumentSnapshot query =
-      await Firestore.instance.collection('posts').document(postId).get();
+          await Firestore.instance.collection('posts').document(postId).get();
       int l = query.data['likes'];
       l += 1;
       Firestore.instance
@@ -286,7 +287,7 @@ class UserModel extends Model {
           .document(postId)
           .delete();
       DocumentSnapshot query =
-      await Firestore.instance.collection('posts').document(postId).get();
+          await Firestore.instance.collection('posts').document(postId).get();
       int l = query.data['likes'];
       l -= 1;
       Firestore.instance
@@ -299,11 +300,24 @@ class UserModel extends Model {
     }
   }
 
-  bool checkLikedPost(postId){
-    if(userData.isNotEmpty) {
+  bool checkLikedPost(postId) {
+    if (userData.isNotEmpty) {
       List farms = userData['likedPosts'];
       return farms.contains(postId);
     }
     return false;
+  }
+
+  Future<List<dynamic>> getLocation() async {
+    final Location location = Location();
+    LocationData locationData;
+    try {
+      final LocationData _locationResult = await location.getLocation();
+      locationData = _locationResult;
+    } catch (e) {
+      print(e);
+    }
+
+    return [locationData.latitude, locationData.longitude];
   }
 }

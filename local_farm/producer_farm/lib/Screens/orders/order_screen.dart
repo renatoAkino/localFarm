@@ -25,7 +25,10 @@ class OrderScreen extends StatelessWidget {
       body: ScopedModelDescendant<UserModel>(
         builder: (context, child, model) {
           return FutureBuilder<QuerySnapshot>(
-              future: FirebaseFirestore.instance.collection('orders').get(),
+              future: FirebaseFirestore.instance.
+              collection('orders').
+              where('farmId', isEqualTo: UserModel.of(context).userData.farmData.farmId)
+              .get(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView(
