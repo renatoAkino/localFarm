@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:producerfarm/Screens/login_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'Models/user_model.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
               builder: (context, child, model) {
                 return MaterialApp(
                   // title: "Local Farm",
-                  home: TabScreen(),
+                  home: model.isLoggedin()? TabScreen() : LoginScreen(),
                   // home: DeliveryScreen(),
 
                   localizationsDelegates: [
