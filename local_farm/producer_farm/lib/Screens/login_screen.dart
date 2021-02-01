@@ -19,6 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color.fromRGBO(202, 229, 198, 1),
         key: _scaffoldKey,
         body: ScopedModelDescendant<UserModel>(
           builder: (context, child, model) {
@@ -38,6 +39,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "App do Produtor",
+                                style: TextStyle(
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25),
+                              ),
+                            ],
+                          ),
                           SizedBox(
                             height: 20,
                           ),
@@ -47,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
-                                      image: AssetImage('assets/logo.png')))),
+                                      image: AssetImage('assets/logo1.png')))),
                           Form(
                             key: _formKey,
                             child: Column(
@@ -100,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: Text(
                                     "Cadastre-se",
                                     style: TextStyle(
-                                        color: Theme.of(context).accentColor,
+                                        color: Colors.green,
                                         fontWeight: FontWeight.bold),
                                   ))
                             ],
@@ -114,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),
                                 textColor: Colors.white,
-                                color: Theme.of(context).primaryColor,
+                                color: Colors.green,
                                 child: Text(
                                   "Login",
                                   style: TextStyle(
@@ -140,7 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)),
                             highlightElevation: 0,
-                            borderSide: BorderSide(color: Colors.grey),
+                            borderSide: BorderSide(color: Colors.grey[600]),
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                               child: Row(
@@ -156,8 +169,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Text(
                                       'Login com o Google',
                                       style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.grey,
+                                        fontSize: 18,
+                                        color: Colors.grey[600],
                                       ),
                                     ),
                                   )
