@@ -80,131 +80,131 @@ class _DashboardScreenState extends State<DashboardScreen>
             ),
 
             SizedBox(height: 20.0),
-
-            Text(
-              "Próxima Encomenda",
-              style: TextStyle(
-                fontSize: 23,
-                // fontWeight: FontWeight.w800,
-              ),
-            ),
-            SizedBox(height: 10.0),
-            FutureBuilder<QuerySnapshot>(
-              future: Firestore.instance
-                  .collection('orders')
-                  .where('clientID', isEqualTo: UserModel.of(context).getId())
-                  .orderBy("ship_date")
-                  .getDocuments(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  DocumentSnapshot document = snapshot.data.documents.first;
-                  Timestamp _snapshotDate = document.data['ship_date'];
-                  DateTime _date = DateTime.fromMillisecondsSinceEpoch(
-                      _snapshotDate.millisecondsSinceEpoch);
-                  return Card(
-                    elevation: 1.5,
-                    // color: Colors.lightGreen,
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+            UserModel.of(context).isLoggedin() ?
+                Column(
+                  children: [
+                    Text(
+                      "Próxima Encomenda",
+                      style: TextStyle(
+                        fontSize: 23,
+                        // fontWeight: FontWeight.w800,
+                      ),
                     ),
-                    margin: EdgeInsets.only(top: 10, bottom: 10),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 80,
-                          child: Center(
-                            child: ListTile(
-                              leading: Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage('assets/cesta.png'),
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(0.0),
-                                  ),
-                                ),
-                                height: 50,
-                                width: 50,
-                              ),
-                              title: Text(
-                                document.data['farmName'],
-                                style: TextStyle(
-                                    // color: Colors.white,
-                                    ),
-                              ),
-                              subtitle: Text(
-                                document.documentID,
-                                style: TextStyle(
-                                    // color: Colors.grey[100],
-                                    ),
-                              ),
-                              trailing: InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) => OrderDetailScreen(
-                                          OrderData.fromDocument(document)),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  child: Icon(
-                                    Icons.arrow_right,
-                                    color: Colors.green,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.green[50],
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                  ),
-                                ),
-                              ),
+                    SizedBox(height: 10.0),
+                    FutureBuilder<QuerySnapshot>(
+                      future: Firestore.instance.collection('orders').where('clientID', isEqualTo: UserModel.of(context).getId()).orderBy("ship_date").getDocuments(),
+                      builder: (context, snapshot){
+                        if(snapshot.hasData){
+                          DocumentSnapshot document = snapshot.data.documents.first;
+                          Timestamp _snapshotDate = document.data['ship_date'];
+                          DateTime _date = DateTime.fromMillisecondsSinceEpoch(_snapshotDate.millisecondsSinceEpoch);
+                          return Card(
+                            elevation: 1.5,
+                            // color: Colors.lightGreen,
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                          ),
-                        ),
-                        Divider(
-                          // height: MediaQuery.of(context).size.width * 0.6,
-                          endIndent: 40,
-                          indent: 40,
-                          height: 10,
-                          // color: Colors.white,
-                        ),
-                        Container(
-                          height: 70,
-                          child: Center(
-                            child: ListTile(
-                              leading: Icon(
-                                Icons.access_time,
-                                // color: Colors.white,
-                                color: Colors.green,
-                              ),
-                              title: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    _date.toString(),
-                                    style: TextStyle(
-                                        // color: Colors.white,
+                            margin: EdgeInsets.only(top: 10, bottom: 10),
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 80,
+                                  child: Center(
+                                    child: ListTile(
+                                      leading: Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: AssetImage('assets/cesta.png'),
+                                          ),
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(0.0),
+                                          ),
                                         ),
+                                        height: 50,
+                                        width: 50,
+                                      ),
+                                      title: Text(
+                                        document.data['farmName'],
+                                        style: TextStyle(
+                                          // color: Colors.white,
+                                        ),
+                                      ),
+                                      subtitle: Text(
+                                        document.documentID,
+                                        style: TextStyle(
+                                          // color: Colors.grey[100],
+                                        ),
+                                      ),
+                                      trailing: InkWell(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) => OrderDetailScreen(OrderData.fromDocument(document)),
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          height: 40,
+                                          width: 40,
+                                          child: Icon(
+                                            Icons.arrow_right,
+                                            color: Colors.green,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: Colors.green[50],
+                                            borderRadius:
+                                            BorderRadius.all(Radius.circular(10.0)),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ],
-                              ),
+                                ),
+                                Divider(
+                                  // height: MediaQuery.of(context).size.width * 0.6,
+                                  endIndent: 40,
+                                  indent: 40,
+                                  height: 10,
+                                  // color: Colors.white,
+                                ),
+                                Container(
+                                  height: 70,
+                                  child: Center(
+                                    child: ListTile(
+                                      leading: Icon(
+                                        Icons.access_time,
+                                        // color: Colors.white,
+                                        color: Colors.green,
+                                      ),
+                                      title: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            _date.toString(),
+                                            style: TextStyle(
+                                              // color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ),
-                      ],
+                          );
+                        }else{
+                          return Container();
+                        }
+
+                      },
                     ),
-                  );
-                } else {
-                  return Container();
-                }
-              },
-            ),
+                  ],
+                )
+            :
+                Container(),
 
             SizedBox(height: 20.0),
 
@@ -279,7 +279,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                 future:
                     Firestore.instance.collection('products').getDocuments(),
                 builder: (context, snapshot) {
-                  if (snapshot.hasData) {
+                  if(snapshot.hasData){
                     return GridView(
                       shrinkWrap: true,
                       primary: false,
@@ -289,15 +289,18 @@ class _DashboardScreenState extends State<DashboardScreen>
                         childAspectRatio: MediaQuery.of(context).size.width /
                             (MediaQuery.of(context).size.height / 1.25),
                       ),
-                      children: snapshot.data.documents.map((document) {
-                        ProductData product =
-                            ProductData.fromDocument(document);
-                        return GridProduct(product);
-                      }).toList(),
+                      children: snapshot.data.documents.map(
+                              (document){
+                            ProductData product = ProductData.fromDocument(document);
+                            return GridProduct(product);
+                          }
+                      ).toList(),
+
                     );
                   }
                   return Container();
                 }),
+
 
             SizedBox(height: 30),
           ],
