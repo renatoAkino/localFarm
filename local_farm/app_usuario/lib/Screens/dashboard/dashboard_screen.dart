@@ -90,12 +90,17 @@ class _DashboardScreenState extends State<DashboardScreen>
             ),
             SizedBox(height: 10.0),
             FutureBuilder<QuerySnapshot>(
-              future: Firestore.instance.collection('orders').where('clientID', isEqualTo: UserModel.of(context).getId()).orderBy("ship_date").getDocuments(),
-              builder: (context, snapshot){
-                if(snapshot.hasData){
+              future: Firestore.instance
+                  .collection('orders')
+                  .where('clientID', isEqualTo: UserModel.of(context).getId())
+                  .orderBy("ship_date")
+                  .getDocuments(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
                   DocumentSnapshot document = snapshot.data.documents.first;
                   Timestamp _snapshotDate = document.data['ship_date'];
-                  DateTime _date = DateTime.fromMillisecondsSinceEpoch(_snapshotDate.millisecondsSinceEpoch);
+                  DateTime _date = DateTime.fromMillisecondsSinceEpoch(
+                      _snapshotDate.millisecondsSinceEpoch);
                   return Card(
                     elevation: 1.5,
                     // color: Colors.lightGreen,
@@ -126,22 +131,23 @@ class _DashboardScreenState extends State<DashboardScreen>
                               title: Text(
                                 document.data['farmName'],
                                 style: TextStyle(
-                                  // color: Colors.white,
-                                ),
+                                    // color: Colors.white,
+                                    ),
                               ),
                               subtitle: Text(
                                 document.documentID,
                                 style: TextStyle(
-                                  // color: Colors.grey[100],
-                                ),
+                                    // color: Colors.grey[100],
+                                    ),
                               ),
                               trailing: InkWell(
                                 onTap: () {
-                                   Navigator.of(context).push(
-                                     MaterialPageRoute(
-                                       builder: (context) => OrderDetailScreen(OrderData.fromDocument(document)),
-                                     ),
-                                   );
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => OrderDetailScreen(
+                                          OrderData.fromDocument(document)),
+                                    ),
+                                  );
                                 },
                                 child: Container(
                                   height: 40,
@@ -153,7 +159,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                                   decoration: BoxDecoration(
                                     color: Colors.green[50],
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                 ),
                               ),
@@ -177,13 +183,14 @@ class _DashboardScreenState extends State<DashboardScreen>
                                 color: Colors.green,
                               ),
                               title: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     _date.toString(),
                                     style: TextStyle(
-                                      // color: Colors.white,
-                                    ),
+                                        // color: Colors.white,
+                                        ),
                                   ),
                                 ],
                               ),
@@ -193,10 +200,9 @@ class _DashboardScreenState extends State<DashboardScreen>
                       ],
                     ),
                   );
-                }else{
+                } else {
                   return Container();
                 }
-
               },
             ),
 
@@ -273,7 +279,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                 future:
                     Firestore.instance.collection('products').getDocuments(),
                 builder: (context, snapshot) {
-                  if(snapshot.hasData){
+                  if (snapshot.hasData) {
                     return GridView(
                       shrinkWrap: true,
                       primary: false,
@@ -283,18 +289,15 @@ class _DashboardScreenState extends State<DashboardScreen>
                         childAspectRatio: MediaQuery.of(context).size.width /
                             (MediaQuery.of(context).size.height / 1.25),
                       ),
-                      children: snapshot.data.documents.map(
-                              (document){
-                            ProductData product = ProductData.fromDocument(document);
-                            return GridProduct(product);
-                          }
-                      ).toList(),
-
+                      children: snapshot.data.documents.map((document) {
+                        ProductData product =
+                            ProductData.fromDocument(document);
+                        return GridProduct(product);
+                      }).toList(),
                     );
                   }
                   return Container();
                 }),
-
 
             SizedBox(height: 30),
           ],
