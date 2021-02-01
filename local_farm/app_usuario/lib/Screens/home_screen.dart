@@ -1,15 +1,12 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:localfarm/Models/user_model.dart';
 import 'package:localfarm/Screens/feed/feed_screen.dart';
-import 'package:localfarm/Screens/login_screen.dart';
-import 'package:localfarm/Screens/search_screen.dart';
+import 'package:localfarm/Screens/profile_screen.dart';
 
 import 'package:localfarm/widgets/home_appBar.dart';
 
 import 'dashboard/dashboard_screen.dart';
-import 'edit_user_screen.dart';
 import 'orders/orders_screen.dart';
 import 'search/search_farmers_screen.dart';
 
@@ -132,41 +129,42 @@ class _HomeScreenState extends State<HomeScreen> {
         return OrderPage();
         break;
       case 4:
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Perfil"),
-              FlatButton(
-                  color: Colors.orange,
-                  padding: EdgeInsets.all(8),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => EditUserScreen()),
-                    );
-                  },
-                  child: Text(
-                    "Editar Perfil",
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  )),
-              FlatButton(
-                  color: Colors.orange,
-                  padding: EdgeInsets.all(8),
-                  onPressed: () {
-                    UserModel.of(context).logout();
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => LoginScreen()),
-                    );
-                  },
-                  child: Text(
-                    "Logout",
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ))
-            ],
-          ),
-        );
+        return ProfileScreen();
+        // return Center(
+        //   child: Column(
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: [
+        //       Text("Perfil"),
+        //       FlatButton(
+        //           color: Colors.orange,
+        //           padding: EdgeInsets.all(8),
+        //           onPressed: () {
+        //             Navigator.of(context).push(
+        //               MaterialPageRoute(builder: (context) => EditUserScreen()),
+        //             );
+        //           },
+        //           child: Text(
+        //             "Editar Perfil",
+        //             style: TextStyle(
+        //                 color: Colors.white, fontWeight: FontWeight.bold),
+        //           )),
+        //       FlatButton(
+        //           color: Colors.orange,
+        //           padding: EdgeInsets.all(8),
+        //           onPressed: () {
+        //             UserModel.of(context).logout();
+        //             Navigator.of(context).push(
+        //               MaterialPageRoute(builder: (context) => LoginScreen()),
+        //             );
+        //           },
+        //           child: Text(
+        //             "Logout",
+        //             style: TextStyle(
+        //                 color: Colors.white, fontWeight: FontWeight.bold),
+        //           ))
+        //     ],
+        //   ),
+        // );
         break;
     }
   }
