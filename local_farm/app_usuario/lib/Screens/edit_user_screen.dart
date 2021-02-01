@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:localfarm/Models/user_model.dart';
-import 'package:localfarm/Screens/home_screen.dart';
-import 'package:localfarm/widgets/home_appBar.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class EditUserScreen extends StatefulWidget {
