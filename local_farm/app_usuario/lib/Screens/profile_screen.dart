@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:producerfarm/Models/user_model.dart';
+import 'package:localfarm/Models/user_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import '../../Models/user_model.dart';
-import '../login_screen.dart';
+import 'edit_user_screen.dart';
+import 'login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -20,21 +20,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
         }
         return Scaffold(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: Colors.green,
-            // leading: Image.asset('local_farm/producer_farm/assets/logo.png'),
-            elevation: 1.5,
-            title: Text(
-              'Perfil',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
           body: model.isLoggedin()
               ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(40.0),
+                      padding: const EdgeInsets.all(30.0),
                       child: Container(
                         // height: MediaQuery.of(context).size.height * 0.6,
                         decoration: BoxDecoration(
@@ -67,7 +59,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   //   ),
                                   // ),
                                   Text(
-                                    model.userData.name,
+                                    model.userData['name'],
                                     style: TextStyle(
                                       fontSize: 18,
                                       color: Colors.grey[800],
@@ -84,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Sexo',
+                                    'E-mail',
                                     style: TextStyle(
                                       // fontWeight: FontWeight.bold,
                                       fontSize: 16,
@@ -100,7 +92,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   //   ),
                                   // ),
                                   Text(
-                                    model.userData.gender,
+                                    model.userData['email'],
                                     style: TextStyle(
                                       fontSize: 18,
                                       color: Colors.grey[800],
@@ -123,42 +115,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               SizedBox(
                                 height: 25,
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Email',
-                                    style: TextStyle(
-                                      // fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      color: Colors.grey[800],
-                                    ),
-                                  ),
-                                  Text(
-                                    model.userData.email,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.grey[800],
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              // Padding(
-                              //   padding: const EdgeInsets.all(20.0),
-                              //   child: Text(
-                              //     cliente.email,
-                              //     style: TextStyle(
-                              //       fontSize: 18,
-                              //       color: Colors.grey[800],
-                              //       fontWeight: FontWeight.bold,
-                              //     ),
-                              //   ),
-                              // ),
-                              SizedBox(
-                                height: 25,
-                              ),
+
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -172,7 +129,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                   ),
                                   Text(
-                                    model.userData.adress,
+                                    model.userData['adress'],
                                     style: TextStyle(
                                       fontSize: 18,
                                       color: Colors.grey[800],
@@ -185,32 +142,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               SizedBox(
                                 height: 25,
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Complemento',
-                                    style: TextStyle(
-                                      // fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      color: Colors.grey[800],
-                                    ),
-                                  ),
-                                  Text(
-                                    '-' ?? model.userData.adressComplement,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.grey[800],
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              // Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   children: [
+                              //     Text(
+                              //       'Complemento',
+                              //       style: TextStyle(
+                              //         // fontWeight: FontWeight.bold,
+                              //         fontSize: 16,
+                              //         color: Colors.grey[800],
+                              //       ),
+                              //     ),
+                              //     Text(
+                              //       '-' ?? model.userData['adress_complement'],
+                              //       style: TextStyle(
+                              //         fontSize: 18,
+                              //         color: Colors.grey[800],
+                              //         fontWeight: FontWeight.bold,
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
 
-                              SizedBox(
-                                height: 25,
-                              ),
+                              // SizedBox(
+                              //   height: 25,
+                              // ),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -224,7 +181,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                   ),
                                   Text(
-                                    model.userData.cep,
+                                    model.userData['cep'],
                                     style: TextStyle(
                                       fontSize: 18,
                                       color: Colors.grey[800],
@@ -234,56 +191,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ],
                               ),
 
-                              SizedBox(
-                                height: 25,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Produção',
-                                    style: TextStyle(
-                                      // fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      color: Colors.grey[800],
-                                    ),
-                                  ),
-                                  Text(
-                                    model.userData.farmData.name,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.grey[800],
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 25,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Endereço',
-                                    style: TextStyle(
-                                      // fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      color: Colors.grey[800],
-                                    ),
-                                  ),
-                                  Text(
-                                    '-' ?? model.userData.farmData.adress,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.grey[800],
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
                               SizedBox(
                                 height: 25,
                               ),
@@ -292,63 +199,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   FlatButton(
-                                    padding: EdgeInsets.zero,
+                                    color: Colors.orange,
+                                    padding: EdgeInsets.all(8),
                                     onPressed: () {
-                                      model.logout();
-                                      Navigator.push(
-                                        context,
+                                      Navigator.of(context).push(
                                         MaterialPageRoute(
-                                          builder: (context) => LoginScreen(),
-                                        ),
+                                            builder: (context) =>
+                                                EditUserScreen()),
                                       );
                                     },
-                                    child: Container(
-                                      width: 100,
-                                      height: 40,
-                                      color: Colors.orange,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Center(
-                                          child: Text(
-                                            "Logout",
-                                            style: TextStyle(
-                                                color: Colors.grey[800],
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
+                                    child: Text(
+                                      "Editar Perfil",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   SizedBox(
                                     width: 50,
                                   ),
                                   FlatButton(
-                                    padding: EdgeInsets.zero,
+                                    color: Colors.orange,
+                                    padding: EdgeInsets.all(8),
                                     onPressed: () {
-                                      model.logout();
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LoginScreen()));
+                                      UserModel.of(context).logout();
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                LoginScreen()),
+                                      );
                                     },
-                                    child: Container(
-                                      width: 100,
-                                      height: 40,
-                                      color: Colors.orange,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Center(
-                                          child: Text(
-                                            "Login",
-                                            style: TextStyle(
-                                                color: Colors.grey[800],
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
+                                    child: Text(
+                                      "Logout",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ),
+                                  )
                                 ],
                               ),
                             ],
